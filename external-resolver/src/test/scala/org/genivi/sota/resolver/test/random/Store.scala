@@ -8,6 +8,7 @@ import org.genivi.sota.resolver.packages.Package
 import org.scalacheck.Gen
 import Misc._
 import org.genivi.sota.data.{PackageId, Vehicle}
+import org.genivi.sota.resolver.test.VehicleRequestsHttp
 
 import scala.collection.immutable.Iterable
 
@@ -372,3 +373,5 @@ object Store {
       (_.packagesWithSomeFilter.size)
 }
 // scalastyle:on
+
+object VehicleRequester extends VehicleRequestsHttp

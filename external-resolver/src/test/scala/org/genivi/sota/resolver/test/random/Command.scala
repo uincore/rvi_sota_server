@@ -44,7 +44,6 @@ final case class UninstallComponent(veh: Vehicle, cmpn: Component) extends Comma
 
 
 object Command extends
-    VehicleRequestsHttp with
     PackageRequestsHttp with
     FilterRequestsHttp  with
     ComponentRequestsHttp with
@@ -80,7 +79,7 @@ object Command extends
       for {
         s0 <- State.get
         s1 <- lift2 { s0.creating(veh) }
-        rq <- lift2 { addVehicle(veh.vin) }
+        rq <- lift2 { VehicleRequester.addVehicle(veh.vin) }
         _  <- State.set(s1)
       } yield Semantics(rq, StatusCodes.NoContent, Success)
 
@@ -94,7 +93,7 @@ object Command extends
       for {
         s0 <- State.get
         s1 <- lift2 { s0.installing(veh, pkg) }
-        rq <- lift2 { installPackage(veh, pkg) }
+        rq <- lift2 { VehicleRequester.installPackage(veh, pkg) }
         _ <- State.set(s1)
       } yield Semantics(rq, StatusCodes.OK, Success)
 
@@ -102,11 +101,9 @@ object Command extends
       for {
         s0 <- State.get
         s1 <- lift2 { s0.uninstalling(veh, pkg) }
-        rq <- lift2 { uninstallPackage(veh, pkg) }
+        rq <- lift2 { VehicleRequester.uninstallPackage(veh, pkg) }
         _  <- State.set(s1)
-      } yield Semantics(
-        rq,
-        StatusCodes.OK, Success) // whether already uninstalled or not, OK is the reply
+      } yield Semantics(rq, StatusCodes.OK, Success) // whether already uninstalled or not, OK is the reply
 
     case AddFilter(filt) =>
       for {
@@ -182,7 +179,7 @@ object Command extends
       for {
         s0 <- State.get
         s1 <- lift2 { s0.installing(veh, cmpn) }
-        rq <- lift2 { installComponent(veh, cmpn) }
+        rq <- lift2 { VehicleRequester.installComponent(veh, cmpn) }
         _  <- State.set(s1)
         isDuplicatePK = s0.vehicles(veh)._2.contains(cmpn)
       } yield {
@@ -194,11 +191,9 @@ object Command extends
       for {
         s0 <- State.get
         s1 <- lift2 { s0.uninstalling(veh, cmpn) }
-        rq <- lift2 { uninstallComponent(veh, cmpn) }
+        rq <- lift2 { VehicleRequester.uninstallComponent(veh, cmpn) }
         _  <- State.set(s1)
-      } yield Semantics(
-        rq,
-        StatusCodes.OK, Success) // whether already uninstalled or not, OK is the reply
+      } yield Semantics(rq, StatusCodes.OK, Success) // whether already uninstalled or not, OK is the reply
 
   }
   // scalastyle:on
