@@ -248,7 +248,7 @@ object Command extends
     } yield EditFilter(fltOld, fltNu1)
 
   /**
-    * Pick an unsed filter for removal.
+    * Pick an unused filter for removal.
     * Note: [[semCommand]] can handle the case where the filter is in use, only we don't exercise such case.
     */
   private def genCommandRemoveFilter(s: RawStore): Gen[RemoveFilter] =
@@ -257,7 +257,7 @@ object Command extends
     } yield RemoveFilter(flt)
 
   /**
-    * Pick an unsed component for removal.
+    * Pick an unused component for removal.
     * Note: [[semCommand]] can handle the case where the component is in use, only we don't exercise such case.
     */
   private def genCommandRemoveComponent(s: RawStore): Gen[RemoveComponent] =
