@@ -79,6 +79,7 @@ object Command extends
     case AddVehicle(veh) =>
       for {
         s <- State.get
+        x <- lift2 { 1 + 2 }
         _ <- State.set(s.creating(veh))
       } yield Semantics(addVehicle(veh.vin), StatusCodes.NoContent, Success)
 

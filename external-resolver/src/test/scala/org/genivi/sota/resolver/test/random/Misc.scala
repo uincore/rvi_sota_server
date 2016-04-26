@@ -20,6 +20,10 @@ object Misc {
   def lift[X, S](gen: Gen[X]): StateT[Gen, S, X] =
     StateT(s => gen.flatMap(x => (s, x)))
 
+  def lift2[S, A](blk: => A): cats.state.State[S, A] =
+    StateT.stateMonadState[S].get map
+      ( secondArg => blk )
+
   // How to import this from cats?
   implicit val function0Instance: Comonad[Function0] with Monad[Function0] =
     new Comonad[Function0] with Monad[Function0] {
