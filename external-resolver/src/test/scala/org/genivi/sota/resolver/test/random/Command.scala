@@ -78,10 +78,11 @@ object Command extends
 
     case AddVehicle(veh) =>
       for {
-        s <- State.get
-        x <- lift2 { 1 + 2 }
-        _ <- State.set(s.creating(veh))
-      } yield Semantics(addVehicle(veh.vin), StatusCodes.NoContent, Success)
+        s0 <- State.get
+        s1 <- lift2 { s0.creating(veh) }
+        rq <- lift2 { addVehicle(veh.vin) }
+        _  <- State.set(s1)
+      } yield Semantics(rq, StatusCodes.NoContent, Success)
 
     case AddPackage(pkg) =>
       for {
@@ -91,16 +92,20 @@ object Command extends
 
     case InstallPackage(veh, pkg) =>
       for {
-        s <- State.get
-        _ <- State.set(s.installing(veh, pkg))
-      } yield Semantics(installPackage(veh, pkg), StatusCodes.OK, Success)
+        s0 <- State.get
+        s1 <- lift2 { s0.installing(veh, pkg) }
+        rq <- lift2 { installPackage(veh, pkg) }
+        _ <- State.set(s1)
+      } yield Semantics(rq, StatusCodes.OK, Success)
 
     case UninstallPackage(veh, pkg) =>
       for {
-        s <- State.get
-        _ <- State.set(s.uninstalling(veh, pkg))
+        s0 <- State.get
+        s1 <- lift2 { s0.uninstalling(veh, pkg) }
+        rq <- lift2 { uninstallPackage(veh, pkg) }
+        _  <- State.set(s1)
       } yield Semantics(
-        uninstallPackage(veh, pkg),
+        rq,
         StatusCodes.OK, Success) // whether already uninstalled or not, OK is the reply
 
     case AddFilter(filt) =>
@@ -175,21 +180,24 @@ object Command extends
 
     case InstallComponent(veh, cmpn) =>
       for {
-        s <- State.get
-        _ <- State.set(s.installing(veh, cmpn))
-        isDuplicatePK = s.vehicles(veh)._2.contains(cmpn)
+        s0 <- State.get
+        s1 <- lift2 { s0.installing(veh, cmpn) }
+        rq <- lift2 { installComponent(veh, cmpn) }
+        _  <- State.set(s1)
+        isDuplicatePK = s0.vehicles(veh)._2.contains(cmpn)
       } yield {
-        val req = installComponent(veh, cmpn)
-        if (isDuplicatePK) { Semantics(req, StatusCodes.Conflict, Failure(ErrorCodes.DuplicateEntry)) }
-        else               { Semantics(req, StatusCodes.OK, Success) }
+        if (isDuplicatePK) { Semantics(rq, StatusCodes.Conflict, Failure(ErrorCodes.DuplicateEntry)) }
+        else               { Semantics(rq, StatusCodes.OK, Success) }
       }
 
     case UninstallComponent(veh, cmpn) =>
       for {
-        s <- State.get
-        _ <- State.set(s.uninstalling(veh, cmpn))
+        s0 <- State.get
+        s1 <- lift2 { s0.uninstalling(veh, cmpn) }
+        rq <- lift2 { uninstallComponent(veh, cmpn) }
+        _  <- State.set(s1)
       } yield Semantics(
-        uninstallComponent(veh, cmpn),
+        rq,
         StatusCodes.OK, Success) // whether already uninstalled or not, OK is the reply
 
   }
