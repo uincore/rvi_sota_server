@@ -27,6 +27,7 @@ import org.genivi.sota.refined.SlickRefined._
 import scala.util.control.NoStackTrace
 import org.genivi.sota.core.db.OperationResults
 import org.genivi.sota.core.db.InstallHistories
+import org.joda.time.DateTime
 
 
 object VehicleUpdates {
@@ -116,7 +117,10 @@ object VehicleUpdates {
       .filter(_.vin === vin && isFail)
       .filter(_.requestId =!= updateRequestId)
       .filter(_.status.inSet(List(UpdateStatus.InFlight, UpdateStatus.Pending)))
-      .filter(_.installPos > spec.installPos)
+      .filter(us =>
+        (us.installPos > spec.installPos) ||
+        (us.installPos === spec.installPos && us.creationTime > spec.creationTime)
+      )
       .map(_.status)
       .update(UpdateStatus.Canceled)
   }
@@ -133,6 +137,9 @@ object VehicleUpdates {
       .map { _.map { case (idx, ur) => ur.copy(installPos = idx) } }
   }
 
+  /**
+    * TODO FIXME the returned [[UpdateSpec]] doesn't include real dependencies: just an empty set.
+    */
   def findUpdateSpecFor(vin: Vehicle.Vin, updateRequestId: UUID)
                        (implicit ec: ExecutionContext, db: Database): DBIO[UpdateSpec] = {
     updateSpecs
@@ -143,10 +150,10 @@ object VehicleUpdates {
       .headOption
       .flatMap {
         case Some((
-          (ns, uuid, updateVin, status, installPos),
+          (ns, uuid, updateVin, status, installPos, creationTime),
           updateRequest
           )) =>
-          val spec = UpdateSpec(updateRequest, updateVin, status, Set.empty[Package], installPos)
+          val spec = UpdateSpec(updateRequest, updateVin, status, Set.empty[Package], installPos, creationTime)
           DBIO.successful(spec)
         case None =>
           DBIO.failed(

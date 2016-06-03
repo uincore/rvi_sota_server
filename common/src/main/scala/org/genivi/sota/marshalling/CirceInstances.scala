@@ -4,6 +4,7 @@
  */
 package org.genivi.sota.marshalling
 
+import java.sql.Timestamp
 import java.util.UUID
 
 import akka.http.scaladsl.model.Uri
@@ -90,6 +91,22 @@ trait CirceInstances {
   implicit def mapRefinedEncoder[K <: Refined[_, _], V]
   (implicit keyEncoder: Encoder[K], valueEncoder: Encoder[V]): Encoder[Map[K, V]] =
     Encoder[Seq[(K, V)]].contramap((m: Map[K, V]) => m.toSeq)
+
+  implicit val timestampEncoder : Encoder[Timestamp] = {
+    // using String given JS Number can't represent all Long-s.
+    Encoder.instance[Timestamp]( x =>  Json.fromString( x.getTime.toString ) )
+  }
+
+  implicit val timestampDecoder : Decoder[Timestamp] = Decoder.instance { c =>
+    // using String given JS Number can't represent all Long-s.
+    c.focus.asString match {
+      case None       => Xor.left(DecodingFailure("DataTime", c.history))
+      case Some(m) =>
+        val ts = new Timestamp(java.lang.Long.valueOf(m).longValue())
+        Xor.right(ts)
+    }
+  }
+
 }
 
 object CirceInstances extends CirceInstances

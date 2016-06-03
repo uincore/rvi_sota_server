@@ -103,8 +103,10 @@ trait Generators {
     packageWithUri = Generators.generatePackageData(packageModel)
     updateRequest <- updateRequestGen(defaultNs, PackageIdGen).map(_.copy(packageId = packageWithUri.id))
   } yield {
+    val date = new java.util.Date()
+    val now  = new java.sql.Timestamp(date.getTime())
     val updateSpec = UpdateSpec(updateRequest, vehicle.vin,
-      UpdateStatus.Pending, List(packageWithUri ).toSet)
+      UpdateStatus.Pending, List(packageWithUri ).toSet, 0, now)
 
     (packageWithUri, updateSpec)
   }

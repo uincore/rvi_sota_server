@@ -4,8 +4,11 @@
  */
 package org.genivi.sota.core.data
 
+import java.sql.Timestamp
+
 import io.circe._
 import java.util.UUID
+
 import org.genivi.sota.data.Namespace._
 import org.genivi.sota.data.{PackageId, Vehicle}
 import org.joda.time.{DateTime, Interval, Period}
@@ -97,7 +100,8 @@ case class UpdateSpec(
   vin: Vehicle.Vin,
   status: UpdateStatus,
   dependencies: Set[Package],
-  installPos: Int
+  installPos: Int,
+  creationTime: Timestamp
 ) {
 
   def namespace: Namespace = request.namespace
@@ -117,8 +121,11 @@ object UpdateSpec {
   implicit val updateStatusDecoder : Decoder[UpdateStatus] = Decoder[String].map(UpdateStatus.withName)
 
   def default(request: UpdateRequest, vin: Vehicle.Vin): UpdateSpec = {
+    val date = new java.util.Date()
+    val now  = new Timestamp(date.getTime())
+
     UpdateSpec(
-      request, vin, UpdateStatus.Pending, Set.empty, 0
+      request, vin, UpdateStatus.Pending, Set.empty, 0, now
     )
   }
 }
