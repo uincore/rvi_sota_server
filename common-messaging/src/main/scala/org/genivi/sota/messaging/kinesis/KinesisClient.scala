@@ -17,7 +17,7 @@ import com.amazonaws.services.kinesis.clientlibrary.lib.worker.{KinesisClientLib
 import com.typesafe.config.{Config, ConfigException}
 import org.genivi.sota.messaging.ConfigHelpers._
 import org.genivi.sota.messaging.{MessageBusPublisher, Messages}
-import org.genivi.sota.messaging.Messages.{DeviceCreated, DeviceSeen, Message}
+import org.genivi.sota.messaging.Messages.{DeviceCreated, DeviceSeen, Message, StreamNameOp}
 import org.genivi.sota.data.Device._
 import cats.syntax.show.toShowOps
 import scala.concurrent.Future
@@ -104,12 +104,5 @@ object KinesisClient {
 
   def runDeviceCreatedWorker(system: ActorSystem, config: Config): ConfigException Xor Done = {
     runWorker(system, config, DeviceCreated.streamName, Messages.parseDeviceCreatedMsg)
-  }
-
-
-  private implicit class StreamNameOp[T](v: T) {
-    def streamName: String = {
-      v.getClass.getSimpleName.filterNot(c => List('$').contains(c))
-    }
   }
 }

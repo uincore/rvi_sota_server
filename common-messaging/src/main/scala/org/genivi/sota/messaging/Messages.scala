@@ -30,6 +30,11 @@ object Messages {
                                  deviceId: Option[Device.DeviceId],
                                  deviceType: Device.DeviceType) extends Message
 
+  implicit class StreamNameOp[T](v: T) {
+    def streamName: String = {
+      v.getClass.getSimpleName.filterNot(c => List('$').contains(c))
+    }
+  }
 
   object DeviceSeen {
     implicit val EncoderInstance: Encoder[DeviceSeen] = deriveEncoder

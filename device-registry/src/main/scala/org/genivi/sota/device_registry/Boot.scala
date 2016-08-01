@@ -56,7 +56,7 @@ object Boot extends App with Directives with BootMigrations {
 
   val authNamespace = NamespaceDirectives.fromConfig()
 
-  val messageBusPublish: MessageBusPublisher[DeviceCreated] =
+  lazy val messageBusPublish: MessageBusPublisher[DeviceCreated] =
     MessageBusManager.getDeviceCreatedPublisher(system, config) match {
       case Xor.Right(v) => v
       case Xor.Left(error) =>
