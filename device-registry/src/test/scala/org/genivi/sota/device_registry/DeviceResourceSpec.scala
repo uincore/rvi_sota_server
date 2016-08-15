@@ -316,19 +316,20 @@ class DeviceResourceSpec extends ResourcePropSpec with BeforeAndAfterEach {
 
   property("PUT request with same deviceName fails with conflict.") {
     forAll { (device1: DeviceT, device2: DeviceT) =>
+      whenever(device1.deviceName.nonEmpty && device2.deviceName.nonEmpty) {
+        val d1 = device1.copy(deviceName = device1.deviceName.map(_.map(_ + "#1")))
+        val d2 = device2.copy(deviceName = device2.deviceName.map(_.map(_ + "#2")))
 
-      val d1 = device1.copy(deviceName = device1.deviceName.map(_.map(_ + "#1")))
-      val d2 = device2.copy(deviceName = device2.deviceName.map(_.map(_ + "#2")))
+        val id1: Id = createDeviceOk(d1)
+        val id2: Id = createDeviceOk(d2)
 
-      val id1: Id = createDeviceOk(d1)
-      val id2: Id = createDeviceOk(d2)
+        updateDevice(id1, d1.copy(deviceName = d2.deviceName)) ~> route ~> check {
+          status shouldBe Conflict
+        }
 
-      updateDevice(id1, d1.copy(deviceName = d2.deviceName)) ~> route ~> check {
-        status shouldBe Conflict
+        deleteDeviceOk(id1)
+        deleteDeviceOk(id2)
       }
-
-      deleteDeviceOk(id1)
-      deleteDeviceOk(id2)
     }
   }
 
