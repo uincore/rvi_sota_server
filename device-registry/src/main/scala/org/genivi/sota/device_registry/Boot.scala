@@ -32,7 +32,7 @@ class Routing(namespaceExtractor: Directive1[Namespace], messageBus: MessageBusP
 
   val route: Route = pathPrefix("api" / "v1") {
     handleRejections(rejectionHandler) {
-      new Routes(namespaceExtractor, messageBus).route
+      new DeviceResource(namespaceExtractor, messageBus).route
     }
   }
 }
@@ -69,7 +69,7 @@ object Boot extends App with Directives with BootMigrations {
       versionHeaders(version)) {
       handleRejections(rejectionHandler) {
         pathPrefix("api" / "v1") {
-          new Routes(authNamespace, messageBus).route
+          new DeviceResource(authNamespace, messageBus).route
         } ~ new HealthResource(db, org.genivi.sota.device_registry.BuildInfo.toMap).route
       }
     }

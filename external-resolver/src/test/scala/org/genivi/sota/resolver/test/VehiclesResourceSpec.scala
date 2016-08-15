@@ -168,10 +168,10 @@ class VehiclesResourceWordSpec extends ResourceWordSpec with Namespaces {
   val devices = "devices"
 
   val deviceId: Device.Id = refineV[Device.ValidId]("1f22860a-3ea2-491f-9042-37c98c2d51cd").right.map(Device.Id).right.get
-  val device: Device     = Device(defaultNs, deviceId, DeviceName("Somename"))
+  val device: Device     = Device(defaultNs, deviceId, Option(DeviceName("Somename")))
 
   val deviceId2: Device.Id = refineV[Device.ValidId]("3fd0282d-79f0-455f-9a32-f221790eca3c").right.map(Device.Id).right.get
-  val device2: Device     = Device(defaultNs, deviceId, DeviceName("Somename 2"))
+  val device2: Device     = Device(defaultNs, deviceId, Option(DeviceName("Somename 2")))
 
   "Vin resource" should {
     "install a package on a VIN on PUT request to /vehicles/:vin/package/:packageName/:packageVersion" in {

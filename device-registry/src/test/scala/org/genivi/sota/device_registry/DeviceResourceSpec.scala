@@ -9,18 +9,25 @@ import eu.timepit.refined.api.Refined
 import eu.timepit.refined.string.Regex
 import io.circe.generic.auto._
 import io.circe.Json
-import org.genivi.sota.data.{Device, DeviceT, DeviceGenerators, SimpleJsonGenerator,RegexGenerators}
+import org.genivi.sota.data.{Device, DeviceGenerators, DeviceT, Namespaces, RegexGenerators, SimpleJsonGenerator}
 import org.genivi.sota.marshalling.CirceMarshallingSupport._
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 
+import cats.syntax.show.toShowOps
+import Device._
+import org.genivi.sota.device_registry.DeviceRepository
 import org.scalacheck._
+import org.scalatest.BeforeAndAfterEach
+import slick.driver.MySQLDriver.api._
 
+import scala.concurrent.Await
+import scala.concurrent.duration._
 
 /**
  * Spec for DeviceRepository REST actions
  */
-class DeviceResourceSpec extends ResourcePropSpec {
+class DeviceResourceSpec extends ResourcePropSpec with BeforeAndAfterEach {
 
   import Arbitrary._
   import Device._
@@ -28,6 +35,11 @@ class DeviceResourceSpec extends ResourcePropSpec {
   import SimpleJsonGenerator._
   import StatusCodes._
 
+  override def afterEach(): Unit = {
+    val sql = sqlu"TRUNCATE TABLE Device"
+    Await.result(db.run(sql), 3.seconds)
+    super.afterEach()
+  }
 
   def createDeviceOk(device: DeviceT): Id = {
     createDevice(device) ~> route ~> check {
@@ -108,10 +120,6 @@ class DeviceResourceSpec extends ResourcePropSpec {
     }
   }
 
-  implicit def DeviceTOrdering(implicit ord: Ordering[DeviceName]): Ordering[DeviceT] = new Ordering[DeviceT] {
-    override def compare(d1: DeviceT, d2: DeviceT): Int = ord.compare(d1.deviceName, d2.deviceName)
-  }
-
   property("GET request with ?regex yields devices which match the regex.") {
 
     import RegexGenerators._
@@ -125,24 +133,28 @@ class DeviceResourceSpec extends ResourcePropSpec {
     val numDevices = 10
 
     forAll(genConflictFreeDeviceTs(numDevices),
-           arbitrary[String Refined Regex]) { case (devices: Seq[DeviceT],
-                                                    regex: (String Refined Regex)) =>
+      arbitrary[String Refined Regex]) { case (devices: Seq[DeviceT],
+    regex: (String Refined Regex)) =>
 
       val n: Int = Random.nextInt(devices.length + 1)
       val regexInstances: Seq[String] = Range(0, n).map(_ => genStrFromRegex(regex))
       val preparedDevices: Seq[DeviceT] =
         Range(0, n).map { i => {
-          val uniqueName = DeviceName(i.toString + injectSubstr(devices(i).deviceName.underlying, regexInstances(i)))
+          val uniqueName = devices(i).deviceName.map { n =>
+            DeviceName(i.toString + injectSubstr(n.show, regexInstances(i)))
+          }
+
           devices(i).copy(deviceName = uniqueName)
-        }}
-      val  unpreparedDevices: Seq[DeviceT] = devices.drop(n)
+        }
+        }
+      val unpreparedDevices: Seq[DeviceT] = devices.drop(n)
 
       preparedDevices.length + unpreparedDevices.length shouldBe devices.length
 
       val created = devices.map(d => createDeviceOk(d) -> d)
 
       val expectedIds: Seq[Id] = created
-        .filter { case (_, d) => regex.get.r.findFirstIn(d.deviceName.underlying).isDefined }
+        .filter { case (_, d) => d.deviceName.isDefined && regex.get.r.findFirstIn(d.deviceName.get.show).isDefined }
         .map(_._1)
 
       searchDevice(defaultNs, regex.get) ~> route ~> check {
@@ -156,8 +168,8 @@ class DeviceResourceSpec extends ResourcePropSpec {
 
   property("PUT request after POST succeeds with updated device.") {
     forAll { (devicePre1: DeviceT, devicePre2: DeviceT) =>
-      val d1 = devicePre1.copy(deviceName = DeviceName(devicePre1.deviceName.underlying + "#1"))
-      val d2 = devicePre2.copy(deviceName = DeviceName(devicePre2.deviceName.underlying + "#2"))
+      val d1 = devicePre1.copy(deviceName = devicePre1.deviceName.map(_.map(_ + "#1")))
+      val d2 = devicePre2.copy(deviceName = devicePre2.deviceName.map(_.map(_ + "#2")))
 
       val id: Id = createDeviceOk(d1)
 
@@ -247,40 +259,42 @@ class DeviceResourceSpec extends ResourcePropSpec {
 
   property("POST request with same deviceName fails with conflict.") {
     forAll { (device1: DeviceT, device2: DeviceT) =>
+      whenever(device1.deviceName.nonEmpty && device2.deviceName.nonEmpty) {
+        val id: Id = createDeviceOk(device1)
 
-      val id: Id = createDeviceOk(device1)
+        createDevice(device2.copy(deviceName = device1.deviceName)) ~> route ~> check {
+          status shouldBe Conflict
+        }
 
-      createDevice(device2.copy(deviceName = device1.deviceName)) ~> route ~> check {
-        status shouldBe Conflict
+        deleteDeviceOk(id)
       }
-
-      deleteDeviceOk(id)
     }
   }
 
-  property("POST request with same deviceId fails with conflict.") {
+  property("POST request with same deviceId fails with conflict") {
     forAll { (device1: DeviceT, device2: DeviceT) =>
+      whenever(device1.deviceName.nonEmpty && device2.deviceName.nonEmpty) {
+        val id: Id = createDeviceOk(device1.copy(deviceName = device1.deviceName.map(_.map(_ + "#1"))))
 
-      val id: Id = createDeviceOk(device1.copy(deviceName = DeviceName(device1.deviceName.underlying + "#1")))
-
-      createDevice(device2.copy(deviceName = DeviceName(device2.deviceName.underlying + "#2"),
-                                deviceId = device1.deviceId)) ~> route ~> check {
-        device1.deviceId match {
-          case Some(deviceId) => status shouldBe Conflict
-          case None => deleteDeviceOk(responseAs[Id])
+        createDevice(device2.copy(deviceName = device2.deviceName.map(_.map(_ + "#2")),
+          deviceId = device1.deviceId)) ~> route ~> check {
+          device1.deviceId match {
+            case Some(deviceId) => status shouldBe Conflict
+            case None => deleteDeviceOk(responseAs[Id])
+          }
         }
-      }
 
-      deleteDeviceOk(id)
+        deleteDeviceOk(id)
+      }
     }
   }
 
   property("PUT request updates device.") {
     forAll { (device1: DeviceT, device2: DeviceT) =>
 
-      val d1 = device1.copy(deviceName = DeviceName(device1.deviceName.underlying + "#1"),
+      val d1 = device1.copy(deviceName = device1.deviceName.map(_.map(_ + "#1")),
         deviceId = device1.deviceId.map(id => DeviceId(id.underlying + "#1")))
-      val d2 = device1.copy(deviceName = DeviceName(device2.deviceName.underlying + "#2"),
+      val d2 = device1.copy(deviceName = device2.deviceName.map(_.map(_ + "#2")),
         deviceId = device2.deviceId.map(id => DeviceId(id.underlying + "#2")))
 
       val id: Id = createDeviceOk(d1)
@@ -303,8 +317,8 @@ class DeviceResourceSpec extends ResourcePropSpec {
   property("PUT request with same deviceName fails with conflict.") {
     forAll { (device1: DeviceT, device2: DeviceT) =>
 
-      val d1 = device1.copy(deviceName = DeviceName(device1.deviceName.underlying + "#1"))
-      val d2 = device2.copy(deviceName = DeviceName(device2.deviceName.underlying + "#2"))
+      val d1 = device1.copy(deviceName = device1.deviceName.map(_.map(_ + "#1")))
+      val d2 = device2.copy(deviceName = device2.deviceName.map(_.map(_ + "#2")))
 
       val id1: Id = createDeviceOk(d1)
       val id2: Id = createDeviceOk(d2)
@@ -321,8 +335,8 @@ class DeviceResourceSpec extends ResourcePropSpec {
   property("PUT request with same deviceId fails with conflict.") {
     forAll { (device1: DeviceT, device2: DeviceT) =>
 
-      val d1 = device1.copy(deviceName = DeviceName(device1.deviceName.underlying + "#1"))
-      val d2 = device2.copy(deviceName = DeviceName(device2.deviceName.underlying + "#2"))
+      val d1 = device1.copy(deviceName = device1.deviceName.map(_.map(_ + "#1")))
+      val d2 = device2.copy(deviceName = device1.deviceName.map(_.map(_ + "#2")))
 
       val id1: Id = createDeviceOk(d1)
       val id2: Id = createDeviceOk(d2)

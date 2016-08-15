@@ -8,8 +8,6 @@ import eu.timepit.refined.api.Refined
 import org.scalacheck.{Arbitrary, Gen}
 import java.time.Instant
 
-import org.genivi.sota.data.Device.DeviceId
-
 trait DeviceGenerators {
 
   import Arbitrary._
@@ -20,11 +18,11 @@ trait DeviceGenerators {
   } yield Id(Refined.unsafeApply(uuid.toString))
 
   val genDeviceName: Gen[DeviceName] = for {
-    name <- arbitrary[String]
+    name <- arbitrary[String] if name.length < 200
   } yield DeviceName(name)
 
   val genDeviceId: Gen[DeviceId] = for {
-    id <- Gen.identifier
+    id <- Gen.identifier if id.length < 200
   } yield DeviceId(id)
 
   val genDeviceType: Gen[DeviceType] = for {
@@ -37,8 +35,8 @@ trait DeviceGenerators {
 
   def genDeviceWith(deviceNameGen: Gen[DeviceName], deviceIdGen: Gen[DeviceId]): Gen[Device] = for {
     id <- genId
-    name <- deviceNameGen
-    deviceId <- Gen.option(deviceIdGen)
+    name <- Gen.frequency(70 -> deviceNameGen.map(Some(_)), 30 ->  Gen.const(None))
+    deviceId <- Gen.frequency(70 -> deviceIdGen.map(Some(_)), 30 ->  Gen.const(None))
     deviceType <- genDeviceType
     lastSeen <- Gen.option(genLastSeen)
   } yield Device(Namespaces.defaultNs, id, name, deviceId, deviceType, lastSeen)
@@ -46,8 +44,8 @@ trait DeviceGenerators {
   val genDevice: Gen[Device] = genDeviceWith(genDeviceName, genDeviceId)
 
   def genDeviceTWith(deviceNameGen: Gen[DeviceName], deviceIdGen: Gen[DeviceId]): Gen[DeviceT] = for {
-    name <- deviceNameGen
-    deviceId <- Gen.option(deviceIdGen)
+    name <- Gen.frequency(70 -> deviceNameGen.map(Some(_)), 30 ->  Gen.const(None))
+    deviceId <- Gen.frequency(70 -> deviceIdGen.map(Some(_)), 30 ->  Gen.const(None))
     deviceType <- genDeviceType
   } yield DeviceT(name, deviceId, deviceType)
 

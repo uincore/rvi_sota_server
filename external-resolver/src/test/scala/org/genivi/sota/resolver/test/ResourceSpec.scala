@@ -62,7 +62,8 @@ class FakeDeviceRegistryRoutes(deviceRegistry: FakeDeviceRegistry) {
 
   val route = path("fake_devices") {
     (put & entity(as[Device.Id])) { device =>
-      deviceRegistry.addDevice(Device(Namespaces.defaultNs, device, DeviceName(s"name-${device.show}"), Option(DeviceId(device.show))))
+      deviceRegistry.addDevice(Device(Namespaces.defaultNs, device, Option(DeviceName(s"name-${device.show}")),
+        Option(DeviceId(device.show))))
       complete(StatusCodes.OK -> "")
     } ~
     get {

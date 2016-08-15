@@ -18,7 +18,7 @@ import Device._
  */
 // TODO: Use org.genivi.sota.core.data.client.ResponseEncoder
 final case class DeviceT(
-  deviceName: DeviceName,
+  deviceName: Option[DeviceName],
   deviceId: Option[Device.DeviceId] = None,
   deviceType: Device.DeviceType = Device.DeviceType.Other
 )
@@ -26,7 +26,7 @@ final case class DeviceT(
 
 final case class Device(namespace: Namespace,
                   id: Id,
-                  deviceName: DeviceName,
+                  deviceName: Option[DeviceName],
                   deviceId: Option[DeviceId] = None,
                   deviceType: Device.DeviceType = DeviceType.Other,
                   lastSeen: Option[Instant] = None) {
@@ -47,7 +47,12 @@ object Device {
     def show(deviceId: DeviceId) = deviceId.underlying
   }
 
-  final case class DeviceName(underlying: String) extends AnyVal
+  // TODO: Make underlying protected
+  final case class DeviceName(underlying: String) extends AnyVal {
+    def map(f: String => String): DeviceName =
+      this.copy(underlying = f(this.underlying))
+  }
+
   implicit val showDeviceName = new Show[DeviceName] {
     def show(name: DeviceName) = name.underlying
   }
@@ -80,8 +85,6 @@ object Device {
   }
 
   // Slick mapping
-
   implicit val idColumnType =
-    MappedColumnType.base[Id, String](showId.show(_), (s: String) => Id(Refined.unsafeApply(s)))
-
+    MappedColumnType.base[Id, String](showId.show, (s: String) => Id(Refined.unsafeApply(s)))
 }

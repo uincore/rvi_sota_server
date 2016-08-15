@@ -4,6 +4,8 @@
  */
 package org.genivi.sota.device_registry
 
+import java.sql.{BatchUpdateException, SQLIntegrityConstraintViolationException}
+
 import cats.Show
 import eu.timepit.refined._
 import eu.timepit.refined.api.Refined
@@ -28,25 +30,24 @@ import slick.driver.MySQLDriver.api._
 object DeviceRepository {
 
   import Device._
+  import org.genivi.sota.db.SlickExtensions._
 
   // TODO generalize
   implicit val deviceNameColumnType =
     MappedColumnType.base[DeviceName, String](
-      { case DeviceName(value) => value.toString },
-      DeviceName(_)
+      { case DeviceName(value) => value.toString }, DeviceName
     )
 
   implicit val deviceIdColumnType =
     MappedColumnType.base[DeviceId, String](
-      { case DeviceId(value) => value.toString },
-      DeviceId(_)
+      { case DeviceId(value) => value.toString }, DeviceId
     )
 
   // scalastyle:off
   class DeviceTable(tag: Tag) extends Table[Device](tag, "Device") {
     def namespace = column[Namespace]("namespace")
     def id = column[Id]("uuid")
-    def deviceName = column[DeviceName]("device_name")
+    def deviceName = column[Option[DeviceName]]("device_name")
     def deviceId = column[Option[DeviceId]]("device_id")
     def deviceType = column[DeviceType]("device_type")
     def lastSeen = column[Option[Instant]]("last_seen")
@@ -58,7 +59,7 @@ object DeviceRepository {
   }
 
   // scalastyle:on
-  val devices = TableQuery[DeviceTable]
+  private val devices = TableQuery[DeviceTable]
 
   def list(ns: Namespace): DBIO[Seq[Device]] = devices.filter(_.namespace === ns).result
 
@@ -71,21 +72,10 @@ object DeviceRepository {
         case Success(_) => DBIO.failed(Errors.ConflictingDevice)
         case Failure(_) => DBIO.successful(())
       }
-      _ <- notConflicts(ns, device.deviceName, device.deviceId)
-      _ <- devices += Device(ns, id, device.deviceName, device.deviceId, device.deviceType)
+      _ <- (devices += Device(ns, id, device.deviceName, device.deviceId, device.deviceType)).handleIntegrityErrors
     } yield id
 
     dbIO.transactionally
-  }
-
-  def notConflicts(ns: Namespace, deviceName: DeviceName, deviceId: Option[DeviceId])
-                  (implicit ec: ExecutionContext): DBIO[Unit] = {
-    devices
-      .filter(_.namespace === ns)
-      .filter(d => d.deviceName === deviceName || d.deviceId === deviceId)
-      .exists
-      .result
-      .flatMap(if (_) DBIO.failed(Errors.ConflictingDevice) else DBIO.successful(()))
   }
 
   def exists(ns: Namespace, id: Id)
@@ -113,8 +103,7 @@ object DeviceRepository {
 
     val dbIO = for {
       _ <- exists(ns, id)
-      _ <- notConflicts(ns, device.deviceName, device.deviceId)
-      _ <- devices.update(Device(ns, id, device.deviceName, device.deviceId, device.deviceType))
+      _ <- devices.update(Device(ns, id, device.deviceName, device.deviceId, device.deviceType)).handleIntegrityErrors()
     } yield ()
 
     dbIO.transactionally
@@ -145,5 +134,4 @@ object DeviceRepository {
 
     dbIO.transactionally
   }
-
 }

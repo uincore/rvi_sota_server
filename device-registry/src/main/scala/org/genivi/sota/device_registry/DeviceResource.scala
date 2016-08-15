@@ -30,12 +30,12 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.ExecutionContext
 import slick.driver.MySQLDriver.api._
 
-class Routes(namespaceExtractor: Directive1[Namespace],
-             messageBus: MessageBusPublisher)
-            (implicit system: ActorSystem,
-             db: Database,
-             mat: ActorMaterializer,
-             ec: ExecutionContext) {
+class DeviceResource(namespaceExtractor: Directive1[Namespace],
+                     messageBus: MessageBusPublisher)
+                    (implicit system: ActorSystem,
+                     db: Database,
+                     mat: ActorMaterializer,
+                     ec: ExecutionContext) {
 
   import Device._
   import Directives._
@@ -62,8 +62,8 @@ class Routes(namespaceExtractor: Directive1[Namespace],
     val f = db
       .run(DeviceRepository.create(ns, device))
       .andThen {
-        case scala.util.Success(_) =>
-          messageBus.publish(DeviceCreated(ns, device.deviceName, device.deviceId, device.deviceType))
+        case scala.util.Success(id) =>
+          messageBus.publish(DeviceCreated(ns, id, device.deviceName, device.deviceId, device.deviceType))
       }
 
    onSuccess(f) { id =>
@@ -94,6 +94,7 @@ class Routes(namespaceExtractor: Directive1[Namespace],
     if (groupName.isEmpty) { complete(BadRequest -> "Group name cannot be empty") }
     else { complete(db.run(GroupInfo.update(groupName, namespace, data))) }
   }
+
   def deleteGroupInfo(groupName: String, namespace: Namespace): Route = {
     complete(db.run(GroupInfo.delete(groupName, namespace)))
   }

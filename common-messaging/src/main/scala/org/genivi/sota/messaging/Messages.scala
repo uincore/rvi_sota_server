@@ -21,7 +21,8 @@ object Messages {
                               lastSeen: Instant) extends Message
 
   final case class DeviceCreated(namespace: Namespace,
-                                 deviceName: DeviceName,
+                                 id: Device.Id,
+                                 deviceName: Option[DeviceName],
                                  deviceId: Option[Device.DeviceId],
                                  deviceType: Device.DeviceType) extends Message
 
@@ -72,16 +73,14 @@ object Messages {
   }
 
   implicit val deviceCreatedMessageLike = new MessageLike[DeviceCreated] {
-    override def partitionKey(v: DeviceCreated): String =
-      v.deviceName.underlying
+    override def partitionKey(v: DeviceCreated): String = v.id.underlying.get
 
     implicit val encoder: Encoder[DeviceCreated] = deriveEncoder
     implicit val decoder: Decoder[DeviceCreated] = deriveDecoder
   }
 
   implicit val deviceDeletedMessageLike = new MessageLike[DeviceDeleted] {
-    override def partitionKey(v: DeviceDeleted): String =
-      v.deviceId.underlying.get
+    override def partitionKey(v: DeviceDeleted): String = v.deviceId.underlying.get
 
     implicit val encoder: Encoder[DeviceDeleted] = deriveEncoder
     implicit val decoder: Decoder[DeviceDeleted] = deriveDecoder
