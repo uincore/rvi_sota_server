@@ -21,6 +21,7 @@ object Errors {
     val GroupInfoAlreadyExists = ErrorCode("group_info_already_exists")
   }
 
+  // TODO: Move this to raw errors or move handler up to common
   case object MissingDevice extends Throwable with NoStackTrace
   case object ConflictingDevice extends Throwable with NoStackTrace
   case object MissingSystemInfo extends Throwable with NoStackTrace

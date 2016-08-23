@@ -10,7 +10,7 @@ import akka.http.scaladsl.model.{HttpResponse, StatusCodes}
 import cats.Show
 import io.circe.Json
 import io.circe.syntax._
-import org.genivi.sota.core.Errors
+import org.genivi.sota.core.SotaCoreErrors
 import org.genivi.sota.core.data.UpdateStatus.UpdateStatus
 import org.genivi.sota.core.data._
 import org.genivi.sota.core.db.UpdateSpecs._
@@ -155,7 +155,7 @@ object DeviceUpdates {
       }
     }
 
-    specsWithDepsIO.failIfNone(Errors.MissingEntity(classOf[UpdateSpec]))
+    specsWithDepsIO.failIfNone(SotaCoreErrors.MissingEntity(classOf[UpdateSpec]))
   }
 
   /**

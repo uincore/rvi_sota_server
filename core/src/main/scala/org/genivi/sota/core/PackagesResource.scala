@@ -128,7 +128,7 @@ class PackagesResource(resolver: ExternalResolverClient, db : Database,
     def handleErrors(throwable: Throwable): Route = throwable match {
       case ExternalResolverRequestFailed(msg, cause) =>
         log.error(cause, s"Unable to create/update package: $msg")
-        complete(StatusCodes.ServiceUnavailable -> ErrorRepresentation(ErrorCodes.ExternalResolverError, msg))
+        complete(StatusCodes.ServiceUnavailable -> ErrorRepresentation(SotaCoreErrorCodes.ExternalResolverError, msg))
       case e => failWith(e)
     }
 

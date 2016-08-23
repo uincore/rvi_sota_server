@@ -15,7 +15,7 @@ import org.genivi.sota.data.{Device, PackageId}
 import org.genivi.sota.db.SlickExtensions
 import java.time.Instant
 
-import org.genivi.sota.core.Errors
+import org.genivi.sota.core.SotaCoreErrors
 import slick.driver.MySQLDriver.api._
 
 import scala.collection.immutable.Queue
@@ -227,7 +227,7 @@ object UpdateSpecs {
         if (rowsAffected == 1) {
           DBIO.successful(rowsAffected)
         } else {
-          DBIO.failed(Errors.MissingEntity(classOf[UpdateSpec]))
+          DBIO.failed(SotaCoreErrors.MissingEntity(classOf[UpdateSpec]))
         }
       }
   }
