@@ -25,7 +25,7 @@ import org.genivi.sota.rest.Validation._
 import slick.driver.MySQLDriver.api.Database
 
 class UpdateRequestsResource(db: Database, resolver: ExternalResolverClient, updateService: UpdateService,
-                             namespaceExtractor: Directive1[Namespace])
+                             namespaceExtractor: Directive1[Namespace], authToken: Directive1[Option[String]])
                             (implicit system: ActorSystem, mat: ActorMaterializer) {
 
   import CirceMarshallingSupport._
@@ -62,9 +62,9 @@ class UpdateRequestsResource(db: Database, resolver: ExternalResolverClient, upd
     * An ota client POST an [[UpdateRequest]] campaign to locally persist it along with one or more [[UpdateSpec]]
     * (one per device, for dependencies obtained from resolver) thus scheduling an update.
     */
-  def createUpdate(ns: Namespace): Route = {
+  def createUpdate(ns: Namespace): Route = authToken { token =>
     clientUpdateRequest(ns) { req: UpdateRequest =>
-      val resultF = updateService.queueUpdate(req, pkg => resolver.resolve(ns, pkg.id))
+      val resultF = updateService.queueUpdate(req, pkg => resolver.resolve(ns, pkg.id).withToken(token).exec)
 
       complete(resultF map (_ => (StatusCodes.Created, req)))
     }

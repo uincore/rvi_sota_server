@@ -16,7 +16,7 @@ import org.genivi.sota.resolver.components.Component
 import akka.http.scaladsl.testkit.RouteTestTimeout
 import org.genivi.sota.data.Device.DeviceName
 import org.genivi.sota.resolver.common.InstalledSoftware
-import org.genivi.sota.resolver.test.generators.PackageGenerators
+import org.genivi.sota.resolver.test.generators.{ComponentGenerators, PackageGenerators}
 import org.genivi.sota.rest.{ErrorCodes, ErrorRepresentation}
 import org.scalacheck._
 import Device._
@@ -31,7 +31,7 @@ import scala.concurrent.duration._
  * Spec for Vehicle REST actions
  */
 class VehiclesResourcePropSpec extends ResourcePropSpec
-    with PackageGenerators with ScalaFutures {
+    with ComponentGenerators with PackageGenerators with ScalaFutures {
   import org.genivi.sota.data.DeviceGenerators._
 
   val devices = "devices"
@@ -48,7 +48,7 @@ class VehiclesResourcePropSpec extends ResourcePropSpec
     } yield (beforeUpdate ++ added, beforeUpdate -- removed ++ added ++ nonExistentAdded)
 
     forAll(genDevice, stateGen, minSuccessful(3)) { (device, state) =>
-      val id = deviceRegistry.createDevice(device.toResponse).futureValue
+      val id = deviceRegistry.createDevice(device.toResponse).exec.futureValue
 
       val (installedBefore, update) = state
       installedBefore.foreach( p => addPackageOK(p.id.name.get, p.id.version.get, p.description, p.vendor) )
@@ -67,7 +67,7 @@ class VehiclesResourcePropSpec extends ResourcePropSpec
     } yield (beforeUpdate ++ added, beforeUpdate -- removed ++ added)
 
     forAll(genDevice, stateGen, minSuccessful(3)) { (device, state) =>
-      val id = deviceRegistry.createDevice(device.toResponse).futureValue
+      val id = deviceRegistry.createDevice(device.toResponse).exec.futureValue
 
       val (availablePackages, update) = state
       availablePackages.foreach( p => addPackageOK(p.id.name.get, p.id.version.get, p.description, p.vendor) )
@@ -82,7 +82,7 @@ class VehiclesResourcePropSpec extends ResourcePropSpec
     val packageGen = Gen.nonEmptyContainerOf[Set, PackageId](genPackageId)
 
     forAll(genDevice, packageGen, minSuccessful(3)) { (device, packageIds) =>
-      val id = deviceRegistry.createDevice(device.toResponse).futureValue
+      val id = deviceRegistry.createDevice(device.toResponse).exec.futureValue
 
       Put(Resource.uri(devices, id.show, "packages"),
         InstalledSoftware(packageIds, Set())) ~> route ~> check {
@@ -100,7 +100,7 @@ class VehiclesResourcePropSpec extends ResourcePropSpec
     val packageGen = Gen.nonEmptyContainerOf[Set, PackageId](genPackageId)
 
     forAll(genDevice, packageGen, minSuccessful(3)) { (device, packageIds) =>
-      val id = deviceRegistry.createDevice(device.toResponse).futureValue
+      val id = deviceRegistry.createDevice(device.toResponse).exec.futureValue
 
       Put(Resource.uri(devices, id.show, "packages"),
         InstalledSoftware(packageIds, Set())) ~> route ~> check {
@@ -118,7 +118,7 @@ class VehiclesResourcePropSpec extends ResourcePropSpec
 
   property("filters installed packages by partial regex") {
     forAll(genDevice, genPackageId, minSuccessful(3)) { (device, packageId) =>
-      val id = deviceRegistry.createDevice(device.toResponse).futureValue
+      val id = deviceRegistry.createDevice(device.toResponse).exec.futureValue
 
       Put(Resource.uri(devices, id.show, "packages"),
         InstalledSoftware(Set(packageId), Set())) ~> route ~> check {
@@ -140,7 +140,7 @@ class VehiclesResourcePropSpec extends ResourcePropSpec
     val packageGen = Gen.nonEmptyContainerOf[Set, PackageId](genPackageId)
 
     forAll(genDevice, packageGen, minSuccessful(3)) { (device, packageIds) =>
-      val id = deviceRegistry.createDevice(device.toResponse).futureValue
+      val id = deviceRegistry.createDevice(device.toResponse).exec.futureValue
 
       val installedSoftware = InstalledSoftware(packageIds, Set())
 
@@ -156,6 +156,19 @@ class VehiclesResourcePropSpec extends ResourcePropSpec
           }
         }
       }
+    }
+  }
+
+  property("VehicleRequestHttp should reject when not authorized") {
+    forAll { (cmp: Component, device: Device.Id, pkg: Package) =>
+      isRejected { listVehicles }
+      isRejected { listVehiclesHaving(cmp) }
+      isRejected { installPackage(device, pkg) }
+      isRejected { uninstallPackage(device, pkg) }
+      isRejected { listPackagesOnVehicle(device) }
+      isRejected { listComponentsOnVehicle(device) }
+      isRejected { installComponent(device, cmp) }
+      isRejected { uninstallComponent(device, cmp) }
     }
   }
 }

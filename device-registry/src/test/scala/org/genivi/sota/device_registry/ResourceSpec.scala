@@ -4,7 +4,7 @@
  */
 package org.genivi.sota.device_registry.test
 
-import akka.http.scaladsl.server.{Directives, Route}
+import akka.http.scaladsl.server.{AuthorizationFailedRejection, Directives, Route}
 import akka.http.scaladsl.testkit.RouteTestTimeout
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import cats.data.Xor
@@ -41,9 +41,13 @@ trait ResourceSpec extends
       case Xor.Left(err) => throw err
     }
 
+  // Route used to test Authorization rejections
+  lazy implicit val rejectRoute: Route =
+    new Routing(namespaceExtractor, Directives.reject(AuthorizationFailedRejection), messageBus).route
+
   // Route
   lazy implicit val route: Route =
-    new Routing(namespaceExtractor, messageBus).route
+    new Routing(namespaceExtractor, Directives.pass, messageBus).route
 
 }
 

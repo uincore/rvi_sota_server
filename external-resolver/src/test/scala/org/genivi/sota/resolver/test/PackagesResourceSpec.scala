@@ -74,6 +74,13 @@ class PackagesResourcePropSpec extends ResourcePropSpec with PackageGenerators {
     }
   }
 
+  property("Package resource should reject when not authorized") {
+    forAll { (p : Package) =>
+      isRejected { addPackage(p) }
+      isRejected { Get(Resource.uri("package", p.id.name.get, p.id.version.get)) }
+    }
+  }
+
 }
 
 /**

@@ -15,7 +15,7 @@ import org.genivi.sota.resolver.components.Component
 /**
  * Specs for Component REST actions
  */
-class ComponentResourceSpec extends ResourceWordSpec with Namespaces {
+class ComponentResourceWordSpec extends ResourceWordSpec with Namespaces {
 
   val components = "components"
 
@@ -88,6 +88,14 @@ class ComponentResourceSpec extends ResourceWordSpec with Namespaces {
                                                  Component(defaultNs, bobby1, "nice"),
                                                  Component(defaultNs, jobby0, "nice"))
       }
+    }
+
+    "Components request should reject when not authorized" in {
+      val cmpn = Component(defaultNs, bobby0, "nice")
+      isRejected{ listComponents }
+      isRejected{ addComponent(cmpn) }
+      isRejected{ deleteComponent(cmpn) }
+      isRejected{ updateComponent(cmpn) }
     }
   }
 }

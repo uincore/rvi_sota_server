@@ -48,7 +48,7 @@ class DeviceResourceSpec extends ResourcePropSpec {
   }
 
   property("GET, PUT, DELETE, and POST '/ping' request fails on non-existent device") {
-    forAll { (id: Id, device: DeviceT, json: Json) =>
+    forAll { (id: Id, device: DeviceT) =>
       fetchDevice(id)          ~> route ~> check { status shouldBe NotFound }
       updateDevice(id, device) ~> route ~> check { status shouldBe NotFound }
       deleteDevice(id)         ~> route ~> check { status shouldBe NotFound }
@@ -56,11 +56,11 @@ class DeviceResourceSpec extends ResourcePropSpec {
     }
   }
 
-  property("GET /system_info request fails on non-existent device") {
+  property("GET, PUT and POST /system_info request fails on non-existent device") {
     forAll { (id: Id, json: Json) =>
-      fetchSystemInfo(id)      ~> route ~> check { status shouldBe NotFound }
-      createSystemInfo(id, json) ~> route ~> check { status shouldBe NotFound}
-      updateSystemInfo(id, json) ~> route ~> check { status shouldBe NotFound}
+      fetchSystemInfo(id)        ~> route ~> check { status shouldBe NotFound }
+      createSystemInfo(id, json) ~> route ~> check { status shouldBe NotFound }
+      updateSystemInfo(id, json) ~> route ~> check { status shouldBe NotFound }
     }
   }
 
@@ -69,6 +69,33 @@ class DeviceResourceSpec extends ResourcePropSpec {
       whenever (! groupName.isEmpty && ! json.isNull) {
         fetchGroupInfo (groupName, defaultNs) ~> route ~> check {
           status shouldBe NotFound
+        }
+      }
+    }
+  }
+
+  property("GET, PUT, DELETE, and POST '/ping' request should be rejected if not Authorized") {
+    forAll { (id: Id, device: DeviceT) =>
+      fetchDevice(id)          ~> rejectRoute ~> check { status shouldBe Unauthorized }
+      updateDevice(id, device) ~> rejectRoute ~> check { status shouldBe Unauthorized }
+      deleteDevice(id)         ~> rejectRoute ~> check { status shouldBe Unauthorized }
+      updateLastSeen(id)       ~> rejectRoute ~> check { status shouldBe Unauthorized }
+    }
+  }
+
+  property("GET, PUT and POST /system_info request should be rejected if not Authorized") {
+    forAll { (id: Id, json: Json) =>
+      fetchSystemInfo(id)        ~> rejectRoute ~> check { status shouldBe Unauthorized }
+      createSystemInfo(id, json) ~> rejectRoute ~> check { status shouldBe Unauthorized }
+      updateSystemInfo(id, json) ~> rejectRoute ~> check { status shouldBe Unauthorized }
+    }
+  }
+
+  property("GET /group_info request fails should be rejected if not Authorized") {
+    forAll { (json: Json, groupName: String) =>
+      whenever (! groupName.isEmpty && ! json.isNull) {
+        fetchGroupInfo (groupName, defaultNs) ~> rejectRoute ~> check {
+          status shouldBe Unauthorized
         }
       }
     }

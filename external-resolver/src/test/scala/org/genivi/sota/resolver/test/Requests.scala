@@ -155,6 +155,13 @@ trait FirmwareRequests extends Matchers { self: ResourceSpec =>
   = installFirmware(device, packages, firmware) ~> route ~> check {
       status shouldBe StatusCodes.NoContent
     }
+
+  def installFirmwareReject
+    (device: Device.Id, packages: Set[PackageId], firmware: Set[Firmware])(route: Route)
+      : Unit
+    = installFirmware(device, packages, firmware) ~> route ~> check {
+      status shouldBe StatusCodes.Unauthorized
+    }
 }
 
 /**

@@ -35,6 +35,7 @@ import slick.driver.MySQLDriver.api._
  * @see {@linktourl http://advancedtelematic.github.io/rvi_sota_server/dev/api.html}
  */
 class DeviceDirectives(namespaceExtractor: Directive1[Namespace],
+                       authToken: Directive1[Option[String]],
                        deviceRegistry: DeviceRegistry)
                       (implicit system: ActorSystem,
                         db: Database,
@@ -46,11 +47,13 @@ class DeviceDirectives(namespaceExtractor: Directive1[Namespace],
   val extractDeviceId: Directive1[Device.Id] = refined[Device.ValidId](Slash ~ Segment).map(Device.Id)
 
   def searchDevices(ns: Namespace): Route =
-    parameters(('regex.as[String Refined Regex].?,
-      'packageName.as[PackageId.Name].?,
-      'packageVersion.as[PackageId.Version].?,
-      'component.as[Component.PartNumber].?)) { case (re, pn, pv, cp) =>
-      complete(DeviceRepository.search(ns, re, pn, pv, cp, deviceRegistry))
+    authToken { token =>
+      parameters(('regex.as[String Refined Regex].?,
+                  'packageName.as[PackageId.Name].?,
+                  'packageVersion.as[PackageId.Version].?,
+                  'component.as[Component.PartNumber].?)) { case (re, pn, pv, cp) =>
+        complete(DeviceRepository.search(ns, re, pn, pv, cp, deviceRegistry,token))
+      }
     }
 
   def getPackages(device: Device.Id, regexFilter: Option[Refined[String, Regex]]): Route = {
@@ -80,15 +83,17 @@ class DeviceDirectives(namespaceExtractor: Directive1[Namespace],
       }
     }
 
-    entity(as[InstalledSoftware]) { installedSoftware =>
-      val responseF = {
-        for {
-          deviceData <- deviceRegistry.fetchDevice(device)
-          _ <- updateSoftwareOnDb(deviceData.namespace, installedSoftware)
-        } yield ()
-      }
+    authToken { token =>
+      entity(as[InstalledSoftware]) { installedSoftware =>
+        val responseF = {
+          for {
+            deviceData <- deviceRegistry.fetchDevice(device).withToken(token).exec
+            _ <- updateSoftwareOnDb(deviceData.namespace, installedSoftware)
+          } yield ()
+        }
 
-      onSuccess(responseF) { complete(StatusCodes.NoContent) }
+        onSuccess(responseF) { complete(StatusCodes.NoContent) }
+      }
     }
   }
 

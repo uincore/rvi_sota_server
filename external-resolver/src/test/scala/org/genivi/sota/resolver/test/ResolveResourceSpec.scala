@@ -28,7 +28,7 @@ class ResolveResourceSpec extends ResourceWordSpec with ScalaFutures {
         val d = DeviceT(DeviceName(s"Name $i"),
           Some(DeviceId(s"${i}0RES0LVEV1N12345")))
 
-        deviceRegistry.createDevice(d).map((d, _))
+        deviceRegistry.createDevice(d).exec.map((d, _))
       }
     }.futureValue
   }
@@ -149,6 +149,11 @@ class ResolveResourceSpec extends ResourceWordSpec with ScalaFutures {
 
         }
       }
+    }
+
+    "Resolve request should reject when not authorized" in {
+      val pkgVersion = "0.0.1"
+      isRejected { resolve(defaultNs, pkgName, pkgVersion) }
     }
   }
 }

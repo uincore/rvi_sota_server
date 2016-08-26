@@ -40,11 +40,12 @@ object DeviceUpdates {
     */
   def update(device: Device.Id,
              packageIds: List[PackageId],
-             resolverClient: ExternalResolverClient)
+             resolverClient: ExternalResolverClient,
+             token: Option[String])
             (implicit ec: ExecutionContext): Future[Unit] = {
     // TODO: core should be able to send this instead!
     val j = Json.obj("packages" -> packageIds.asJson, "firmware" -> Json.arr())
-    resolverClient.setInstalledPackages(device, j)
+    resolverClient.setInstalledPackages(device, j).withToken(token).exec
   }
 
   def buildReportInstallResponse(device: Device.Id, updateReport: UpdateReport,

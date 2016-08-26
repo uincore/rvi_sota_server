@@ -29,4 +29,13 @@ class FirmwareResourceSpec extends ResourceWordSpec {
         Refined.unsafeApply("ec1"): Firmware.Module, Refined.unsafeApply("1.0.0"): Firmware.FirmwareId, 42356329L)))
     }
   }
+
+  "Firmware resource" should {
+    "reject request that are not authorized" in {
+      installFirmwareReject(device, Set(), Set(Firmware(Namespace("default"),
+                                                        Refined.unsafeApply("ec1"): Firmware.Module,
+                                                        Refined.unsafeApply("1.0.0"): Firmware.FirmwareId,
+                                                        42356329L)))(routeReject)
+    }
+  }
 }

@@ -25,6 +25,10 @@ object SotaRejectionHandler {
   case object DuplicateEntry extends Throwable("Entry already exists")
 
   def rejectionHandler : RejectionHandler = RejectionHandler.newBuilder().handle {
+    case AuthorizationFailedRejection =>
+      complete(StatusCodes.Unauthorized ->
+               ErrorRepresentation(ErrorCode("failed_authentication"),
+                                             "The supplied authentication is not authorized to access this resource"))
     case ValidationRejection(msg, _) =>
       complete( StatusCodes.BadRequest -> ErrorRepresentation(ErrorCodes.InvalidEntity, msg) )
   }.handle{

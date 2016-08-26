@@ -20,6 +20,7 @@ import org.genivi.sota.core.resolver.DefaultExternalResolverClient
 import org.genivi.sota.core.rvi._
 import org.genivi.sota.data.{Device, Namespaces, PackageId}
 import org.genivi.sota.data.Namespace._
+import org.genivi.sota.http.AuthToken
 import java.time.{Duration, Instant}
 import java.util.UUID
 
@@ -188,7 +189,7 @@ trait SotaCore {
                                   messageBus)
     val updateController = system.actorOf( UpdateController.props(transferProtocolProps ), "update-controller")
     val client = new FakeExternalResolver()
-    new SotaServices(updateController, client, deviceRegistry).route
+    new SotaServices(updateController, client, deviceRegistry, AuthToken.allowAll).route
   }
 
 }

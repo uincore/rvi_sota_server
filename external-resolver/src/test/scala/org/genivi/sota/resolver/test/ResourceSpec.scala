@@ -4,13 +4,13 @@
  */
 package org.genivi.sota.resolver.test
 
-import akka.http.scaladsl.model.StatusCodes
-import akka.http.scaladsl.server.Route
+import akka.http.scaladsl.model.{HttpRequest, StatusCodes}
+import akka.http.scaladsl.server.{AuthorizationFailedRejection, Directives, Route}
 import akka.http.scaladsl.testkit.{RouteTestTimeout, ScalatestRouteTest}
 import org.genivi.sota.core.{DatabaseSpec, FakeDeviceRegistry}
 import org.genivi.sota.data.Device.DeviceName
 import org.genivi.sota.data.{Device, Namespaces}
-import org.genivi.sota.http.NamespaceDirectives
+import org.genivi.sota.http.{AuthToken, NamespaceDirectives}
 import org.genivi.sota.resolver.Routing
 import org.scalatest.prop.PropertyChecks
 import org.scalatest.{BeforeAndAfterAll, PropSpec, Suite, WordSpec}
@@ -38,9 +38,20 @@ trait ResourceSpec extends
 
   import akka.http.scaladsl.server.Directives._
 
+  def isRejected(req: HttpRequest) = req ~> routeReject ~> check {
+    status shouldBe StatusCodes.Unauthorized
+  }
+
+  // Route for rejecting unauthorized access
+  lazy val routeReject: Route = new
+    Routing(NamespaceDirectives.defaultNamespaceExtractor,
+            AuthToken.allowAll,
+            Directives.reject(AuthorizationFailedRejection),
+            deviceRegistry).route
   // Route
   lazy implicit val route: Route = new Routing(NamespaceDirectives.defaultNamespaceExtractor,
-    deviceRegistry).route ~ new FakeDeviceRegistryRoutes(deviceRegistry).route
+                                               AuthToken.allowAll, Directives.pass, deviceRegistry).route ~
+    new FakeDeviceRegistryRoutes(deviceRegistry).route
 }
 
 /**

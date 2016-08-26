@@ -51,7 +51,7 @@ class FiltersResourceWordSpec extends ResourceWordSpec with Namespaces {
     val filterName2 = "myfilter2"
     val filterExpr2 = s"""vin_matches "TAJNX5745SC......""""
     val filter2     = Filter(defaultNs, Refined.unsafeApply(filterName2), Refined.unsafeApply(filterExpr2))
-
+    val regex       = "^.*2$"
     "list available filters on a GET request" in {
       addFilterOK(filterName2, filterExpr2)
       listFilters ~> route ~> check {
@@ -60,7 +60,7 @@ class FiltersResourceWordSpec extends ResourceWordSpec with Namespaces {
     }
 
     "allow regex search on listing filters" in {
-      listFiltersRegex("^.*2$") ~> route ~> check {
+      listFiltersRegex(regex) ~> route ~> check {
         responseAs[Seq[Filter]] shouldBe List(filter2)
       }
     }
@@ -100,6 +100,14 @@ class FiltersResourceWordSpec extends ResourceWordSpec with Namespaces {
       }
     }
 
+    "Filter request should reject when not authorized" in {
+      isRejected{ addFilter2(filter) }
+      isRejected{ updateFilter(filter) }
+      isRejected{ listFilters }
+      isRejected{ deleteFilter(filter) }
+      isRejected{ listFiltersRegex(regex) }
+      isRejected{ validateFilter(filter) }
+    }
   }
 }
 
@@ -114,5 +122,4 @@ class FiltersResourcePropSpec extends ResourcePropSpec with FilterGenerators {
       addFilterOK(filter.name.get, filter.expression.get)
     }
   }
-
 }

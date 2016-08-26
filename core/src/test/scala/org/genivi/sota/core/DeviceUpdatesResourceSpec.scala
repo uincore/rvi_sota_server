@@ -20,7 +20,7 @@ import org.genivi.sota.data.SimpleJsonGenerator
 import java.time.Instant
 
 import eu.timepit.refined.api.Refined
-import org.genivi.sota.http.{AuthDirectives, NamespaceDirectives}
+import org.genivi.sota.http.{AuthDirectives, AuthToken, NamespaceDirectives}
 import org.genivi.sota.marshalling.CirceMarshallingSupport._
 import org.genivi.sota.messaging.MessageBusPublisher
 import org.scalacheck.Gen
@@ -53,7 +53,7 @@ class DeviceUpdatesResourceSpec extends FunSuite
   implicit val connectivity = new FakeConnectivity()
 
   lazy val service = new DeviceUpdatesResource(db, fakeResolver, fakeDeviceRegistry, defaultNamespaceExtractor,
-    AuthDirectives.allowAll, MessageBusPublisher.ignore)
+    AuthToken.allowAll, AuthDirectives.allowAll, MessageBusPublisher.ignore)
 
   val fakeResolver = new FakeExternalResolver()
 
@@ -61,7 +61,7 @@ class DeviceUpdatesResourceSpec extends FunSuite
   val (fakeDeviceRegistry, deviceUri, deviceUuid) = {
     val registry = new FakeDeviceRegistry(Namespaces.defaultNs)
     val device = genDeviceT.sample.get
-    val id = Await.result(registry.createDevice(device), 1.seconds)
+    val id = Await.result(registry.createDevice(device).exec, 1.seconds)
     (registry, Uri.Empty.withPath(baseUri.path / id.underlying.get), id)
   }
 
@@ -89,7 +89,7 @@ class DeviceUpdatesResourceSpec extends FunSuite
     Put(uri, newSystemInfo) ~> service.route ~> check {
       status shouldBe StatusCodes.OK
 
-      val systemInfo = fakeDeviceRegistry.getSystemInfo(deviceUuid).futureValue
+      val systemInfo = fakeDeviceRegistry.getSystemInfo(deviceUuid).exec.futureValue
       newSystemInfo shouldBe systemInfo
     }
 
@@ -139,7 +139,7 @@ class DeviceUpdatesResourceSpec extends FunSuite
       status shouldBe StatusCodes.OK
       responseAs[List[UUID]] should be(empty)
 
-      val device = fakeDeviceRegistry.fetchDevice(deviceUuid).futureValue
+      val device = fakeDeviceRegistry.fetchDevice(deviceUuid).exec.futureValue
       device.lastSeen shouldBe defined
       device.lastSeen.get.isAfter(now) shouldBe true
     }
@@ -183,7 +183,7 @@ class DeviceUpdatesResourceSpec extends FunSuite
 
   test("GET to download a file returns 3xx if the package URL is an s3 URI") {
     val service = new DeviceUpdatesResource(db, fakeResolver, fakeDeviceRegistry, defaultNamespaceExtractor,
-      AuthDirectives.allowAll, MessageBusPublisher.ignore) {
+      AuthToken.allowAll, AuthDirectives.allowAll, MessageBusPublisher.ignore) {
       override lazy val packageRetrievalOp: (Package) => Future[HttpResponse] = {
         _ => Future.successful {
           HttpResponse(StatusCodes.Found, Location("https://some-fake-place") :: Nil)

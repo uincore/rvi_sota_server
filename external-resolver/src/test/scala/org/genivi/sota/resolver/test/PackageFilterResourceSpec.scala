@@ -144,6 +144,13 @@ class PackageFilterResourceWordSpec extends ResourceWordSpec with Namespaces {
       }
     }
 
+    "PackageFilter request should reject when not authorized" in {
+      isRejected { addPackageFilter2(pkgFilter) }
+      isRejected { listPackageFilters }
+      isRejected { listPackagesForFilter(filterName) }
+      isRejected { listFiltersForPackage(pkgName, pkgVersion) }
+      isRejected { deletePackageFilter(pkgName, pkgVersion, filterName) }
+    }
 
   }
 }

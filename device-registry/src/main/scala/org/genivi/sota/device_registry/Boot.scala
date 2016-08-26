@@ -6,7 +6,7 @@ package org.genivi.sota.device_registry
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.server.{Directive1, Directives, Route}
+import akka.http.scaladsl.server.{Directive0, Directive1, Directives, Route}
 import akka.stream.ActorMaterializer
 import cats.data.Xor
 import org.genivi.sota.data.Namespace
@@ -26,13 +26,13 @@ import slick.driver.MySQLDriver.api._
  * Base API routing class.
  * @see {@linktourl http://advancedtelematic.github.io/rvi_sota_server/dev/api.html}
  */
-class Routing(namespaceExtractor: Directive1[Namespace], messageBus: MessageBusPublisher)
+class Routing(namespaceExtractor: Directive1[Namespace], tokenValidator: Directive0, messageBus: MessageBusPublisher)
   (implicit db: Database, system: ActorSystem, mat: ActorMaterializer, exec: ExecutionContext)
     extends Directives {
 
   val route: Route = pathPrefix("api" / "v1") {
     handleRejections(rejectionHandler) {
-      new Routes(namespaceExtractor, messageBus).route
+      new Routes(namespaceExtractor, tokenValidator, messageBus).route
     }
   }
 }
@@ -69,7 +69,7 @@ object Boot extends App with Directives with BootMigrations {
       versionHeaders(version)) {
       handleRejections(rejectionHandler) {
         pathPrefix("api" / "v1") {
-          new Routes(authNamespace, messageBus).route
+          new Routes(authNamespace, TokenValidator().validate, messageBus).route
         } ~ new HealthResource(db, org.genivi.sota.device_registry.BuildInfo.toMap).route
       }
     }

@@ -31,6 +31,7 @@ import scala.concurrent.ExecutionContext
 import slick.driver.MySQLDriver.api._
 
 class Routes(namespaceExtractor: Directive1[Namespace],
+             tokenValidator: Directive0,
              messageBus: MessageBusPublisher)
             (implicit system: ActorSystem,
              db: Database,
@@ -121,7 +122,8 @@ class Routes(namespaceExtractor: Directive1[Namespace],
 
   def api: Route =
     ErrorHandler.handleErrors {
-      pathPrefix("devices") {
+      tokenValidator {
+        pathPrefix("devices") {
           (extractId & post & path("ping")) { id =>
             updateLastSeen(id)
           } ~
@@ -164,6 +166,7 @@ class Routes(namespaceExtractor: Directive1[Namespace],
                 }
             }
           }
+        }
       }
     }
 

@@ -228,7 +228,8 @@ object DeviceRepository {
              pkgName   : Option[PackageId.Name],
              pkgVersion: Option[PackageId.Version],
              part      : Option[Component.PartNumber],
-             deviceRegistry: DeviceRegistry)
+             deviceRegistry: DeviceRegistry,
+             token     : Option[String])
             (implicit db: Database, ec: ExecutionContext, mat: ActorMaterializer): Future[Seq[Device.Id]] = {
     def toRegex[T](r: Refined[String, T]): Refined[String, Regex] =
       refineV[Regex](r.get).right.getOrElse(Refined.unsafeApply(".*"))
@@ -245,7 +246,7 @@ object DeviceRepository {
     val filter = And(vins, And(pkgs, comps))
 
     for {
-      devices <- deviceRegistry.listNamespace(namespace)
+      devices <- deviceRegistry.listNamespace(namespace).withToken(token).exec
       searchResult <- DbDepResolver.filterDevices(namespace, devices.map(d => d.id -> d.deviceId).toMap, filter)
     } yield searchResult
   }

@@ -13,8 +13,9 @@ import java.io.File
 import org.genivi.sota.core.SotaCoreErrors.SotaCoreErrorCodes
 import org.genivi.sota.core.data.Package
 import org.genivi.sota.core.resolver.{ExternalResolverClient, ExternalResolverRequestFailed}
+import org.genivi.sota.common.ClientRequest
 import org.genivi.sota.data.{Device, Namespace, PackageId}
-import org.genivi.sota.http.NamespaceDirectives
+import org.genivi.sota.http.{AuthToken, NamespaceDirectives}
 import org.genivi.sota.marshalling.CirceMarshallingSupport
 import org.genivi.sota.messaging.Messages.PackageCreated
 import org.genivi.sota.messaging.MessageBusPublisher
@@ -50,16 +51,22 @@ class PackageUploadSpec extends PropSpec
 
   class Service(resolverResult: Future[Unit] ) {
     val resolver = new ExternalResolverClient {
-      override def putPackage(namespace: Namespace, packageId: PackageId, description: Option[String], vendor: Option[String]): Future[Unit] = resolverResult
 
-      override def resolve(namespace: Namespace, packageId: PackageId): Future[Map[Device.Id, Set[PackageId]]] = ???
+      type Request[T] = FutureClientRequest[T]
 
-      override def setInstalledPackages(device: Device.Id, json: io.circe.Json) : Future[Unit] = ???
+      override def putPackage(namespace: Namespace, packageId: PackageId,
+                              description: Option[String], vendor: Option[String]): Request[Unit]
+        = FutureClientRequest {resolverResult}
+
+      override def resolve(namespace: Namespace, packageId: PackageId): Request[Map[Device.Id, Set[PackageId]]] = ???
+
+      override def setInstalledPackages(device: Device.Id, json: io.circe.Json) : Request[Unit] = ???
     }
 
     lazy val messageBusPublisher = MessageBusPublisher.ignore
 
-    val resource = new PackagesResource(resolver, db, messageBusPublisher, defaultNamespaceExtractor)
+    val resource = new PackagesResource(resolver, db, messageBusPublisher,
+                                        defaultNamespaceExtractor, AuthToken.allowAll)
   }
 
   def toBodyPart(name : String)(x: String) = BodyPart.Strict(name, HttpEntity( x ) )
