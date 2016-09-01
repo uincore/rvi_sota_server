@@ -46,25 +46,13 @@ trait RviBoot {
 
   def messageBusPublisher: MessageBusPublisher
 
-  def startSotaServices(db: Database): Route = {
+  def startRviSotaServices(db: Database): Route = {
     val s3PackageStoreOpt = S3PackageStore.loadCredentials(settings.config).map { new S3PackageStore(_) }
     val transferProtocolProps =
       TransferProtocolActor.props(db, rviConnectivity.client,
         PackageTransferActor.props(rviConnectivity.client, s3PackageStoreOpt), messageBusPublisher)
     val updateController = system.actorOf(UpdateController.props(transferProtocolProps ), "update-controller")
     new rvi.SotaServices(updateController, resolverClient, deviceRegistryClient).route
-  }
-
-  def rviRoutes(db: Database, notifier: UpdateNotifier, namespaceDirective: Directive1[Namespace]): Route = {
-      new WebService(notifier, resolverClient,
-        deviceRegistryClient, db, namespaceDirective, messageBusPublisher).route ~
-      startSotaServices(db)
-  }
-
-  def rviInteractionRoutes(db: Database, namespaceDirective: Directive1[Namespace]): Future[Route] = {
-    SotaServices.register(settings.rviSotaUri) map { sotaServices =>
-      rviRoutes(db, new RviUpdateNotifier(sotaServices), namespaceDirective)
-    }
   }
 }
 
@@ -83,8 +71,9 @@ trait HttpBoot {
   def httpInteractionRoutes(db: Database,
                             namespaceDirective: Directive1[Namespace],
                             authDirective: AuthScope => Directive0,
-                            messageBus: MessageBusPublisher): Route = {
-    val webService = new WebService(DefaultUpdateNotifier, resolverClient, deviceRegistryClient, db,
+                            messageBus: MessageBusPublisher,
+                            notifier: UpdateNotifier): Route = {
+    val webService = new WebService(notifier, resolverClient, deviceRegistryClient, db,
       namespaceDirective, messageBusPublisher)
     val vehicleService = new DeviceUpdatesResource(db, resolverClient, deviceRegistryClient,
       namespaceDirective, authDirective, messageBus)
@@ -156,15 +145,15 @@ object Boot extends App with DatabaseConfig with HttpBoot with RviBoot with Boot
       versionHeaders(version)
   }
 
-  def routes(): Future[Route] = interactionProtocol match {
-    case "rvi" =>
-      rviInteractionRoutes(db, NamespaceDirectives.fromConfig()).map(_ ~ healthResource.route)
+  def apiRoutes(notifier: UpdateNotifier) = healthResource.route ~ httpInteractionRoutes(
+      db, NamespaceDirectives.fromConfig(), AuthDirectives.fromConfig(), messageBusPublisher, notifier)
 
-    case _ =>
-      FastFuture.successful {
-        httpInteractionRoutes(db, NamespaceDirectives.fromConfig(), AuthDirectives.fromConfig(), messageBusPublisher) ~
-          healthResource.route
-      }
+  def routes(): Future[Route] = interactionProtocol match {
+    case "rvi" => rvi.SotaServices.register(settings.rviSotaUri) map { sotaServices =>
+      startRviSotaServices(db) ~
+      apiRoutes(new RviUpdateNotifier(sotaServices))
+    }
+    case _ => FastFuture.successful(apiRoutes(DefaultUpdateNotifier))
   }
 
   val startupF =
