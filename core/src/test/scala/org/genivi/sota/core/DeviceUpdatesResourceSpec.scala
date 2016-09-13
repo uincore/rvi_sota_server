@@ -20,7 +20,7 @@ import org.genivi.sota.data.SimpleJsonGenerator
 import java.time.Instant
 
 import eu.timepit.refined.api.Refined
-import org.genivi.sota.http.{AuthDirectives, AuthToken, NamespaceDirectives}
+import org.genivi.sota.http.{AuthDirectives, AuthToken, NamespaceDirectives, TraceId}
 import org.genivi.sota.marshalling.CirceMarshallingSupport._
 import org.genivi.sota.messaging.MessageBusPublisher
 import org.scalacheck.Gen
@@ -53,7 +53,7 @@ class DeviceUpdatesResourceSpec extends FunSuite
   implicit val connectivity = new FakeConnectivity()
 
   lazy val service = new DeviceUpdatesResource(db, fakeResolver, fakeDeviceRegistry, defaultNamespaceExtractor,
-    AuthToken.allowAll, AuthDirectives.allowAll, MessageBusPublisher.ignore)
+    AuthToken.allowAll, AuthDirectives.allowAll, TraceId.fromConfig(), MessageBusPublisher.ignore)
 
   val fakeResolver = new FakeExternalResolver()
 
@@ -183,7 +183,7 @@ class DeviceUpdatesResourceSpec extends FunSuite
 
   test("GET to download a file returns 3xx if the package URL is an s3 URI") {
     val service = new DeviceUpdatesResource(db, fakeResolver, fakeDeviceRegistry, defaultNamespaceExtractor,
-      AuthToken.allowAll, AuthDirectives.allowAll, MessageBusPublisher.ignore) {
+      AuthToken.allowAll, AuthDirectives.allowAll, TraceId.fromConfig(), MessageBusPublisher.ignore) {
       override lazy val packageRetrievalOp: (Package) => Future[HttpResponse] = {
         _ => Future.successful {
           HttpResponse(StatusCodes.Found, Location("https://some-fake-place") :: Nil)

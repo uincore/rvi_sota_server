@@ -17,6 +17,7 @@ import org.genivi.sota.client.DeviceRegistryClient
 import org.genivi.sota.common.DeviceRegistry
 import org.genivi.sota.data.Namespace
 import org.genivi.sota.db.BootMigrations
+import org.genivi.sota.http.TraceId
 import org.genivi.sota.resolver.filters.FilterDirectives
 import org.genivi.sota.resolver.packages.{PackageDirectives, PackageFiltersResource}
 import org.genivi.sota.resolver.resolve.ResolveDirectives
@@ -40,6 +41,7 @@ import slick.driver.MySQLDriver.api._
 class Routing(namespaceDirective: Directive1[Namespace],
               authToken: Directive1[Option[String]],
               tokenValidator: Directive0,
+              traceDirective: Directive1[TraceId.TraceId],
               deviceRegistry: DeviceRegistry)
   (implicit db: Database, system: ActorSystem, mat: ActorMaterializer, exec: ExecutionContext)
  {
@@ -48,10 +50,10 @@ class Routing(namespaceDirective: Directive1[Namespace],
    val route: Route = pathPrefix("api" / "v1" / "resolver") {
      handleRejections(rejectionHandler) {
        tokenValidator {
-         new DeviceDirectives(namespaceDirective, authToken, deviceRegistry).route ~
+         new DeviceDirectives(namespaceDirective, authToken, traceDirective, deviceRegistry).route ~
          new PackageDirectives(namespaceDirective).route ~
          new FilterDirectives(namespaceDirective).route ~
-         new ResolveDirectives(namespaceDirective, authToken, deviceRegistry).route ~
+         new ResolveDirectives(namespaceDirective, authToken, traceDirective, deviceRegistry).route ~
          new ComponentDirectives(namespaceDirective).route ~
          new PackageFiltersResource(namespaceDirective).routes
        }
@@ -89,6 +91,7 @@ object Boot extends App with Directives with BootMigrations {
   val namespaceDirective = NamespaceDirectives.fromConfig()
   val authToken = AuthToken.fromConfig()
   val tokenValidator = TokenValidator().validate
+  val traceDirective = TraceId.fromConfig()
 
   val deviceRegistryClient = new DeviceRegistryClient(
     settings.deviceRegistryUri, settings.deviceRegistryApi
@@ -99,7 +102,7 @@ object Boot extends App with Directives with BootMigrations {
       logResponseMetrics("sota-resolver", TraceId.traceMetrics) &
       versionHeaders(version)) {
       Route.seal {
-        new Routing(namespaceDirective, authToken, tokenValidator, deviceRegistryClient).route ~
+        new Routing(namespaceDirective, authToken, tokenValidator, traceDirective, deviceRegistryClient).route ~
         new HealthResource(db, org.genivi.sota.resolver.BuildInfo.toMap).route
       }
     }

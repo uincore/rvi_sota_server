@@ -20,12 +20,14 @@ import org.genivi.sota.core.db.UpdateSpecs
 import org.genivi.sota.core.resolver.ExternalResolverClient
 import org.genivi.sota.data.Device
 import org.genivi.sota.data.Namespace
+import org.genivi.sota.http.TraceId.TraceId
 import org.genivi.sota.marshalling.CirceMarshallingSupport
 import org.genivi.sota.rest.Validation._
 import slick.driver.MySQLDriver.api.Database
 
 class UpdateRequestsResource(db: Database, resolver: ExternalResolverClient, updateService: UpdateService,
-                             namespaceExtractor: Directive1[Namespace], authToken: Directive1[Option[String]])
+                             namespaceExtractor: Directive1[Namespace], authToken: Directive1[Option[String]],
+                             traceDirective: Directive1[TraceId])
                             (implicit system: ActorSystem, mat: ActorMaterializer) {
 
   import CirceMarshallingSupport._
@@ -63,10 +65,13 @@ class UpdateRequestsResource(db: Database, resolver: ExternalResolverClient, upd
     * (one per device, for dependencies obtained from resolver) thus scheduling an update.
     */
   def createUpdate(ns: Namespace): Route = authToken { token =>
-    clientUpdateRequest(ns) { req: UpdateRequest =>
-      val resultF = updateService.queueUpdate(req, pkg => resolver.resolve(ns, pkg.id).withToken(token).exec)
+    traceDirective { traceId =>
+      clientUpdateRequest(ns) { req: UpdateRequest =>
+        val resultF = updateService.queueUpdate(req, pkg => resolver.resolve(ns, pkg.id).withToken(token)
+                                                  .withTraceId(traceId).exec)
 
-      complete(resultF map (_ => (StatusCodes.Created, req)))
+        complete(resultF map (_ => (StatusCodes.Created, req)))
+      }
     }
   }
 

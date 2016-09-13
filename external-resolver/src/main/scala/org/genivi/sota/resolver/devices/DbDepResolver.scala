@@ -14,6 +14,7 @@ import akka.stream.scaladsl.{Flow, Source}
 import org.genivi.sota.common.DeviceRegistry
 import org.genivi.sota.data.Device.DeviceId
 import org.genivi.sota.data.{Device, Namespace, PackageId}
+import org.genivi.sota.http.TraceId.TraceId
 import org.genivi.sota.resolver.components.Component
 import org.genivi.sota.resolver.components.Component.PartNumber
 import org.genivi.sota.resolver.filters.{And, Filter, True}
@@ -45,11 +46,12 @@ object DbDepResolver {
  /*
   * Resolving package dependencies.
   */
-  def resolve(namespace: Namespace, deviceRegistry: DeviceRegistry, token: Option[String], pkgId: PackageId)
+  def resolve(namespace: Namespace, deviceRegistry: DeviceRegistry, token: Option[String],
+              traceId: TraceId, pkgId: PackageId)
              (implicit db: Database, ec: ExecutionContext,
               mat: Materializer): Future[Map[Device.Id, Seq[PackageId]]] = {
     for {
-      devices <- deviceRegistry.listNamespace(namespace).withToken(token).exec
+      devices <- deviceRegistry.listNamespace(namespace).withToken(token).withTraceId(traceId).exec
       filtersForPkg <- db.run(PackageFilterRepository.listFiltersForPackage(namespace, pkgId))
       vf <- filterDevices(namespace, devices.map(d => (d.id, d.deviceId)).toMap, filterByPackageFilters(filtersForPkg))
     } yield ResolveFunctions.makeFakeDependencyMap(pkgId, vf)

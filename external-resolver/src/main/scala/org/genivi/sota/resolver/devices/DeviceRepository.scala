@@ -11,6 +11,7 @@ import eu.timepit.refined.api.Refined
 import eu.timepit.refined.string.Regex
 import org.genivi.sota.common.DeviceRegistry
 import org.genivi.sota.data.{Device, Namespace, PackageId}
+import org.genivi.sota.http.TraceId.TraceId
 import org.genivi.sota.resolver.common.Errors
 import org.genivi.sota.resolver.components.{Component, ComponentRepository}
 import org.genivi.sota.resolver.data.Firmware
@@ -229,7 +230,8 @@ object DeviceRepository {
              pkgVersion: Option[PackageId.Version],
              part      : Option[Component.PartNumber],
              deviceRegistry: DeviceRegistry,
-             token     : Option[String])
+             token     : Option[String],
+             traceId   : TraceId)
             (implicit db: Database, ec: ExecutionContext, mat: ActorMaterializer): Future[Seq[Device.Id]] = {
     def toRegex[T](r: Refined[String, T]): Refined[String, Regex] =
       refineV[Regex](r.get).right.getOrElse(Refined.unsafeApply(".*"))
@@ -246,7 +248,7 @@ object DeviceRepository {
     val filter = And(vins, And(pkgs, comps))
 
     for {
-      devices <- deviceRegistry.listNamespace(namespace).withToken(token).exec
+      devices <- deviceRegistry.listNamespace(namespace).withToken(token).withTraceId(traceId).exec
       searchResult <- DbDepResolver.filterDevices(namespace, devices.map(d => d.id -> d.deviceId).toMap, filter)
     } yield searchResult
   }

@@ -23,6 +23,7 @@ import org.genivi.sota.core.storage.PackageStorage
 import org.genivi.sota.core.storage.PackageStorage.PackageStorageOp
 import org.genivi.sota.data.Namespace
 import org.genivi.sota.data.PackageId
+import org.genivi.sota.http.TraceId.TraceId
 import org.genivi.sota.marshalling.RefinedMarshallingSupport._
 import org.genivi.sota.messaging.Messages.PackageCreated
 import org.genivi.sota.messaging.MessageBusPublisher
@@ -55,7 +56,8 @@ object PackagesResource {
 class PackagesResource(resolver: ExternalResolverClient, db : Database,
                        messageBusPublisher: MessageBusPublisher,
                        namespaceExtractor: Directive1[Namespace],
-                       authToken: Directive1[Option[String]])
+                       authToken: Directive1[Option[String]],
+                       traceDirective: Directive1[TraceId])
                       (implicit system: ActorSystem, mat: ActorMaterializer) {
 
   import system.dispatcher
@@ -110,12 +112,12 @@ class PackagesResource(resolver: ExternalResolverClient, db : Database,
     * </ul>
     */
   def updatePackage(ns: Namespace, pid: PackageId): Route = {
-    def storePackage(token: Option[String], ns: Namespace, pid: PackageId,
+    def storePackage(token: Option[String], traceId: TraceId, ns: Namespace, pid: PackageId,
                      description: Option[String], vendor: Option[String],
                      signature: Option[String],
                      file: Source[ByteString, Any]): Future[StatusCode] = {
       val resultF = for {
-        _ <- resolver.putPackage(ns, pid, description, vendor).withToken(token).exec
+        _ <- resolver.putPackage(ns, pid, description, vendor).withToken(token).withTraceId(traceId).exec
         (uri, size, digest) <- packageStorageOp(pid, ns.get, file)
         pkg <- db.run(Packages.create(Package(ns, pid, uri, size, digest, description, vendor, signature)))
       } yield StatusCodes.NoContent
@@ -140,11 +142,13 @@ class PackagesResource(resolver: ExternalResolverClient, db : Database,
     }
 
     authToken { token =>
-      // TODO: Fix form fields metadata causing error for large upload
-      parameters('description.?, 'vendor.?, 'signature.?) { (description, vendor, signature) =>
-        fileUpload("file") { case (_, file) =>
-          val storePkgF = storePackage(token, ns, pid, description, vendor, signature, file)
-          completeOrRecoverWith(storePkgF) { ex => onComplete(drainStream(file))(_ => handleErrors(ex)) }
+      traceDirective { traceId =>
+        // TODO: Fix form fields metadata causing error for large upload
+        parameters('description.?, 'vendor.?, 'signature.?) { (description, vendor, signature) =>
+          fileUpload("file") { case (_, file) =>
+            val storePkgF = storePackage(token, traceId, ns, pid, description, vendor, signature, file)
+            completeOrRecoverWith(storePkgF) { ex => onComplete(drainStream(file))(_ => handleErrors(ex)) }
+          }
         }
       }
     }

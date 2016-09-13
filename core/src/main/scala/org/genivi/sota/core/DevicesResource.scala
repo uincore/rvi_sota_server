@@ -20,6 +20,7 @@ import org.genivi.sota.core.data._
 import org.genivi.sota.core.resolver.{ConnectivityClient, ExternalResolverClient}
 import org.genivi.sota.data.Device
 import org.genivi.sota.data.Namespace
+import org.genivi.sota.http.TraceId.TraceId
 import org.genivi.sota.marshalling.CirceMarshallingSupport
 import org.genivi.sota.marshalling.RefinedMarshallingSupport._
 
@@ -42,10 +43,10 @@ case class DeviceSearchResult(
                         )
 
 class DevicesResource(db: Database, client: ConnectivityClient,
-                      resolverClient: ExternalResolverClient,
                       deviceRegistry: DeviceRegistry,
                       namespaceExtractor: Directive1[Namespace],
-                      authToken: Directive1[Option[String]])
+                      authToken: Directive1[Option[String]],
+                      traceDirective: Directive1[TraceId])
                      (implicit system: ActorSystem, mat: ActorMaterializer) {
 
   import CirceMarshallingSupport._
@@ -64,21 +65,22 @@ class DevicesResource(db: Database, client: ConnectivityClient,
     */
   def search(ns: Namespace): Route = {
     authToken { token =>
-      parameters(('status.?(false), 'regex.as[RefinedRegx].?)) {
-        (includeStatus: Boolean, reqRegex: Option[RefinedRegx]) =>
-        val regex = reqRegex.getOrElse(Refined.unsafeApply(".*")) // TODO optimize or forbid
-        val devices = deviceRegistry.searchDevice(ns, regex).withToken(token).exec
+      traceDirective { traceId =>
+        parameters(('status.?(false), 'regex.as[RefinedRegx].?)) {
+          (includeStatus: Boolean, reqRegex: Option[RefinedRegx]) =>
+          val regex = reqRegex.getOrElse(Refined.unsafeApply(".*")) // TODO optimize or forbid
+          val devices = deviceRegistry.searchDevice(ns, regex).withToken(token).withTraceId(traceId).exec
 
-        if (includeStatus) {
-          val f = DeviceSearch.fetchDeviceStatus(devices)
-          val response = f flatMap buildSearchResponse(devices)
-          completeWith(response)
-        } else {
-          val response = buildSearchResponse(devices)(Seq.empty)
-          completeWith(response)
+          if (includeStatus) {
+            val f = DeviceSearch.fetchDeviceStatus(devices)
+            val response = f flatMap buildSearchResponse(devices)
+            completeWith(response)
+          } else {
+            val response = buildSearchResponse(devices)(Seq.empty)
+            completeWith(response)
+          }
         }
       }
-
     }
   }
 

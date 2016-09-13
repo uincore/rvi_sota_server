@@ -10,6 +10,7 @@ import akka.stream.ActorMaterializer
 import io.circe.generic.auto._
 import org.genivi.sota.data.{Namespace, PackageId}
 import org.genivi.sota.data.Namespace._
+import org.genivi.sota.http.TraceId.TraceId
 import org.genivi.sota.marshalling.CirceMarshallingSupport._
 import org.genivi.sota.resolver.common.Errors
 import org.genivi.sota.resolver.common.RefinementDirectives._
@@ -29,6 +30,7 @@ import org.genivi.sota.marshalling.RefinedMarshallingSupport._
  */
 class ResolveDirectives(namespaceExtractor: Directive1[Namespace],
                         authToken: Directive1[Option[String]],
+                        traceDirective: Directive1[TraceId],
                         deviceRegistry: DeviceRegistry)
                        (implicit system: ActorSystem,
                         db: Database,
@@ -36,9 +38,11 @@ class ResolveDirectives(namespaceExtractor: Directive1[Namespace],
                         ec: ExecutionContext) {
 
   def resolvePackage(ns: Namespace, id: PackageId): Route = authToken { token =>
-    val resultF = DbDepResolver.resolve(ns, deviceRegistry, token, id)
+    traceDirective { traceId =>
+      val resultF = DbDepResolver.resolve(ns, deviceRegistry, token, traceId, id)
 
-    complete(resultF)
+      complete(resultF)
+    }
   }
 
   implicit val NamespaceUnmarshaller: FromStringUnmarshaller[Namespace] = Unmarshaller.strict(Namespace.apply)

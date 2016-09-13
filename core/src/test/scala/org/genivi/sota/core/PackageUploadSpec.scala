@@ -15,7 +15,7 @@ import org.genivi.sota.core.data.Package
 import org.genivi.sota.core.resolver.{ExternalResolverClient, ExternalResolverRequestFailed}
 import org.genivi.sota.common.ClientRequest
 import org.genivi.sota.data.{Device, Namespace, PackageId}
-import org.genivi.sota.http.{AuthToken, NamespaceDirectives}
+import org.genivi.sota.http.{AuthToken, NamespaceDirectives, TraceId}
 import org.genivi.sota.marshalling.CirceMarshallingSupport
 import org.genivi.sota.messaging.Messages.PackageCreated
 import org.genivi.sota.messaging.MessageBusPublisher
@@ -66,7 +66,8 @@ class PackageUploadSpec extends PropSpec
     lazy val messageBusPublisher = MessageBusPublisher.ignore
 
     val resource = new PackagesResource(resolver, db, messageBusPublisher,
-                                        defaultNamespaceExtractor, AuthToken.allowAll)
+                                        defaultNamespaceExtractor, AuthToken.allowAll,
+                                        TraceId.fromConfig())
   }
 
   def toBodyPart(name : String)(x: String) = BodyPart.Strict(name, HttpEntity( x ) )

@@ -9,6 +9,7 @@ import akka.http.scaladsl.util.FastFuture
 import akka.stream.ActorMaterializer
 import org.genivi.sota.common.ClientRequest
 import org.genivi.sota.device_registry.common.Errors
+import org.genivi.sota.http.TraceId
 import scala.concurrent.{ExecutionContext, Future}
 
 object HttpClientRequest {
@@ -48,10 +49,16 @@ object HttpClientRequest {
 
 class HttpClientRequest[T](req: Future[HttpRequest], cont: Future[HttpResponse] => Future[T])
                 (implicit system: ActorSystem, mat: ActorMaterializer) extends ClientRequest[T, HttpClientRequest] {
+  import TraceId._
+
   override def withToken(tokenO: Option[String])(implicit ec: ExecutionContext): HttpClientRequest[T] = {
     tokenO.map { token =>
       new HttpClientRequest(req.map(_.withHeaders(Authorization(OAuth2BearerToken(token)))), cont)
     }.getOrElse(this)
+  }
+
+  override def withTraceId(traceId: TraceId)(implicit ec: ExecutionContext): HttpClientRequest[T] = {
+    new HttpClientRequest(req.map(_.withHeaders(traceIdHeaders(traceId))), cont)
   }
 
   override def transformResponse[S](f: Future[T] => Future[S]): HttpClientRequest[S] = {

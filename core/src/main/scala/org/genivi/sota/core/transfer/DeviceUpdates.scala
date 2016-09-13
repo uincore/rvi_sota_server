@@ -21,6 +21,7 @@ import org.genivi.sota.data.{Device, Namespace, PackageId}
 import org.genivi.sota.db.Operators._
 import org.genivi.sota.db.SlickExtensions
 import org.genivi.sota.http.Errors.MissingEntity
+import org.genivi.sota.http.TraceId.TraceId
 import org.genivi.sota.messaging.{MessageBusPublisher, Messages}
 import slick.dbio.DBIO
 import slick.driver.MySQLDriver.api._
@@ -41,11 +42,12 @@ object DeviceUpdates {
   def update(device: Device.Id,
              packageIds: List[PackageId],
              resolverClient: ExternalResolverClient,
-             token: Option[String])
+             token: Option[String],
+             traceId: TraceId)
             (implicit ec: ExecutionContext): Future[Unit] = {
     // TODO: core should be able to send this instead!
     val j = Json.obj("packages" -> packageIds.asJson, "firmware" -> Json.arr())
-    resolverClient.setInstalledPackages(device, j).withToken(token).exec
+    resolverClient.setInstalledPackages(device, j).withToken(token).withTraceId(traceId).exec
   }
 
   def buildReportInstallResponse(device: Device.Id, updateReport: UpdateReport,

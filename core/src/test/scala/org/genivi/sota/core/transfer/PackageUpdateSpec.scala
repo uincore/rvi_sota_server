@@ -221,8 +221,7 @@ class PackageUpdateSpec extends PropSpec
     implicit val _db = db
 
     val notifier = new RviUpdateNotifier(services)
-    val deviceRegistry = new FakeDeviceRegistry(Namespaces.defaultNs)
-    val updateService = new UpdateService(notifier, deviceRegistry)(system, connectivity, exec)
+    val updateService = new UpdateService(notifier)(system, connectivity, exec)
     val devices: Set[Device.Id] =
       generatedData.values.map( _.keySet ).fold(Set.empty[Device.Id])( _ union _)
 

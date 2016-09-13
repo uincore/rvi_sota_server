@@ -51,9 +51,8 @@ class UpdateServiceSpec extends PropSpec
 
   implicit val updateQueueLog = akka.event.Logging(system, "sota.core.updateQueue")
   implicit val connectivity = DefaultConnectivity
-  val deviceRegistry = new FakeDeviceRegistry(Namespaces.defaultNs)
 
-  val service = new UpdateService(DefaultUpdateNotifier, deviceRegistry)
+  val service = new UpdateService(DefaultUpdateNotifier)
 
   import org.genivi.sota.core.data.UpdateRequest
 

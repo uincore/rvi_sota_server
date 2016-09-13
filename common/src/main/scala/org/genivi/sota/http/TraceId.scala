@@ -5,7 +5,7 @@ import java.util.UUID
 import collection.JavaConversions._
 import akka.http.scaladsl.model.{HttpHeader, HttpRequest, HttpResponse}
 import akka.http.scaladsl.model.headers.RawHeader
-import akka.http.scaladsl.server.Directive0
+import akka.http.scaladsl.server.{Directive0, Directive1}
 
 import scala.util.{Failure, Success, Try}
 import javax.crypto.Mac
@@ -65,11 +65,15 @@ object TraceId {
     Map("traceid" -> req.headers.find(_.is(TRACEID_HEADER)).map(_.value()).getOrElse("?"))
   }
 
-  private def traceIdHeaders(traceId: TraceId): List[HttpHeader] = {
+  def traceIdHeaders(traceId: TraceId): List[HttpHeader] = {
     List(RawHeader(TRACEID_HEADER, traceId.id), RawHeader(TRACEID_HMAC_HEADER, traceId.sig))
   }
 
-  def withTraceId: Directive0 = {
+  def withTraceId: Directive0 = fromConfig() flatMap { traceId =>
+        respondWithHeaders(traceIdHeaders(traceId))
+  }
+
+  def fromConfig(): Directive1[TraceId] = {
     mapRequest{ r =>
       val traceIdHeader = r.headers.find(_.is(TRACEID_HEADER)).map(_.value())
       val traceIdSig = r.headers.find(_.is(TRACEID_HMAC_HEADER)).map(_.value())
@@ -85,11 +89,11 @@ object TraceId {
             .addHeaders(traceIdHeaders(newTraceId))
       }
     } tflatMap { _ =>
-      extractRequest flatMap { r =>
+      extractRequest map { r =>
         val idH = r.headers.find(_.is(TRACEID_HEADER)).map(_.value).getOrElse("<traceid error>")
         val sigH = r.headers.find(_.is(TRACEID_HMAC_HEADER)).map(_.value).getOrElse("<traceid sig error>")
 
-        respondWithHeaders(traceIdHeaders(TraceId(idH, sigH)))
+        TraceId(idH, sigH)
       }
     }
   }

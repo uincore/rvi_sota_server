@@ -22,7 +22,7 @@ import cats.data.Xor
 import io.circe.Json
 import io.circe.generic.auto._
 import org.genivi.sota.core.db.{BlacklistedPackages, Packages}
-import org.genivi.sota.http.{AuthToken, NamespaceDirectives}
+import org.genivi.sota.http.{AuthToken, NamespaceDirectives, TraceId}
 import org.genivi.sota.core.storage.PackageStorage.PackageStorageOp
 import org.genivi.sota.core.storage.LocalPackageStore
 import org.scalatest.concurrent.ScalaFutures
@@ -48,7 +48,8 @@ class PackagesResourceSpec extends FunSuite
   val resolver = new FakeExternalResolver()
 
   val service = new PackagesResource(resolver, db, MessageBusPublisher.ignore,
-                                     defaultNamespaceExtractor, AuthToken.allowAll) {
+                                     defaultNamespaceExtractor, AuthToken.allowAll,
+                                     TraceId.fromConfig()) {
     override val packageStorageOp: PackageStorageOp = new LocalPackageStore().store _
   }
 

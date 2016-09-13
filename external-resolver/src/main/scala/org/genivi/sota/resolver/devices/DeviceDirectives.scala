@@ -16,6 +16,7 @@ import org.genivi.sota.common.DeviceRegistry
 import org.genivi.sota.data.Namespace._
 import org.genivi.sota.data.{Device, Namespace, PackageId}
 import org.genivi.sota.http.ErrorHandler
+import org.genivi.sota.http.TraceId.TraceId
 import org.genivi.sota.resolver.packages.Package
 import org.genivi.sota.marshalling.CirceMarshallingSupport._
 import org.genivi.sota.marshalling.RefinedMarshallingSupport._
@@ -36,6 +37,7 @@ import slick.driver.MySQLDriver.api._
  */
 class DeviceDirectives(namespaceExtractor: Directive1[Namespace],
                        authToken: Directive1[Option[String]],
+                       traceDirective: Directive1[TraceId],
                        deviceRegistry: DeviceRegistry)
                       (implicit system: ActorSystem,
                         db: Database,
@@ -48,11 +50,13 @@ class DeviceDirectives(namespaceExtractor: Directive1[Namespace],
 
   def searchDevices(ns: Namespace): Route =
     authToken { token =>
-      parameters(('regex.as[String Refined Regex].?,
-                  'packageName.as[PackageId.Name].?,
-                  'packageVersion.as[PackageId.Version].?,
-                  'component.as[Component.PartNumber].?)) { case (re, pn, pv, cp) =>
-        complete(DeviceRepository.search(ns, re, pn, pv, cp, deviceRegistry,token))
+      traceDirective { traceId =>
+        parameters(('regex.as[String Refined Regex].?,
+                    'packageName.as[PackageId.Name].?,
+                    'packageVersion.as[PackageId.Version].?,
+                    'component.as[Component.PartNumber].?)) { case (re, pn, pv, cp) =>
+            complete(DeviceRepository.search(ns, re, pn, pv, cp, deviceRegistry,token,traceId))
+        }
       }
     }
 
@@ -84,15 +88,16 @@ class DeviceDirectives(namespaceExtractor: Directive1[Namespace],
     }
 
     authToken { token =>
-      entity(as[InstalledSoftware]) { installedSoftware =>
-        val responseF = {
-          for {
-            deviceData <- deviceRegistry.fetchDevice(device).withToken(token).exec
-            _ <- updateSoftwareOnDb(deviceData.namespace, installedSoftware)
-          } yield ()
+      traceDirective { traceId =>
+        entity(as[InstalledSoftware]) { installedSoftware =>
+          val responseF = {
+            for {
+              deviceData <- deviceRegistry.fetchDevice(device).withToken(token).withTraceId(traceId).exec
+              _ <- updateSoftwareOnDb(deviceData.namespace, installedSoftware)
+            } yield ()
+          }
+          onSuccess(responseF) { complete(StatusCodes.NoContent) }
         }
-
-        onSuccess(responseF) { complete(StatusCodes.NoContent) }
       }
     }
   }

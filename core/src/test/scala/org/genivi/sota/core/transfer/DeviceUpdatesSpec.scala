@@ -12,6 +12,7 @@ import org.genivi.sota.core.rvi.OperationResult
 import org.genivi.sota.core.rvi.UpdateReport
 import org.genivi.sota.data.{Device, DeviceGenerators, Namespaces}
 import org.genivi.sota.db.SlickExtensions
+import org.genivi.sota.http.TraceId.TraceId
 import org.genivi.sota.marshalling.CirceMarshallingSupport._
 import org.genivi.sota.messaging.MessageBusPublisher
 import org.scalacheck.Gen
@@ -53,7 +54,7 @@ class DeviceUpdatesSpec extends FunSuite
     whenReady(deviceRegistry.createDevice(device).exec) { id =>
       val resolverClient = new FakeExternalResolver
       val packageIds = Gen.listOf(PackageIdGen).sample.get
-      val f = update(id, packageIds, resolverClient, None)
+      val f = update(id, packageIds, resolverClient, None, TraceId("",""))
 
       whenReady(f) { _ =>
         forAll(packageIds) { id =>

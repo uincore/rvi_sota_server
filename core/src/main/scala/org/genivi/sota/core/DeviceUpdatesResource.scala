@@ -37,6 +37,7 @@ import scala.language.implicitConversions
 import slick.driver.MySQLDriver.api.Database
 import cats.syntax.show.toShowOps
 import org.genivi.sota.http.AuthDirectives.AuthScope
+import org.genivi.sota.http.TraceId.TraceId
 import org.genivi.sota.messaging.Messages.DeviceSeen
 import org.genivi.sota.messaging.MessageBusPublisher
 
@@ -46,6 +47,7 @@ class DeviceUpdatesResource(db: Database,
                             authNamespace: Directive1[Namespace],
                             authToken: Directive1[Option[String]],
                             authDirective: AuthScope => Directive0,
+                            traceDirective: Directive1[TraceId],
                             messageBus: MessageBusPublisher)
                            (implicit system: ActorSystem, mat: ActorMaterializer,
                             connectivity: Connectivity = DefaultConnectivity) {
@@ -64,16 +66,18 @@ class DeviceUpdatesResource(db: Database,
 
   lazy val packageDownloadProcess = new PackageDownloadProcess(db, packageRetrievalOp)
 
-  protected lazy val updateService = new UpdateService(DefaultUpdateNotifier, deviceRegistry)
+  protected lazy val updateService = new UpdateService(DefaultUpdateNotifier)
 
   def logDeviceSeen(id: Device.Id): Directive0 = {
     authToken flatMap { token =>
-      extractRequestContext flatMap { _ =>
-        onComplete {
-          for {
-            _ <- messageBus.publishSafe(DeviceSeen(id, Instant.now()))
-            _ <- deviceRegistry.updateLastSeen(id).withToken(token).exec
-          } yield ()
+      traceDirective flatMap { traceId =>
+        extractRequestContext flatMap { _ =>
+          onComplete {
+            for {
+              _ <- messageBus.publishSafe(DeviceSeen(id, Instant.now()))
+              _ <- deviceRegistry.updateLastSeen(id).withToken(token).withTraceId(traceId).exec
+            } yield ()
+          }
         }
       }
     } flatMap (_ => pass)
@@ -81,8 +85,10 @@ class DeviceUpdatesResource(db: Database,
 
   def updateSystemInfo(id: Device.Id): Route = {
     authToken { token =>
-      entity(as[Json]) { json =>
-        complete(deviceRegistry.updateSystemInfo(id,json).withToken(token).exec)
+      traceDirective { traceId =>
+        entity(as[Json]) { json =>
+          complete(deviceRegistry.updateSystemInfo(id,json).withToken(token).withTraceId(traceId).exec)
+        }
       }
     }
   }
@@ -91,12 +97,14 @@ class DeviceUpdatesResource(db: Database,
     * An ota client PUT a list of packages to record they're installed on a device, overwriting any previous such list.
     */
   def updateInstalledPackages(id: Device.Id): Route = authToken { token =>
-    entity(as[List[PackageId]]) { ids =>
-      val f = DeviceUpdates
-        .update(id, ids, resolverClient, token)
-        .map(_ => OK)
+    traceDirective { traceId =>
+      entity(as[List[PackageId]]) { ids =>
+        val f = DeviceUpdates
+          .update(id, ids, resolverClient, token, traceId)
+          .map(_ => OK)
 
-      complete(f)
+        complete(f)
+      }
     }
   }
 

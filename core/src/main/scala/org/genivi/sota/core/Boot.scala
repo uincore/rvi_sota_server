@@ -57,16 +57,18 @@ trait RviBoot {
 
   def rviRoutes(db: Database, notifier: UpdateNotifier,
                 namespaceDirective: Directive1[Namespace],
-                authToken: Directive1[Option[String]]): Route = {
+                authToken: Directive1[Option[String]],
+                traceDirective: Directive1[TraceId.TraceId]): Route = {
       new WebService(notifier, resolverClient,
-        deviceRegistryClient, db, namespaceDirective, authToken, messageBusPublisher).route ~
+        deviceRegistryClient, db, namespaceDirective, authToken, traceDirective, messageBusPublisher).route ~
       startSotaServices(db, authToken)
   }
 
   def rviInteractionRoutes(db: Database, namespaceDirective: Directive1[Namespace],
-                           authToken: Directive1[Option[String]]): Future[Route] = {
+                           authToken: Directive1[Option[String]],
+                           traceDirective: Directive1[TraceId.TraceId]): Future[Route] = {
     SotaServices.register(settings.rviSotaUri) map { sotaServices =>
-      rviRoutes(db, new RviUpdateNotifier(sotaServices), namespaceDirective, authToken)
+      rviRoutes(db, new RviUpdateNotifier(sotaServices), namespaceDirective, authToken, traceDirective)
     }
   }
 }
@@ -87,11 +89,12 @@ trait HttpBoot {
                             namespaceDirective: Directive1[Namespace],
                             authToken: Directive1[Option[String]],
                             authDirective: AuthScope => Directive0,
+                            traceDirective: Directive1[TraceId.TraceId],
                             messageBus: MessageBusPublisher): Route = {
     val webService = new WebService(DefaultUpdateNotifier, resolverClient, deviceRegistryClient, db,
-      namespaceDirective, authToken, messageBusPublisher)
+      namespaceDirective, authToken, traceDirective, messageBusPublisher)
     val deviceService = new DeviceUpdatesResource(db, resolverClient, deviceRegistryClient,
-      namespaceDirective, authToken, authDirective, messageBus)
+      namespaceDirective, authToken, authDirective, traceDirective, messageBus)
 
     TokenValidator().validate.apply{
       webService.route ~ deviceService.route
@@ -164,7 +167,7 @@ object Boot extends App with DatabaseConfig with HttpBoot with RviBoot with Boot
 
   def routes(): Future[Route] = interactionProtocol match {
     case "rvi" =>
-      rviInteractionRoutes(db, NamespaceDirectives.fromConfig(), AuthToken.fromConfig())
+      rviInteractionRoutes(db, NamespaceDirectives.fromConfig(), AuthToken.fromConfig(), TraceId.fromConfig())
         .map(_ ~ healthResource.route)
 
     case _ =>
@@ -172,6 +175,7 @@ object Boot extends App with DatabaseConfig with HttpBoot with RviBoot with Boot
         httpInteractionRoutes(db, NamespaceDirectives.fromConfig(),
                               AuthToken.fromConfig(),
                               AuthDirectives.fromConfig(),
+                              TraceId.fromConfig(),
                               messageBusPublisher) ~
           healthResource.route
       }

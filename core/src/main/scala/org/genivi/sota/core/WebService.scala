@@ -17,6 +17,7 @@ import org.genivi.sota.core.resolver.{Connectivity, ExternalResolverClient}
 import org.genivi.sota.core.transfer.UpdateNotifier
 import org.genivi.sota.data.Device
 import org.genivi.sota.data.Namespace
+import org.genivi.sota.http.TraceId.TraceId
 import org.genivi.sota.rest.Validation.refined
 
 import scala.concurrent.ExecutionContext
@@ -38,6 +39,7 @@ class WebService(notifier: UpdateNotifier,
                  db: Database,
                  authNamespace: Directive1[Namespace],
                  authToken: Directive1[Option[String]],
+                 traceDirective: Directive1[TraceId],
                  messageBusPublisher: MessageBusPublisher)
                 (implicit val system: ActorSystem, val mat: ActorMaterializer,
                  val connectivity: Connectivity, val ec: ExecutionContext) extends Directives {
@@ -50,10 +52,13 @@ class WebService(notifier: UpdateNotifier,
   import eu.timepit.refined._
   import org.genivi.sota.marshalling.RefinedMarshallingSupport._
 
-  val devicesResource = new DevicesResource(db, connectivity.client, resolver, deviceRegistry, authNamespace, authToken)
-  val packagesResource = new PackagesResource(resolver, db, messageBusPublisher, authNamespace, authToken)
-  val updateService = new UpdateService(notifier, deviceRegistry)
-  val updateRequestsResource = new UpdateRequestsResource(db, resolver, updateService, authNamespace, authToken)
+  val devicesResource = new DevicesResource(db, connectivity.client, deviceRegistry, authNamespace,
+                                            authToken, traceDirective)
+  val packagesResource = new PackagesResource(resolver, db, messageBusPublisher, authNamespace,
+                                              authToken, traceDirective)
+  val updateService = new UpdateService(notifier)
+  val updateRequestsResource = new UpdateRequestsResource(db, resolver, updateService, authNamespace,
+                                                          authToken, traceDirective)
   val historyResource = new HistoryResource(db, authNamespace)
   val blacklistResource = new BlacklistResource(authNamespace, messageBusPublisher)(db, system)
   val impactResource = new ImpactResource(authNamespace)(db, system)

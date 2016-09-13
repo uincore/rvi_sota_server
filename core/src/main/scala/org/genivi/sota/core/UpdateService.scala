@@ -42,7 +42,7 @@ object UploadConf {
 
 }
 
-class UpdateService(notifier: UpdateNotifier, deviceRegistry: DeviceRegistry)
+class UpdateService(notifier: UpdateNotifier)
                    (implicit val system: ActorSystem, val connectivity: Connectivity, val ec: ExecutionContext) {
 
   import UpdateService._

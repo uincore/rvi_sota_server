@@ -18,7 +18,7 @@ import org.genivi.sota.core.data.{DeviceStatus, DeviceUpdateStatus}
 import org.genivi.sota.core.jsonrpc.HttpTransport
 import org.genivi.sota.core.rvi._
 import org.genivi.sota.data.{Device, DeviceGenerators, Namespaces, PackageIdGenerators}
-import org.genivi.sota.http.{AuthToken, NamespaceDirectives}
+import org.genivi.sota.http.{AuthToken, NamespaceDirectives, TraceId}
 import org.genivi.sota.marshalling.CirceMarshallingSupport
 import org.scalatest._
 import org.scalatest.concurrent.ScalaFutures
@@ -52,11 +52,11 @@ class DeviceResourceSpec extends FunSuite
   val serverTransport = HttpTransport( rviUri )
   implicit val rviClient = new JsonRpcRviClient( serverTransport.requestTransport, system.dispatcher)
 
-  val fakeResolver = new FakeExternalResolver()
   val deviceRegistry = new FakeDeviceRegistry(Namespaces.defaultNs)
 
-  lazy val service = new DevicesResource(db, rviClient, fakeResolver, deviceRegistry,
-                                         defaultNamespaceExtractor, AuthToken.allowAll)
+  lazy val service = new DevicesResource(db, rviClient, deviceRegistry,
+                                         defaultNamespaceExtractor, AuthToken.allowAll,
+                                         TraceId.fromConfig())
 
   val BasePath = Path("/devices")
 
