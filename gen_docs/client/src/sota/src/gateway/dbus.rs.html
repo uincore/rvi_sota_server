@@ -212,26 +212,6 @@
 <span id="168">168</span>
 <span id="169">169</span>
 <span id="170">170</span>
-<span id="171">171</span>
-<span id="172">172</span>
-<span id="173">173</span>
-<span id="174">174</span>
-<span id="175">175</span>
-<span id="176">176</span>
-<span id="177">177</span>
-<span id="178">178</span>
-<span id="179">179</span>
-<span id="180">180</span>
-<span id="181">181</span>
-<span id="182">182</span>
-<span id="183">183</span>
-<span id="184">184</span>
-<span id="185">185</span>
-<span id="186">186</span>
-<span id="187">187</span>
-<span id="188">188</span>
-<span id="189">189</span>
-<span id="190">190</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>chan</span>::<span class='ident'>Sender</span>;
 <span class='kw'>use</span> <span class='ident'>dbus</span>::{<span class='ident'>Connection</span>, <span class='ident'>BusType</span>, <span class='ident'>ConnectionItem</span>, <span class='ident'>FromMessageItem</span>,
@@ -287,7 +267,7 @@
                     <span class='ident'>MessageItem</span>::<span class='ident'>from</span>(<span class='ident'>avail</span>.<span class='ident'>update_id</span>),
                     <span class='ident'>MessageItem</span>::<span class='ident'>from</span>(<span class='ident'>avail</span>.<span class='ident'>signature</span>),
                     <span class='ident'>MessageItem</span>::<span class='ident'>from</span>(<span class='ident'>avail</span>.<span class='ident'>description</span>),
-                    <span class='ident'>MessageItem</span>::<span class='ident'>from</span>(<span class='ident'>avail</span>.<span class='ident'>confirmation</span>)
+                    <span class='ident'>MessageItem</span>::<span class='ident'>from</span>(<span class='ident'>avail</span>.<span class='ident'>request_confirmation</span>)
                 ]);
                 <span class='kw'>let</span> <span class='ident'>conn</span> <span class='op'>=</span> <span class='ident'>Connection</span>::<span class='ident'>get_private</span>(<span class='ident'>BusType</span>::<span class='ident'>Session</span>).<span class='ident'>expect</span>(<span class='string'>&quot;couldn&#39;t get dbus session&quot;</span>);
                 <span class='kw'>let</span> _    <span class='op'>=</span> <span class='ident'>conn</span>.<span class='ident'>send</span>(<span class='ident'>msg</span>).<span class='ident'>map_err</span>(<span class='op'>|</span>_<span class='op'>|</span> <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;couldn&#39;t send updateAvailable message&quot;</span>));
@@ -302,10 +282,10 @@
                 <span class='kw'>let</span> _    <span class='op'>=</span> <span class='ident'>conn</span>.<span class='ident'>send</span>(<span class='ident'>msg</span>).<span class='ident'>map_err</span>(<span class='op'>|</span>_<span class='op'>|</span> <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;couldn&#39;t send downloadComplete message&quot;</span>));
             }
 
-            <span class='ident'>Event</span>::<span class='ident'>GetInstalledSoftware</span>(<span class='ident'>get</span>) <span class='op'>=&gt;</span> {
+            <span class='ident'>Event</span>::<span class='ident'>InstalledSoftwareNeeded</span> <span class='op'>=&gt;</span> {
                 <span class='kw'>let</span> <span class='ident'>msg</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>new_message</span>(<span class='string'>&quot;getInstalledPackages&quot;</span>, <span class='kw-2'>&amp;</span>[
-                    <span class='ident'>MessageItem</span>::<span class='ident'>from</span>(<span class='ident'>get</span>.<span class='ident'>include_packages</span>),
-                    <span class='ident'>MessageItem</span>::<span class='ident'>from</span>(<span class='ident'>get</span>.<span class='ident'>include_firmware</span>)
+                    <span class='ident'>MessageItem</span>::<span class='ident'>from</span>(<span class='bool-val'>true</span>), <span class='comment'>// include packages?</span>
+                    <span class='ident'>MessageItem</span>::<span class='ident'>from</span>(<span class='bool-val'>false</span>) <span class='comment'>// include firmware?</span>
                 ]);
                 <span class='kw'>let</span> <span class='ident'>conn</span>  <span class='op'>=</span> <span class='ident'>Connection</span>::<span class='ident'>get_private</span>(<span class='ident'>BusType</span>::<span class='ident'>Session</span>).<span class='ident'>expect</span>(<span class='string'>&quot;couldn&#39;t get dbus session&quot;</span>);
                 <span class='kw'>let</span> <span class='ident'>reply</span> <span class='op'>=</span> <span class='ident'>conn</span>.<span class='ident'>send_with_reply_and_block</span>(<span class='ident'>msg</span>, <span class='self'>self</span>.<span class='ident'>dbus_cfg</span>.<span class='ident'>timeout</span>).<span class='ident'>unwrap</span>();
@@ -328,7 +308,7 @@
                                          }).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>InstalledFirmware</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;&gt;</span>());
 
                     <span class='prelude-val'>Ok</span>(<span class='ident'>InstalledSoftware</span>::<span class='ident'>new</span>(<span class='ident'>packages</span>, <span class='ident'>firmwares</span>))
-                }().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>inst</span><span class='op'>|</span> <span class='ident'>send</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>itx</span>, <span class='ident'>Command</span>::<span class='ident'>SendInstalledSoftware</span>(<span class='prelude-val'>Some</span>(<span class='ident'>inst</span>))))
+                }().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>inst</span><span class='op'>|</span> <span class='ident'>send</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>itx</span>, <span class='ident'>Command</span>::<span class='ident'>SendInstalledSoftware</span>(<span class='ident'>inst</span>)))
                    .<span class='ident'>map_err</span>(<span class='op'>|</span>_<span class='op'>|</span> <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;unable to ReportInstalledSoftware&quot;</span>));
             }
 
@@ -357,14 +337,6 @@
         <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='kw'>move</span> <span class='op'>|</span><span class='ident'>msg</span><span class='op'>|</span> <span class='ident'>handle_initiate_download</span>(<span class='kw-2'>&amp;</span><span class='ident'>initiate_itx</span>, <span class='ident'>msg</span>))
     );
 
-    <span class='kw'>let</span> <span class='ident'>abort_itx</span>      <span class='op'>=</span> <span class='ident'>itx</span>.<span class='ident'>clone</span>();
-    <span class='kw'>let</span> <span class='ident'>abort_download</span> <span class='op'>=</span> <span class='ident'>Method</span>::<span class='ident'>new</span>(
-        <span class='string'>&quot;abortDownload&quot;</span>,
-        <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Argument</span>::<span class='ident'>new</span>(<span class='string'>&quot;update_id&quot;</span>, <span class='string'>&quot;s&quot;</span>)],
-        <span class='macro'>vec</span><span class='macro'>!</span>[],
-        <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='kw'>move</span> <span class='op'>|</span><span class='ident'>msg</span><span class='op'>|</span> <span class='ident'>handle_abort_download</span>(<span class='kw-2'>&amp;</span><span class='ident'>abort_itx</span>, <span class='ident'>msg</span>))
-    );
-
     <span class='kw'>let</span> <span class='ident'>update_itx</span>    <span class='op'>=</span> <span class='ident'>itx</span>.<span class='ident'>clone</span>();
     <span class='kw'>let</span> <span class='ident'>update_report</span> <span class='op'>=</span> <span class='ident'>Method</span>::<span class='ident'>new</span>(
         <span class='string'>&quot;updateReport&quot;</span>,
@@ -373,7 +345,7 @@
         <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='kw'>move</span> <span class='op'>|</span><span class='ident'>msg</span><span class='op'>|</span> <span class='ident'>handle_update_report</span>(<span class='kw-2'>&amp;</span><span class='ident'>update_itx</span>, <span class='ident'>msg</span>))
     );
 
-    <span class='ident'>Interface</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>initiate_download</span>, <span class='ident'>abort_download</span>, <span class='ident'>update_report</span>], <span class='macro'>vec</span><span class='macro'>!</span>[], <span class='macro'>vec</span><span class='macro'>!</span>[])
+    <span class='ident'>Interface</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>initiate_download</span>, <span class='ident'>update_report</span>], <span class='macro'>vec</span><span class='macro'>!</span>[], <span class='macro'>vec</span><span class='macro'>!</span>[])
 }
 
 <span class='kw'>fn</span> <span class='ident'>send</span>(<span class='ident'>itx</span>: <span class='kw-2'>&amp;</span><span class='ident'>Sender</span><span class='op'>&lt;</span><span class='ident'>Interpret</span><span class='op'>&gt;</span>, <span class='ident'>cmd</span>: <span class='ident'>Command</span>) {
@@ -387,19 +359,7 @@
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>args</span> <span class='op'>=</span> <span class='ident'>msg</span>.<span class='ident'>get_items</span>().<span class='ident'>into_iter</span>();
     <span class='kw'>let</span> <span class='ident'>arg_id</span>   <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>args</span>.<span class='ident'>next</span>().<span class='ident'>ok_or</span>(<span class='ident'>dbus</span>::<span class='ident'>missing_arg</span>()));
     <span class='kw'>let</span> <span class='ident'>update_id</span>: <span class='kw-2'>&amp;</span><span class='ident'>String</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>FromMessageItem</span>::<span class='ident'>from</span>(<span class='kw-2'>&amp;</span><span class='ident'>arg_id</span>).<span class='ident'>or</span>(<span class='prelude-val'>Err</span>(<span class='ident'>dbus</span>::<span class='ident'>malformed_arg</span>())));
-    <span class='ident'>send</span>(<span class='ident'>itx</span>, <span class='ident'>Command</span>::<span class='ident'>AcceptUpdates</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>update_id</span>.<span class='ident'>clone</span>()]));
-
-    <span class='prelude-val'>Ok</span>(<span class='macro'>vec</span><span class='macro'>!</span>[])
-}
-
-<span class='kw'>fn</span> <span class='ident'>handle_abort_download</span>(<span class='ident'>itx</span>: <span class='kw-2'>&amp;</span><span class='ident'>Sender</span><span class='op'>&lt;</span><span class='ident'>Interpret</span><span class='op'>&gt;</span>, <span class='ident'>msg</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Message</span>) <span class='op'>-&gt;</span> <span class='ident'>MethodResult</span> {
-    <span class='kw'>let</span> <span class='ident'>sender</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>msg</span>.<span class='ident'>sender</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='ident'>s</span>.<span class='ident'>to_string</span>()).<span class='ident'>ok_or</span>(<span class='ident'>dbus</span>::<span class='ident'>missing_arg</span>()));
-    <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;handle_abort_download: sender={:?}, msg={:?}&quot;</span>, <span class='ident'>sender</span>, <span class='ident'>msg</span>);
-
-    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>args</span> <span class='op'>=</span> <span class='ident'>msg</span>.<span class='ident'>get_items</span>().<span class='ident'>into_iter</span>();
-    <span class='kw'>let</span> <span class='ident'>arg</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>args</span>.<span class='ident'>next</span>().<span class='ident'>ok_or</span>(<span class='ident'>dbus</span>::<span class='ident'>missing_arg</span>()));
-    <span class='kw'>let</span> <span class='ident'>update_id</span>: <span class='kw-2'>&amp;</span><span class='ident'>String</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>FromMessageItem</span>::<span class='ident'>from</span>(<span class='kw-2'>&amp;</span><span class='ident'>arg</span>).<span class='ident'>or</span>(<span class='prelude-val'>Err</span>(<span class='ident'>dbus</span>::<span class='ident'>malformed_arg</span>())));
-    <span class='ident'>send</span>(<span class='ident'>itx</span>, <span class='ident'>Command</span>::<span class='ident'>AbortUpdates</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>update_id</span>.<span class='ident'>clone</span>()]));
+    <span class='ident'>send</span>(<span class='ident'>itx</span>, <span class='ident'>Command</span>::<span class='ident'>StartDownload</span>(<span class='ident'>update_id</span>.<span class='ident'>clone</span>()));
 
     <span class='prelude-val'>Ok</span>(<span class='macro'>vec</span><span class='macro'>!</span>[])
 }
@@ -419,7 +379,7 @@
                        .<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>OperationResult</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;&gt;</span>()
                        .<span class='ident'>or</span>(<span class='prelude-val'>Err</span>(<span class='ident'>dbus</span>::<span class='ident'>malformed_arg</span>()))
     );
-    <span class='ident'>send</span>(<span class='ident'>itx</span>, <span class='ident'>Command</span>::<span class='ident'>SendUpdateReport</span>(<span class='prelude-val'>Some</span>(<span class='ident'>UpdateReport</span>::<span class='ident'>new</span>(<span class='ident'>update_id</span>.<span class='ident'>clone</span>(), <span class='ident'>results</span>))));
+    <span class='ident'>send</span>(<span class='ident'>itx</span>, <span class='ident'>Command</span>::<span class='ident'>SendUpdateReport</span>(<span class='ident'>UpdateReport</span>::<span class='ident'>new</span>(<span class='ident'>update_id</span>.<span class='ident'>clone</span>(), <span class='ident'>results</span>)));
 
     <span class='prelude-val'>Ok</span>(<span class='macro'>vec</span><span class='macro'>!</span>[])
 }

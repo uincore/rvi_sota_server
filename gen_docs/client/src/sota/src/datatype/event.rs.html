@@ -81,39 +81,83 @@
 <span id="37">37</span>
 <span id="38">38</span>
 <span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='ident'>Display</span>, <span class='ident'>Formatter</span>, <span class='prelude-ty'>Result</span> <span class='kw'>as</span> <span class='ident'>FmtResult</span>};
 
-<span class='kw'>use</span> <span class='ident'>datatype</span>::{<span class='ident'>DownloadComplete</span>, <span class='ident'>GetInstalledSoftware</span>, <span class='ident'>Package</span>,
-               <span class='ident'>UpdateAvailable</span>, <span class='ident'>UpdateRequestId</span>, <span class='ident'>UpdateState</span>};
+<span class='kw'>use</span> <span class='ident'>datatype</span>::{<span class='ident'>DownloadComplete</span>, <span class='ident'>Package</span>, <span class='ident'>UpdateAvailable</span>, <span class='ident'>UpdateReport</span>,
+               <span class='ident'>UpdateRequest</span>, <span class='ident'>UpdateRequestId</span>};
 
 
 <span class='doccomment'>/// System-wide events that are broadcast to all interested parties.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcEncodable</span>, <span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Event</span> {
-    <span class='doccomment'>/// No-op event to signal the success case.</span>
-    <span class='prelude-val'>Ok</span>,
     <span class='doccomment'>/// General error event with a printable representation for debugging.</span>
     <span class='ident'>Error</span>(<span class='ident'>String</span>),
 
-    <span class='doccomment'>/// Notification the authentication was successful.</span>
+    <span class='doccomment'>/// Authentication was successful.</span>
     <span class='ident'>Authenticated</span>,
     <span class='doccomment'>/// An operation failed because we are not currently authenticated.</span>
     <span class='ident'>NotAuthenticated</span>,
 
-    <span class='doccomment'>/// An event used to notify the DBus gateway to call the respective method.</span>
-    <span class='ident'>GetInstalledSoftware</span>(<span class='ident'>GetInstalledSoftware</span>),
-    <span class='doccomment'>/// A list of the currently installed system packages.</span>
-    <span class='ident'>FoundInstalledPackages</span>(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Package</span><span class='op'>&gt;</span>),
-
-    <span class='doccomment'>/// A new update has been found.</span>
+    <span class='doccomment'>/// A notification from Core of pending or in-flight updates.</span>
+    <span class='ident'>UpdatesReceived</span>(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>UpdateRequest</span><span class='op'>&gt;</span>),
+    <span class='doccomment'>/// A notification from RVI of a pending update.</span>
     <span class='ident'>UpdateAvailable</span>(<span class='ident'>UpdateAvailable</span>),
-    <span class='doccomment'>/// The installation of a specific update has progressed to a new state.</span>
-    <span class='ident'>UpdateStateChanged</span>(<span class='ident'>UpdateRequestId</span>, <span class='ident'>UpdateState</span>),
-    <span class='doccomment'>/// Downloading a specific update has successfully completed.</span>
+    <span class='doccomment'>/// There are no outstanding update requests.</span>
+    <span class='ident'>NoUpdateRequests</span>,
+
+    <span class='doccomment'>/// The following packages are installed on the device.</span>
+    <span class='ident'>FoundInstalledPackages</span>(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Package</span><span class='op'>&gt;</span>),
+    <span class='doccomment'>/// An update on the system information was received.</span>
+    <span class='ident'>FoundSystemInfo</span>(<span class='ident'>String</span>),
+
+    <span class='doccomment'>/// Downloading an update.</span>
+    <span class='ident'>DownloadingUpdate</span>(<span class='ident'>UpdateRequestId</span>),
+    <span class='doccomment'>/// An update was downloaded.</span>
     <span class='ident'>DownloadComplete</span>(<span class='ident'>DownloadComplete</span>),
-    <span class='doccomment'>/// The installation of a specific update failed.</span>
-    <span class='ident'>UpdateErrored</span>(<span class='ident'>UpdateRequestId</span>, <span class='ident'>String</span>),
+    <span class='doccomment'>/// Downloading an update failed.</span>
+    <span class='ident'>DownloadFailed</span>(<span class='ident'>UpdateRequestId</span>, <span class='ident'>String</span>),
+
+    <span class='doccomment'>/// Installing an update.</span>
+    <span class='ident'>InstallingUpdate</span>(<span class='ident'>UpdateRequestId</span>),
+    <span class='doccomment'>/// An update was installed.</span>
+    <span class='ident'>InstallComplete</span>(<span class='ident'>UpdateReport</span>),
+    <span class='doccomment'>/// The installation of an update failed.</span>
+    <span class='ident'>InstallFailed</span>(<span class='ident'>UpdateReport</span>),
+
+    <span class='doccomment'>/// An update report was sent to the Core server.</span>
+    <span class='ident'>UpdateReportSent</span>,
+    <span class='doccomment'>/// A list of installed packages was sent to the Core server.</span>
+    <span class='ident'>InstalledPackagesSent</span>,
+    <span class='doccomment'>/// A list of installed software was sent to the Core server.</span>
+    <span class='ident'>InstalledSoftwareSent</span>,
+    <span class='doccomment'>/// The system information was sent to the Core server.</span>
+    <span class='ident'>SystemInfoSent</span>,
+
+    <span class='doccomment'>/// A broadcast event requesting an update on externally installed software.</span>
+    <span class='ident'>InstalledSoftwareNeeded</span>,
 }
 
 <span class='kw'>impl</span> <span class='ident'>Display</span> <span class='kw'>for</span> <span class='ident'>Event</span> {

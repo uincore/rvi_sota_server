@@ -176,7 +176,7 @@
 }
 
 
-<span class='doccomment'>/// ServerHandler implements the `hyper::server::Handler` trait so can be used</span>
+<span class='doccomment'>/// This implements the `hyper::server::Handler` trait so that it can be used</span>
 <span class='doccomment'>/// to handle incoming HTTP connections with `hyper::server::Server`.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ServerHandler</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Transport</span><span class='op'>&gt;</span> {
     <span class='ident'>server</span>:    <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Server</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;&gt;</span>,

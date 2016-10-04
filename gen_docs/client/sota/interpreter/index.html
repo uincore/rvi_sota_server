@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-4305' class='srclink' href='../../src/sota/src/interpreter.rs.html#1-299' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-4761' class='srclink' href='../../src/sota/src/interpreter.rs.html#1-373' title='goto source code'>[src]</a></span></h1>
 <h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                        <tr class=' module-item'>
@@ -55,24 +55,24 @@
                                   title='sota::interpreter::CommandInterpreter'>CommandInterpreter</a></td>
                            <td class='docblock short'>
                                 <p>The <code>CommandInterpreter</code> wraps each incoming <code>Command</code> inside an <code>Interpret</code>
-type with no response channel. This can then be sent to the <code>GlobalInterpreter</code>.</p>
+type with no response channel for sending to the <code>GlobalInterpreter</code>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.EventInterpreter.html'
                                   title='sota::interpreter::EventInterpreter'>EventInterpreter</a></td>
                            <td class='docblock short'>
-                                <p>The <code>EventInterpreter</code> listens for <code>Event</code>s and responds with <code>Command</code>s
-that can be sent to the <code>CommandInterpreter</code>.</p>
+                                <p>The <code>EventInterpreter</code> listens for <code>Event</code>s and optionally responds with
+<code>Command</code>s that may be sent to the <code>CommandInterpreter</code>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.GlobalInterpreter.html'
                                   title='sota::interpreter::GlobalInterpreter'>GlobalInterpreter</a></td>
                            <td class='docblock short'>
-                                <p>The <code>GlobalInterpreter</code> waits for incoming <code>Interpret</code> messages then interprets
-the contained <code>Command</code>, broadcasting the results as <code>Event</code> messages to <code>etx</code>.
-The final <code>Event</code> message is (optionally) sent to the <code>Interpret</code> listener.</p>
+                                <p>The <code>GlobalInterpreter</code> interprets the <code>Command</code> inside incoming <code>Interpret</code>
+messages, broadcasting <code>Event</code>s globally and (optionally) sending the final
+outcome <code>Event</code> to the <code>Interpret</code> response channel.</p>
                            </td>
                        </tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>

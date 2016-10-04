@@ -306,6 +306,65 @@
 <span id="262">262</span>
 <span id="263">263</span>
 <span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='ident'>Display</span>, <span class='ident'>Formatter</span>, <span class='prelude-ty'>Result</span> <span class='kw'>as</span> <span class='ident'>FmtResult</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
@@ -313,7 +372,7 @@
 
 <span class='kw'>use</span> <span class='ident'>nom</span>::{<span class='ident'>IResult</span>, <span class='ident'>space</span>, <span class='ident'>eof</span>};
 <span class='kw'>use</span> <span class='ident'>datatype</span>::{<span class='ident'>ClientCredentials</span>, <span class='ident'>ClientId</span>, <span class='ident'>ClientSecret</span>, <span class='ident'>Error</span>, <span class='ident'>InstalledSoftware</span>,
-               <span class='ident'>UpdateReport</span>, <span class='ident'>UpdateRequestId</span>};
+               <span class='ident'>Package</span>, <span class='ident'>UpdateReport</span>, <span class='ident'>UpdateRequestId</span>, <span class='ident'>UpdateResultCode</span>};
 
 
 <span class='doccomment'>/// System-wide commands that are sent to the interpreter.</span>
@@ -324,29 +383,36 @@
     <span class='doccomment'>/// Shutdown the client immediately.</span>
     <span class='ident'>Shutdown</span>,
 
-    <span class='doccomment'>/// Check for any new updates.</span>
-    <span class='ident'>GetPendingUpdates</span>,
-    <span class='doccomment'>/// Start downloading and installing one or more updates.</span>
-    <span class='ident'>AcceptUpdates</span>(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>UpdateRequestId</span><span class='op'>&gt;</span>),
-    <span class='doccomment'>/// Cancel the installation process of one or more updates.</span>
-    <span class='ident'>AbortUpdates</span>(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>UpdateRequestId</span><span class='op'>&gt;</span>),
+    <span class='doccomment'>/// Check for any pending or in-flight updates.</span>
+    <span class='ident'>GetUpdateRequests</span>,
 
-    <span class='doccomment'>/// Query the system to find all the currently installed packages.</span>
+    <span class='doccomment'>/// List the installed packages on the system.</span>
     <span class='ident'>ListInstalledPackages</span>,
-    <span class='doccomment'>/// Publish the currently installed packages to the core server.</span>
-    <span class='ident'>UpdateInstalledPackages</span>,
+    <span class='doccomment'>/// List the system information.</span>
+    <span class='ident'>ListSystemInfo</span>,
 
-    <span class='doccomment'>/// Send a list of packages and firmwares installed via RVI.</span>
-    <span class='ident'>SendInstalledSoftware</span>(<span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>InstalledSoftware</span><span class='op'>&gt;</span>),
-    <span class='doccomment'>/// Send a report of the system information to the core server.</span>
+    <span class='doccomment'>/// Start downloading an update.</span>
+    <span class='ident'>StartDownload</span>(<span class='ident'>UpdateRequestId</span>),
+    <span class='doccomment'>/// Start installing an update.</span>
+    <span class='ident'>StartInstall</span>(<span class='ident'>UpdateRequestId</span>),
+
+    <span class='doccomment'>/// Send a list of packages to the Core server.</span>
+    <span class='ident'>SendInstalledPackages</span>(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Package</span><span class='op'>&gt;</span>),
+    <span class='doccomment'>/// Send a list of all packages and firmware to the Core server.</span>
+    <span class='ident'>SendInstalledSoftware</span>(<span class='ident'>InstalledSoftware</span>),
+    <span class='doccomment'>/// Send the system information to the Core server.</span>
     <span class='ident'>SendSystemInfo</span>,
-    <span class='doccomment'>/// Send an installation report via RVI.</span>
-    <span class='ident'>SendUpdateReport</span>(<span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>UpdateReport</span><span class='op'>&gt;</span>),
+    <span class='doccomment'>/// Send a package update report to the Core server.</span>
+    <span class='ident'>SendUpdateReport</span>(<span class='ident'>UpdateReport</span>),
 }
 
 <span class='kw'>impl</span> <span class='ident'>Display</span> <span class='kw'>for</span> <span class='ident'>Command</span> {
     <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>FmtResult</span> {
-        <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;{:?}&quot;</span>, <span class='self'>self</span>)
+        <span class='kw'>let</span> <span class='ident'>text</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='ident'>Command</span>::<span class='ident'>SendInstalledPackages</span>(_) <span class='op'>=&gt;</span> <span class='string'>&quot;SendInstalledPackages(...)&quot;</span>.<span class='ident'>to_string</span>(),
+            _                                 <span class='op'>=&gt;</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='self'>self</span>)
+        };
+        <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>text</span>)
     }
 }
 
@@ -365,26 +431,28 @@
 <span class='macro'>named</span><span class='macro'>!</span>(<span class='ident'>command</span> <span class='op'>&lt;</span>(<span class='ident'>Command</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span>)<span class='op'>&gt;</span>, <span class='macro'>chain</span><span class='macro'>!</span>(
     <span class='ident'>space</span>?
     ~ <span class='ident'>cmd</span>: <span class='macro'>alt</span><span class='macro'>!</span>(
-        <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;AcceptUpdates&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;acc&quot;</span>))
-            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>AcceptUpdates</span>(<span class='ident'>Vec</span>::<span class='ident'>new</span>()) }
-        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;AbortUpdates&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;abort&quot;</span>))
-            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>AbortUpdates</span>(<span class='ident'>Vec</span>::<span class='ident'>new</span>()) }
-        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;Authenticate&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;auth&quot;</span>))
+        <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;Authenticate&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;auth&quot;</span>))
             <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(<span class='prelude-val'>None</span>) }
-        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;GetPendingUpdates&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;pen&quot;</span>))
-            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>GetPendingUpdates</span> }
+        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;GetUpdateRequests&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;getreq&quot;</span>))
+            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>GetUpdateRequests</span> }
         <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;ListInstalledPackages&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;ls&quot;</span>))
             <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>ListInstalledPackages</span> }
-        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;SendInstalledSoftware&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;sendinst&quot;</span>))
-            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>SendInstalledSoftware</span>(<span class='prelude-val'>None</span>) }
-        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;SendSystemInfo&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;info&quot;</span>))
-            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>SendSystemInfo</span> }
-        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;SendUpdateReport&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;sendup&quot;</span>))
-            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>SendUpdateReport</span>(<span class='prelude-val'>None</span>) }
+        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;ListSystemInfo&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;info&quot;</span>))
+            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>ListSystemInfo</span> }
         <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;Shutdown&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;shutdown&quot;</span>))
             <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>Shutdown</span> }
-        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;UpdateInstalledPackages&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;upinst&quot;</span>))
-            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>UpdateInstalledPackages</span> }
+        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;SendInstalledPackages&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;sendpack&quot;</span>))
+            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>SendInstalledPackages</span>(<span class='ident'>Vec</span>::<span class='ident'>new</span>()) }
+        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;SendInstalledSoftware&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;sendinst&quot;</span>))
+            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>SendInstalledSoftware</span>(<span class='ident'>InstalledSoftware</span>::<span class='ident'>default</span>()) }
+        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;SendSystemInfo&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;sendinfo&quot;</span>))
+            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>SendSystemInfo</span> }
+        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;SendUpdateReport&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;sendup&quot;</span>))
+            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>SendUpdateReport</span>(<span class='ident'>UpdateReport</span>::<span class='ident'>default</span>()) }
+        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;StartDownload&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;dl&quot;</span>))
+            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>StartDownload</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>()) }
+        <span class='op'>|</span> <span class='macro'>alt_complete</span><span class='macro'>!</span>(<span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;StartInstall&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;inst&quot;</span>))
+            <span class='op'>=&gt;</span> { <span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>Command</span>::<span class='ident'>StartInstall</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>()) }
     )
         ~ <span class='ident'>args</span>: <span class='ident'>arguments</span>
         ~ <span class='macro'>alt</span><span class='macro'>!</span>(<span class='ident'>eof</span> <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;\r&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;\n&quot;</span>) <span class='op'>|</span> <span class='macro'>tag</span><span class='macro'>!</span>(<span class='string'>&quot;;&quot;</span>)),
@@ -407,16 +475,6 @@
 
 <span class='kw'>fn</span> <span class='ident'>parse_arguments</span>(<span class='ident'>cmd</span>: <span class='ident'>Command</span>, <span class='ident'>args</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Command</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
     <span class='kw'>match</span> <span class='ident'>cmd</span> {
-        <span class='ident'>Command</span>::<span class='ident'>AcceptUpdates</span>(_) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
-            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='string'>&quot;usage: acc [&lt;id&gt;]&quot;</span>.<span class='ident'>to_string</span>())),
-            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>AcceptUpdates</span>(<span class='ident'>args</span>.<span class='ident'>iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>arg</span><span class='op'>|</span> <span class='ident'>String</span>::<span class='ident'>from</span>(<span class='op'>*</span><span class='ident'>arg</span>)).<span class='ident'>collect</span>())),
-        },
-
-        <span class='ident'>Command</span>::<span class='ident'>AbortUpdates</span>(_) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
-            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='string'>&quot;usage: abort [&lt;id&gt;]&quot;</span>.<span class='ident'>to_string</span>())),
-            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>AbortUpdates</span>(<span class='ident'>args</span>.<span class='ident'>iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>arg</span><span class='op'>|</span> <span class='ident'>String</span>::<span class='ident'>from</span>(<span class='op'>*</span><span class='ident'>arg</span>)).<span class='ident'>collect</span>())),
-        },
-
         <span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(_) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
             <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(<span class='prelude-val'>None</span>)),
             <span class='number'>1</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='string'>&quot;usage: auth &lt;client-id&gt; &lt;client-secret&gt;&quot;</span>.<span class='ident'>to_string</span>())),
@@ -426,9 +484,9 @@
             _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected Authenticate args: {:?}&quot;</span>, <span class='ident'>args</span>))),
         },
 
-        <span class='ident'>Command</span>::<span class='ident'>GetPendingUpdates</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
-            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>GetPendingUpdates</span>),
-            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected GetPendingUpdates args: {:?}&quot;</span>, <span class='ident'>args</span>))),
+        <span class='ident'>Command</span>::<span class='ident'>GetUpdateRequests</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
+            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>GetUpdateRequests</span>),
+            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected GetUpdateRequests args: {:?}&quot;</span>, <span class='ident'>args</span>))),
         },
 
         <span class='ident'>Command</span>::<span class='ident'>ListInstalledPackages</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
@@ -436,13 +494,45 @@
             _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected ListInstalledPackages args: {:?}&quot;</span>, <span class='ident'>args</span>))),
         },
 
+        <span class='ident'>Command</span>::<span class='ident'>ListSystemInfo</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
+            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>ListSystemInfo</span>),
+            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected ListSystemInfo args: {:?}&quot;</span>, <span class='ident'>args</span>))),
+        },
+
+        <span class='ident'>Command</span>::<span class='ident'>SendInstalledPackages</span>(_) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
+            <span class='number'>0</span> <span class='op'>|</span> <span class='number'>1</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='string'>&quot;usage: sendpack (&lt;name&gt; &lt;version&gt; )+&quot;</span>.<span class='ident'>to_string</span>())),
+            <span class='ident'>n</span> <span class='kw'>if</span> <span class='ident'>n</span> <span class='op'>%</span> <span class='number'>2</span> <span class='op'>==</span> <span class='number'>0</span> <span class='op'>=&gt;</span> {
+                <span class='kw'>let</span> (<span class='ident'>names</span>, <span class='ident'>versions</span>): (<span class='ident'>Vec</span><span class='op'>&lt;</span>(_, <span class='kw-2'>&amp;</span><span class='ident'>str</span>)<span class='op'>&gt;</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span>(_, <span class='kw-2'>&amp;</span><span class='ident'>str</span>)<span class='op'>&gt;</span>) <span class='op'>=</span>
+                    <span class='ident'>args</span>.<span class='ident'>into_iter</span>().<span class='ident'>enumerate</span>().<span class='ident'>partition</span>(<span class='op'>|</span><span class='kw-2'>&amp;</span>(<span class='ident'>n</span>, _)<span class='op'>|</span> <span class='ident'>n</span> <span class='op'>%</span> <span class='number'>2</span> <span class='op'>==</span> <span class='number'>0</span>);
+                <span class='kw'>let</span> <span class='ident'>packages</span> <span class='op'>=</span> <span class='ident'>names</span>.<span class='ident'>into_iter</span>().<span class='ident'>zip</span>(<span class='ident'>versions</span>.<span class='ident'>into_iter</span>())
+                    .<span class='ident'>map</span>(<span class='op'>|</span>((_, <span class='ident'>name</span>), (_, <span class='ident'>version</span>))<span class='op'>|</span> <span class='ident'>Package</span> {
+                        <span class='ident'>name</span>:    <span class='ident'>name</span>.<span class='ident'>to_string</span>(),
+                        <span class='ident'>version</span>: <span class='ident'>version</span>.<span class='ident'>to_string</span>()
+                    }).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Package</span><span class='op'>&gt;&gt;</span>();
+                <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>SendInstalledPackages</span>(<span class='ident'>packages</span>))
+            }
+            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;SendInstalledPackages expects an even number of &#39;name version&#39; pairs&quot;</span>))),
+        },
+
         <span class='ident'>Command</span>::<span class='ident'>SendInstalledSoftware</span>(_) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
-            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>SendInstalledSoftware</span>(<span class='prelude-val'>None</span>)),
+            <span class='comment'>// FIXME(PRO-1160): args</span>
             _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected SendInstalledSoftware args: {:?}&quot;</span>, <span class='ident'>args</span>))),
         },
 
+        <span class='ident'>Command</span>::<span class='ident'>SendSystemInfo</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
+            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>SendSystemInfo</span>),
+            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected SendSystemInfo args: {:?}&quot;</span>, <span class='ident'>args</span>))),
+        },
+
         <span class='ident'>Command</span>::<span class='ident'>SendUpdateReport</span>(_) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
-            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>SendUpdateReport</span>(<span class='prelude-val'>None</span>)),
+            <span class='number'>0</span> <span class='op'>|</span> <span class='number'>1</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='string'>&quot;usage: sendup &lt;update-id&gt; &lt;result-code&gt;&quot;</span>.<span class='ident'>to_string</span>())),
+            <span class='number'>2</span> <span class='op'>=&gt;</span> {
+                <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>code</span>) <span class='op'>=</span> <span class='ident'>args</span>[<span class='number'>1</span>].<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>UpdateResultCode</span><span class='op'>&gt;</span>() {
+                    <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>SendUpdateReport</span>(<span class='ident'>UpdateReport</span>::<span class='ident'>single</span>(<span class='ident'>args</span>[<span class='number'>0</span>].<span class='ident'>to_string</span>(), <span class='ident'>code</span>, <span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>())))
+                } <span class='kw'>else</span> {
+                    <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='string'>&quot;couldn&#39;t parse 2nd argument as an UpdateResultCode&quot;</span>.<span class='ident'>to_string</span>()))
+                }
+            }
             _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected SendUpdateReport args: {:?}&quot;</span>, <span class='ident'>args</span>))),
         },
 
@@ -451,15 +541,18 @@
             _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected Shutdown args: {:?}&quot;</span>, <span class='ident'>args</span>))),
         },
 
-        <span class='ident'>Command</span>::<span class='ident'>SendSystemInfo</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
-            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>SendSystemInfo</span>),
-            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected SendSystemInfo args: {:?}&quot;</span>, <span class='ident'>args</span>))),
+        <span class='ident'>Command</span>::<span class='ident'>StartDownload</span>(_) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
+            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='string'>&quot;usage: dl &lt;id&gt;&quot;</span>.<span class='ident'>to_string</span>())),
+            <span class='number'>1</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>StartDownload</span>(<span class='ident'>args</span>[<span class='number'>0</span>].<span class='ident'>to_string</span>())),
+            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected StartInstall args: {:?}&quot;</span>, <span class='ident'>args</span>))),
         },
 
-        <span class='ident'>Command</span>::<span class='ident'>UpdateInstalledPackages</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
-            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>UpdateInstalledPackages</span>),
-            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected UpdateInstalledPackages args: {:?}&quot;</span>, <span class='ident'>args</span>))),
+        <span class='ident'>Command</span>::<span class='ident'>StartInstall</span>(_) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>args</span>.<span class='ident'>len</span>() {
+            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='string'>&quot;usage: inst &lt;id&gt;&quot;</span>.<span class='ident'>to_string</span>())),
+            <span class='number'>1</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>StartInstall</span>(<span class='ident'>args</span>[<span class='number'>0</span>].<span class='ident'>to_string</span>())),
+            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected StartInstall args: {:?}&quot;</span>, <span class='ident'>args</span>))),
         },
+
     }
 }
 
@@ -467,7 +560,8 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>tests</span> {
     <span class='kw'>use</span> <span class='kw'>super</span>::{<span class='ident'>command</span>, <span class='ident'>arguments</span>};
-    <span class='kw'>use</span> <span class='ident'>datatype</span>::{<span class='ident'>Command</span>, <span class='ident'>ClientCredentials</span>, <span class='ident'>ClientId</span>, <span class='ident'>ClientSecret</span>};
+    <span class='kw'>use</span> <span class='ident'>datatype</span>::{<span class='ident'>Command</span>, <span class='ident'>ClientCredentials</span>, <span class='ident'>ClientId</span>, <span class='ident'>ClientSecret</span>, <span class='ident'>Package</span>,
+                   <span class='ident'>UpdateReport</span>, <span class='ident'>UpdateResultCode</span>};
     <span class='kw'>use</span> <span class='ident'>nom</span>::<span class='ident'>IResult</span>;
 
 
@@ -475,8 +569,8 @@
     <span class='kw'>fn</span> <span class='ident'>parse_command_test</span>() {
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>command</span>(<span class='kw-2'>&amp;</span><span class='string'>b&quot;auth foo bar&quot;</span>[..]),
                    <span class='ident'>IResult</span>::<span class='ident'>Done</span>(<span class='kw-2'>&amp;</span><span class='string'>b&quot;&quot;</span>[..], (<span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(<span class='prelude-val'>None</span>), <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;foo&quot;</span>, <span class='string'>&quot;bar&quot;</span>])));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>command</span>(<span class='kw-2'>&amp;</span><span class='string'>b&quot;acc 1&quot;</span>[..]),
-                   <span class='ident'>IResult</span>::<span class='ident'>Done</span>(<span class='kw-2'>&amp;</span><span class='string'>b&quot;&quot;</span>[..], (<span class='ident'>Command</span>::<span class='ident'>AcceptUpdates</span>(<span class='ident'>Vec</span>::<span class='ident'>new</span>()), <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;1&quot;</span>])));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>command</span>(<span class='kw-2'>&amp;</span><span class='string'>b&quot;dl 1&quot;</span>[..]),
+                   <span class='ident'>IResult</span>::<span class='ident'>Done</span>(<span class='kw-2'>&amp;</span><span class='string'>b&quot;&quot;</span>[..], (<span class='ident'>Command</span>::<span class='ident'>StartDownload</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>()), <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;1&quot;</span>])));
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>command</span>(<span class='kw-2'>&amp;</span><span class='string'>b&quot;ls;\n&quot;</span>[..]),
                    <span class='ident'>IResult</span>::<span class='ident'>Done</span>(<span class='kw-2'>&amp;</span><span class='string'>b&quot;\n&quot;</span>[..], (<span class='ident'>Command</span>::<span class='ident'>ListInstalledPackages</span>, <span class='ident'>Vec</span>::<span class='ident'>new</span>())));
     }
@@ -491,26 +585,11 @@
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>arguments</span>(<span class='kw-2'>&amp;</span><span class='string'>b&quot;;&quot;</span>[..]), <span class='ident'>IResult</span>::<span class='ident'>Done</span>(<span class='kw-2'>&amp;</span><span class='string'>b&quot;;&quot;</span>[..], <span class='ident'>Vec</span>::<span class='ident'>new</span>()));
     }
 
-    <span class='attribute'>#[<span class='ident'>test</span>]</span>
-    <span class='kw'>fn</span> <span class='ident'>accept_updates_test</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;acc 1&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>AcceptUpdates</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;1&quot;</span>.<span class='ident'>to_string</span>()]));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;AcceptUpdates this&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>AcceptUpdates</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;this&quot;</span>.<span class='ident'>to_string</span>()]));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;acc some more&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>AcceptUpdates</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;some&quot;</span>.<span class='ident'>to_string</span>(), <span class='string'>&quot;more&quot;</span>.<span class='ident'>to_string</span>()]));
-        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;acc&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
-    }
-
-    <span class='attribute'>#[<span class='ident'>test</span>]</span>
-    <span class='kw'>fn</span> <span class='ident'>abort_updates_test</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;abort 1&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>AbortUpdates</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;1&quot;</span>.<span class='ident'>to_string</span>()]));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;AbortUpdates this&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>AbortUpdates</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;this&quot;</span>.<span class='ident'>to_string</span>()]));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;abort some more&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>AbortUpdates</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;some&quot;</span>.<span class='ident'>to_string</span>(), <span class='string'>&quot;more&quot;</span>.<span class='ident'>to_string</span>()]));
-        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;abort&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
-    }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>authenticate_test</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;auth&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(<span class='prelude-val'>None</span>));
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;Authenticate&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(<span class='prelude-val'>None</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;auth&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(<span class='prelude-val'>None</span>));
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;auth user pass&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(),
                    <span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(<span class='prelude-val'>Some</span>(<span class='ident'>ClientCredentials</span> {
                        <span class='ident'>client_id</span>:     <span class='ident'>ClientId</span>(<span class='string'>&quot;user&quot;</span>.<span class='ident'>to_string</span>()),
@@ -521,54 +600,93 @@
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
-    <span class='kw'>fn</span> <span class='ident'>get_pending_updates_test</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;pen&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>GetPendingUpdates</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;GetPendingUpdates&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>GetPendingUpdates</span>);
-        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;pen some&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+    <span class='kw'>fn</span> <span class='ident'>get_update_requests_test</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;GetUpdateRequests&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>GetUpdateRequests</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;getreq&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>GetUpdateRequests</span>);
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;getreq now&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>list_installed_test</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;ls&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>ListInstalledPackages</span>);
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;ListInstalledPackages&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>ListInstalledPackages</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;ls&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>ListInstalledPackages</span>);
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;ls some&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>list_system_info_test</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;ListSystemInfo&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>ListSystemInfo</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;info&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>ListSystemInfo</span>);
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;ListSystemInfo 1 2&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;info please&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>send_installed_packages_test</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;SendInstalledPackages myname myversion&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(),
+                   <span class='ident'>Command</span>::<span class='ident'>SendInstalledPackages</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Package</span> {
+                       <span class='ident'>name</span>:    <span class='string'>&quot;myname&quot;</span>.<span class='ident'>to_string</span>(),
+                       <span class='ident'>version</span>: <span class='string'>&quot;myversion&quot;</span>.<span class='ident'>to_string</span>()
+                   }]));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;sendpack n1 v1 n2 v2&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(),
+                   <span class='ident'>Command</span>::<span class='ident'>SendInstalledPackages</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Package</span> {
+                       <span class='ident'>name</span>:    <span class='string'>&quot;n1&quot;</span>.<span class='ident'>to_string</span>(),
+                       <span class='ident'>version</span>: <span class='string'>&quot;v1&quot;</span>.<span class='ident'>to_string</span>()
+                   }, <span class='ident'>Package</span> {
+                       <span class='ident'>name</span>:    <span class='string'>&quot;n2&quot;</span>.<span class='ident'>to_string</span>(),
+                       <span class='ident'>version</span>: <span class='string'>&quot;v2&quot;</span>.<span class='ident'>to_string</span>()
+                   }]));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;SendInstalledPackages some&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;sendpack 1 2 3&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>send_installed_software_test</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;sendinst&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>SendInstalledSoftware</span>(<span class='prelude-val'>None</span>));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;SendInstalledSoftware&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>SendInstalledSoftware</span>(<span class='prelude-val'>None</span>));
-        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;sendinst some&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;SendInstalledSoftware&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;sendsoft some&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>send_system_info_test</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;SendSystemInfo&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>SendSystemInfo</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;sendinfo&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>SendSystemInfo</span>);
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;SendSystemInfo 1 2&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;sendinfo please&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>send_update_report_test</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;sendup&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>SendUpdateReport</span>(<span class='prelude-val'>None</span>));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;SendUpdateReport&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>SendUpdateReport</span>(<span class='prelude-val'>None</span>));
-        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;sendup some&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;SendUpdateReport myid OK&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>SendUpdateReport</span>(
+            <span class='ident'>UpdateReport</span>::<span class='ident'>single</span>(<span class='string'>&quot;myid&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>UpdateResultCode</span>::<span class='ident'>OK</span>, <span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>())));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;sendup myid 19&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>SendUpdateReport</span>(
+            <span class='ident'>UpdateReport</span>::<span class='ident'>single</span>(<span class='string'>&quot;myid&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>UpdateResultCode</span>::<span class='ident'>GENERAL_ERROR</span>, <span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>())));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;sendup myid 20&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;SendInstalledPackages&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;sendup 1 2 3&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>shutdown_test</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;shutdown&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>Shutdown</span>);
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;Shutdown&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>Shutdown</span>);
-        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;shutdown now&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;shutdown&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>Shutdown</span>);
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;Shutdown 1 2&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;shutdown now&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
-    <span class='kw'>fn</span> <span class='ident'>sendsysteminfo_test</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;info&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>SendSystemInfo</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;SendSystemInfo&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>SendSystemInfo</span>);
-        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;info please&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
-        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;SendSystemInfo 1 2&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+    <span class='kw'>fn</span> <span class='ident'>start_download_test</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;StartDownload this&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>StartDownload</span>(<span class='string'>&quot;this&quot;</span>.<span class='ident'>to_string</span>()));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;dl that&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>StartDownload</span>(<span class='string'>&quot;that&quot;</span>.<span class='ident'>to_string</span>()));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;StartDownload this and that&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;dl&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
-    <span class='kw'>fn</span> <span class='ident'>update_installed_test</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;upinst&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>UpdateInstalledPackages</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;UpdateInstalledPackages&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>UpdateInstalledPackages</span>);
-        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;upinst down&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+    <span class='kw'>fn</span> <span class='ident'>start_install_test</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;StartInstall 123&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>StartInstall</span>(<span class='string'>&quot;123&quot;</span>.<span class='ident'>to_string</span>()));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;inst this&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>StartInstall</span>(<span class='string'>&quot;this&quot;</span>.<span class='ident'>to_string</span>()));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;StartInstall&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;inst more than one&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
     }
 }
 </pre>

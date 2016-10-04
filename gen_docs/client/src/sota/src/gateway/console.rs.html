@@ -111,7 +111,7 @@
         <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
             <span class='kw'>loop</span> {
                 <span class='kw'>match</span> <span class='ident'>get_input</span>() {
-                    <span class='prelude-val'>Ok</span>(<span class='ident'>cmd</span>)  <span class='op'>=&gt;</span> <span class='ident'>itx</span>.<span class='ident'>send</span>(<span class='ident'>Interpret</span>{ <span class='ident'>command</span>: <span class='ident'>cmd</span>, <span class='ident'>response_tx</span>: <span class='prelude-val'>Some</span>(<span class='ident'>etx</span>.<span class='ident'>clone</span>()) }),
+                    <span class='prelude-val'>Ok</span>(<span class='ident'>cmd</span>)  <span class='op'>=&gt;</span> <span class='ident'>itx</span>.<span class='ident'>send</span>(<span class='ident'>Interpret</span> { <span class='ident'>command</span>: <span class='ident'>cmd</span>, <span class='ident'>response_tx</span>: <span class='prelude-val'>Some</span>(<span class='ident'>etx</span>.<span class='ident'>clone</span>()) }),
                     <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Console Error: {:?}&quot;</span>, <span class='ident'>err</span>)
                 }
             }

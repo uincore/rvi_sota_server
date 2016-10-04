@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["EventWrapper",""],["Socket","The `Socket` gateway is used for communication via Unix Domain Sockets."]]});

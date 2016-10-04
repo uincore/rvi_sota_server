@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["broadcast",""],["console",""],["dbus",""],["gateway",""],["http",""],["websocket",""]]});
+initSidebarItems({"mod":[["console",""],["dbus",""],["gateway",""],["http",""],["socket",""],["websocket",""]]});

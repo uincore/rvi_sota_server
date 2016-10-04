@@ -95,7 +95,7 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>borrow</span>::<span class='ident'>Cow</span>;
 
 
-<span class='doccomment'>/// The available OAuth2 authentication types.</span>
+<span class='doccomment'>/// The available authentication types for communicating with the Auth server.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Auth</span> {
     <span class='prelude-val'>None</span>,
@@ -117,7 +117,7 @@
     <span class='kw'>pub</span> <span class='ident'>access_token</span>: <span class='ident'>String</span>,
     <span class='kw'>pub</span> <span class='ident'>token_type</span>:   <span class='ident'>String</span>,
     <span class='kw'>pub</span> <span class='ident'>expires_in</span>:   <span class='ident'>i32</span>,
-    <span class='kw'>pub</span> <span class='ident'>scope</span>:        <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>
+    <span class='kw'>pub</span> <span class='ident'>scope</span>:        <span class='ident'>String</span>
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>AccessToken</span><span class='op'>&gt;&gt;</span> <span class='kw'>for</span> <span class='ident'>AccessToken</span> {

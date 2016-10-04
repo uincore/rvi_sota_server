@@ -283,11 +283,11 @@
         <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>register</span>(<span class='string'>&quot;/sota/notify&quot;</span>);
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>remote</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>remote</span>.<span class='ident'>lock</span>().<span class='ident'>unwrap</span>();
         <span class='ident'>remote</span>.<span class='ident'>local</span>   <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>LocalServices</span> {
-            <span class='ident'>start_url</span>:    <span class='ident'>register</span>(<span class='string'>&quot;/sota/start&quot;</span>),
-            <span class='ident'>chunk_url</span>:    <span class='ident'>register</span>(<span class='string'>&quot;/sota/chunk&quot;</span>),
-            <span class='ident'>abort_url</span>:    <span class='ident'>register</span>(<span class='string'>&quot;/sota/abort&quot;</span>),
-            <span class='ident'>finish_url</span>:   <span class='ident'>register</span>(<span class='string'>&quot;/sota/finish&quot;</span>),
-            <span class='ident'>packages_url</span>: <span class='ident'>register</span>(<span class='string'>&quot;/sota/getpackages&quot;</span>)
+            <span class='ident'>start</span>:    <span class='ident'>register</span>(<span class='string'>&quot;/sota/start&quot;</span>),
+            <span class='ident'>chunk</span>:    <span class='ident'>register</span>(<span class='string'>&quot;/sota/chunk&quot;</span>),
+            <span class='ident'>abort</span>:    <span class='ident'>register</span>(<span class='string'>&quot;/sota/abort&quot;</span>),
+            <span class='ident'>finish</span>:   <span class='ident'>register</span>(<span class='string'>&quot;/sota/finish&quot;</span>),
+            <span class='ident'>getpackages</span>: <span class='ident'>register</span>(<span class='string'>&quot;/sota/getpackages&quot;</span>)
         });
     }
 
@@ -343,51 +343,51 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>send_download_started</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>update_id</span>: <span class='ident'>UpdateRequestId</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>backend</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>backend</span>.<span class='ident'>as_ref</span>().<span class='ident'>ok_or</span>(<span class='string'>&quot;BackendServices not set&quot;</span>));
         <span class='kw'>let</span> <span class='ident'>local</span>   <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>local</span>.<span class='ident'>as_ref</span>().<span class='ident'>ok_or</span>(<span class='string'>&quot;LocalServices not set&quot;</span>));
-        <span class='kw'>let</span> <span class='ident'>start</span>   <span class='op'>=</span> <span class='ident'>DownloadStarted</span> { <span class='ident'>device_id</span>: <span class='self'>self</span>.<span class='ident'>device_id</span>.<span class='ident'>clone</span>(), <span class='ident'>update_id</span>: <span class='ident'>update_id</span>, <span class='ident'>local</span>: <span class='ident'>local</span>.<span class='ident'>clone</span>() };
-        <span class='self'>self</span>.<span class='ident'>send_message</span>(<span class='ident'>start</span>, <span class='kw-2'>&amp;</span><span class='ident'>backend</span>.<span class='ident'>start_url</span>)
+        <span class='kw'>let</span> <span class='ident'>start</span>   <span class='op'>=</span> <span class='ident'>DownloadStarted</span> { <span class='ident'>device</span>: <span class='self'>self</span>.<span class='ident'>device_id</span>.<span class='ident'>clone</span>(), <span class='ident'>update_id</span>: <span class='ident'>update_id</span>, <span class='ident'>services</span>: <span class='ident'>local</span>.<span class='ident'>clone</span>() };
+        <span class='self'>self</span>.<span class='ident'>send_message</span>(<span class='ident'>start</span>, <span class='kw-2'>&amp;</span><span class='ident'>backend</span>.<span class='ident'>start</span>)
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>send_chunk_received</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>chunk</span>: <span class='ident'>ChunkReceived</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>backend</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>backend</span>.<span class='ident'>as_ref</span>().<span class='ident'>ok_or</span>(<span class='string'>&quot;BackendServices not set&quot;</span>));
-        <span class='self'>self</span>.<span class='ident'>send_message</span>(<span class='ident'>chunk</span>, <span class='kw-2'>&amp;</span><span class='ident'>backend</span>.<span class='ident'>ack_url</span>)
+        <span class='self'>self</span>.<span class='ident'>send_message</span>(<span class='ident'>chunk</span>, <span class='kw-2'>&amp;</span><span class='ident'>backend</span>.<span class='ident'>ack</span>)
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>send_update_report</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>report</span>: <span class='ident'>UpdateReport</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>backend</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>backend</span>.<span class='ident'>as_ref</span>().<span class='ident'>ok_or</span>(<span class='string'>&quot;BackendServices not set&quot;</span>));
-        <span class='kw'>let</span> <span class='ident'>result</span>  <span class='op'>=</span> <span class='ident'>UpdateReportResult</span> { <span class='ident'>device_id</span>: <span class='self'>self</span>.<span class='ident'>device_id</span>.<span class='ident'>clone</span>(), <span class='ident'>report</span>: <span class='ident'>report</span> };
-        <span class='self'>self</span>.<span class='ident'>send_message</span>(<span class='ident'>result</span>, <span class='kw-2'>&amp;</span><span class='ident'>backend</span>.<span class='ident'>report_url</span>)
+        <span class='kw'>let</span> <span class='ident'>result</span>  <span class='op'>=</span> <span class='ident'>UpdateReportResult</span> { <span class='ident'>device</span>: <span class='self'>self</span>.<span class='ident'>device_id</span>.<span class='ident'>clone</span>(), <span class='ident'>update_report</span>: <span class='ident'>report</span> };
+        <span class='self'>self</span>.<span class='ident'>send_message</span>(<span class='ident'>result</span>, <span class='kw-2'>&amp;</span><span class='ident'>backend</span>.<span class='ident'>report</span>)
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>send_installed_software</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>installed</span>: <span class='ident'>InstalledSoftware</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>backend</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>backend</span>.<span class='ident'>as_ref</span>().<span class='ident'>ok_or</span>(<span class='string'>&quot;BackendServices not set&quot;</span>));
         <span class='kw'>let</span> <span class='ident'>result</span>  <span class='op'>=</span> <span class='ident'>InstalledSoftwareResult</span> { <span class='ident'>device_id</span>: <span class='self'>self</span>.<span class='ident'>device_id</span>.<span class='ident'>clone</span>(), <span class='ident'>installed</span>: <span class='ident'>installed</span> };
-        <span class='self'>self</span>.<span class='ident'>send_message</span>(<span class='ident'>result</span>, <span class='kw-2'>&amp;</span><span class='ident'>backend</span>.<span class='ident'>packages_url</span>)
+        <span class='self'>self</span>.<span class='ident'>send_message</span>(<span class='ident'>result</span>, <span class='kw-2'>&amp;</span><span class='ident'>backend</span>.<span class='ident'>packages</span>)
     }
 }
 
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>RustcDecodable</span>, <span class='ident'>RustcEncodable</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>LocalServices</span> {
-    <span class='kw'>pub</span> <span class='ident'>start_url</span>:    <span class='ident'>String</span>,
-    <span class='kw'>pub</span> <span class='ident'>chunk_url</span>:    <span class='ident'>String</span>,
-    <span class='kw'>pub</span> <span class='ident'>abort_url</span>:    <span class='ident'>String</span>,
-    <span class='kw'>pub</span> <span class='ident'>finish_url</span>:   <span class='ident'>String</span>,
-    <span class='kw'>pub</span> <span class='ident'>packages_url</span>: <span class='ident'>String</span>,
+    <span class='kw'>pub</span> <span class='ident'>start</span>:    <span class='ident'>String</span>,
+    <span class='kw'>pub</span> <span class='ident'>abort</span>:    <span class='ident'>String</span>,
+    <span class='kw'>pub</span> <span class='ident'>chunk</span>:    <span class='ident'>String</span>,
+    <span class='kw'>pub</span> <span class='ident'>finish</span>:   <span class='ident'>String</span>,
+    <span class='kw'>pub</span> <span class='ident'>getpackages</span>: <span class='ident'>String</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>RustcDecodable</span>, <span class='ident'>RustcEncodable</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>BackendServices</span> {
-    <span class='kw'>pub</span> <span class='ident'>start_url</span>:    <span class='ident'>String</span>,
-    <span class='kw'>pub</span> <span class='ident'>ack_url</span>:      <span class='ident'>String</span>,
-    <span class='kw'>pub</span> <span class='ident'>report_url</span>:   <span class='ident'>String</span>,
-    <span class='kw'>pub</span> <span class='ident'>packages_url</span>: <span class='ident'>String</span>
+    <span class='kw'>pub</span> <span class='ident'>start</span>:    <span class='ident'>String</span>,
+    <span class='kw'>pub</span> <span class='ident'>ack</span>:      <span class='ident'>String</span>,
+    <span class='kw'>pub</span> <span class='ident'>report</span>:   <span class='ident'>String</span>,
+    <span class='kw'>pub</span> <span class='ident'>packages</span>: <span class='ident'>String</span>
 }
 
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>RustcEncodable</span>)]</span>
 <span class='kw'>struct</span> <span class='ident'>UpdateReportResult</span> {
-    <span class='kw'>pub</span> <span class='ident'>device_id</span>: <span class='ident'>String</span>,
-    <span class='kw'>pub</span> <span class='ident'>report</span>:    <span class='ident'>UpdateReport</span>
+    <span class='kw'>pub</span> <span class='ident'>device</span>:        <span class='ident'>String</span>,
+    <span class='kw'>pub</span> <span class='ident'>update_report</span>: <span class='ident'>UpdateReport</span>
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>RustcEncodable</span>)]</span>
@@ -399,17 +399,17 @@
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>RustcEncodable</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>RviMessage</span><span class='op'>&lt;</span><span class='ident'>E</span>: <span class='ident'>Encodable</span><span class='op'>&gt;</span> {
-    <span class='kw'>pub</span> <span class='ident'>service</span>:    <span class='ident'>String</span>,
-    <span class='kw'>pub</span> <span class='ident'>parameters</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>,
-    <span class='kw'>pub</span> <span class='ident'>timeout</span>:    <span class='ident'>i64</span>,
+    <span class='kw'>pub</span> <span class='ident'>service_name</span>: <span class='ident'>String</span>,
+    <span class='kw'>pub</span> <span class='ident'>parameters</span>:   <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>,
+    <span class='kw'>pub</span> <span class='ident'>timeout</span>:      <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;</span>
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>E</span>: <span class='ident'>Encodable</span><span class='op'>&gt;</span> <span class='ident'>RviMessage</span><span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>service</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>parameters</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>, <span class='ident'>expire_in</span>: <span class='ident'>i64</span>) <span class='op'>-&gt;</span> <span class='ident'>RviMessage</span><span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span> {
         <span class='ident'>RviMessage</span> {
-            <span class='ident'>service</span>:    <span class='ident'>service</span>.<span class='ident'>to_string</span>(),
+            <span class='ident'>service_name</span>:    <span class='ident'>service</span>.<span class='ident'>to_string</span>(),
             <span class='ident'>parameters</span>: <span class='ident'>parameters</span>,
-            <span class='ident'>timeout</span>:    (<span class='ident'>time</span>::<span class='ident'>get_time</span>() <span class='op'>+</span> <span class='ident'>time</span>::<span class='ident'>Duration</span>::<span class='ident'>seconds</span>(<span class='ident'>expire_in</span>)).<span class='ident'>sec</span>,
+            <span class='ident'>timeout</span>:    <span class='prelude-val'>Some</span>((<span class='ident'>time</span>::<span class='ident'>get_time</span>() <span class='op'>+</span> <span class='ident'>time</span>::<span class='ident'>Duration</span>::<span class='ident'>seconds</span>(<span class='ident'>expire_in</span>)).<span class='ident'>sec</span>)
         }
     }
 }

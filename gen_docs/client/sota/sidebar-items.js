@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["datatype",""],["gateway",""],["http",""],["interpreter",""],["oauth2",""],["ota_plus",""],["package_manager",""],["rvi",""]]});
+initSidebarItems({"mod":[["broadcast",""],["datatype",""],["gateway",""],["http",""],["interpreter",""],["oauth2",""],["package_manager",""],["rvi",""],["sota",""]]});

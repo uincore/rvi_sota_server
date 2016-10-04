@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Sota","Encapsulate the client configuration and HTTP client used for software-over-the-air updates."]]});

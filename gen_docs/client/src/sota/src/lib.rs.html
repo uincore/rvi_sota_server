@@ -67,6 +67,8 @@
 <span id="23">23</span>
 <span id="24">24</span>
 <span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
 </pre><pre class='rust '>
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span> <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>nom</span>; <span class='comment'>// use before log to avoid error!() macro conflict</span>
 
@@ -82,17 +84,19 @@
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rustc_serialize</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>time</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>toml</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>unix_socket</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>url</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>ws</span>;
 
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>broadcast</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>datatype</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>gateway</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>http</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>interpreter</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>oauth2</span>;
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>ota_plus</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>package_manager</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>rvi</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>sota</span>;
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

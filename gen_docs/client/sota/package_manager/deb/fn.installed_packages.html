@@ -47,9 +47,9 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-4650' class='srclink' href='../../../src/sota/src/package_manager/deb.rs.html#9-24' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn installed_packages() -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../../sota/datatype/package/struct.Package.html' title='sota::datatype::package::Package'>Package</a>&gt;,&nbsp;<a class='enum' href='../../../sota/datatype/error/enum.Error.html' title='sota::datatype::error::Error'>Error</a>&gt;</pre><div class='docblock'><p>Returns a list of installed DEB packages with
-<code>dpkg-query -f=&#39;${Package} ${Version}\n -W</code>.</p>
+               </span><a id='src-4955' class='srclink' href='../../../src/sota/src/package_manager/deb.rs.html#9-24' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub fn installed_packages() -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../../sota/datatype/update_request/struct.Package.html' title='sota::datatype::update_request::Package'>Package</a>&gt;,&nbsp;<a class='enum' href='../../../sota/datatype/error/enum.Error.html' title='sota::datatype::error::Error'>Error</a>&gt;</pre><div class='docblock'><p>Returns a list of installed DEB packages with
+<code>dpkg-query -f=&#39;${Package} ${Version}\n&#39; -W</code>.</p>
 </div></section>
     <section id='search' class="content hidden"></section>
 

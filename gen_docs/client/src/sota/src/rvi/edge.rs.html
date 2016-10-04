@@ -191,10 +191,10 @@
 
 <span class='kw'>impl</span> <span class='ident'>Edge</span> {
     <span class='doccomment'>/// Create a new `Edge` by registering each `RVI` service.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='kw-2'>mut</span> <span class='ident'>services</span>: <span class='ident'>Services</span>, <span class='ident'>rvi_edge</span>: <span class='ident'>Url</span>, <span class='ident'>rvi_client</span>: <span class='ident'>Url</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='kw-2'>mut</span> <span class='ident'>services</span>: <span class='ident'>Services</span>, <span class='ident'>rvi_edge</span>: <span class='ident'>String</span>, <span class='ident'>rvi_client</span>: <span class='ident'>Url</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
         <span class='ident'>services</span>.<span class='ident'>register_services</span>(<span class='op'>|</span><span class='ident'>service</span><span class='op'>|</span> {
             <span class='kw'>let</span> <span class='ident'>req</span> <span class='op'>=</span> <span class='ident'>RpcRequest</span>::<span class='ident'>new</span>(<span class='string'>&quot;register_service&quot;</span>, <span class='ident'>RegisterServiceRequest</span> {
-                <span class='ident'>network_address</span>: <span class='ident'>rvi_edge</span>.<span class='ident'>to_string</span>(),
+                <span class='ident'>network_address</span>: <span class='ident'>rvi_edge</span>.<span class='ident'>clone</span>(),
                 <span class='ident'>service</span>:         <span class='ident'>service</span>.<span class='ident'>to_string</span>(),
             });
             <span class='kw'>let</span> <span class='ident'>resp</span> <span class='op'>=</span> <span class='ident'>req</span>.<span class='ident'>send</span>(<span class='ident'>rvi_client</span>.<span class='ident'>clone</span>())
@@ -204,7 +204,7 @@
             <span class='ident'>rpc_ok</span>.<span class='ident'>result</span>.<span class='ident'>expect</span>(<span class='string'>&quot;expected rpc_ok result&quot;</span>).<span class='ident'>service</span>
         });
 
-        <span class='ident'>Edge</span> { <span class='ident'>rvi_edge</span>: <span class='ident'>rvi_edge</span>, <span class='ident'>services</span>: <span class='ident'>services</span> }
+        <span class='ident'>Edge</span> { <span class='ident'>rvi_edge</span>: <span class='ident'>rvi_edge</span>.<span class='ident'>parse</span>().<span class='ident'>expect</span>(<span class='string'>&quot;couldn&#39;t parse edge server as url&quot;</span>), <span class='ident'>services</span>: <span class='ident'>services</span> }
     }
 
     <span class='doccomment'>/// Start the HTTP server listening for incoming RVI client connections.</span>
