@@ -75,7 +75,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Account.html"><span class="name">Account</span></a><span class="params">(<span name="email">email: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="password">password: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="role">role: <a href="Role$.html#Role=org.genivi.webserver.Authentication.Role.Value" class="extmbr" name="org.genivi.webserver.Authentication.Role.Role">Role</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="Account.html"><span class="name">Account</span></a><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="role">role: <a href="Role.html" class="extype" name="org.genivi.webserver.Authentication.Role">Role</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.Authentication.package@AccountextendsProductwithSerializable" title="Permalink" target="_top">
@@ -84,24 +84,146 @@
     </span>
       <p class="shortcomment cmt">Case class for Account
 </p><div class="fullcomment"><div class="comment cmt"><p>Case class for Account
-</p></div><dl class="paramcmts block"><dt class="param">email</dt><dd class="cmt"><p>Account email</p></dd><dt class="param">password</dt><dd class="cmt"><p>Account password</p></dd><dt class="param">name</dt><dd class="cmt"><p>Account name</p></dd><dt class="param">role</dt><dd class="cmt"><p>Account role</p></dd></dl></div>
-    </li><li name="org.genivi.webserver.Authentication.AccountManager" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="AccountManagerextendsAnyRef"></a>
-      <a id="AccountManager:AccountManager"></a>
+</p></div><dl class="paramcmts block"><dt class="param">role</dt><dd class="cmt"><p>Account role</p></dd></dl></div>
+    </li><li name="org.genivi.webserver.Authentication.AuthenticationConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="AuthenticationConfigextendsProductwithSerializable"></a>
+      <a id="AuthenticationConfig:AuthenticationConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="AuthenticationConfig.html"><span class="name">AuthenticationConfig</span></a><span class="params">(<span name="bind">bind: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>) ⇒ <span class="extype" name="com.unboundid.ldap.sdk.BindRequest">BindRequest</span></span>, <span name="userDn">userDn: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="password">password: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.webserver.Authentication.package@AuthenticationConfigextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="org.genivi.webserver.Authentication.AuthenticationFailed" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="AuthenticationFailedextendsThrowablewithProductwithSerializable"></a>
+      <a id="AuthenticationFailed:AuthenticationFailed"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="AuthenticationFailed.html"><span class="name">AuthenticationFailed</span></a><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="cause">cause: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Throwable">Throwable</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Throwable">Throwable</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.webserver.Authentication.package@AuthenticationFailedextendsThrowablewithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="org.genivi.webserver.Authentication.ConnectionConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConnectionConfigextendsProductwithSerializable"></a>
+      <a id="ConnectionConfig:ConnectionConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ConnectionConfig.html"><span class="name">ConnectionConfig</span></a><span class="params">(<span name="host">host: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="port">port: <span class="extype" name="scala.Int">Int</span></span>, <span name="poolSize">poolSize: <span class="extype" name="scala.Int">Int</span></span>, <span name="socketFactory">socketFactory: <span class="extype" name="javax.net.SocketFactory">SocketFactory</span></span>, <span name="bindRequest">bindRequest: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="com.unboundid.ldap.sdk.BindRequest">BindRequest</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.webserver.Authentication.package@ConnectionConfigextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="org.genivi.webserver.Authentication.InMemoryDirectory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="InMemoryDirectoryextendsAnyRef"></a>
+      <a id="InMemoryDirectory:InMemoryDirectory"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="AccountManager.html"><span class="name">AccountManager</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="InMemoryDirectory.html"><span class="name">InMemoryDirectory</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.Authentication.package@AccountManagerextendsAnyRef" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.webserver.Authentication.package@InMemoryDirectoryextendsAnyRef" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Class to find and authenticate accounts, and to read accounts from file.</p>
+      
+    </li><li name="org.genivi.webserver.Authentication.InMemoryDirectoryModule" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="InMemoryDirectoryModuleextendsModule"></a>
+      <a id="InMemoryDirectoryModule:InMemoryDirectoryModule"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="InMemoryDirectoryModule.html"><span class="name">InMemoryDirectoryModule</span></a><span class="result"> extends <span class="extype" name="play.api.inject.Module">Module</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.webserver.Authentication.package@InMemoryDirectoryModuleextendsModule" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="org.genivi.webserver.Authentication.LdapAuth" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="LdapAuthextendsAnyRef"></a>
+      <a id="LdapAuth:LdapAuth"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="LdapAuth.html"><span class="name">LdapAuth</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.webserver.Authentication.package@LdapAuthextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@Singleton</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="org.genivi.webserver.Authentication.Role" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="RoleextendsAnyRef"></a>
+      <a id="Role:Role"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Role.html"><span class="name">Role</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.webserver.Authentication.package@RoleextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="org.genivi.webserver.Authentication.SearchFailed" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SearchFailedextendsThrowablewithProductwithSerializable"></a>
+      <a id="SearchFailed:SearchFailed"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="SearchFailed.html"><span class="name">SearchFailed</span></a><span class="params">(<span name="baseDN">baseDN: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="filter">filter: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="entryCount">entryCount: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Throwable">Throwable</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.webserver.Authentication.package@SearchFailedextendsThrowablewithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li></ol>
             </div>
 
@@ -109,24 +231,40 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="org.genivi.webserver.Authentication.Role" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Role"></a>
-      <a id="Role:Role"></a>
+              <ol><li name="org.genivi.webserver.Authentication.InMemoryDirectory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="InMemoryDirectory"></a>
+      <a id="InMemoryDirectory:InMemoryDirectory"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Role$.html"><span class="name">Role</span></a><span class="result"> extends <span class="extype" name="scala.Enumeration">Enumeration</span></span>
+        <a href="InMemoryDirectory$.html"><span class="name">InMemoryDirectory</span></a>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.Authentication.package@Role" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.webserver.Authentication.package@InMemoryDirectory" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Roles for accounts
-</p>
+      
+    </li><li name="org.genivi.webserver.Authentication.User" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="User"></a>
+      <a id="User:User"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="User$.html"><span class="name">User</span></a><span class="result"> extends <a href="Role.html" class="extype" name="org.genivi.webserver.Authentication.Role">Role</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.webserver.Authentication.package@User" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li></ol>
             </div>
 

@@ -62,7 +62,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -75,7 +75,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -254,7 +254,7 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="org.genivi.sota.resolver.components.ComponentRepository#exists" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="exists(namespace:org.genivi.sota.data.Namespace.Namespace,part:org.genivi.sota.resolver.components.Component.PartNumber)(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[org.genivi.sota.resolver.components.Component]"></a>
+      <a id="exists(namespace:org.genivi.sota.data.Namespace,part:org.genivi.sota.resolver.components.Component.PartNumber)(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[org.genivi.sota.resolver.components.Component]"></a>
       <a id="exists(Namespace,PartNumber)(ExecutionContext):slick.driver.JdbcProfile.API.DBIO[Component]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -262,10 +262,10 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">exists</span><span class="params">(<span name="namespace">namespace: <span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span></span>, <span name="part">part: <a href="Component$.html#PartNumber=eu.timepit.refined.api.Refined[String,org.genivi.sota.resolver.components.Component.ValidPartNumber]" class="extmbr" name="org.genivi.sota.resolver.components.Component.PartNumber">PartNumber</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="slick.lifted.Aliases.DBIO">slick.driver.JdbcProfile.API.DBIO</span>[<a href="Component.html" class="extype" name="org.genivi.sota.resolver.components.Component">Component</a>]</span>
+        <span class="name">exists</span><span class="params">(<span name="namespace">namespace: <span class="extype" name="org.genivi.sota.data.Namespace">Namespace</span></span>, <span name="part">part: <a href="Component$.html#PartNumber=eu.timepit.refined.api.Refined[String,org.genivi.sota.resolver.components.Component.ValidPartNumber]" class="extmbr" name="org.genivi.sota.resolver.components.Component.PartNumber">PartNumber</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="slick.lifted.Aliases.DBIO">slick.driver.JdbcProfile.API.DBIO</span>[<a href="Component.html" class="extype" name="org.genivi.sota.resolver.components.Component">Component</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.resolver.components.ComponentRepository$@exists(namespace:org.genivi.sota.data.Namespace.Namespace,part:org.genivi.sota.resolver.components.Component.PartNumber)(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[org.genivi.sota.resolver.components.Component]" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.resolver.components.ComponentRepository$@exists(namespace:org.genivi.sota.data.Namespace,part:org.genivi.sota.resolver.components.Component.PartNumber)(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[org.genivi.sota.resolver.components.Component]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -327,6 +327,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="org.genivi.sota.resolver.components.ComponentRepository#isInstalled" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="isInstalled(namespace:org.genivi.sota.data.Namespace,part:org.genivi.sota.resolver.components.Component.PartNumber)(implicitdb:slick.driver.MySQLDriver.api.Database,implicitec:scala.concurrent.ExecutionContext):scala.concurrent.Future[Boolean]"></a>
+      <a id="isInstalled(Namespace,PartNumber)(slick.driver.JdbcProfile.API.Database,ExecutionContext):Future[Boolean]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstalled</span><span class="params">(<span name="namespace">namespace: <span class="extype" name="org.genivi.sota.data.Namespace">Namespace</span></span>, <span name="part">part: <a href="Component$.html#PartNumber=eu.timepit.refined.api.Refined[String,org.genivi.sota.resolver.components.Component.ValidPartNumber]" class="extmbr" name="org.genivi.sota.resolver.components.Component.PartNumber">PartNumber</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="db">db: <span class="extype" name="slick.profile.BasicProfile.API.Database">slick.driver.JdbcProfile.API.Database</span></span>, <span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#org.genivi.sota.resolver.components.ComponentRepository$@isInstalled(namespace:org.genivi.sota.data.Namespace,part:org.genivi.sota.resolver.components.Component.PartNumber)(implicitdb:slick.driver.MySQLDriver.api.Database,implicitec:scala.concurrent.ExecutionContext):scala.concurrent.Future[Boolean]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -413,24 +430,24 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="org.genivi.sota.resolver.components.ComponentRepository#removeComponent" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="removeComponent(namespace:org.genivi.sota.data.Namespace.Namespace,part:org.genivi.sota.resolver.components.Component.PartNumber)(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[Int]"></a>
-      <a id="removeComponent(Namespace,PartNumber)(ExecutionContext):slick.driver.JdbcProfile.API.DBIO[Int]"></a>
+      <a id="removeComponent(namespace:org.genivi.sota.data.Namespace,part:org.genivi.sota.resolver.components.Component.PartNumber)(implicitdb:slick.driver.MySQLDriver.api.Database,implicitec:scala.concurrent.ExecutionContext):scala.concurrent.Future[Int]"></a>
+      <a id="removeComponent(Namespace,PartNumber)(slick.driver.JdbcProfile.API.Database,ExecutionContext):Future[Int]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">removeComponent</span><span class="params">(<span name="namespace">namespace: <span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span></span>, <span name="part">part: <a href="Component$.html#PartNumber=eu.timepit.refined.api.Refined[String,org.genivi.sota.resolver.components.Component.ValidPartNumber]" class="extmbr" name="org.genivi.sota.resolver.components.Component.PartNumber">PartNumber</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="slick.lifted.Aliases.DBIO">slick.driver.JdbcProfile.API.DBIO</span>[<span class="extype" name="scala.Int">Int</span>]</span>
+        <span class="name">removeComponent</span><span class="params">(<span name="namespace">namespace: <span class="extype" name="org.genivi.sota.data.Namespace">Namespace</span></span>, <span name="part">part: <a href="Component$.html#PartNumber=eu.timepit.refined.api.Refined[String,org.genivi.sota.resolver.components.Component.ValidPartNumber]" class="extmbr" name="org.genivi.sota.resolver.components.Component.PartNumber">PartNumber</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="db">db: <span class="extype" name="slick.profile.BasicProfile.API.Database">slick.driver.JdbcProfile.API.Database</span></span>, <span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Int">Int</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.resolver.components.ComponentRepository$@removeComponent(namespace:org.genivi.sota.data.Namespace.Namespace,part:org.genivi.sota.resolver.components.Component.PartNumber)(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[Int]" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.resolver.components.ComponentRepository$@removeComponent(namespace:org.genivi.sota.data.Namespace,part:org.genivi.sota.resolver.components.Component.PartNumber)(implicitdb:slick.driver.MySQLDriver.api.Database,implicitec:scala.concurrent.ExecutionContext):scala.concurrent.Future[Int]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       
     </li><li name="org.genivi.sota.resolver.components.ComponentRepository#searchByRegex" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="searchByRegex(namespace:org.genivi.sota.data.Namespace.Namespace,re:eu.timepit.refined.api.Refined[String,eu.timepit.refined.string.Regex]):slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.resolver.components.Component]]"></a>
+      <a id="searchByRegex(namespace:org.genivi.sota.data.Namespace,re:eu.timepit.refined.api.Refined[String,eu.timepit.refined.string.Regex]):slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.resolver.components.Component]]"></a>
       <a id="searchByRegex(Namespace,Refined[String,Regex]):slick.driver.JdbcProfile.API.DBIO[Seq[Component]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -438,10 +455,10 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">searchByRegex</span><span class="params">(<span name="namespace">namespace: <span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span></span>, <span name="re">re: <span class="extype" name="eu.timepit.refined.api.Refined">Refined</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="eu.timepit.refined.string.Regex">Regex</span>]</span>)</span><span class="result">: <span class="extype" name="slick.lifted.Aliases.DBIO">slick.driver.JdbcProfile.API.DBIO</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="Component.html" class="extype" name="org.genivi.sota.resolver.components.Component">Component</a>]]</span>
+        <span class="name">searchByRegex</span><span class="params">(<span name="namespace">namespace: <span class="extype" name="org.genivi.sota.data.Namespace">Namespace</span></span>, <span name="re">re: <span class="extype" name="eu.timepit.refined.api.Refined">Refined</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="eu.timepit.refined.string.Regex">Regex</span>]</span>)</span><span class="result">: <span class="extype" name="slick.lifted.Aliases.DBIO">slick.driver.JdbcProfile.API.DBIO</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="Component.html" class="extype" name="org.genivi.sota.resolver.components.Component">Component</a>]]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.resolver.components.ComponentRepository$@searchByRegex(namespace:org.genivi.sota.data.Namespace.Namespace,re:eu.timepit.refined.api.Refined[String,eu.timepit.refined.string.Regex]):slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.resolver.components.Component]]" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.resolver.components.ComponentRepository$@searchByRegex(namespace:org.genivi.sota.data.Namespace,re:eu.timepit.refined.api.Refined[String,eu.timepit.refined.string.Regex]):slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.resolver.components.Component]]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>

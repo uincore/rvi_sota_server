@@ -62,7 +62,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -75,7 +75,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -97,7 +97,7 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">PackageDownloadProcess</span><span class="params">(<span name="db">db: <span class="extype" name="slick.profile.BasicProfile.CommonAPI.Database">slick.driver.JdbcProfile.API.Database</span></span>, <span name="packageRetrieval">packageRetrieval: <a href="../storage/PackageStorage$.html#PackageRetrievalOp=org.genivi.sota.core.data.Package=&gt;scala.concurrent.Future[akka.http.scaladsl.model.HttpResponse]" class="extmbr" name="org.genivi.sota.core.storage.PackageStorage.PackageRetrievalOp">PackageRetrievalOp</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="system">system: <span class="extype" name="akka.actor.ActorSystem">ActorSystem</span></span>, <span name="mat">mat: <span class="extype" name="akka.stream.ActorMaterializer">ActorMaterializer</span></span>)</span>
+        <span class="name">PackageDownloadProcess</span><span class="params">(<span name="db">db: <span class="extype" name="slick.profile.BasicProfile.API.Database">slick.driver.JdbcProfile.API.Database</span></span>, <span name="packageRetrieval">packageRetrieval: <a href="../storage/PackageStorage$.html#PackageRetrievalOp=org.genivi.sota.core.data.Package=&gt;scala.concurrent.Future[akka.http.scaladsl.model.HttpResponse]" class="extmbr" name="org.genivi.sota.core.storage.PackageStorage.PackageRetrievalOp">PackageRetrievalOp</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="system">system: <span class="extype" name="akka.actor.ActorSystem">ActorSystem</span></span>, <span name="mat">mat: <span class="extype" name="akka.stream.ActorMaterializer">ActorMaterializer</span></span>)</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../index.html#org.genivi.sota.core.transfer.PackageDownloadProcess@&lt;init&gt;(db:slick.driver.MySQLDriver.api.Database,packageRetrieval:org.genivi.sota.core.storage.PackageStorage.PackageRetrievalOp)(implicitsystem:akka.actor.ActorSystem,implicitmat:akka.stream.ActorMaterializer):org.genivi.sota.core.transfer.PackageDownloadProcess" title="Permalink" target="_top">
@@ -182,23 +182,24 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="org.genivi.sota.core.transfer.PackageDownloadProcess#buildClientDownloadResponse" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="buildClientDownloadResponse(vin:org.genivi.sota.data.Vehicle.Vin,updateRequestId:eu.timepit.refined.api.Refined[String,eu.timepit.refined.string.Uuid])(implicitec:scala.concurrent.ExecutionContext):scala.concurrent.Future[akka.http.scaladsl.model.HttpResponse]"></a>
-      <a id="buildClientDownloadResponse(Vin,Refined[String,Uuid])(ExecutionContext):Future[HttpResponse]"></a>
+    </li><li name="org.genivi.sota.core.transfer.PackageDownloadProcess#buildClientDownloadResponse" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="buildClientDownloadResponse(device:org.genivi.sota.data.Uuid,updateRequestId:eu.timepit.refined.api.Refined[String,org.genivi.sota.data.Uuid.Valid])(implicitec:scala.concurrent.ExecutionContext):scala.concurrent.Future[akka.http.scaladsl.model.HttpResponse]"></a>
+      <a id="buildClientDownloadResponse(Uuid,Refined[String,Valid])(ExecutionContext):Future[HttpResponse]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">buildClientDownloadResponse</span><span class="params">(<span name="vin">vin: <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span></span>, <span name="updateRequestId">updateRequestId: <span class="extype" name="eu.timepit.refined.api.Refined">Refined</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="eu.timepit.refined.string.Uuid">Uuid</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="akka.http.scaladsl.model.HttpResponse">HttpResponse</span>]</span>
+        <span class="name">buildClientDownloadResponse</span><span class="params">(<span name="device">device: <span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span></span>, <span name="updateRequestId">updateRequestId: <span class="extype" name="eu.timepit.refined.api.Refined">Refined</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="org.genivi.sota.data.Uuid.Valid">Valid</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="akka.http.scaladsl.model.HttpResponse">HttpResponse</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.transfer.PackageDownloadProcess@buildClientDownloadResponse(vin:org.genivi.sota.data.Vehicle.Vin,updateRequestId:eu.timepit.refined.api.Refined[String,eu.timepit.refined.string.Uuid])(implicitec:scala.concurrent.ExecutionContext):scala.concurrent.Future[akka.http.scaladsl.model.HttpResponse]" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.transfer.PackageDownloadProcess@buildClientDownloadResponse(device:org.genivi.sota.data.Uuid,updateRequestId:eu.timepit.refined.api.Refined[String,org.genivi.sota.data.Uuid.Valid])(implicitec:scala.concurrent.ExecutionContext):scala.concurrent.Future[akka.http.scaladsl.model.HttpResponse]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Retrieves from <span class="extype" name="PackageStorage">PackageStorage</span> the binary file for the package denoted by the argument.</p>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"><ul><li>Retrieves from <span class="extype" name="PackageStorage">PackageStorage</span> the binary file for the package denoted by the argument.</li><li>Rewrites in the DB to <span class="extype" name="UpdateStatus.InFlight">UpdateStatus.InFlight</span> the status of an <span class="extype" name="UpdateSpec">UpdateSpec</span>,
+ie for a (<span class="extype" name="UpdateRequest">UpdateRequest</span>, device) combination.</li></ul></div></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>

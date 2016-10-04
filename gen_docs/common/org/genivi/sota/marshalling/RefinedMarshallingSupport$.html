@@ -50,7 +50,7 @@
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Add Akka HTTP request unmarshalling support for refined types.
-</p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><code><a href="https://github.com/fthomas/refined" target="_blank">https://github.com/fthomas/refined</a></code></p></span><span class="cmt"><p><code><a href="http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0/scala.html" target="_blank">http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0/scala.html</a></code></p></span></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="https://github.com/fthomas/refined" target="_blank">https://github.com/fthomas/refined</a></p></span><span class="cmt"><p><a href="http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0/scala.html" target="_blank">http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0/scala.html</a></p></span></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -63,7 +63,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -76,7 +76,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -346,35 +346,35 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="org.genivi.sota.marshalling.RefinedMarshallingSupport#refinedFromRequestUnmarshaller" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="refinedFromRequestUnmarshaller[T,P](implicitum:akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller[T],implicitp:eu.timepit.refined.Predicate[P,T]):akka.http.scaladsl.unmarshalling.FromRequestUnmarshaller[eu.timepit.refined.Refined[T,P]]"></a>
-      <a id="refinedFromRequestUnmarshaller[T,P](FromEntityUnmarshaller[T],Predicate[P,T]):FromRequestUnmarshaller[Refined[T,P]]"></a>
+      <a id="refinedFromRequestUnmarshaller[T,P](implicitum:akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller[T],implicitp:eu.timepit.refined.api.Validate.Plain[T,P],implicitec:scala.concurrent.ExecutionContext,implicitmat:akka.stream.Materializer):akka.http.scaladsl.unmarshalling.FromRequestUnmarshaller[eu.timepit.refined.api.Refined[T,P]]"></a>
+      <a id="refinedFromRequestUnmarshaller[T,P](FromEntityUnmarshaller[T],Plain[T,P],ExecutionContext,Materializer):FromRequestUnmarshaller[Refined[T,P]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">refinedFromRequestUnmarshaller</span><span class="tparams">[<span name="T">T</span>, <span name="P">P</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="um">um: <span class="extype" name="akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller">FromEntityUnmarshaller</span>[<span class="extype" name="org.genivi.sota.marshalling.RefinedMarshallingSupport.refinedFromRequestUnmarshaller.T">T</span>]</span>, <span name="p">p: <span class="extype" name="eu.timepit.refined.Predicate">Predicate</span>[<span class="extype" name="org.genivi.sota.marshalling.RefinedMarshallingSupport.refinedFromRequestUnmarshaller.P">P</span>, <span class="extype" name="org.genivi.sota.marshalling.RefinedMarshallingSupport.refinedFromRequestUnmarshaller.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.unmarshalling.FromRequestUnmarshaller">FromRequestUnmarshaller</span>[<span class="extype" name="eu.timepit.refined.Refined">Refined</span>[<span class="extype" name="org.genivi.sota.marshalling.RefinedMarshallingSupport.refinedFromRequestUnmarshaller.T">T</span>, <span class="extype" name="org.genivi.sota.marshalling.RefinedMarshallingSupport.refinedFromRequestUnmarshaller.P">P</span>]]</span>
+        <span class="name">refinedFromRequestUnmarshaller</span><span class="tparams">[<span name="T">T</span>, <span name="P">P</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="um">um: <span class="extype" name="akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller">FromEntityUnmarshaller</span>[<span class="extype" name="org.genivi.sota.marshalling.RefinedMarshallingSupport.refinedFromRequestUnmarshaller.T">T</span>]</span>, <span name="p">p: <span class="extype" name="eu.timepit.refined.api.Validate.Plain">Plain</span>[<span class="extype" name="org.genivi.sota.marshalling.RefinedMarshallingSupport.refinedFromRequestUnmarshaller.T">T</span>, <span class="extype" name="org.genivi.sota.marshalling.RefinedMarshallingSupport.refinedFromRequestUnmarshaller.P">P</span>]</span>, <span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="mat">mat: <span class="extype" name="akka.stream.Materializer">Materializer</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.unmarshalling.FromRequestUnmarshaller">FromRequestUnmarshaller</span>[<span class="extype" name="eu.timepit.refined.api.Refined">Refined</span>[<span class="extype" name="org.genivi.sota.marshalling.RefinedMarshallingSupport.refinedFromRequestUnmarshaller.T">T</span>, <span class="extype" name="org.genivi.sota.marshalling.RefinedMarshallingSupport.refinedFromRequestUnmarshaller.P">P</span>]]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.RefinedMarshallingSupport$@refinedFromRequestUnmarshaller[T,P](implicitum:akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller[T],implicitp:eu.timepit.refined.Predicate[P,T]):akka.http.scaladsl.unmarshalling.FromRequestUnmarshaller[eu.timepit.refined.Refined[T,P]]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.RefinedMarshallingSupport$@refinedFromRequestUnmarshaller[T,P](implicitum:akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller[T],implicitp:eu.timepit.refined.api.Validate.Plain[T,P],implicitec:scala.concurrent.ExecutionContext,implicitmat:akka.stream.Materializer):akka.http.scaladsl.unmarshalling.FromRequestUnmarshaller[eu.timepit.refined.api.Refined[T,P]]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       
     </li><li name="org.genivi.sota.marshalling.RefinedMarshallingSupport#refinedUnmarshaller" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="refinedUnmarshaller[P](implicitp:eu.timepit.refined.Predicate[P,String]):akka.http.scaladsl.unmarshalling.FromStringUnmarshaller[eu.timepit.refined.Refined[String,P]]"></a>
-      <a id="refinedUnmarshaller[P](Predicate[P,String]):FromStringUnmarshaller[Refined[String,P]]"></a>
+      <a id="refinedUnmarshaller[P](implicitp:eu.timepit.refined.api.Validate.Plain[String,P]):akka.http.scaladsl.unmarshalling.FromStringUnmarshaller[eu.timepit.refined.api.Refined[String,P]]"></a>
+      <a id="refinedUnmarshaller[P](Plain[String,P]):FromStringUnmarshaller[Refined[String,P]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">refinedUnmarshaller</span><span class="tparams">[<span name="P">P</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="p">p: <span class="extype" name="eu.timepit.refined.Predicate">Predicate</span>[<span class="extype" name="org.genivi.sota.marshalling.RefinedMarshallingSupport.refinedUnmarshaller.P">P</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.unmarshalling.FromStringUnmarshaller">FromStringUnmarshaller</span>[<span class="extype" name="eu.timepit.refined.Refined">Refined</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="org.genivi.sota.marshalling.RefinedMarshallingSupport.refinedUnmarshaller.P">P</span>]]</span>
+        <span class="name">refinedUnmarshaller</span><span class="tparams">[<span name="P">P</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="p">p: <span class="extype" name="eu.timepit.refined.api.Validate.Plain">Plain</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="org.genivi.sota.marshalling.RefinedMarshallingSupport.refinedUnmarshaller.P">P</span>]</span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.unmarshalling.FromStringUnmarshaller">FromStringUnmarshaller</span>[<span class="extype" name="eu.timepit.refined.api.Refined">Refined</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="org.genivi.sota.marshalling.RefinedMarshallingSupport.refinedUnmarshaller.P">P</span>]]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.RefinedMarshallingSupport$@refinedUnmarshaller[P](implicitp:eu.timepit.refined.Predicate[P,String]):akka.http.scaladsl.unmarshalling.FromStringUnmarshaller[eu.timepit.refined.Refined[String,P]]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.RefinedMarshallingSupport$@refinedUnmarshaller[P](implicitp:eu.timepit.refined.api.Validate.Plain[String,P]):akka.http.scaladsl.unmarshalling.FromStringUnmarshaller[eu.timepit.refined.api.Refined[String,P]]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>

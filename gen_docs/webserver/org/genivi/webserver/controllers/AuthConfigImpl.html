@@ -65,7 +65,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -78,7 +78,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -94,7 +94,7 @@
         <div id="types" class="types members">
               <h3>Type Members</h3>
               <ol><li name="org.genivi.webserver.controllers.AuthConfigImpl.Authority" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="Authority=org.genivi.webserver.Authentication.Role.Role"></a>
+      <a id="Authority=org.genivi.webserver.Authentication.Role"></a>
       <a id="Authority:Authority"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -102,10 +102,10 @@
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">Authority</span><span class="result"> = <a href="../Authentication/Role$.html#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="org.genivi.webserver.Authentication.Role.Value">Authentication.Role.Value</a></span>
+        <span class="name">Authority</span><span class="result"> = <a href="../Authentication/Role.html" class="extype" name="org.genivi.webserver.Authentication.Role">Role</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.controllers.AuthConfigImpl@Authority=org.genivi.webserver.Authentication.Role.Role" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.AuthConfigImpl@Authority=org.genivi.webserver.Authentication.Role" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -157,8 +157,8 @@ case object NormalUser extends Role
 
         <div id="values" class="values members">
               <h3>Abstract Value Members</h3>
-              <ol><li name="org.genivi.webserver.controllers.AuthConfigImpl#resolveUser" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="resolveUser(id:AuthConfigImpl.this.Id)(implicitctx:scala.concurrent.ExecutionContext):scala.concurrent.Future[Option[AuthConfigImpl.this.User]]"></a>
+              <ol><li name="jp.t2v.lab.play2.auth.AuthConfig#resolveUser" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="resolveUser(id:AuthConfig.this.Id)(implicitcontext:scala.concurrent.ExecutionContext):scala.concurrent.Future[Option[AuthConfig.this.User]]"></a>
       <a id="resolveUser(Id)(ExecutionContext):Future[Option[User]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -166,16 +166,14 @@ case object NormalUser extends Role
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">resolveUser</span><span class="params">(<span name="id">id: <a href="#Id=String" class="extmbr" name="org.genivi.webserver.controllers.AuthConfigImpl.Id">Id</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ctx">ctx: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Option">Option</span>[<a href="#User=org.genivi.webserver.Authentication.Account" class="extmbr" name="org.genivi.webserver.controllers.AuthConfigImpl.User">User</a>]]</span>
+        <span class="name">resolveUser</span><span class="params">(<span name="id">id: <a href="#Id=String" class="extmbr" name="org.genivi.webserver.controllers.AuthConfigImpl.Id">Id</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Option">Option</span>[<a href="#User=org.genivi.webserver.Authentication.Account" class="extmbr" name="org.genivi.webserver.controllers.AuthConfigImpl.User">User</a>]]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.controllers.AuthConfigImpl@resolveUser(id:AuthConfigImpl.this.Id)(implicitctx:scala.concurrent.ExecutionContext):scala.concurrent.Future[Option[AuthConfigImpl.this.User]]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.AuthConfigImpl@resolveUser(id:AuthConfig.this.Id)(implicitcontext:scala.concurrent.ExecutionContext):scala.concurrent.Future[Option[AuthConfig.this.User]]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">A function that returns a <code>User</code> object from an <code>Id</code>.</p><div class="fullcomment"><div class="comment cmt"><p>A function that returns a <code>User</code> object from an <code>Id</code>.
-You can alter the procedure to suit your application.
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.genivi.webserver.controllers.AuthConfigImpl">AuthConfigImpl</a> → AuthConfig</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AuthConfig</dd></dl></div>
     </li></ol>
             </div>
 
@@ -277,7 +275,7 @@ You can alter the procedure to suit your application.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">authorizationFailed</span><span class="params">(<span name="request">request: <span class="extype" name="play.api.mvc.RequestHeader">RequestHeader</span></span>, <span name="user">user: <a href="#User=org.genivi.webserver.Authentication.Account" class="extmbr" name="org.genivi.webserver.controllers.AuthConfigImpl.User">User</a></span>, <span name="authority">authority: <span class="extype" name="scala.Option">Option</span>[<a href="#Authority=org.genivi.webserver.Authentication.Role.Role" class="extmbr" name="org.genivi.webserver.controllers.AuthConfigImpl.Authority">Authority</a>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="play.api.mvc.Result">Result</span>]</span>
+        <span class="name">authorizationFailed</span><span class="params">(<span name="request">request: <span class="extype" name="play.api.mvc.RequestHeader">RequestHeader</span></span>, <span name="user">user: <a href="#User=org.genivi.webserver.Authentication.Account" class="extmbr" name="org.genivi.webserver.controllers.AuthConfigImpl.User">User</a></span>, <span name="authority">authority: <span class="extype" name="scala.Option">Option</span>[<a href="#Authority=org.genivi.webserver.Authentication.Role" class="extmbr" name="org.genivi.webserver.controllers.AuthConfigImpl.Authority">Authority</a>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="play.api.mvc.Result">Result</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.controllers.AuthConfigImpl@authorizationFailed(request:play.api.mvc.RequestHeader,user:AuthConfigImpl.this.User,authority:Option[AuthConfigImpl.this.Authority])(implicitcontext:scala.concurrent.ExecutionContext):scala.concurrent.Future[play.api.mvc.Result]" title="Permalink" target="_top">
@@ -296,7 +294,7 @@ You can alter the procedure to suit your application.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">authorize</span><span class="params">(<span name="user">user: <a href="#User=org.genivi.webserver.Authentication.Account" class="extmbr" name="org.genivi.webserver.controllers.AuthConfigImpl.User">User</a></span>, <span name="authority">authority: <a href="#Authority=org.genivi.webserver.Authentication.Role.Role" class="extmbr" name="org.genivi.webserver.controllers.AuthConfigImpl.Authority">Authority</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ctx">ctx: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
+        <span class="name">authorize</span><span class="params">(<span name="user">user: <a href="#User=org.genivi.webserver.Authentication.Account" class="extmbr" name="org.genivi.webserver.controllers.AuthConfigImpl.User">User</a></span>, <span name="authority">authority: <a href="#Authority=org.genivi.webserver.Authentication.Role" class="extmbr" name="org.genivi.webserver.controllers.AuthConfigImpl.Authority">Authority</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ctx">ctx: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.controllers.AuthConfigImpl@authorize(user:AuthConfigImpl.this.User,authority:AuthConfigImpl.this.Authority)(implicitctx:scala.concurrent.ExecutionContext):scala.concurrent.Future[Boolean]" title="Permalink" target="_top">

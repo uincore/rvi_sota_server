@@ -28,12 +28,10 @@
         </head>
         <body class="value">
       <div id="definition">
-        <a href="CirceMarshallingSupport.html" title="See companion trait"><img alt="Object/Trait" src="../../../../lib/object_to_trait_big.png" /></a>
+        <img alt="Object" src="../../../../lib/object_big.png" />
         <p id="owner"><a href="../../../package.html" class="extype" name="org">org</a>.<a href="../../package.html" class="extype" name="org.genivi">genivi</a>.<a href="../package.html" class="extype" name="org.genivi.sota">sota</a>.<a href="package.html" class="extype" name="org.genivi.sota.marshalling">marshalling</a></p>
-        <h1><a href="CirceMarshallingSupport.html" title="See companion trait">CirceMarshallingSupport</a></h1><h3><span class="morelinks"><div>
-            Related Docs:
-            <a href="CirceMarshallingSupport.html" title="See companion trait">trait CirceMarshallingSupport</a>
-            | <a href="package.html" class="extype" name="org.genivi.sota.marshalling">package marshalling</a>
+        <h1>CirceMarshallingSupport</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="org.genivi.sota.marshalling">package marshalling</a>
           </div></span></h3><span class="permalink">
       <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
@@ -47,13 +45,13 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">CirceMarshallingSupport</span><span class="result"> extends <a href="CirceMarshallingSupport.html" class="extype" name="org.genivi.sota.marshalling.CirceMarshallingSupport">CirceMarshallingSupport</a> with <a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></span>
+        <span class="name">CirceMarshallingSupport</span><span class="result"> extends <span class="extype" name="de.heikoseeberger.akkahttpcirce.CirceSupport">CirceSupport</span> with <a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a>, <a href="CirceMarshallingSupport.html" class="extype" name="org.genivi.sota.marshalling.CirceMarshallingSupport">CirceMarshallingSupport</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a>, <span class="extype" name="de.heikoseeberger.akkahttpcirce.CirceSupport">CirceSupport</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -64,20 +62,20 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="org.genivi.sota.marshalling.CirceMarshallingSupport"><span>CirceMarshallingSupport</span></li><li class="in" name="org.genivi.sota.marshalling.CirceInstances"><span>CirceInstances</span></li><li class="in" name="org.genivi.sota.marshalling.CirceMarshallingSupport"><span>CirceMarshallingSupport</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="org.genivi.sota.marshalling.CirceMarshallingSupport"><span>CirceMarshallingSupport</span></li><li class="in" name="org.genivi.sota.marshalling.CirceInstances"><span>CirceInstances</span></li><li class="in" name="de.heikoseeberger.akkahttpcirce.CirceSupport"><span>CirceSupport</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -147,6 +145,40 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#anyValUnwrappedEncoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="anyValUnwrappedEncoder[A&lt;:AnyVal,B&lt;:shapeless.HList,C](implicitgen:shapeless.Generic.Aux[A,B],implicithCons:shapeless.ops.hlist.IsHCons.Aux[B,C,shapeless.HNil],implicitwrappedEncoder:io.circe.Encoder[C]):io.circe.Encoder[A]"></a>
+      <a id="anyValUnwrappedEncoder[A&lt;:AnyVal,B&lt;:HList,C](Aux[A,B],Aux[B,C,HNil],Encoder[C]):Encoder[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">anyValUnwrappedEncoder</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="scala.AnyVal">AnyVal</span></span>, <span name="B">B &lt;: <span class="extype" name="shapeless.HList">HList</span></span>, <span name="C">C</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="gen">gen: <span class="extype" name="shapeless.Generic.Aux">Aux</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.anyValUnwrappedEncoder.A">A</span>, <span class="extype" name="org.genivi.sota.marshalling.CirceInstances.anyValUnwrappedEncoder.B">B</span>]</span>, <span name="hCons">hCons: <span class="extype" name="shapeless.ops.hlist.IsHCons.Aux">Aux</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.anyValUnwrappedEncoder.B">B</span>, <span class="extype" name="org.genivi.sota.marshalling.CirceInstances.anyValUnwrappedEncoder.C">C</span>, <span class="extype" name="shapeless.HNil">HNil</span>]</span>, <span name="wrappedEncoder">wrappedEncoder: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.anyValUnwrappedEncoder.C">C</span>]</span>)</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.anyValUnwrappedEncoder.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@anyValUnwrappedEncoder[A&lt;:AnyVal,B&lt;:shapeless.HList,C](implicitgen:shapeless.Generic.Aux[A,B],implicithCons:shapeless.ops.hlist.IsHCons.Aux[B,C,shapeless.HNil],implicitwrappedEncoder:io.circe.Encoder[C]):io.circe.Encoder[A]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#anyValWrapDecoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="anyValWrapDecoder[A&lt;:AnyVal,B&lt;:shapeless.HList,C](implicitgen:shapeless.Generic.Aux[A,B],implicitev:=:=[shapeless.::[C,shapeless.HNil],B],implicitwrappedDecoder:io.circe.Decoder[C]):io.circe.Decoder[A]"></a>
+      <a id="anyValWrapDecoder[A&lt;:AnyVal,B&lt;:HList,C](Aux[A,B],=:=[::[C,HNil],B],Decoder[C]):Decoder[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">anyValWrapDecoder</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="scala.AnyVal">AnyVal</span></span>, <span name="B">B &lt;: <span class="extype" name="shapeless.HList">HList</span></span>, <span name="C">C</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="gen">gen: <span class="extype" name="shapeless.Generic.Aux">Aux</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.anyValWrapDecoder.A">A</span>, <span class="extype" name="org.genivi.sota.marshalling.CirceInstances.anyValWrapDecoder.B">B</span>]</span>, <span name="ev">ev: <span class="extype" name="scala.Predef.=:=">=:=</span>[<span class="extype" name="shapeless.::">::</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.anyValWrapDecoder.C">C</span>, <span class="extype" name="shapeless.HNil">HNil</span>], <span class="extype" name="org.genivi.sota.marshalling.CirceInstances.anyValWrapDecoder.B">B</span>]</span>, <span name="wrappedDecoder">wrappedDecoder: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.anyValWrapDecoder.C">C</span>]</span>)</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.anyValWrapDecoder.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@anyValWrapDecoder[A&lt;:AnyVal,B&lt;:shapeless.HList,C](implicitgen:shapeless.Generic.Aux[A,B],implicitev:=:=[shapeless.::[C,shapeless.HNil],B],implicitwrappedDecoder:io.circe.Decoder[C]):io.circe.Decoder[A]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -164,74 +196,40 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="org.genivi.sota.marshalling.CirceMarshallingSupport#circeFromEntityJsonUnmarshaller" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="circeFromEntityJsonUnmarshaller(implicitmat:akka.stream.Materializer):akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller[io.circe.Json]"></a>
-      <a id="circeFromEntityJsonUnmarshaller(Materializer):FromEntityUnmarshaller[Json]"></a>
+    </li><li name="de.heikoseeberger.akkahttpcirce.CirceSupport#circeToEntityMarshaller" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="circeToEntityMarshaller[A](implicitencoder:io.circe.Encoder[A],implicitprinter:io.circe.Json=&gt;String):akka.http.scaladsl.marshalling.ToEntityMarshaller[A]"></a>
+      <a id="circeToEntityMarshaller[A](Encoder[A],(Json)⇒String):ToEntityMarshaller[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">circeFromEntityJsonUnmarshaller</span><span class="params">(<span class="implicit">implicit </span><span name="mat">mat: <span class="extype" name="akka.stream.Materializer">Materializer</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller">FromEntityUnmarshaller</span>[<span class="extype" name="io.circe.Json">Json</span>]</span>
+        <span class="name">circeToEntityMarshaller</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="encoder">encoder: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="de.heikoseeberger.akkahttpcirce.CirceSupport.circeToEntityMarshaller.A">A</span>]</span>, <span name="printer">printer: (<span class="extype" name="io.circe.Json">Json</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.marshalling.ToEntityMarshaller">ToEntityMarshaller</span>[<span class="extype" name="de.heikoseeberger.akkahttpcirce.CirceSupport.circeToEntityMarshaller.A">A</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@circeFromEntityJsonUnmarshaller(implicitmat:akka.stream.Materializer):akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller[io.circe.Json]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@circeToEntityMarshaller[A](implicitencoder:io.circe.Encoder[A],implicitprinter:io.circe.Json=&gt;String):akka.http.scaladsl.marshalling.ToEntityMarshaller[A]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceMarshallingSupport.html" class="extype" name="org.genivi.sota.marshalling.CirceMarshallingSupport">CirceMarshallingSupport</a></dd></dl></div>
-    </li><li name="org.genivi.sota.marshalling.CirceMarshallingSupport#circeJsonMarshaller" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="circeJsonMarshaller(implicitprinter:io.circe.Printer):akka.http.scaladsl.marshalling.ToEntityMarshaller[io.circe.Json]"></a>
-      <a id="circeJsonMarshaller(Printer):ToEntityMarshaller[Json]"></a>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CirceSupport</dd></dl></div>
+    </li><li name="de.heikoseeberger.akkahttpcirce.CirceSupport#circeUnmarshaller" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="circeUnmarshaller[A](implicitdecoder:io.circe.Decoder[A]):akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller[A]"></a>
+      <a id="circeUnmarshaller[A](Decoder[A]):FromEntityUnmarshaller[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">circeJsonMarshaller</span><span class="params">(<span class="implicit">implicit </span><span name="printer">printer: <span class="extype" name="io.circe.Printer">Printer</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.marshalling.ToEntityMarshaller">ToEntityMarshaller</span>[<span class="extype" name="io.circe.Json">Json</span>]</span>
+        <span class="name">circeUnmarshaller</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="decoder">decoder: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="de.heikoseeberger.akkahttpcirce.CirceSupport.circeUnmarshaller.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller">FromEntityUnmarshaller</span>[<span class="extype" name="de.heikoseeberger.akkahttpcirce.CirceSupport.circeUnmarshaller.A">A</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@circeJsonMarshaller(implicitprinter:io.circe.Printer):akka.http.scaladsl.marshalling.ToEntityMarshaller[io.circe.Json]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@circeUnmarshaller[A](implicitdecoder:io.circe.Decoder[A]):akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller[A]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceMarshallingSupport.html" class="extype" name="org.genivi.sota.marshalling.CirceMarshallingSupport">CirceMarshallingSupport</a></dd></dl></div>
-    </li><li name="org.genivi.sota.marshalling.CirceMarshallingSupport#circeToEntityMarshaller" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="circeToEntityMarshaller[T](implicitencoder:io.circe.Encoder[T],implicitprinter:io.circe.Printer):akka.http.scaladsl.marshalling.ToEntityMarshaller[T]"></a>
-      <a id="circeToEntityMarshaller[T](Encoder[T],Printer):ToEntityMarshaller[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">circeToEntityMarshaller</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="encoder">encoder: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceMarshallingSupport.circeToEntityMarshaller.T">T</span>]</span>, <span name="printer">printer: <span class="extype" name="io.circe.Printer">Printer</span> = <span class="symbol">Printer.noSpaces</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.marshalling.ToEntityMarshaller">ToEntityMarshaller</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceMarshallingSupport.circeToEntityMarshaller.T">T</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@circeToEntityMarshaller[T](implicitencoder:io.circe.Encoder[T],implicitprinter:io.circe.Printer):akka.http.scaladsl.marshalling.ToEntityMarshaller[T]" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceMarshallingSupport.html" class="extype" name="org.genivi.sota.marshalling.CirceMarshallingSupport">CirceMarshallingSupport</a></dd></dl></div>
-    </li><li name="org.genivi.sota.marshalling.CirceMarshallingSupport#circeUnmarshaller" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="circeUnmarshaller[T](implicitdecoder:io.circe.Decoder[T],implicitmat:akka.stream.Materializer):akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller[T]"></a>
-      <a id="circeUnmarshaller[T](Decoder[T],Materializer):FromEntityUnmarshaller[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">circeUnmarshaller</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="decoder">decoder: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceMarshallingSupport.circeUnmarshaller.T">T</span>]</span>, <span name="mat">mat: <span class="extype" name="akka.stream.Materializer">Materializer</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller">FromEntityUnmarshaller</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceMarshallingSupport.circeUnmarshaller.T">T</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@circeUnmarshaller[T](implicitdecoder:io.circe.Decoder[T],implicitmat:akka.stream.Materializer):akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller[T]" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceMarshallingSupport.html" class="extype" name="org.genivi.sota.marshalling.CirceMarshallingSupport">CirceMarshallingSupport</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CirceSupport</dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -255,36 +253,155 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="org.genivi.sota.marshalling.CirceInstances#dateTimeDecoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="dateTimeDecoder:io.circe.Decoder[org.joda.time.DateTime]"></a>
-      <a id="dateTimeDecoder:Decoder[DateTime]"></a>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#customUuidDecoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="customUuidDecoder:io.circe.Decoder[org.genivi.sota.data.Uuid]"></a>
+      <a id="customUuidDecoder:Decoder[Uuid]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">dateTimeDecoder</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.joda.time.DateTime">DateTime</span>]</span>
+        <span class="name">customUuidDecoder</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@dateTimeDecoder:io.circe.Decoder[org.joda.time.DateTime]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@customUuidDecoder:io.circe.Decoder[org.genivi.sota.data.Uuid]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#customUuidEncoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="customUuidEncoder:io.circe.Encoder[org.genivi.sota.data.Uuid]"></a>
+      <a id="customUuidEncoder:Encoder[Uuid]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">customUuidEncoder</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@customUuidEncoder:io.circe.Encoder[org.genivi.sota.data.Uuid]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#customUuidKeyDecoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="customUuidKeyDecoder:io.circe.KeyDecoder[org.genivi.sota.data.Uuid]"></a>
+      <a id="customUuidKeyDecoder:KeyDecoder[Uuid]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">customUuidKeyDecoder</span><span class="result">: <span class="extype" name="io.circe.KeyDecoder">KeyDecoder</span>[<span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@customUuidKeyDecoder:io.circe.KeyDecoder[org.genivi.sota.data.Uuid]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#dateTimeDecoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dateTimeDecoder:io.circe.Decoder[java.time.Instant]"></a>
+      <a id="dateTimeDecoder:Decoder[Instant]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">dateTimeDecoder</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="java.time.Instant">Instant</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@dateTimeDecoder:io.circe.Decoder[java.time.Instant]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
     </li><li name="org.genivi.sota.marshalling.CirceInstances#dateTimeEncoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="dateTimeEncoder:io.circe.Encoder[org.joda.time.DateTime]"></a>
-      <a id="dateTimeEncoder:Encoder[DateTime]"></a>
+      <a id="dateTimeEncoder:io.circe.Encoder[java.time.Instant]"></a>
+      <a id="dateTimeEncoder:Encoder[Instant]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">dateTimeEncoder</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.joda.time.DateTime">DateTime</span>]</span>
+        <span class="name">dateTimeEncoder</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="java.time.Instant">Instant</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@dateTimeEncoder:io.circe.Encoder[org.joda.time.DateTime]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@dateTimeEncoder:io.circe.Encoder[java.time.Instant]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#deviceIdDecoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="deviceIdDecoder:io.circe.Decoder[org.genivi.sota.data.Device.DeviceId]"></a>
+      <a id="deviceIdDecoder:Decoder[DeviceId]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">deviceIdDecoder</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.genivi.sota.data.Device.DeviceId">DeviceId</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@deviceIdDecoder:io.circe.Decoder[org.genivi.sota.data.Device.DeviceId]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#deviceIdEncoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="deviceIdEncoder:io.circe.Encoder[org.genivi.sota.data.Device.DeviceId]"></a>
+      <a id="deviceIdEncoder:Encoder[DeviceId]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">deviceIdEncoder</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.genivi.sota.data.Device.DeviceId">DeviceId</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@deviceIdEncoder:io.circe.Encoder[org.genivi.sota.data.Device.DeviceId]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#deviceNameDecoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="deviceNameDecoder:io.circe.Decoder[org.genivi.sota.data.Device.DeviceName]"></a>
+      <a id="deviceNameDecoder:Decoder[DeviceName]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">deviceNameDecoder</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.genivi.sota.data.Device.DeviceName">DeviceName</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@deviceNameDecoder:io.circe.Decoder[org.genivi.sota.data.Device.DeviceName]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#deviceNameEncoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="deviceNameEncoder:io.circe.Encoder[org.genivi.sota.data.Device.DeviceName]"></a>
+      <a id="deviceNameEncoder:Encoder[DeviceName]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">deviceNameEncoder</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.genivi.sota.data.Device.DeviceName">DeviceName</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@deviceNameEncoder:io.circe.Encoder[org.genivi.sota.data.Device.DeviceName]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -381,7 +498,7 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="org.genivi.sota.marshalling.CirceInstances#intervalDecoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="intervalDecoder:io.circe.Decoder[org.joda.time.Interval]"></a>
+      <a id="intervalDecoder:io.circe.Decoder[org.genivi.sota.data.Interval]"></a>
       <a id="intervalDecoder:Decoder[Interval]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -389,16 +506,16 @@
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">intervalDecoder</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.joda.time.Interval">Interval</span>]</span>
+        <span class="name">intervalDecoder</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.genivi.sota.data.Interval">Interval</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@intervalDecoder:io.circe.Decoder[org.joda.time.Interval]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@intervalDecoder:io.circe.Decoder[org.genivi.sota.data.Interval]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
     </li><li name="org.genivi.sota.marshalling.CirceInstances#intervalEncoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="intervalEncoder:io.circe.Encoder[org.joda.time.Interval]"></a>
+      <a id="intervalEncoder:io.circe.Encoder[org.genivi.sota.data.Interval]"></a>
       <a id="intervalEncoder:Encoder[Interval]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -406,10 +523,10 @@
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">intervalEncoder</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.joda.time.Interval">Interval</span>]</span>
+        <span class="name">intervalEncoder</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.genivi.sota.data.Interval">Interval</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@intervalEncoder:io.circe.Encoder[org.joda.time.Interval]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@intervalEncoder:io.circe.Encoder[org.genivi.sota.data.Interval]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -431,36 +548,36 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="org.genivi.sota.marshalling.CirceInstances#mapDecoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="mapDecoder[K,V](implicitkeyDecoder:io.circe.Decoder[K],implicitvalueDecoder:io.circe.Decoder[V]):io.circe.Decoder[Map[K,V]]"></a>
-      <a id="mapDecoder[K,V](Decoder[K],Decoder[V]):Decoder[Map[K,V]]"></a>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#javaUuidDecoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="javaUuidDecoder:io.circe.Decoder[java.util.UUID]"></a>
+      <a id="javaUuidDecoder:Decoder[UUID]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
-        <span class="kind">def</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">mapDecoder</span><span class="tparams">[<span name="K">K</span>, <span name="V">V</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="keyDecoder">keyDecoder: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.mapDecoder.K">K</span>]</span>, <span name="valueDecoder">valueDecoder: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.mapDecoder.V">V</span>]</span>)</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.mapDecoder.K">K</span>, <span class="extype" name="org.genivi.sota.marshalling.CirceInstances.mapDecoder.V">V</span>]]</span>
+        <span class="name">javaUuidDecoder</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="java.util.UUID">UUID</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@mapDecoder[K,V](implicitkeyDecoder:io.circe.Decoder[K],implicitvalueDecoder:io.circe.Decoder[V]):io.circe.Decoder[Map[K,V]]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@javaUuidDecoder:io.circe.Decoder[java.util.UUID]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
-    </li><li name="org.genivi.sota.marshalling.CirceInstances#mapEncoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="mapEncoder[K,V](implicitkeyEncoder:io.circe.Encoder[K],implicitvalueEncoder:io.circe.Encoder[V]):io.circe.Encoder[Map[K,V]]"></a>
-      <a id="mapEncoder[K,V](Encoder[K],Encoder[V]):Encoder[Map[K,V]]"></a>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#javaUuidEncoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="javaUuidEncoder:io.circe.Encoder[java.util.UUID]"></a>
+      <a id="javaUuidEncoder:Encoder[UUID]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
-        <span class="kind">def</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">mapEncoder</span><span class="tparams">[<span name="K">K</span>, <span name="V">V</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="keyEncoder">keyEncoder: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.mapEncoder.K">K</span>]</span>, <span name="valueEncoder">valueEncoder: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.mapEncoder.V">V</span>]</span>)</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.mapEncoder.K">K</span>, <span class="extype" name="org.genivi.sota.marshalling.CirceInstances.mapEncoder.V">V</span>]]</span>
+        <span class="name">javaUuidEncoder</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="java.util.UUID">UUID</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@mapEncoder[K,V](implicitkeyEncoder:io.circe.Encoder[K],implicitvalueEncoder:io.circe.Encoder[V]):io.circe.Encoder[Map[K,V]]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@javaUuidEncoder:io.circe.Encoder[java.util.UUID]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -516,25 +633,59 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#packageIdDecoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="packageIdDecoder:io.circe.Decoder[org.genivi.sota.data.PackageId]"></a>
+      <a id="packageIdDecoder:Decoder[PackageId]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">packageIdDecoder</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.genivi.sota.data.PackageId">PackageId</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@packageIdDecoder:io.circe.Decoder[org.genivi.sota.data.PackageId]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#packageIdEncoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="packageIdEncoder:io.circe.Encoder[org.genivi.sota.data.PackageId]"></a>
+      <a id="packageIdEncoder:Encoder[PackageId]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">packageIdEncoder</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.genivi.sota.data.PackageId">PackageId</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@packageIdEncoder:io.circe.Encoder[org.genivi.sota.data.PackageId]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
     </li><li name="org.genivi.sota.marshalling.CirceInstances#refinedDecoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="refinedDecoder[T,P](implicitdecoder:io.circe.Decoder[T],implicitpredicate:eu.timepit.refined.Predicate[P,T]):io.circe.Decoder[eu.timepit.refined.Refined[T,P]]"></a>
-      <a id="refinedDecoder[T,P](Decoder[T],Predicate[P,T]):Decoder[Refined[T,P]]"></a>
+      <a id="refinedDecoder[T,P](implicitdecoder:io.circe.Decoder[T],implicitp:eu.timepit.refined.api.Validate.Plain[T,P]):io.circe.Decoder[eu.timepit.refined.api.Refined[T,P]]"></a>
+      <a id="refinedDecoder[T,P](Decoder[T],Plain[T,P]):Decoder[Refined[T,P]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">refinedDecoder</span><span class="tparams">[<span name="T">T</span>, <span name="P">P</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="decoder">decoder: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedDecoder.T">T</span>]</span>, <span name="predicate">predicate: <span class="extype" name="eu.timepit.refined.Predicate">Predicate</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedDecoder.P">P</span>, <span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedDecoder.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="eu.timepit.refined.Refined">Refined</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedDecoder.T">T</span>, <span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedDecoder.P">P</span>]]</span>
+        <span class="name">refinedDecoder</span><span class="tparams">[<span name="T">T</span>, <span name="P">P</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="decoder">decoder: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedDecoder.T">T</span>]</span>, <span name="p">p: <span class="extype" name="eu.timepit.refined.api.Validate.Plain">Plain</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedDecoder.T">T</span>, <span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedDecoder.P">P</span>]</span>)</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="eu.timepit.refined.api.Refined">Refined</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedDecoder.T">T</span>, <span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedDecoder.P">P</span>]]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@refinedDecoder[T,P](implicitdecoder:io.circe.Decoder[T],implicitpredicate:eu.timepit.refined.Predicate[P,T]):io.circe.Decoder[eu.timepit.refined.Refined[T,P]]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@refinedDecoder[T,P](implicitdecoder:io.circe.Decoder[T],implicitp:eu.timepit.refined.api.Validate.Plain[T,P]):io.circe.Decoder[eu.timepit.refined.api.Refined[T,P]]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
     </li><li name="org.genivi.sota.marshalling.CirceInstances#refinedEncoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="refinedEncoder[T,P](implicitencoder:io.circe.Encoder[T]):io.circe.Encoder[eu.timepit.refined.Refined[T,P]]"></a>
+      <a id="refinedEncoder[T,P](implicitencoder:io.circe.Encoder[T]):io.circe.Encoder[eu.timepit.refined.api.Refined[T,P]]"></a>
       <a id="refinedEncoder[T,P](Encoder[T]):Encoder[Refined[T,P]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -542,10 +693,61 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">refinedEncoder</span><span class="tparams">[<span name="T">T</span>, <span name="P">P</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="encoder">encoder: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedEncoder.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="eu.timepit.refined.Refined">Refined</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedEncoder.T">T</span>, <span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedEncoder.P">P</span>]]</span>
+        <span class="name">refinedEncoder</span><span class="tparams">[<span name="T">T</span>, <span name="P">P</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="encoder">encoder: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedEncoder.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="eu.timepit.refined.api.Refined">Refined</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedEncoder.T">T</span>, <span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedEncoder.P">P</span>]]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@refinedEncoder[T,P](implicitencoder:io.circe.Encoder[T]):io.circe.Encoder[eu.timepit.refined.Refined[T,P]]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@refinedEncoder[T,P](implicitencoder:io.circe.Encoder[T]):io.circe.Encoder[eu.timepit.refined.api.Refined[T,P]]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#refinedMapDecoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="refinedMapDecoder[K&lt;:eu.timepit.refined.api.Refined[_,_],V](implicitkeyDecoder:io.circe.Decoder[K],implicitvalueDecoder:io.circe.Decoder[V]):io.circe.Decoder[Map[K,V]]"></a>
+      <a id="refinedMapDecoder[K&lt;:Refined[_,_],V](Decoder[K],Decoder[V]):Decoder[Map[K,V]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">refinedMapDecoder</span><span class="tparams">[<span name="K">K &lt;: <span class="extype" name="eu.timepit.refined.api.Refined">Refined</span>[_, _]</span>, <span name="V">V</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="keyDecoder">keyDecoder: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedMapDecoder.K">K</span>]</span>, <span name="valueDecoder">valueDecoder: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedMapDecoder.V">V</span>]</span>)</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedMapDecoder.K">K</span>, <span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedMapDecoder.V">V</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@refinedMapDecoder[K&lt;:eu.timepit.refined.api.Refined[_,_],V](implicitkeyDecoder:io.circe.Decoder[K],implicitvalueDecoder:io.circe.Decoder[V]):io.circe.Decoder[Map[K,V]]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#refinedMapEncoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="refinedMapEncoder[K&lt;:eu.timepit.refined.api.Refined[_,_],V](implicitkeyEncoder:io.circe.Encoder[K],implicitvalueEncoder:io.circe.Encoder[V]):io.circe.Encoder[Map[K,V]]"></a>
+      <a id="refinedMapEncoder[K&lt;:Refined[_,_],V](Encoder[K],Encoder[V]):Encoder[Map[K,V]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">refinedMapEncoder</span><span class="tparams">[<span name="K">K &lt;: <span class="extype" name="eu.timepit.refined.api.Refined">Refined</span>[_, _]</span>, <span name="V">V</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="keyEncoder">keyEncoder: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedMapEncoder.K">K</span>]</span>, <span name="valueEncoder">valueEncoder: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedMapEncoder.V">V</span>]</span>)</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedMapEncoder.K">K</span>, <span class="extype" name="org.genivi.sota.marshalling.CirceInstances.refinedMapEncoder.V">V</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@refinedMapEncoder[K&lt;:eu.timepit.refined.api.Refined[_,_],V](implicitkeyEncoder:io.circe.Encoder[K],implicitvalueEncoder:io.circe.Encoder[V]):io.circe.Encoder[Map[K,V]]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
+    </li><li name="org.genivi.sota.marshalling.CirceInstances#showableKeyEncoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="showableKeyEncoder[K](implicitshow:cats.Show[K]):io.circe.KeyEncoder[K]"></a>
+      <a id="showableKeyEncoder[K](Show[K]):KeyEncoder[K]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">showableKeyEncoder</span><span class="tparams">[<span name="K">K</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="show">show: <span class="extype" name="cats.Show">Show</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.showableKeyEncoder.K">K</span>]</span>)</span><span class="result">: <span class="extype" name="io.circe.KeyEncoder">KeyEncoder</span>[<span class="extype" name="org.genivi.sota.marshalling.CirceInstances.showableKeyEncoder.K">K</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@showableKeyEncoder[K](implicitshow:cats.Show[K]):io.circe.KeyEncoder[K]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -614,40 +816,6 @@
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@uriEncoder:io.circe.Encoder[akka.http.scaladsl.model.Uri]" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
-    </li><li name="org.genivi.sota.marshalling.CirceInstances#uuidDecoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="uuidDecoder:io.circe.Decoder[java.util.UUID]"></a>
-      <a id="uuidDecoder:Decoder[UUID]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">uuidDecoder</span><span class="result">: <span class="extype" name="io.circe.Decoder">Decoder</span>[<span class="extype" name="java.util.UUID">UUID</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@uuidDecoder:io.circe.Decoder[java.util.UUID]" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></dd></dl></div>
-    </li><li name="org.genivi.sota.marshalling.CirceInstances#uuidEncoder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="uuidEncoder:io.circe.Encoder[java.util.UUID]"></a>
-      <a id="uuidEncoder:Encoder[UUID]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">uuidEncoder</span><span class="result">: <span class="extype" name="io.circe.Encoder">Encoder</span>[<span class="extype" name="java.util.UUID">UUID</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.marshalling.CirceMarshallingSupport$@uuidEncoder:io.circe.Encoder[java.util.UUID]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -732,8 +900,8 @@
         <div id="inheritedMembers">
         <div class="parent" name="org.genivi.sota.marshalling.CirceInstances">
               <h3>Inherited from <a href="CirceInstances.html" class="extype" name="org.genivi.sota.marshalling.CirceInstances">CirceInstances</a></h3>
-            </div><div class="parent" name="org.genivi.sota.marshalling.CirceMarshallingSupport">
-              <h3>Inherited from <a href="CirceMarshallingSupport.html" class="extype" name="org.genivi.sota.marshalling.CirceMarshallingSupport">CirceMarshallingSupport</a></h3>
+            </div><div class="parent" name="de.heikoseeberger.akkahttpcirce.CirceSupport">
+              <h3>Inherited from <span class="extype" name="de.heikoseeberger.akkahttpcirce.CirceSupport">CirceSupport</span></h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">

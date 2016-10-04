@@ -64,7 +64,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -77,7 +77,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -168,18 +168,18 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="org.genivi.sota.core.storage.S3PackageStore#PUBLIC_URL_EXPIRE_TIME" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="PUBLIC_URL_EXPIRE_TIME:org.joda.time.Period"></a>
-      <a id="PUBLIC_URL_EXPIRE_TIME:Period"></a>
+      <a id="PUBLIC_URL_EXPIRE_TIME:java.time.Duration"></a>
+      <a id="PUBLIC_URL_EXPIRE_TIME:Duration"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">PUBLIC_URL_EXPIRE_TIME</span><span class="result">: <span class="extype" name="org.joda.time.Period">Period</span></span>
+        <span class="name">PUBLIC_URL_EXPIRE_TIME</span><span class="result">: <span class="extype" name="java.time.Duration">Duration</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.storage.S3PackageStore@PUBLIC_URL_EXPIRE_TIME:org.joda.time.Period" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.storage.S3PackageStore@PUBLIC_URL_EXPIRE_TIME:java.time.Duration" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -349,6 +349,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="org.genivi.sota.core.storage.S3PackageStore#log" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="log:org.slf4j.Logger"></a>
+      <a id="log:Logger"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">log</span><span class="result">: <span class="extype" name="org.slf4j.Logger">Logger</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#org.genivi.sota.core.storage.S3PackageStore@log:org.slf4j.Logger" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="org.genivi.sota.core.storage.S3PackageStore#mat" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="mat:akka.stream.ActorMaterializer"></a>
       <a id="mat:ActorMaterializer"></a>
@@ -486,18 +503,18 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
     </li><li name="org.genivi.sota.core.storage.S3PackageStore#store" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="store(packageId:org.genivi.sota.data.PackageId,fileData:akka.http.scaladsl.common.StrictForm.FileData):scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize,org.genivi.sota.core.DigestCalculator.DigestResult)]"></a>
-      <a id="store(PackageId,FileData):Future[(Uri,PackageSize,DigestResult)]"></a>
+      <a id="store(packageId:org.genivi.sota.data.PackageId,filename:String,fileData:akka.stream.scaladsl.Source[akka.util.ByteString,Any]):scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize,org.genivi.sota.core.DigestCalculator.DigestResult)]"></a>
+      <a id="store(PackageId,String,Source[ByteString,Any]):Future[(Uri,PackageSize,DigestResult)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">store</span><span class="params">(<span name="packageId">packageId: <span class="extype" name="org.genivi.sota.data.PackageId">PackageId</span></span>, <span name="fileData">fileData: <span class="extype" name="akka.http.scaladsl.common.StrictForm.FileData">FileData</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[(<span class="extype" name="akka.http.scaladsl.model.Uri">Uri</span>, <a href="PackageStorage$.html#PackageSize=Long" class="extmbr" name="org.genivi.sota.core.storage.PackageStorage.PackageSize">PackageSize</a>, <a href="../DigestCalculator$.html#DigestResult=String" class="extmbr" name="org.genivi.sota.core.DigestCalculator.DigestResult">DigestResult</a>)]</span>
+        <span class="name">store</span><span class="params">(<span name="packageId">packageId: <span class="extype" name="org.genivi.sota.data.PackageId">PackageId</span></span>, <span name="filename">filename: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fileData">fileData: <span class="extype" name="akka.stream.scaladsl.Source">Source</span>[<span class="extype" name="akka.util.ByteString">ByteString</span>, <span class="extype" name="scala.Any">Any</span>]</span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[(<span class="extype" name="akka.http.scaladsl.model.Uri">Uri</span>, <a href="PackageStorage$.html#PackageSize=Long" class="extmbr" name="org.genivi.sota.core.storage.PackageStorage.PackageSize">PackageSize</a>, <a href="../DigestCalculator$.html#DigestResult=String" class="extmbr" name="org.genivi.sota.core.DigestCalculator.DigestResult">DigestResult</a>)]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.storage.S3PackageStore@store(packageId:org.genivi.sota.data.PackageId,fileData:akka.http.scaladsl.common.StrictForm.FileData):scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize,org.genivi.sota.core.DigestCalculator.DigestResult)]" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.storage.S3PackageStore@store(packageId:org.genivi.sota.data.PackageId,filename:String,fileData:akka.stream.scaladsl.Source[akka.util.ByteString,Any]):scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize,org.genivi.sota.core.DigestCalculator.DigestResult)]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -554,18 +571,18 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="org.genivi.sota.core.storage.S3PackageStore#upload" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="upload(is:java.io.InputStream,fileName:String,fileData:akka.http.scaladsl.common.StrictForm.FileData):scala.concurrent.Future[(akka.http.scaladsl.model.Uri,Long)]"></a>
-      <a id="upload(InputStream,String,FileData):Future[(Uri,Long)]"></a>
+      <a id="upload(file:java.io.File,fileName:String,fileData:akka.stream.scaladsl.Source[akka.util.ByteString,Any]):scala.concurrent.Future[(akka.http.scaladsl.model.Uri,Long)]"></a>
+      <a id="upload(File,String,Source[ByteString,Any]):Future[(Uri,Long)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">upload</span><span class="params">(<span name="is">is: <span class="extype" name="java.io.InputStream">InputStream</span></span>, <span name="fileName">fileName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fileData">fileData: <span class="extype" name="akka.http.scaladsl.common.StrictForm.FileData">FileData</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[(<span class="extype" name="akka.http.scaladsl.model.Uri">Uri</span>, <span class="extype" name="scala.Long">Long</span>)]</span>
+        <span class="name">upload</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="fileName">fileName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fileData">fileData: <span class="extype" name="akka.stream.scaladsl.Source">Source</span>[<span class="extype" name="akka.util.ByteString">ByteString</span>, <span class="extype" name="scala.Any">Any</span>]</span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[(<span class="extype" name="akka.http.scaladsl.model.Uri">Uri</span>, <span class="extype" name="scala.Long">Long</span>)]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.storage.S3PackageStore@upload(is:java.io.InputStream,fileName:String,fileData:akka.http.scaladsl.common.StrictForm.FileData):scala.concurrent.Future[(akka.http.scaladsl.model.Uri,Long)]" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.storage.S3PackageStore@upload(file:java.io.File,fileName:String,fileData:akka.stream.scaladsl.Source[akka.util.ByteString,Any]):scala.concurrent.Future[(akka.http.scaladsl.model.Uri,Long)]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>

@@ -45,11 +45,14 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">InstallHistoryTable</span><span class="result"> extends <span class="extype" name="slick.profile.RelationalProfile.CommonAPI.Table">slick.driver.JdbcProfile.API.Table</span>[<a href="../data/InstallHistory.html" class="extype" name="org.genivi.sota.core.data.InstallHistory">InstallHistory</a>]</span>
+        <span class="name">InstallHistoryTable</span><span class="result"> extends <span class="extype" name="slick.profile.RelationalProfile.API.Table">slick.driver.JdbcProfile.API.Table</span>[<a href="../data/InstallHistory.html" class="extype" name="org.genivi.sota.core.data.InstallHistory">InstallHistory</a>]</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Slick mapping definition for the InstallHistory table</p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="http://slick.typesafe.com/" target="_blank">http://slick.typesafe.com/</a></p></span></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A log of update installs attempted on a device.
+Each logged row includes the <span class="extype" name="UpdateRequest">UpdateRequest</span> identity, device id, time of attempt
+and whether the install was successful.
+</p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="slick.profile.RelationalTableComponent.Table">slick.driver.MySQLDriver.Table</span>[<a href="../data/InstallHistory.html" class="extype" name="org.genivi.sota.core.data.InstallHistory">InstallHistory</a>], <span class="extype" name="slick.lifted.AbstractTable">AbstractTable</span>[<a href="../data/InstallHistory.html" class="extype" name="org.genivi.sota.core.data.InstallHistory">InstallHistory</a>], <span class="extype" name="slick.lifted.Rep">Rep</span>[<a href="../data/InstallHistory.html" class="extype" name="org.genivi.sota.core.data.InstallHistory">InstallHistory</a>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -62,7 +65,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -75,7 +78,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -294,18 +297,18 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Table</dd></dl></div>
     </li><li name="org.genivi.sota.core.db.InstallHistories.InstallHistoryTable#completionTime" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="completionTime:slick.lifted.Rep[org.joda.time.DateTime]"></a>
-      <a id="completionTime:Rep[DateTime]"></a>
+      <a id="completionTime:slick.lifted.Rep[java.time.Instant]"></a>
+      <a id="completionTime:Rep[Instant]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">completionTime</span><span class="result">: <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="org.joda.time.DateTime">DateTime</span>]</span>
+        <span class="name">completionTime</span><span class="result">: <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="java.time.Instant">Instant</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.db.InstallHistories$$InstallHistoryTable@completionTime:slick.lifted.Rep[org.joda.time.DateTime]" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.db.InstallHistories$$InstallHistoryTable@completionTime:slick.lifted.Rep[java.time.Instant]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -327,6 +330,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AbstractTable</dd></dl></div>
+    </li><li name="org.genivi.sota.core.db.InstallHistories.InstallHistoryTable#device" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="device:slick.lifted.Rep[org.genivi.sota.data.Uuid]"></a>
+      <a id="device:Rep[Uuid]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">device</span><span class="result">: <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#org.genivi.sota.core.db.InstallHistories$$InstallHistoryTable@device:slick.lifted.Rep[org.genivi.sota.data.Uuid]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="slick.lifted.AbstractTable#encodeRef" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="encodeRef(path:slick.ast.Node):slick.lifted.AbstractTable[T]"></a>
       <a id="encodeRef(Node):AbstractTable[InstallHistory]"></a>
@@ -537,23 +557,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="org.genivi.sota.core.db.InstallHistories.InstallHistoryTable#namespace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="namespace:slick.lifted.Rep[org.genivi.sota.data.Namespace.Namespace]"></a>
-      <a id="namespace:Rep[Namespace]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">namespace</span><span class="result">: <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.db.InstallHistories$$InstallHistoryTable@namespace:slick.lifted.Rep[org.genivi.sota.data.Namespace.Namespace]" title="Permalink" target="_top">
-        <img src="../../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -605,36 +608,19 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="org.genivi.sota.core.db.InstallHistories.InstallHistoryTable#packageName" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="packageName:slick.lifted.Rep[org.genivi.sota.data.PackageId.Name]"></a>
-      <a id="packageName:Rep[Name]"></a>
+    </li><li name="org.genivi.sota.core.db.InstallHistories.InstallHistoryTable#packageUuid" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="packageUuid:slick.lifted.Rep[java.util.UUID]"></a>
+      <a id="packageUuid:Rep[UUID]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">packageName</span><span class="result">: <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="org.genivi.sota.data.PackageId.Name">Name</span>]</span>
+        <span class="name">packageUuid</span><span class="result">: <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="java.util.UUID">UUID</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.db.InstallHistories$$InstallHistoryTable@packageName:slick.lifted.Rep[org.genivi.sota.data.PackageId.Name]" title="Permalink" target="_top">
-        <img src="../../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="org.genivi.sota.core.db.InstallHistories.InstallHistoryTable#packageVersion" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="packageVersion:slick.lifted.Rep[org.genivi.sota.data.PackageId.Version]"></a>
-      <a id="packageVersion:Rep[Version]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">packageVersion</span><span class="result">: <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="org.genivi.sota.data.PackageId.Version">Version</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.db.InstallHistories$$InstallHistoryTable@packageVersion:slick.lifted.Rep[org.genivi.sota.data.PackageId.Version]" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.db.InstallHistories$$InstallHistoryTable@packageUuid:slick.lifted.Rep[java.util.UUID]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -877,6 +863,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Rep → AnyRef → Any</dd></dl></div>
+    </li><li name="org.genivi.sota.core.db.InstallHistories.InstallHistoryTable#tuple" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="tuple:(slick.lifted.Rep[Option[Long]],slick.lifted.Rep[org.genivi.sota.data.Uuid],slick.lifted.Rep[java.util.UUID],slick.lifted.Rep[java.util.UUID],slick.lifted.Rep[Boolean],slick.lifted.Rep[java.time.Instant])"></a>
+      <a id="tuple:(Rep[Option[Long]],Rep[Uuid],Rep[UUID],Rep[UUID],Rep[Boolean],Rep[Instant])"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tuple</span><span class="result">: (<span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Long">Long</span>]], <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span>], <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="java.util.UUID">UUID</span>], <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="java.util.UUID">UUID</span>], <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="scala.Boolean">Boolean</span>], <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="java.time.Instant">Instant</span>])</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#org.genivi.sota.core.db.InstallHistories$$InstallHistoryTable@tuple:(slick.lifted.Rep[Option[Long]],slick.lifted.Rep[org.genivi.sota.data.Uuid],slick.lifted.Rep[java.util.UUID],slick.lifted.Rep[java.util.UUID],slick.lifted.Rep[Boolean],slick.lifted.Rep[java.time.Instant])" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="org.genivi.sota.core.db.InstallHistories.InstallHistoryTable#updateId" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="updateId:slick.lifted.Rep[java.util.UUID]"></a>
       <a id="updateId:Rep[UUID]"></a>
@@ -890,23 +893,6 @@
       </span>
       </h4><span class="permalink">
       <a href="../../../../../index.html#org.genivi.sota.core.db.InstallHistories$$InstallHistoryTable@updateId:slick.lifted.Rep[java.util.UUID]" title="Permalink" target="_top">
-        <img src="../../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="org.genivi.sota.core.db.InstallHistories.InstallHistoryTable#vin" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="vin:slick.lifted.Rep[org.genivi.sota.data.Vehicle.Vin]"></a>
-      <a id="vin:Rep[Vin]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">vin</span><span class="result">: <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.db.InstallHistories$$InstallHistoryTable@vin:slick.lifted.Rep[org.genivi.sota.data.Vehicle.Vin]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>

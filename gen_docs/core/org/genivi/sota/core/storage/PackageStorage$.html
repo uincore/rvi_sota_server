@@ -64,7 +64,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -77,7 +77,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -127,7 +127,7 @@
     </span>
       
     </li><li name="org.genivi.sota.core.storage.PackageStorage.PackageStorageOp" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="PackageStorageOp=(org.genivi.sota.data.PackageId,akka.http.scaladsl.common.StrictForm.FileData)=&gt;scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize,org.genivi.sota.core.DigestCalculator.DigestResult)]"></a>
+      <a id="PackageStorageOp=(org.genivi.sota.data.PackageId,String,akka.stream.scaladsl.Source[akka.util.ByteString,Any])=&gt;scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize,org.genivi.sota.core.DigestCalculator.DigestResult)]"></a>
       <a id="PackageStorageOp:PackageStorageOp"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -135,10 +135,10 @@
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">PackageStorageOp</span><span class="result"> = (<span class="extype" name="org.genivi.sota.data.PackageId">PackageId</span>, <span class="extype" name="akka.http.scaladsl.common.StrictForm.FileData">FileData</span>) ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[(<span class="extype" name="akka.http.scaladsl.model.Uri">Uri</span>, <a href="#PackageSize=Long" class="extmbr" name="org.genivi.sota.core.storage.PackageStorage.PackageSize">PackageSize</a>, <a href="../DigestCalculator$.html#DigestResult=String" class="extmbr" name="org.genivi.sota.core.DigestCalculator.DigestResult">DigestResult</a>)]</span>
+        <span class="name">PackageStorageOp</span><span class="result"> = (<span class="extype" name="org.genivi.sota.data.PackageId">PackageId</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="akka.stream.scaladsl.Source">Source</span>[<span class="extype" name="akka.util.ByteString">ByteString</span>, <span class="extype" name="scala.Any">Any</span>]) ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[(<span class="extype" name="akka.http.scaladsl.model.Uri">Uri</span>, <a href="#PackageSize=Long" class="extmbr" name="org.genivi.sota.core.storage.PackageStorage.PackageSize">PackageSize</a>, <a href="../DigestCalculator$.html#DigestResult=String" class="extmbr" name="org.genivi.sota.core.DigestCalculator.DigestResult">DigestResult</a>)]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.storage.PackageStorage$@PackageStorageOp=(org.genivi.sota.data.PackageId,akka.http.scaladsl.common.StrictForm.FileData)=&gt;scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize,org.genivi.sota.core.DigestCalculator.DigestResult)]" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.storage.PackageStorage$@PackageStorageOp=(org.genivi.sota.data.PackageId,String,akka.stream.scaladsl.Source[akka.util.ByteString,Any])=&gt;scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize,org.genivi.sota.core.DigestCalculator.DigestResult)]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -400,23 +400,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="org.genivi.sota.core.storage.PackageStorage#packageFileName" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="packageFileName(packageId:org.genivi.sota.data.PackageId,providedFilename:Option[String]):String"></a>
-      <a id="packageFileName(PackageId,Option[String]):String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">packageFileName</span><span class="params">(<span name="packageId">packageId: <span class="extype" name="org.genivi.sota.data.PackageId">PackageId</span></span>, <span name="providedFilename">providedFilename: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.storage.PackageStorage$@packageFileName(packageId:org.genivi.sota.data.PackageId,providedFilename:Option[String]):String" title="Permalink" target="_top">
-        <img src="../../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="package.html" class="extype" name="org.genivi.sota.core.storage">org.genivi.sota.core.storage</a>] </dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -521,18 +504,18 @@
               
         </dd></dl></div>
     </li><li name="org.genivi.sota.core.storage.PackageStorage#writePackage" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="writePackage(packageId:org.genivi.sota.data.PackageId,fileData:akka.stream.scaladsl.Source[akka.util.ByteString,akka.NotUsed],sink:akka.stream.scaladsl.Sink[akka.util.ByteString,scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize)]])(implicitsystem:akka.actor.ActorSystem,implicitmat:akka.stream.ActorMaterializer):scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize,org.genivi.sota.core.DigestCalculator.DigestResult)]"></a>
-      <a id="writePackage(PackageId,Source[ByteString,NotUsed],Sink[ByteString,Future[(Uri,PackageSize)]])(ActorSystem,ActorMaterializer):Future[(Uri,PackageSize,DigestResult)]"></a>
+      <a id="writePackage(packageId:org.genivi.sota.data.PackageId,fileData:akka.stream.scaladsl.Source[akka.util.ByteString,Any],sink:akka.stream.scaladsl.Sink[akka.util.ByteString,scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize)]])(implicitsystem:akka.actor.ActorSystem,implicitmat:akka.stream.ActorMaterializer):scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize,org.genivi.sota.core.DigestCalculator.DigestResult)]"></a>
+      <a id="writePackage(PackageId,Source[ByteString,Any],Sink[ByteString,Future[(Uri,PackageSize)]])(ActorSystem,ActorMaterializer):Future[(Uri,PackageSize,DigestResult)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">writePackage</span><span class="params">(<span name="packageId">packageId: <span class="extype" name="org.genivi.sota.data.PackageId">PackageId</span></span>, <span name="fileData">fileData: <span class="extype" name="akka.stream.scaladsl.Source">Source</span>[<span class="extype" name="akka.util.ByteString">ByteString</span>, <span class="extype" name="akka.NotUsed">NotUsed</span>]</span>, <span name="sink">sink: <span class="extype" name="akka.stream.scaladsl.Sink">Sink</span>[<span class="extype" name="akka.util.ByteString">ByteString</span>, <span class="extype" name="scala.concurrent.Future">Future</span>[(<span class="extype" name="akka.http.scaladsl.model.Uri">Uri</span>, <a href="#PackageSize=Long" class="extmbr" name="org.genivi.sota.core.storage.PackageStorage.PackageSize">PackageSize</a>)]]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="system">system: <span class="extype" name="akka.actor.ActorSystem">ActorSystem</span></span>, <span name="mat">mat: <span class="extype" name="akka.stream.ActorMaterializer">ActorMaterializer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[(<span class="extype" name="akka.http.scaladsl.model.Uri">Uri</span>, <a href="#PackageSize=Long" class="extmbr" name="org.genivi.sota.core.storage.PackageStorage.PackageSize">PackageSize</a>, <a href="../DigestCalculator$.html#DigestResult=String" class="extmbr" name="org.genivi.sota.core.DigestCalculator.DigestResult">DigestResult</a>)]</span>
+        <span class="name">writePackage</span><span class="params">(<span name="packageId">packageId: <span class="extype" name="org.genivi.sota.data.PackageId">PackageId</span></span>, <span name="fileData">fileData: <span class="extype" name="akka.stream.scaladsl.Source">Source</span>[<span class="extype" name="akka.util.ByteString">ByteString</span>, <span class="extype" name="scala.Any">Any</span>]</span>, <span name="sink">sink: <span class="extype" name="akka.stream.scaladsl.Sink">Sink</span>[<span class="extype" name="akka.util.ByteString">ByteString</span>, <span class="extype" name="scala.concurrent.Future">Future</span>[(<span class="extype" name="akka.http.scaladsl.model.Uri">Uri</span>, <a href="#PackageSize=Long" class="extmbr" name="org.genivi.sota.core.storage.PackageStorage.PackageSize">PackageSize</a>)]]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="system">system: <span class="extype" name="akka.actor.ActorSystem">ActorSystem</span></span>, <span name="mat">mat: <span class="extype" name="akka.stream.ActorMaterializer">ActorMaterializer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[(<span class="extype" name="akka.http.scaladsl.model.Uri">Uri</span>, <a href="#PackageSize=Long" class="extmbr" name="org.genivi.sota.core.storage.PackageStorage.PackageSize">PackageSize</a>, <a href="../DigestCalculator$.html#DigestResult=String" class="extmbr" name="org.genivi.sota.core.DigestCalculator.DigestResult">DigestResult</a>)]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.storage.PackageStorage$@writePackage(packageId:org.genivi.sota.data.PackageId,fileData:akka.stream.scaladsl.Source[akka.util.ByteString,akka.NotUsed],sink:akka.stream.scaladsl.Sink[akka.util.ByteString,scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize)]])(implicitsystem:akka.actor.ActorSystem,implicitmat:akka.stream.ActorMaterializer):scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize,org.genivi.sota.core.DigestCalculator.DigestResult)]" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.storage.PackageStorage$@writePackage(packageId:org.genivi.sota.data.PackageId,fileData:akka.stream.scaladsl.Source[akka.util.ByteString,Any],sink:akka.stream.scaladsl.Sink[akka.util.ByteString,scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize)]])(implicitsystem:akka.actor.ActorSystem,implicitmat:akka.stream.ActorMaterializer):scala.concurrent.Future[(akka.http.scaladsl.model.Uri,org.genivi.sota.core.storage.PackageStorage.PackageSize,org.genivi.sota.core.DigestCalculator.DigestResult)]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>

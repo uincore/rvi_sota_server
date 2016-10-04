@@ -63,7 +63,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -76,7 +76,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -90,7 +90,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="org.genivi.sota.resolver.resolve.ResolveDirectives#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;()(implicitsystem:akka.actor.ActorSystem,implicitdb:slick.jdbc.JdbcBackend.Database,implicitmat:akka.stream.ActorMaterializer,implicitec:scala.concurrent.ExecutionContext):org.genivi.sota.resolver.resolve.ResolveDirectives"></a>
+      <a id="&lt;init&gt;(namespaceExtractor:akka.http.scaladsl.server.Directive1[org.genivi.sota.data.Namespace],deviceRegistry:org.genivi.sota.common.DeviceRegistry)(implicitsystem:akka.actor.ActorSystem,implicitdb:slick.driver.MySQLDriver.api.Database,implicitmat:akka.stream.ActorMaterializer,implicitec:scala.concurrent.ExecutionContext):org.genivi.sota.resolver.resolve.ResolveDirectives"></a>
       <a id="&lt;init&gt;:ResolveDirectives"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -98,10 +98,10 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">ResolveDirectives</span><span class="params">()</span><span class="params">(<span class="implicit">implicit </span><span name="system">system: <span class="extype" name="akka.actor.ActorSystem">ActorSystem</span></span>, <span name="db">db: <span class="extype" name="slick.jdbc.JdbcBackend.Database">slick.jdbc.JdbcBackend.Database</span></span>, <span name="mat">mat: <span class="extype" name="akka.stream.ActorMaterializer">ActorMaterializer</span></span>, <span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span>
+        <span class="name">ResolveDirectives</span><span class="params">(<span name="namespaceExtractor">namespaceExtractor: <span class="extype" name="akka.http.scaladsl.server.Directive1">Directive1</span>[<span class="extype" name="org.genivi.sota.data.Namespace">Namespace</span>]</span>, <span name="deviceRegistry">deviceRegistry: <span class="extype" name="org.genivi.sota.common.DeviceRegistry">DeviceRegistry</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="system">system: <span class="extype" name="akka.actor.ActorSystem">ActorSystem</span></span>, <span name="db">db: <span class="extype" name="slick.profile.BasicProfile.API.Database">slick.driver.JdbcProfile.API.Database</span></span>, <span name="mat">mat: <span class="extype" name="akka.stream.ActorMaterializer">ActorMaterializer</span></span>, <span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.resolver.resolve.ResolveDirectives@&lt;init&gt;()(implicitsystem:akka.actor.ActorSystem,implicitdb:slick.jdbc.JdbcBackend.Database,implicitmat:akka.stream.ActorMaterializer,implicitec:scala.concurrent.ExecutionContext):org.genivi.sota.resolver.resolve.ResolveDirectives" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.resolver.resolve.ResolveDirectives@&lt;init&gt;(namespaceExtractor:akka.http.scaladsl.server.Directive1[org.genivi.sota.data.Namespace],deviceRegistry:org.genivi.sota.common.DeviceRegistry)(implicitsystem:akka.actor.ActorSystem,implicitdb:slick.driver.MySQLDriver.api.Database,implicitmat:akka.stream.ActorMaterializer,implicitec:scala.concurrent.ExecutionContext):org.genivi.sota.resolver.resolve.ResolveDirectives" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -166,6 +166,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="org.genivi.sota.resolver.resolve.ResolveDirectives#NamespaceUnmarshaller" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NamespaceUnmarshaller:akka.http.scaladsl.unmarshalling.FromStringUnmarshaller[org.genivi.sota.data.Namespace]"></a>
+      <a id="NamespaceUnmarshaller:FromStringUnmarshaller[Namespace]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">NamespaceUnmarshaller</span><span class="result">: <span class="extype" name="akka.http.scaladsl.unmarshalling.FromStringUnmarshaller">FromStringUnmarshaller</span>[<span class="extype" name="org.genivi.sota.data.Namespace">Namespace</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#org.genivi.sota.resolver.resolve.ResolveDirectives@NamespaceUnmarshaller:akka.http.scaladsl.unmarshalling.FromStringUnmarshaller[org.genivi.sota.data.Namespace]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -366,7 +383,7 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="org.genivi.sota.resolver.resolve.ResolveDirectives#resolvePackage" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="resolvePackage(ns:org.genivi.sota.data.Namespace.Namespace,id:org.genivi.sota.data.PackageId):akka.http.scaladsl.server.Route"></a>
+      <a id="resolvePackage(ns:org.genivi.sota.data.Namespace,id:org.genivi.sota.data.PackageId):akka.http.scaladsl.server.Route"></a>
       <a id="resolvePackage(Namespace,PackageId):Route"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -374,15 +391,15 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">resolvePackage</span><span class="params">(<span name="ns">ns: <span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span></span>, <span name="id">id: <span class="extype" name="org.genivi.sota.data.PackageId">PackageId</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Route">Route</span></span>
+        <span class="name">resolvePackage</span><span class="params">(<span name="ns">ns: <span class="extype" name="org.genivi.sota.data.Namespace">Namespace</span></span>, <span name="id">id: <span class="extype" name="org.genivi.sota.data.PackageId">PackageId</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Route">Route</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.resolver.resolve.ResolveDirectives@resolvePackage(ns:org.genivi.sota.data.Namespace.Namespace,id:org.genivi.sota.data.PackageId):akka.http.scaladsl.server.Route" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.resolver.resolve.ResolveDirectives@resolvePackage(ns:org.genivi.sota.data.Namespace,id:org.genivi.sota.data.PackageId):akka.http.scaladsl.server.Route" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       
-    </li><li name="org.genivi.sota.resolver.resolve.ResolveDirectives#route" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="org.genivi.sota.resolver.resolve.ResolveDirectives#route" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="route:akka.http.scaladsl.server.Route"></a>
       <a id="route:Route"></a>
       <h4 class="signature">
@@ -398,7 +415,7 @@
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">API route for resolving a package, i.e.</p><div class="fullcomment"><div class="comment cmt"><p>API route for resolving a package, i.e. returning the list of VINs it applies to.</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Route object containing route for package resolution</p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt"><p><span class="extype" name="Errors.MissingPackageException"><code>Errors.MissingPackageException</code></span> if the package doesn't exist</p></span></dd></dl></div>
+      
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

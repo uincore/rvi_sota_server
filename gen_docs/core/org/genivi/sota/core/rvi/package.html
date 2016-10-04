@@ -66,7 +66,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="org.genivi.sota.core.rvi.ChunksReceived" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="org.genivi.sota.core.rvi.ChunksReceived" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ChunksReceivedextendsProductwithSerializable"></a>
       <a id="ChunksReceived:ChunksReceived"></a>
       <h4 class="signature">
@@ -75,14 +75,15 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="ChunksReceived.html"><span class="name">ChunksReceived</span></a><span class="params">(<span name="vin">vin: <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span></span>, <span name="update_id">update_id: <span class="extype" name="java.util.UUID">UUID</span></span>, <span name="chunks">chunks: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="ChunksReceived.html"><span class="name">ChunksReceived</span></a><span class="params">(<span name="device">device: <span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span></span>, <span name="update_id">update_id: <span class="extype" name="java.util.UUID">UUID</span></span>, <span name="chunks">chunks: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../index.html#org.genivi.sota.core.rvi.package@ChunksReceivedextendsProductwithSerializable" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">The <span class="extype" name="ConnectivityClient">ConnectivityClient</span> notifies which chunks it received for THE package being transferred.</p><div class="fullcomment"><div class="comment cmt"><p>The <span class="extype" name="ConnectivityClient">ConnectivityClient</span> notifies which chunks it received for THE package being transferred.
+</p></div><dl class="paramcmts block"><dt class="param">update_id</dt><dd class="cmt"><p>of the <span class="extype" name="UpdateRequest">UpdateRequest</span></p></dd></dl></div>
     </li><li name="org.genivi.sota.core.rvi.ClientServices" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ClientServicesextendsProductwithSerializable"></a>
       <a id="ClientServices:ClientServices"></a>
@@ -100,7 +101,7 @@
       </a>
     </span>
       <p class="shortcomment cmt">RVI paths for client-side services.</p>
-    </li><li name="org.genivi.sota.core.rvi.Finish" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="org.genivi.sota.core.rvi.Finish" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="FinishextendsProductwithSerializable"></a>
       <a id="Finish:Finish"></a>
       <h4 class="signature">
@@ -116,7 +117,8 @@
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Sent by <a href="PackageTransferActor.html" class="extype" name="org.genivi.sota.core.rvi.PackageTransferActor">PackageTransferActor</a> to the <span class="extype" name="ConnectivityClient">ConnectivityClient</span> (step 3 of 3) to indicate all chunks sent.</p><div class="fullcomment"><div class="comment cmt"><p>Sent by <a href="PackageTransferActor.html" class="extype" name="org.genivi.sota.core.rvi.PackageTransferActor">PackageTransferActor</a> to the <span class="extype" name="ConnectivityClient">ConnectivityClient</span> (step 3 of 3) to indicate all chunks sent.
+</p></div><dl class="paramcmts block"><dt class="param">signature</dt><dd class="cmt"><p>Signature of the <span class="extype" name="UpdateRequest">UpdateRequest</span>. Not the <span class="extype" name="Package.signature">Package.signature</span>.</p></dd></dl></div>
     </li><li name="org.genivi.sota.core.rvi.InstallReport" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="InstallReportextendsProductwithSerializable"></a>
       <a id="InstallReport:InstallReport"></a>
@@ -126,7 +128,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="InstallReport.html"><span class="name">InstallReport</span></a><span class="params">(<span name="vin">vin: <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span></span>, <span name="update_report">update_report: <a href="UpdateReport.html" class="extype" name="org.genivi.sota.core.rvi.UpdateReport">UpdateReport</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="InstallReport.html"><span class="name">InstallReport</span></a><span class="params">(<span name="device">device: <span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span></span>, <span name="update_report">update_report: <a href="UpdateReport.html" class="extype" name="org.genivi.sota.core.rvi.UpdateReport">UpdateReport</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../index.html#org.genivi.sota.core.rvi.package@InstallReportextendsProductwithSerializable" title="Permalink" target="_top">
@@ -143,7 +145,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="InstalledPackages.html"><span class="name">InstalledPackages</span></a><span class="params">(<span name="vin">vin: <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span></span>, <span name="installed_software">installed_software: <span class="extype" name="io.circe.Json">Json</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="InstalledPackages.html"><span class="name">InstalledPackages</span></a><span class="params">(<span name="device">device: <span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span></span>, <span name="installed_software">installed_software: <span class="extype" name="io.circe.Json">Json</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../index.html#org.genivi.sota.core.rvi.package@InstalledPackagesextendsProductwithSerializable" title="Permalink" target="_top">
@@ -177,7 +179,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="OperationResult.html"><span class="name">OperationResult</span></a><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="result_code">result_code: <span class="extype" name="scala.Int">Int</span></span>, <span name="result_text">result_text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="OperationResult.html"><span class="name">OperationResult</span></a><span class="params">(<span name="id">id: <span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span></span>, <span name="result_code">result_code: <span class="extype" name="scala.Int">Int</span></span>, <span name="result_text">result_text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../index.html#org.genivi.sota.core.rvi.package@OperationResultextendsProductwithSerializable" title="Permalink" target="_top">
@@ -185,7 +187,7 @@
       </a>
     </span>
       
-    </li><li name="org.genivi.sota.core.rvi.PackageChunk" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="org.genivi.sota.core.rvi.PackageChunk" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="PackageChunkextendsProductwithSerializable"></a>
       <a id="PackageChunk:PackageChunk"></a>
       <h4 class="signature">
@@ -201,7 +203,7 @@
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Sent by <a href="PackageTransferActor.html" class="extype" name="org.genivi.sota.core.rvi.PackageTransferActor">PackageTransferActor</a> to the <span class="extype" name="ConnectivityClient">ConnectivityClient</span> (step 2 of 3) to transfer a chunk.</p><div class="fullcomment"><div class="comment cmt"><p>Sent by <a href="PackageTransferActor.html" class="extype" name="org.genivi.sota.core.rvi.PackageTransferActor">PackageTransferActor</a> to the <span class="extype" name="ConnectivityClient">ConnectivityClient</span> (step 2 of 3) to transfer a chunk.</p></div><dl class="paramcmts block"><dt class="param">index</dt><dd class="cmt"><p>is 1-based</p></dd></dl></div>
     </li><li name="org.genivi.sota.core.rvi.PackageTransferActor" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="PackageTransferActorextendsActorwithActorLogging"></a>
       <a id="PackageTransferActor:PackageTransferActor"></a>
@@ -218,7 +220,7 @@
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Actor to handle transferring chunks to a vehicle.</p>
+      <p class="shortcomment cmt">Actor to handle transferring chunks of a single <span class="extype" name="Package">Package</span> to a vehicle.</p>
     </li><li name="org.genivi.sota.core.rvi.RviConnectivity" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RviConnectivityextendsConnectivity"></a>
       <a id="RviConnectivity:RviConnectivity"></a>
@@ -304,7 +306,7 @@ can/should be updated.</p>
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">HTTP endpoints for receiving messages from the RVI node.</p>
+      <p class="shortcomment cmt">HTTP endpoints for receideviceg messages from the RVI node.</p>
     </li><li name="org.genivi.sota.core.rvi.StartDownload" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="StartDownloadextendsProductwithSerializable"></a>
       <a id="StartDownload:StartDownload"></a>
@@ -314,7 +316,7 @@ can/should be updated.</p>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="StartDownload.html"><span class="name">StartDownload</span></a><span class="params">(<span name="vin">vin: <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span></span>, <span name="update_id">update_id: <span class="extype" name="java.util.UUID">UUID</span></span>, <span name="services">services: <a href="ClientServices.html" class="extype" name="org.genivi.sota.core.rvi.ClientServices">ClientServices</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="StartDownload.html"><span class="name">StartDownload</span></a><span class="params">(<span name="device">device: <span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span></span>, <span name="update_id">update_id: <span class="extype" name="java.util.UUID">UUID</span></span>, <span name="services">services: <a href="ClientServices.html" class="extype" name="org.genivi.sota.core.rvi.ClientServices">ClientServices</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../index.html#org.genivi.sota.core.rvi.package@StartDownloadextendsProductwithSerializable" title="Permalink" target="_top">
@@ -338,7 +340,8 @@ can/should be updated.</p>
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Sent by <a href="PackageTransferActor.html" class="extype" name="org.genivi.sota.core.rvi.PackageTransferActor">PackageTransferActor</a> to the <span class="extype" name="ConnectivityClient">ConnectivityClient</span> (step 1 of 3)
+to indicate chunks are ready to be downloaded.</p>
     </li><li name="org.genivi.sota.core.rvi.TransferProtocolActor" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="TransferProtocolActorextendsActorwithActorLogging"></a>
       <a id="TransferProtocolActor:TransferProtocolActor"></a>
@@ -374,7 +377,7 @@ can/should be updated.</p>
     </span>
       <p class="shortcomment cmt">Actor to handle events received from the RVI node.</p><div class="fullcomment"><div class="comment cmt"><p>Actor to handle events received from the RVI node.
 </p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p>SotaServices</p></span></dd></dl></div>
-    </li><li name="org.genivi.sota.core.rvi.UpdateReport" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="org.genivi.sota.core.rvi.UpdateReport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="UpdateReportextendsProductwithSerializable"></a>
       <a id="UpdateReport:UpdateReport"></a>
       <h4 class="signature">
@@ -390,7 +393,7 @@ can/should be updated.</p>
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">update_id</dt><dd class="cmt"><p>id of the <span class="extype" name="UpdateRequest">UpdateRequest</span> this report describes</p></dd></dl></div>
     </li></ol>
             </div>
 

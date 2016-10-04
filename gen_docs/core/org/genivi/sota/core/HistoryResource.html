@@ -62,7 +62,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -75,7 +75,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -89,7 +89,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="org.genivi.sota.core.HistoryResource#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(db:slick.driver.MySQLDriver.api.Database)(implicitsystem:akka.actor.ActorSystem):org.genivi.sota.core.HistoryResource"></a>
+      <a id="&lt;init&gt;(namespaceExtractor:akka.http.scaladsl.server.Directive1[org.genivi.sota.data.Namespace])(implicitdb:slick.driver.MySQLDriver.api.Database,implicitsystem:akka.actor.ActorSystem):org.genivi.sota.core.HistoryResource"></a>
       <a id="&lt;init&gt;:HistoryResource"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -97,10 +97,10 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">HistoryResource</span><span class="params">(<span name="db">db: <span class="extype" name="slick.profile.BasicProfile.CommonAPI.Database">slick.driver.JdbcProfile.API.Database</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="system">system: <span class="extype" name="akka.actor.ActorSystem">ActorSystem</span></span>)</span>
+        <span class="name">HistoryResource</span><span class="params">(<span name="namespaceExtractor">namespaceExtractor: <span class="extype" name="akka.http.scaladsl.server.Directive1">Directive1</span>[<span class="extype" name="org.genivi.sota.data.Namespace">Namespace</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="db">db: <span class="extype" name="slick.profile.BasicProfile.API.Database">slick.driver.JdbcProfile.API.Database</span></span>, <span name="system">system: <span class="extype" name="akka.actor.ActorSystem">ActorSystem</span></span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@&lt;init&gt;(db:slick.driver.MySQLDriver.api.Database)(implicitsystem:akka.actor.ActorSystem):org.genivi.sota.core.HistoryResource" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@&lt;init&gt;(namespaceExtractor:akka.http.scaladsl.server.Directive1[org.genivi.sota.data.Namespace])(implicitdb:slick.driver.MySQLDriver.api.Database,implicitsystem:akka.actor.ActorSystem):org.genivi.sota.core.HistoryResource" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -406,6 +406,159 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>PathMatchers</dd></dl></div>
+    </li><li name="akka.http.scaladsl.server.directives.FileAndResourceDirectives#_defaultClassLoader" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_defaultClassLoader:ClassLoader"></a>
+      <a id="_defaultClassLoader:ClassLoader"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_defaultClassLoader</span><span class="result">: <span class="extype" name="java.lang.ClassLoader">ClassLoader</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@_defaultClassLoader:ClassLoader" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../akka/http.html" class="extype" name="akka.http">akka.http</a>] </dd><dt>Definition Classes</dt><dd>FileAndResourceDirectives</dd></dl></div>
+    </li><li name="akka.http.scaladsl.server.RouteConcatenation#_enhanceRouteWithConcatenation" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_enhanceRouteWithConcatenation(route:akka.http.scaladsl.server.Route):akka.http.scaladsl.server.RouteConcatenation.RouteWithConcatenation"></a>
+      <a id="_enhanceRouteWithConcatenation(Route):RouteWithConcatenation"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_enhanceRouteWithConcatenation</span><span class="params">(<span name="route">route: <span class="extype" name="akka.http.scaladsl.server.Route">Route</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.RouteConcatenation.RouteWithConcatenation">RouteWithConcatenation</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@_enhanceRouteWithConcatenation(route:akka.http.scaladsl.server.Route):akka.http.scaladsl.server.RouteConcatenation.RouteWithConcatenation" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>RouteConcatenation</dd></dl></div>
+    </li><li name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction#_regex2PathMatcher" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_regex2PathMatcher(regex:scala.util.matching.Regex):akka.http.scaladsl.server.PathMatcher1[String]"></a>
+      <a id="_regex2PathMatcher(Regex):PathMatcher1[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_regex2PathMatcher</span><span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.PathMatcher1">PathMatcher1</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@_regex2PathMatcher(regex:scala.util.matching.Regex):akka.http.scaladsl.server.PathMatcher1[String]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ImplicitPathMatcherConstruction</dd></dl></div>
+    </li><li name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction#_segmentStringToPathMatcher" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_segmentStringToPathMatcher(segment:String):akka.http.scaladsl.server.PathMatcher0"></a>
+      <a id="_segmentStringToPathMatcher(String):PathMatcher0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_segmentStringToPathMatcher</span><span class="params">(<span name="segment">segment: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.PathMatcher0">PathMatcher0</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@_segmentStringToPathMatcher(segment:String):akka.http.scaladsl.server.PathMatcher0" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ImplicitPathMatcherConstruction</dd></dl></div>
+    </li><li name="akka.http.scaladsl.common.ToNameReceptacleEnhancements#_string2NR" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_string2NR(string:String):akka.http.scaladsl.common.NameReceptacle[String]"></a>
+      <a id="_string2NR(String):NameReceptacle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_string2NR</span><span class="params">(<span name="string">string: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.common.NameReceptacle">NameReceptacle</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@_string2NR(string:String):akka.http.scaladsl.common.NameReceptacle[String]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ToNameReceptacleEnhancements</dd></dl></div>
+    </li><li name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction#_stringExtractionPair2PathMatcher" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_stringExtractionPair2PathMatcher[T](tuple:(String,T)):akka.http.scaladsl.server.PathMatcher1[T]"></a>
+      <a id="_stringExtractionPair2PathMatcher[T]((String,T)):PathMatcher1[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_stringExtractionPair2PathMatcher</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="tuple">tuple: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction._stringExtractionPair2PathMatcher.T">T</span>)</span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.PathMatcher1">PathMatcher1</span>[<span class="extype" name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction._stringExtractionPair2PathMatcher.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@_stringExtractionPair2PathMatcher[T](tuple:(String,T)):akka.http.scaladsl.server.PathMatcher1[T]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ImplicitPathMatcherConstruction</dd></dl></div>
+    </li><li name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction#_stringNameOptionReceptacle2PathMatcher" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_stringNameOptionReceptacle2PathMatcher(nr:akka.http.scaladsl.common.NameOptionReceptacle[String]):akka.http.scaladsl.server.PathMatcher0"></a>
+      <a id="_stringNameOptionReceptacle2PathMatcher(NameOptionReceptacle[String]):PathMatcher0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_stringNameOptionReceptacle2PathMatcher</span><span class="params">(<span name="nr">nr: <span class="extype" name="akka.http.scaladsl.common.NameOptionReceptacle">NameOptionReceptacle</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.PathMatcher0">PathMatcher0</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@_stringNameOptionReceptacle2PathMatcher(nr:akka.http.scaladsl.common.NameOptionReceptacle[String]):akka.http.scaladsl.server.PathMatcher0" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ImplicitPathMatcherConstruction</dd></dl></div>
+    </li><li name="akka.http.scaladsl.common.ToNameReceptacleEnhancements#_symbol2NR" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_symbol2NR(symbol:Symbol):akka.http.scaladsl.common.NameReceptacle[String]"></a>
+      <a id="_symbol2NR(Symbol):NameReceptacle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_symbol2NR</span><span class="params">(<span name="symbol">symbol: <span class="extype" name="scala.Symbol">Symbol</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.common.NameReceptacle">NameReceptacle</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@_symbol2NR(symbol:Symbol):akka.http.scaladsl.common.NameReceptacle[String]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ToNameReceptacleEnhancements</dd></dl></div>
+    </li><li name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction#_valueMap2PathMatcher" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_valueMap2PathMatcher[T](valueMap:Map[String,T]):akka.http.scaladsl.server.PathMatcher1[T]"></a>
+      <a id="_valueMap2PathMatcher[T](Map[String,T]):PathMatcher1[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_valueMap2PathMatcher</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="valueMap">valueMap: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction._valueMap2PathMatcher.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.PathMatcher1">PathMatcher1</span>[<span class="extype" name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction._valueMap2PathMatcher.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@_valueMap2PathMatcher[T](valueMap:Map[String,T]):akka.http.scaladsl.server.PathMatcher1[T]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ImplicitPathMatcherConstruction</dd></dl></div>
     </li><li name="akka.http.scaladsl.server.directives.MarshallingDirectives#as" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="as[T](implicitum:akka.http.scaladsl.unmarshalling.FromRequestUnmarshaller[T]):akka.http.scaladsl.unmarshalling.FromRequestUnmarshaller[T]"></a>
       <a id="as[T](FromRequestUnmarshaller[T]):FromRequestUnmarshaller[T]"></a>
@@ -729,23 +882,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BasicDirectives</dd></dl></div>
-    </li><li name="akka.http.scaladsl.server.directives.SecurityDirectives#challengeFor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="challengeFor(realm:String):akka.http.scaladsl.model.headers.HttpChallenge"></a>
-      <a id="challengeFor(String):HttpChallenge"></a>
+    </li><li name="akka.http.scaladsl.server.directives.HeaderDirectives#checkSameOrigin" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkSameOrigin(allowed:akka.http.scaladsl.model.headers.HttpOriginRange):akka.http.scaladsl.server.Directive0"></a>
+      <a id="checkSameOrigin(HttpOriginRange):Directive0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">challengeFor</span><span class="params">(<span name="realm">realm: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.model.headers.HttpChallenge">HttpChallenge</span></span>
+        <span class="name">checkSameOrigin</span><span class="params">(<span name="allowed">allowed: <span class="extype" name="akka.http.scaladsl.model.headers.HttpOriginRange">HttpOriginRange</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Directive0">Directive0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@challengeFor(realm:String):akka.http.scaladsl.model.headers.HttpChallenge" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@checkSameOrigin(allowed:akka.http.scaladsl.model.headers.HttpOriginRange):akka.http.scaladsl.server.Directive0" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>SecurityDirectives</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>HeaderDirectives</dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -973,23 +1126,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CodingDirectives</dd></dl></div>
-    </li><li name="akka.http.scaladsl.server.directives.FileAndResourceDirectives#defaultClassLoader" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="defaultClassLoader:ClassLoader"></a>
-      <a id="defaultClassLoader:ClassLoader"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">defaultClassLoader</span><span class="result">: <span class="extype" name="java.lang.ClassLoader">ClassLoader</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@defaultClassLoader:ClassLoader" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../akka/http.html" class="extype" name="akka.http">akka.http</a>] </dd><dt>Definition Classes</dt><dd>FileAndResourceDirectives</dd></dl></div>
     </li><li name="akka.http.scaladsl.server.directives.MethodDirectives#delete" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="delete:akka.http.scaladsl.server.Directive0"></a>
       <a id="delete:Directive0"></a>
@@ -1075,23 +1211,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CodingDirectives</dd></dl></div>
-    </li><li name="akka.http.scaladsl.server.RouteConcatenation#enhanceRouteWithConcatenation" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="enhanceRouteWithConcatenation(route:akka.http.scaladsl.server.Route):akka.http.scaladsl.server.RouteConcatenation.RouteWithConcatenation"></a>
-      <a id="enhanceRouteWithConcatenation(Route):RouteWithConcatenation"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">enhanceRouteWithConcatenation</span><span class="params">(<span name="route">route: <span class="extype" name="akka.http.scaladsl.server.Route">Route</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.RouteConcatenation.RouteWithConcatenation">RouteWithConcatenation</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@enhanceRouteWithConcatenation(route:akka.http.scaladsl.server.Route):akka.http.scaladsl.server.RouteConcatenation.RouteWithConcatenation" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>RouteConcatenation</dd></dl></div>
     </li><li name="akka.http.scaladsl.server.directives.MarshallingDirectives#entity" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="entity[T](um:akka.http.scaladsl.unmarshalling.FromRequestUnmarshaller[T]):akka.http.scaladsl.server.Directive1[T]"></a>
       <a id="entity[T](FromRequestUnmarshaller[T]):Directive1[T]"></a>
@@ -1194,6 +1313,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>SecurityDirectives</dd></dl></div>
+    </li><li name="akka.http.scaladsl.server.directives.BasicDirectives#extractDataBytes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="extractDataBytes:akka.http.scaladsl.server.Directive1[akka.stream.scaladsl.Source[akka.util.ByteString,Any]]"></a>
+      <a id="extractDataBytes:Directive1[Source[ByteString,Any]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">extractDataBytes</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Directive1">Directive1</span>[<span class="extype" name="akka.stream.scaladsl.Source">Source</span>[<span class="extype" name="akka.util.ByteString">ByteString</span>, <span class="extype" name="scala.Any">Any</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@extractDataBytes:akka.http.scaladsl.server.Directive1[akka.stream.scaladsl.Source[akka.util.ByteString,Any]]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BasicDirectives</dd></dl></div>
     </li><li name="akka.http.scaladsl.server.directives.BasicDirectives#extractExecutionContext" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="extractExecutionContext:akka.http.scaladsl.server.Directive1[scala.concurrent.ExecutionContextExecutor]"></a>
       <a id="extractExecutionContext:Directive1[ExecutionContextExecutor]"></a>
@@ -1343,6 +1479,23 @@
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@extractRequestContext:akka.http.scaladsl.server.Directive1[akka.http.scaladsl.server.RequestContext]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BasicDirectives</dd></dl></div>
+    </li><li name="akka.http.scaladsl.server.directives.BasicDirectives#extractRequestEntity" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="extractRequestEntity:akka.http.scaladsl.server.Directive1[akka.http.scaladsl.model.RequestEntity]"></a>
+      <a id="extractRequestEntity:Directive1[RequestEntity]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">extractRequestEntity</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Directive1">Directive1</span>[<span class="extype" name="akka.http.scaladsl.model.RequestEntity">RequestEntity</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@extractRequestEntity:akka.http.scaladsl.server.Directive1[akka.http.scaladsl.model.RequestEntity]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -1983,22 +2136,22 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>HeaderDirectives</dd></dl></div>
     </li><li name="org.genivi.sota.core.HistoryResource#history" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="history(ns:org.genivi.sota.data.Namespace.Namespace,vin:org.genivi.sota.data.Vehicle.Vin):akka.http.scaladsl.server.Route"></a>
-      <a id="history(Namespace,Vin):Route"></a>
+      <a id="history(device:org.genivi.sota.data.Uuid):akka.http.scaladsl.server.Route"></a>
+      <a id="history(Uuid):Route"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">history</span><span class="params">(<span name="ns">ns: <span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span></span>, <span name="vin">vin: <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Route">Route</span></span>
+        <span class="name">history</span><span class="params">(<span name="device">device: <span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Route">Route</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@history(ns:org.genivi.sota.data.Namespace.Namespace,vin:org.genivi.sota.data.Vehicle.Vin):akka.http.scaladsl.server.Route" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@history(device:org.genivi.sota.data.Uuid):akka.http.scaladsl.server.Route" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">An ota client GET all install attempts, a Seq of <span class="extype" name="InstallHistory">InstallHistory</span>, for the given VIN
+      <p class="shortcomment cmt">A web app GET all install attempts, a Seq of <span class="extype" name="InstallHistory">InstallHistory</span>, for the given device
 </p>
     </li><li name="akka.http.scaladsl.server.directives.HostDirectives#host" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="host(regex:scala.util.matching.Regex):akka.http.scaladsl.server.Directive1[String]"></a>
@@ -2489,6 +2642,23 @@
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@onComplete[T](future:=&gt;scala.concurrent.Future[T]):akka.http.scaladsl.server.Directive1[scala.util.Try[T]]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FutureDirectives</dd></dl></div>
+    </li><li name="akka.http.scaladsl.server.directives.FutureDirectives#onCompleteWithBreaker" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="onCompleteWithBreaker[T](breaker:akka.pattern.CircuitBreaker)(future:=&gt;scala.concurrent.Future[T]):akka.http.scaladsl.server.Directive1[scala.util.Try[T]]"></a>
+      <a id="onCompleteWithBreaker[T](CircuitBreaker)(⇒Future[T]):Directive1[Try[T]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">onCompleteWithBreaker</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="breaker">breaker: <span class="extype" name="akka.pattern.CircuitBreaker">CircuitBreaker</span></span>)</span><span class="params">(<span name="future">future: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="akka.http.scaladsl.server.directives.FutureDirectives.onCompleteWithBreaker.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Directive1">Directive1</span>[<span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="akka.http.scaladsl.server.directives.FutureDirectives.onCompleteWithBreaker.T">T</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@onCompleteWithBreaker[T](breaker:akka.pattern.CircuitBreaker)(future:=&gt;scala.concurrent.Future[T]):akka.http.scaladsl.server.Directive1[scala.util.Try[T]]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -3071,23 +3241,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>PathDirectives</dd></dl></div>
-    </li><li name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction#regex2PathMatcher" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="regex2PathMatcher(regex:scala.util.matching.Regex):akka.http.scaladsl.server.PathMatcher1[String]"></a>
-      <a id="regex2PathMatcher(Regex):PathMatcher1[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">regex2PathMatcher</span><span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.PathMatcher1">PathMatcher1</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@regex2PathMatcher(regex:scala.util.matching.Regex):akka.http.scaladsl.server.PathMatcher1[String]" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ImplicitPathMatcherConstruction</dd></dl></div>
     </li><li name="akka.http.scaladsl.server.directives.RouteDirectives#reject" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="reject(rejections:akka.http.scaladsl.server.Rejection*):akka.http.scaladsl.server.StandardRoute"></a>
       <a id="reject(Rejection*):StandardRoute"></a>
@@ -3343,23 +3496,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>SchemeDirectives</dd></dl></div>
-    </li><li name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction#segmentStringToPathMatcher" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="segmentStringToPathMatcher(segment:String):akka.http.scaladsl.server.PathMatcher0"></a>
-      <a id="segmentStringToPathMatcher(String):PathMatcher0"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">segmentStringToPathMatcher</span><span class="params">(<span name="segment">segment: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.PathMatcher0">PathMatcher0</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@segmentStringToPathMatcher(segment:String):akka.http.scaladsl.server.PathMatcher0" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ImplicitPathMatcherConstruction</dd></dl></div>
     </li><li name="akka.http.scaladsl.server.directives.MiscDirectives#selectPreferredLanguage" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="selectPreferredLanguage(first:akka.http.scaladsl.model.headers.Language,more:akka.http.scaladsl.model.headers.Language*):akka.http.scaladsl.server.Directive1[akka.http.scaladsl.model.headers.Language]"></a>
       <a id="selectPreferredLanguage(Language,Language*):Directive1[Language]"></a>
@@ -3411,74 +3547,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CookieDirectives</dd></dl></div>
-    </li><li name="akka.http.scaladsl.common.ToNameReceptacleEnhancements#string2NR" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="string2NR(string:String):akka.http.scaladsl.common.NameReceptacle[String]"></a>
-      <a id="string2NR(String):NameReceptacle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">string2NR</span><span class="params">(<span name="string">string: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.common.NameReceptacle">NameReceptacle</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@string2NR(string:String):akka.http.scaladsl.common.NameReceptacle[String]" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ToNameReceptacleEnhancements</dd></dl></div>
-    </li><li name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction#stringExtractionPair2PathMatcher" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="stringExtractionPair2PathMatcher[T](tuple:(String,T)):akka.http.scaladsl.server.PathMatcher1[T]"></a>
-      <a id="stringExtractionPair2PathMatcher[T]((String,T)):PathMatcher1[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">stringExtractionPair2PathMatcher</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="tuple">tuple: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction.stringExtractionPair2PathMatcher.T">T</span>)</span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.PathMatcher1">PathMatcher1</span>[<span class="extype" name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction.stringExtractionPair2PathMatcher.T">T</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@stringExtractionPair2PathMatcher[T](tuple:(String,T)):akka.http.scaladsl.server.PathMatcher1[T]" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ImplicitPathMatcherConstruction</dd></dl></div>
-    </li><li name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction#stringNameOptionReceptacle2PathMatcher" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="stringNameOptionReceptacle2PathMatcher(nr:akka.http.scaladsl.common.NameOptionReceptacle[String]):akka.http.scaladsl.server.PathMatcher0"></a>
-      <a id="stringNameOptionReceptacle2PathMatcher(NameOptionReceptacle[String]):PathMatcher0"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">stringNameOptionReceptacle2PathMatcher</span><span class="params">(<span name="nr">nr: <span class="extype" name="akka.http.scaladsl.common.NameOptionReceptacle">NameOptionReceptacle</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.PathMatcher0">PathMatcher0</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@stringNameOptionReceptacle2PathMatcher(nr:akka.http.scaladsl.common.NameOptionReceptacle[String]):akka.http.scaladsl.server.PathMatcher0" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ImplicitPathMatcherConstruction</dd></dl></div>
-    </li><li name="akka.http.scaladsl.common.ToNameReceptacleEnhancements#symbol2NR" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="symbol2NR(symbol:Symbol):akka.http.scaladsl.common.NameReceptacle[String]"></a>
-      <a id="symbol2NR(Symbol):NameReceptacle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">symbol2NR</span><span class="params">(<span name="symbol">symbol: <span class="extype" name="scala.Symbol">Symbol</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.common.NameReceptacle">NameReceptacle</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@symbol2NR(symbol:Symbol):akka.http.scaladsl.common.NameReceptacle[String]" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ToNameReceptacleEnhancements</dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -3581,23 +3649,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MiscDirectives</dd></dl></div>
-    </li><li name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction#valueMap2PathMatcher" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="valueMap2PathMatcher[T](valueMap:Map[String,T]):akka.http.scaladsl.server.PathMatcher1[T]"></a>
-      <a id="valueMap2PathMatcher[T](Map[String,T]):PathMatcher1[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">valueMap2PathMatcher</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="valueMap">valueMap: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction.valueMap2PathMatcher.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.PathMatcher1">PathMatcher1</span>[<span class="extype" name="akka.http.scaladsl.server.ImplicitPathMatcherConstruction.valueMap2PathMatcher.T">T</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@valueMap2PathMatcher[T](valueMap:Map[String,T]):akka.http.scaladsl.server.PathMatcher1[T]" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ImplicitPathMatcherConstruction</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -3837,6 +3888,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BasicDirectives</dd></dl></div>
+    </li><li name="akka.http.scaladsl.server.directives.MiscDirectives#withSizeLimit" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withSizeLimit(maxBytes:Long):akka.http.scaladsl.server.Directive0"></a>
+      <a id="withSizeLimit(Long):Directive0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">withSizeLimit</span><span class="params">(<span name="maxBytes">maxBytes: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Directive0">Directive0</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@withSizeLimit(maxBytes:Long):akka.http.scaladsl.server.Directive0" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MiscDirectives</dd></dl></div>
     </li><li name="akka.http.scaladsl.server.directives.TimeoutDirectives#withoutRequestTimeout" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="withoutRequestTimeout:akka.http.scaladsl.server.Directive0"></a>
       <a id="withoutRequestTimeout:Directive0"></a>
@@ -3854,6 +3922,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TimeoutDirectives</dd></dl></div>
+    </li><li name="akka.http.scaladsl.server.directives.MiscDirectives#withoutSizeLimit" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withoutSizeLimit:akka.http.scaladsl.server.Directive0"></a>
+      <a id="withoutSizeLimit:Directive0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">withoutSizeLimit</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Directive0">Directive0</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.HistoryResource@withoutSizeLimit:akka.http.scaladsl.server.Directive0" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MiscDirectives</dd></dl></div>
     </li></ol>
             </div>
 

@@ -67,7 +67,7 @@
         <div id="types" class="types members">
               <h3>Type Members</h3>
               <ol><li name="org.genivi.sota.resolver.Routing" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="RoutingextendsDirectives"></a>
+      <a id="RoutingextendsAnyRef"></a>
       <a id="Routing:Routing"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -75,14 +75,32 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="Routing.html"><span class="name">Routing</span></a><span class="result"> extends <span class="extype" name="akka.http.scaladsl.server.Directives">Directives</span></span>
+        <a href="Routing.html"><span class="name">Routing</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.resolver.package@RoutingextendsDirectives" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.resolver.package@RoutingextendsAnyRef" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Base API routing class.</p><div class="fullcomment"><div class="comment cmt"><p>Base API routing class.</p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><code><span class="extype" name="tourl">http://pdxostc.github.io/rvi_sota_server/dev/api.html</span></code></p></span></dd></dl></div>
+      <p class="shortcomment cmt">Base API routing class.</p><div class="fullcomment"><div class="comment cmt"><p>Base API routing class.
+</p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><code><span class="extype" name="tourl">http://advancedtelematic.github.io/rvi_sota_server/dev/api.html</span></code></p></span></dd></dl></div>
+    </li><li name="org.genivi.sota.resolver.Settings" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SettingsextendsAnyRef"></a>
+      <a id="Settings:Settings"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Settings.html"><span class="name">Settings</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.resolver.package@SettingsextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li></ol>
             </div>
 
@@ -99,7 +117,7 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Boot$.html"><span class="name">Boot</span></a><span class="result"> extends <span class="extype" name="scala.App">App</span></span>
+        <a href="Boot$.html"><span class="name">Boot</span></a><span class="result"> extends <span class="extype" name="scala.App">App</span> with <span class="extype" name="akka.http.scaladsl.server.Directives">Directives</span> with <span class="extype" name="org.genivi.sota.db.BootMigrations">BootMigrations</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.sota.resolver.package@Boot" title="Permalink" target="_top">
@@ -158,6 +176,23 @@
       </a>
     </span>
       
+    </li><li name="org.genivi.sota.resolver.daemon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="daemon"></a>
+      <a id="daemon:daemon"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="daemon/package.html"><span class="name">daemon</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.resolver.package@daemon" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="org.genivi.sota.resolver.data" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="data"></a>
       <a id="data:data"></a>
@@ -171,6 +206,40 @@
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.sota.resolver.package@data" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="org.genivi.sota.resolver.db" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="db"></a>
+      <a id="db:db"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="db/package.html"><span class="name">db</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.resolver.package@db" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="org.genivi.sota.resolver.devices" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="devices"></a>
+      <a id="devices:devices"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="devices/package.html"><span class="name">devices</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.resolver.package@devices" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -222,23 +291,6 @@
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.sota.resolver.package@resolve" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="org.genivi.sota.resolver.vehicles" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="vehicles"></a>
-      <a id="vehicles:vehicles"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">package</span>
-      </span>
-      <span class="symbol">
-        <a href="vehicles/package.html"><span class="name">vehicles</span></a>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.resolver.package@vehicles" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>

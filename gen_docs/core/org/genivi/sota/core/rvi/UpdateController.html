@@ -65,7 +65,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -78,7 +78,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -618,25 +618,25 @@
 </p><div class="fullcomment"><div class="comment cmt"><p>Entry point with initial empty map of downloads
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.genivi.sota.core.rvi.UpdateController">UpdateController</a> → Actor</dd></dl></div>
     </li><li name="org.genivi.sota.core.rvi.UpdateController#running" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="running(currentDownloads:Map[org.genivi.sota.data.Vehicle.Vin,akka.actor.ActorRef]):UpdateController.this.Receive"></a>
-      <a id="running(Map[Vin,ActorRef]):Receive"></a>
+      <a id="running(currentDownloads:Map[org.genivi.sota.data.Uuid,akka.actor.ActorRef]):UpdateController.this.Receive"></a>
+      <a id="running(Map[Uuid,ActorRef]):Receive"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">running</span><span class="params">(<span name="currentDownloads">currentDownloads: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span>, <span class="extype" name="akka.actor.ActorRef">ActorRef</span>]</span>)</span><span class="result">: <a href="#Receive=akka.actor.Actor.Receive" class="extmbr" name="org.genivi.sota.core.rvi.UpdateController.Receive">Receive</a></span>
+        <span class="name">running</span><span class="params">(<span name="currentDownloads">currentDownloads: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span>, <span class="extype" name="akka.actor.ActorRef">ActorRef</span>]</span>)</span><span class="result">: <a href="#Receive=akka.actor.Actor.Receive" class="extmbr" name="org.genivi.sota.core.rvi.UpdateController.Receive">Receive</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.rvi.UpdateController@running(currentDownloads:Map[org.genivi.sota.data.Vehicle.Vin,akka.actor.ActorRef]):UpdateController.this.Receive" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.rvi.UpdateController@running(currentDownloads:Map[org.genivi.sota.data.Uuid,akka.actor.ActorRef]):UpdateController.this.Receive" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Create actors to handle new downloads to a single vehicle.</p><div class="fullcomment"><div class="comment cmt"><p>Create actors to handle new downloads to a single vehicle.
-Forward messages to that actor until it finishes the download.
+Forward <a href="ChunksReceived.html" class="extype" name="org.genivi.sota.core.rvi.ChunksReceived">ChunksReceived</a> and <a href="InstallReport.html" class="extype" name="org.genivi.sota.core.rvi.InstallReport">InstallReport</a> messages to that actor until it finishes the download.
 Remove the actor from the map when it is terminated.
-</p></div><dl class="paramcmts block"><dt class="param">currentDownloads</dt><dd class="cmt"><p>the map of VIN to the actor handling that vehicle</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">currentDownloads</dt><dd class="cmt"><p>the map of device to the actor handling that vehicle</p></dd></dl></div>
     </li><li name="akka.actor.Actor#self" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="self:akka.actor.ActorRef"></a>
       <a id="self:ActorRef"></a>

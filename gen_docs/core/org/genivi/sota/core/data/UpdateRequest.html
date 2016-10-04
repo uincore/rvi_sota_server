@@ -47,18 +47,18 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">UpdateRequest</span><span class="params">(<span name="id">id: <span class="extype" name="java.util.UUID">UUID</span></span>, <span name="namespace">namespace: <span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span></span>, <span name="packageId">packageId: <span class="extype" name="org.genivi.sota.data.PackageId">PackageId</span></span>, <span name="creationTime">creationTime: <span class="extype" name="org.joda.time.DateTime">DateTime</span></span>, <span name="periodOfValidity">periodOfValidity: <span class="extype" name="org.joda.time.Interval">Interval</span></span>, <span name="priority">priority: <span class="extype" name="scala.Int">Int</span></span>, <span name="signature">signature: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="description">description: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="requestConfirmation">requestConfirmation: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="installPos">installPos: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">0</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">UpdateRequest</span><span class="params">(<span name="id">id: <span class="extype" name="java.util.UUID">UUID</span></span>, <span name="namespace">namespace: <span class="extype" name="org.genivi.sota.data.Namespace">Namespace</span></span>, <span name="packageUuid">packageUuid: <span class="extype" name="java.util.UUID">UUID</span></span>, <span name="creationTime">creationTime: <span class="extype" name="java.time.Instant">Instant</span></span>, <span name="periodOfValidity">periodOfValidity: <span class="extype" name="org.genivi.sota.data.Interval">Interval</span></span>, <span name="priority">priority: <span class="extype" name="scala.Int">Int</span></span>, <span name="signature">signature: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="description">description: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="requestConfirmation">requestConfirmation: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="installPos">installPos: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">0</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Domain object for an update request.
 An update request refers to the intent to update a package on a number of
-VINs. It describes a single package, with a period of validity and priority
-for the update.</p></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>A generated unique ID for this update request</p></dd><dt class="param">packageId</dt><dd class="cmt"><p>The name and version of the package</p></dd><dt class="param">creationTime</dt><dd class="cmt"><p>When this update request was entered into SOTA</p></dd><dt class="param">periodOfValidity</dt><dd class="cmt"><p>The start and end times when this update may be
+devices. It describes a single package, with a period of validity and priority
+for the update.</p></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>A generated unique ID for this update request</p></dd><dt class="param">creationTime</dt><dd class="cmt"><p>When this update request was entered into SOTA</p></dd><dt class="param">periodOfValidity</dt><dd class="cmt"><p>The start and end times when this update may be
                         installed. The install won't be attempted before
                         this point and will fail it it hasn't been started
                         after the interval expires.</p></dd><dt class="param">priority</dt><dd class="cmt"><p>The priority. priority == 1 items are installed before
-                priority == 2.</p></dd><dt class="param">signature</dt><dd class="cmt"><p>Signature for this updates Id</p></dd><dt class="param">description</dt><dd class="cmt"><p>A descriptive text of the available update.</p></dd><dt class="param">requestConfirmation</dt><dd class="cmt"><p>Flag to indicate if a user confirmation of the package is required.</p></dd></dl><div class="toggleContainer block">
+                priority == 2.</p></dd><dt class="param">signature</dt><dd class="cmt"><p>Signature for this updates Id</p></dd><dt class="param">description</dt><dd class="cmt"><p>A descriptive text of the available update.</p></dd><dt class="param">requestConfirmation</dt><dd class="cmt"><p>Flag to indicate if a user confirmation of the package is required.</p></dd><dt class="param">installPos</dt><dd class="cmt"><p>Derived from the corresponding field in <a href="UpdateSpec.html" class="extype" name="org.genivi.sota.core.data.UpdateSpec">UpdateSpec</a></p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -71,7 +71,7 @@ for the update.</p></div><dl class="paramcmts block"><dt class="param">id</dt><d
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -84,7 +84,7 @@ for the update.</p></div><dl class="paramcmts block"><dt class="param">id</dt><d
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -98,7 +98,7 @@ for the update.</p></div><dl class="paramcmts block"><dt class="param">id</dt><d
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="org.genivi.sota.core.data.UpdateRequest#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(id:java.util.UUID,namespace:org.genivi.sota.data.Namespace.Namespace,packageId:org.genivi.sota.data.PackageId,creationTime:org.joda.time.DateTime,periodOfValidity:org.joda.time.Interval,priority:Int,signature:String,description:Option[String],requestConfirmation:Boolean,installPos:Int):org.genivi.sota.core.data.UpdateRequest"></a>
+      <a id="&lt;init&gt;(id:java.util.UUID,namespace:org.genivi.sota.data.Namespace,packageUuid:java.util.UUID,creationTime:java.time.Instant,periodOfValidity:org.genivi.sota.data.Interval,priority:Int,signature:String,description:Option[String],requestConfirmation:Boolean,installPos:Int):org.genivi.sota.core.data.UpdateRequest"></a>
       <a id="&lt;init&gt;:UpdateRequest"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -106,18 +106,18 @@ for the update.</p></div><dl class="paramcmts block"><dt class="param">id</dt><d
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">UpdateRequest</span><span class="params">(<span name="id">id: <span class="extype" name="java.util.UUID">UUID</span></span>, <span name="namespace">namespace: <span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span></span>, <span name="packageId">packageId: <span class="extype" name="org.genivi.sota.data.PackageId">PackageId</span></span>, <span name="creationTime">creationTime: <span class="extype" name="org.joda.time.DateTime">DateTime</span></span>, <span name="periodOfValidity">periodOfValidity: <span class="extype" name="org.joda.time.Interval">Interval</span></span>, <span name="priority">priority: <span class="extype" name="scala.Int">Int</span></span>, <span name="signature">signature: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="description">description: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="requestConfirmation">requestConfirmation: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="installPos">installPos: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">0</span></span>)</span>
+        <span class="name">UpdateRequest</span><span class="params">(<span name="id">id: <span class="extype" name="java.util.UUID">UUID</span></span>, <span name="namespace">namespace: <span class="extype" name="org.genivi.sota.data.Namespace">Namespace</span></span>, <span name="packageUuid">packageUuid: <span class="extype" name="java.util.UUID">UUID</span></span>, <span name="creationTime">creationTime: <span class="extype" name="java.time.Instant">Instant</span></span>, <span name="periodOfValidity">periodOfValidity: <span class="extype" name="org.genivi.sota.data.Interval">Interval</span></span>, <span name="priority">priority: <span class="extype" name="scala.Int">Int</span></span>, <span name="signature">signature: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="description">description: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="requestConfirmation">requestConfirmation: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="installPos">installPos: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">0</span></span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.data.UpdateRequest@&lt;init&gt;(id:java.util.UUID,namespace:org.genivi.sota.data.Namespace.Namespace,packageId:org.genivi.sota.data.PackageId,creationTime:org.joda.time.DateTime,periodOfValidity:org.joda.time.Interval,priority:Int,signature:String,description:Option[String],requestConfirmation:Boolean,installPos:Int):org.genivi.sota.core.data.UpdateRequest" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.data.UpdateRequest@&lt;init&gt;(id:java.util.UUID,namespace:org.genivi.sota.data.Namespace,packageUuid:java.util.UUID,creationTime:java.time.Instant,periodOfValidity:org.genivi.sota.data.Interval,priority:Int,signature:String,description:Option[String],requestConfirmation:Boolean,installPos:Int):org.genivi.sota.core.data.UpdateRequest" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>A generated unique ID for this update request</p></dd><dt class="param">packageId</dt><dd class="cmt"><p>The name and version of the package</p></dd><dt class="param">creationTime</dt><dd class="cmt"><p>When this update request was entered into SOTA</p></dd><dt class="param">periodOfValidity</dt><dd class="cmt"><p>The start and end times when this update may be
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>A generated unique ID for this update request</p></dd><dt class="param">creationTime</dt><dd class="cmt"><p>When this update request was entered into SOTA</p></dd><dt class="param">periodOfValidity</dt><dd class="cmt"><p>The start and end times when this update may be
                         installed. The install won't be attempted before
                         this point and will fail it it hasn't been started
                         after the interval expires.</p></dd><dt class="param">priority</dt><dd class="cmt"><p>The priority. priority == 1 items are installed before
-                priority == 2.</p></dd><dt class="param">signature</dt><dd class="cmt"><p>Signature for this updates Id</p></dd><dt class="param">description</dt><dd class="cmt"><p>A descriptive text of the available update.</p></dd><dt class="param">requestConfirmation</dt><dd class="cmt"><p>Flag to indicate if a user confirmation of the package is required.</p></dd></dl></div>
+                priority == 2.</p></dd><dt class="param">signature</dt><dd class="cmt"><p>Signature for this updates Id</p></dd><dt class="param">description</dt><dd class="cmt"><p>A descriptive text of the available update.</p></dd><dt class="param">requestConfirmation</dt><dd class="cmt"><p>Flag to indicate if a user confirmation of the package is required.</p></dd><dt class="param">installPos</dt><dd class="cmt"><p>Derived from the corresponding field in <a href="UpdateSpec.html" class="extype" name="org.genivi.sota.core.data.UpdateSpec">UpdateSpec</a></p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -219,18 +219,18 @@ for the update.</p></div><dl class="paramcmts block"><dt class="param">id</dt><d
               
         </dd></dl></div>
     </li><li name="org.genivi.sota.core.data.UpdateRequest#creationTime" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="creationTime:org.joda.time.DateTime"></a>
-      <a id="creationTime:DateTime"></a>
+      <a id="creationTime:java.time.Instant"></a>
+      <a id="creationTime:Instant"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">creationTime</span><span class="result">: <span class="extype" name="org.joda.time.DateTime">DateTime</span></span>
+        <span class="name">creationTime</span><span class="result">: <span class="extype" name="java.time.Instant">Instant</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.data.UpdateRequest@creationTime:org.joda.time.DateTime" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.data.UpdateRequest@creationTime:java.time.Instant" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -342,7 +342,7 @@ for the update.</p></div><dl class="paramcmts block"><dt class="param">id</dt><d
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Derived from the corresponding field in <a href="UpdateSpec.html" class="extype" name="org.genivi.sota.core.data.UpdateSpec">UpdateSpec</a></p>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -361,7 +361,7 @@ for the update.</p></div><dl class="paramcmts block"><dt class="param">id</dt><d
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="org.genivi.sota.core.data.UpdateRequest#namespace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="namespace:org.genivi.sota.data.Namespace.Namespace"></a>
+      <a id="namespace:org.genivi.sota.data.Namespace"></a>
       <a id="namespace:Namespace"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -369,10 +369,10 @@ for the update.</p></div><dl class="paramcmts block"><dt class="param">id</dt><d
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">namespace</span><span class="result">: <span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span></span>
+        <span class="name">namespace</span><span class="result">: <span class="extype" name="org.genivi.sota.data.Namespace">Namespace</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.data.UpdateRequest@namespace:org.genivi.sota.data.Namespace.Namespace" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.data.UpdateRequest@namespace:org.genivi.sota.data.Namespace" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -428,25 +428,25 @@ for the update.</p></div><dl class="paramcmts block"><dt class="param">id</dt><d
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="org.genivi.sota.core.data.UpdateRequest#packageId" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="packageId:org.genivi.sota.data.PackageId"></a>
-      <a id="packageId:PackageId"></a>
+    </li><li name="org.genivi.sota.core.data.UpdateRequest#packageUuid" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="packageUuid:java.util.UUID"></a>
+      <a id="packageUuid:UUID"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">packageId</span><span class="result">: <span class="extype" name="org.genivi.sota.data.PackageId">PackageId</span></span>
+        <span class="name">packageUuid</span><span class="result">: <span class="extype" name="java.util.UUID">UUID</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.data.UpdateRequest@packageId:org.genivi.sota.data.PackageId" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.data.UpdateRequest@packageUuid:java.util.UUID" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">The name and version of the package</p>
+      
     </li><li name="org.genivi.sota.core.data.UpdateRequest#periodOfValidity" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="periodOfValidity:org.joda.time.Interval"></a>
+      <a id="periodOfValidity:org.genivi.sota.data.Interval"></a>
       <a id="periodOfValidity:Interval"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -454,10 +454,10 @@ for the update.</p></div><dl class="paramcmts block"><dt class="param">id</dt><d
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">periodOfValidity</span><span class="result">: <span class="extype" name="org.joda.time.Interval">Interval</span></span>
+        <span class="name">periodOfValidity</span><span class="result">: <span class="extype" name="org.genivi.sota.data.Interval">Interval</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.data.UpdateRequest@periodOfValidity:org.joda.time.Interval" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.data.UpdateRequest@periodOfValidity:org.genivi.sota.data.Interval" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>

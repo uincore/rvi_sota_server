@@ -64,7 +64,7 @@ These refer to the results of an UpdateRequest operation.
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -77,7 +77,7 @@ These refer to the results of an UpdateRequest operation.
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -101,7 +101,7 @@ These refer to the results of an UpdateRequest operation.
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="OperationResults$$OperationResultTable.html"><span class="name">OperationResultTable</span></a><span class="result"> extends <span class="extype" name="slick.profile.RelationalProfile.CommonAPI.Table">slick.driver.JdbcProfile.API.Table</span>[<a href="../data/OperationResult.html" class="extype" name="org.genivi.sota.core.data.OperationResult">OperationResult</a>]</span>
+        <a href="OperationResults$$OperationResultTable.html"><span class="name">OperationResultTable</span></a><span class="result"> extends <span class="extype" name="slick.profile.RelationalProfile.API.Table">slick.driver.JdbcProfile.API.Table</span>[<a href="../data/OperationResult.html" class="extype" name="org.genivi.sota.core.data.OperationResult">OperationResult</a>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../index.html#org.genivi.sota.core.db.OperationResults$@OperationResultTableextendsslick.driver.MySQLDriver.api.Table[org.genivi.sota.core.data.OperationResult]" title="Permalink" target="_top">
@@ -202,40 +202,59 @@ These refer to the results of an UpdateRequest operation.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="org.genivi.sota.core.db.OperationResults#byId" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="byId(ns:org.genivi.sota.data.Namespace.Namespace,id:eu.timepit.refined.api.Refined[String,eu.timepit.refined.string.Uuid])(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.core.data.OperationResult]]"></a>
-      <a id="byId(Namespace,Refined[String,Uuid])(ExecutionContext):slick.driver.JdbcProfile.API.DBIO[Seq[OperationResult]]"></a>
+    </li><li name="org.genivi.sota.core.db.OperationResults#byDevice" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="byDevice(device:org.genivi.sota.data.Uuid)(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.core.data.OperationResult]]"></a>
+      <a id="byDevice(Uuid)(ExecutionContext):slick.driver.JdbcProfile.API.DBIO[Seq[OperationResult]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">byId</span><span class="params">(<span name="ns">ns: <span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span></span>, <span name="id">id: <span class="extype" name="eu.timepit.refined.api.Refined">Refined</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="eu.timepit.refined.string.Uuid">Uuid</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="slick.lifted.Aliases.DBIO">slick.driver.JdbcProfile.API.DBIO</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="../data/OperationResult.html" class="extype" name="org.genivi.sota.core.data.OperationResult">OperationResult</a>]]</span>
+        <span class="name">byDevice</span><span class="params">(<span name="device">device: <span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="slick.lifted.Aliases.DBIO">slick.driver.JdbcProfile.API.DBIO</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="../data/OperationResult.html" class="extype" name="org.genivi.sota.core.data.OperationResult">OperationResult</a>]]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.db.OperationResults$@byId(ns:org.genivi.sota.data.Namespace.Namespace,id:eu.timepit.refined.api.Refined[String,eu.timepit.refined.string.Uuid])(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.core.data.OperationResult]]" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.db.OperationResults$@byDevice(device:org.genivi.sota.data.Uuid)(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.core.data.OperationResult]]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">List all the update results for a give update ID</p><div class="fullcomment"><div class="comment cmt"><p>List all the update results for a give update ID</p></div><dl class="paramcmts block"><dt class="param">ns</dt><dd class="cmt"><p>The namespace of the user making the query</p></dd><dt class="param">id</dt><dd class="cmt"><p>the uuid of the Update that operation results should be fetched for</p></dd><dt>returns</dt><dd class="cmt"><p>all OperationResults associated with the given id</p></dd></dl></div>
-    </li><li name="org.genivi.sota.core.db.OperationResults#byVin" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="byVin(vin:org.genivi.sota.data.Vehicle.Vin)(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.core.data.OperationResult]]"></a>
-      <a id="byVin(Vin)(ExecutionContext):slick.driver.JdbcProfile.API.DBIO[Seq[OperationResult]]"></a>
+      <p class="shortcomment cmt">All <span class="extype" name="OperationResult">OperationResult</span>-s for the given device.</p>
+    </li><li name="org.genivi.sota.core.db.OperationResults#byDeviceIdAndId" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="byDeviceIdAndId(device:org.genivi.sota.data.Uuid,id:eu.timepit.refined.api.Refined[String,org.genivi.sota.data.Uuid.Valid])(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.core.data.OperationResult]]"></a>
+      <a id="byDeviceIdAndId(Uuid,Refined[String,Valid])(ExecutionContext):slick.driver.JdbcProfile.API.DBIO[Seq[OperationResult]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">byVin</span><span class="params">(<span name="vin">vin: <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="slick.lifted.Aliases.DBIO">slick.driver.JdbcProfile.API.DBIO</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="../data/OperationResult.html" class="extype" name="org.genivi.sota.core.data.OperationResult">OperationResult</a>]]</span>
+        <span class="name">byDeviceIdAndId</span><span class="params">(<span name="device">device: <span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span></span>, <span name="id">id: <span class="extype" name="eu.timepit.refined.api.Refined">Refined</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="org.genivi.sota.data.Uuid.Valid">Valid</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="slick.lifted.Aliases.DBIO">slick.driver.JdbcProfile.API.DBIO</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="../data/OperationResult.html" class="extype" name="org.genivi.sota.core.data.OperationResult">OperationResult</a>]]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.db.OperationResults$@byVin(vin:org.genivi.sota.data.Vehicle.Vin)(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.core.data.OperationResult]]" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.db.OperationResults$@byDeviceIdAndId(device:org.genivi.sota.data.Uuid,id:eu.timepit.refined.api.Refined[String,org.genivi.sota.data.Uuid.Valid])(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.core.data.OperationResult]]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Get all OperationResults associated with the given VIN</p><div class="fullcomment"><div class="comment cmt"><p>Get all OperationResults associated with the given VIN</p></div><dl class="paramcmts block"><dt class="param">vin</dt><dd class="cmt"><p>The VIN for which all OperationResults should be returned</p></dd><dt>returns</dt><dd class="cmt"><p>all OperationResults associated with the given VIN</p></dd></dl></div>
+      <p class="shortcomment cmt">All <span class="extype" name="OperationResult">OperationResult</span>-s for the given (device, <span class="extype" name="UpdateRequest">UpdateRequest</span>) combination
+</p>
+    </li><li name="org.genivi.sota.core.db.OperationResults#byId" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="byId(id:eu.timepit.refined.api.Refined[String,org.genivi.sota.data.Uuid.Valid])(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.core.data.OperationResult]]"></a>
+      <a id="byId(Refined[String,Valid])(ExecutionContext):slick.driver.JdbcProfile.API.DBIO[Seq[OperationResult]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">byId</span><span class="params">(<span name="id">id: <span class="extype" name="eu.timepit.refined.api.Refined">Refined</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="org.genivi.sota.data.Uuid.Valid">Valid</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="slick.lifted.Aliases.DBIO">slick.driver.JdbcProfile.API.DBIO</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="../data/OperationResult.html" class="extype" name="org.genivi.sota.core.data.OperationResult">OperationResult</a>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#org.genivi.sota.core.db.OperationResults$@byId(id:eu.timepit.refined.api.Refined[String,org.genivi.sota.data.Uuid.Valid])(implicitec:scala.concurrent.ExecutionContext):slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.core.data.OperationResult]]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">All <span class="extype" name="OperationResult">OperationResult</span>-s for the given <span class="extype" name="UpdateRequest">UpdateRequest</span>
+</p>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -367,7 +386,7 @@ These refer to the results of an UpdateRequest operation.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="org.genivi.sota.core.db.OperationResults#list" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="org.genivi.sota.core.db.OperationResults#list" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="list:slick.driver.MySQLDriver.api.DBIO[Seq[org.genivi.sota.core.data.OperationResult]]"></a>
       <a id="list:slick.driver.JdbcProfile.API.DBIO[Seq[OperationResult]]"></a>
       <h4 class="signature">
@@ -383,7 +402,8 @@ These refer to the results of an UpdateRequest operation.
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">List all the update results that have been ever created</p><div class="fullcomment"><div class="comment cmt"><p>List all the update results that have been ever created</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>A list of operation results</p></dd></dl></div>
+      <p class="shortcomment cmt">All <span class="extype" name="OperationResult">OperationResult</span>-s that have been ever created
+</p>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>

@@ -28,10 +28,12 @@
         </head>
         <body class="type">
       <div id="definition">
-        <img alt="Class" src="../../../../../lib/class_big.png" />
+        <a href="OperationResult$.html" title="See companion object"><img alt="Class/Object" src="../../../../../lib/class_to_object_big.png" /></a>
         <p id="owner"><a href="../../../../package.html" class="extype" name="org">org</a>.<a href="../../../package.html" class="extype" name="org.genivi">genivi</a>.<a href="../../package.html" class="extype" name="org.genivi.sota">sota</a>.<a href="../package.html" class="extype" name="org.genivi.sota.core">core</a>.<a href="package.html" class="extype" name="org.genivi.sota.core.data">data</a></p>
-        <h1>OperationResult</h1><h3><span class="morelinks"><div>Related Doc:
-            <a href="package.html" class="extype" name="org.genivi.sota.core.data">package data</a>
+        <h1><a href="OperationResult$.html" title="See companion object">OperationResult</a></h1><h3><span class="morelinks"><div>
+            Related Docs:
+            <a href="OperationResult$.html" title="See companion object">object OperationResult</a>
+            | <a href="package.html" class="extype" name="org.genivi.sota.core.data">package data</a>
           </div></span></h3><span class="permalink">
       <a href="../../../../../index.html#org.genivi.sota.core.data.OperationResult" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
@@ -45,11 +47,12 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">OperationResult</span><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="updateId">updateId: <span class="extype" name="java.util.UUID">UUID</span></span>, <span name="resultCode">resultCode: <span class="extype" name="scala.Int">Int</span></span>, <span name="resultText">resultText: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="vin">vin: <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span></span>, <span name="namespace">namespace: <span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">OperationResult</span><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="updateId">updateId: <span class="extype" name="java.util.UUID">UUID</span></span>, <span name="resultCode">resultCode: <span class="extype" name="scala.Int">Int</span></span>, <span name="resultText">resultText: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="device">device: <span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span></span>, <span name="receivedAt">receivedAt: <span class="extype" name="java.time.Instant">Instant</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Domain object for the update operation result</p></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>The unique id of operation.</p></dd><dt class="param">updateId</dt><dd class="cmt"><p>Id of update this operation belongs to.</p></dd><dt class="param">resultCode</dt><dd class="cmt"><p>The status of operation.</p></dd><dt class="param">resultText</dt><dd class="cmt"><p>The description of operation.</p></dd><dt class="param">vin</dt><dd class="cmt"><p>The vin of the vehicle the operation was performed on</p></dd><dt class="param">namespace</dt><dd class="cmt"><p>The namespace for the given row</p></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Domain object for the update operation result
+</p></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>The unique id of operation.</p></dd><dt class="param">updateId</dt><dd class="cmt"><p>Id of update this operation belongs to.</p></dd><dt class="param">resultCode</dt><dd class="cmt"><p>The status of operation.</p></dd><dt class="param">resultText</dt><dd class="cmt"><p>The description of operation.</p></dd><dt class="param">device</dt><dd class="cmt"><p>The device of the vehicle the operation was performed on</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -62,7 +65,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -75,7 +78,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -89,7 +92,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="org.genivi.sota.core.data.OperationResult#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(id:String,updateId:java.util.UUID,resultCode:Int,resultText:String,vin:org.genivi.sota.data.Vehicle.Vin,namespace:org.genivi.sota.data.Namespace.Namespace):org.genivi.sota.core.data.OperationResult"></a>
+      <a id="&lt;init&gt;(id:String,updateId:java.util.UUID,resultCode:Int,resultText:String,device:org.genivi.sota.data.Uuid,receivedAt:java.time.Instant):org.genivi.sota.core.data.OperationResult"></a>
       <a id="&lt;init&gt;:OperationResult"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -97,14 +100,14 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">OperationResult</span><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="updateId">updateId: <span class="extype" name="java.util.UUID">UUID</span></span>, <span name="resultCode">resultCode: <span class="extype" name="scala.Int">Int</span></span>, <span name="resultText">resultText: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="vin">vin: <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span></span>, <span name="namespace">namespace: <span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span></span>)</span>
+        <span class="name">OperationResult</span><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="updateId">updateId: <span class="extype" name="java.util.UUID">UUID</span></span>, <span name="resultCode">resultCode: <span class="extype" name="scala.Int">Int</span></span>, <span name="resultText">resultText: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="device">device: <span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span></span>, <span name="receivedAt">receivedAt: <span class="extype" name="java.time.Instant">Instant</span></span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.data.OperationResult@&lt;init&gt;(id:String,updateId:java.util.UUID,resultCode:Int,resultText:String,vin:org.genivi.sota.data.Vehicle.Vin,namespace:org.genivi.sota.data.Namespace.Namespace):org.genivi.sota.core.data.OperationResult" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.data.OperationResult@&lt;init&gt;(id:String,updateId:java.util.UUID,resultCode:Int,resultText:String,device:org.genivi.sota.data.Uuid,receivedAt:java.time.Instant):org.genivi.sota.core.data.OperationResult" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>The unique id of operation.</p></dd><dt class="param">updateId</dt><dd class="cmt"><p>Id of update this operation belongs to.</p></dd><dt class="param">resultCode</dt><dd class="cmt"><p>The status of operation.</p></dd><dt class="param">resultText</dt><dd class="cmt"><p>The description of operation.</p></dd><dt class="param">vin</dt><dd class="cmt"><p>The vin of the vehicle the operation was performed on</p></dd><dt class="param">namespace</dt><dd class="cmt"><p>The namespace for the given row</p></dd></dl></div>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>The unique id of operation.</p></dd><dt class="param">updateId</dt><dd class="cmt"><p>Id of update this operation belongs to.</p></dd><dt class="param">resultCode</dt><dd class="cmt"><p>The status of operation.</p></dd><dt class="param">resultText</dt><dd class="cmt"><p>The description of operation.</p></dd><dt class="param">device</dt><dd class="cmt"><p>The device of the vehicle the operation was performed on</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -205,6 +208,23 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="org.genivi.sota.core.data.OperationResult#device" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="device:org.genivi.sota.data.Uuid"></a>
+      <a id="device:Uuid"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">device</span><span class="result">: <span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#org.genivi.sota.core.data.OperationResult@device:org.genivi.sota.data.Uuid" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The device of the vehicle the operation was performed on</p>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -296,23 +316,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="org.genivi.sota.core.data.OperationResult#namespace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="namespace:org.genivi.sota.data.Namespace.Namespace"></a>
-      <a id="namespace:Namespace"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">namespace</span><span class="result">: <span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.data.OperationResult@namespace:org.genivi.sota.data.Namespace.Namespace" title="Permalink" target="_top">
-        <img src="../../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">The namespace for the given row</p>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -364,6 +367,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="org.genivi.sota.core.data.OperationResult#receivedAt" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="receivedAt:java.time.Instant"></a>
+      <a id="receivedAt:Instant"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">receivedAt</span><span class="result">: <span class="extype" name="java.time.Instant">Instant</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#org.genivi.sota.core.data.OperationResult@receivedAt:java.time.Instant" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="org.genivi.sota.core.data.OperationResult#resultCode" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="resultCode:Int"></a>
       <a id="resultCode:Int"></a>
@@ -432,23 +452,6 @@
       </a>
     </span>
       <p class="shortcomment cmt">Id of update this operation belongs to.</p>
-    </li><li name="org.genivi.sota.core.data.OperationResult#vin" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="vin:org.genivi.sota.data.Vehicle.Vin"></a>
-      <a id="vin:Vin"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">vin</span><span class="result">: <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.data.OperationResult@vin:org.genivi.sota.data.Vehicle.Vin" title="Permalink" target="_top">
-        <img src="../../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">The vin of the vehicle the operation was performed on</p>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>

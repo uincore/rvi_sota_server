@@ -45,14 +45,14 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">UpdateSpecTable</span><span class="result"> extends <span class="extype" name="slick.profile.RelationalProfile.CommonAPI.Table">slick.driver.JdbcProfile.API.Table</span>[(<span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span>, <span class="extype" name="java.util.UUID">UUID</span>, <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span>, <a href="../data/UpdateStatus$.html#UpdateStatus=org.genivi.sota.core.data.UpdateStatus.Value" class="extmbr" name="org.genivi.sota.core.data.UpdateStatus.UpdateStatus">UpdateStatus</a>)]</span>
+        <span class="name">UpdateSpecTable</span><span class="result"> extends <span class="extype" name="slick.profile.RelationalProfile.API.Table">slick.driver.JdbcProfile.API.Table</span>[<a href="UpdateSpecs$$UpdateSpecRow.html" class="extype" name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecRow">UpdateSpecRow</a>]</span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Each row corresponds to an <span class="extype" name="UpdateSpec">UpdateSpec</span> instance except that <code>dependencies</code> are kept in <a href="UpdateSpecs$$RequiredPackageTable.html" class="extype" name="org.genivi.sota.core.db.UpdateSpecs.RequiredPackageTable">RequiredPackageTable</a>
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="slick.profile.RelationalTableComponent.Table">slick.driver.MySQLDriver.Table</span>[(<span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span>, <span class="extype" name="java.util.UUID">UUID</span>, <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span>, <a href="../data/UpdateStatus$.html#UpdateStatus=org.genivi.sota.core.data.UpdateStatus.Value" class="extmbr" name="org.genivi.sota.core.data.UpdateStatus.UpdateStatus">UpdateStatus</a>)], <span class="extype" name="slick.lifted.AbstractTable">AbstractTable</span>[(<span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span>, <span class="extype" name="java.util.UUID">UUID</span>, <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span>, <a href="../data/UpdateStatus$.html#UpdateStatus=org.genivi.sota.core.data.UpdateStatus.Value" class="extmbr" name="org.genivi.sota.core.data.UpdateStatus.UpdateStatus">UpdateStatus</a>)], <span class="extype" name="slick.lifted.Rep">Rep</span>[(<span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span>, <span class="extype" name="java.util.UUID">UUID</span>, <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span>, <a href="../data/UpdateStatus$.html#UpdateStatus=org.genivi.sota.core.data.UpdateStatus.Value" class="extmbr" name="org.genivi.sota.core.data.UpdateStatus.UpdateStatus">UpdateStatus</a>)], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="slick.profile.RelationalTableComponent.Table">slick.driver.MySQLDriver.Table</span>[<a href="UpdateSpecs$$UpdateSpecRow.html" class="extype" name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecRow">UpdateSpecRow</a>], <span class="extype" name="slick.lifted.AbstractTable">AbstractTable</span>[<a href="UpdateSpecs$$UpdateSpecRow.html" class="extype" name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecRow">UpdateSpecRow</a>], <span class="extype" name="slick.lifted.Rep">Rep</span>[<a href="UpdateSpecs$$UpdateSpecRow.html" class="extype" name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecRow">UpdateSpecRow</a>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -63,7 +63,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -76,7 +76,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -120,7 +120,7 @@
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">TableElementType</span><span class="result"> = (<span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span>, <span class="extype" name="java.util.UUID">UUID</span>, <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span>, <a href="../data/UpdateStatus$.html#UpdateStatus=org.genivi.sota.core.data.UpdateStatus.Value" class="extmbr" name="org.genivi.sota.core.data.UpdateStatus.UpdateStatus">UpdateStatus</a>)</span>
+        <span class="name">TableElementType</span><span class="result"> = <a href="UpdateSpecs$$UpdateSpecRow.html" class="extype" name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecRow">UpdateSpecRow</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../index.html#org.genivi.sota.core.db.UpdateSpecs$$UpdateSpecTable@TableElementType=T" title="Permalink" target="_top">
@@ -170,18 +170,18 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecTable#*" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="*:slick.lifted.ProvenShape[(org.genivi.sota.data.Namespace.Namespace,java.util.UUID,org.genivi.sota.data.Vehicle.Vin,org.genivi.sota.core.data.UpdateStatus.UpdateStatus)]"></a>
-      <a id="*:ProvenShape[(Namespace,UUID,Vin,UpdateStatus)]"></a>
+      <a id="*:slick.lifted.ProvenShape[org.genivi.sota.core.db.UpdateSpecs.UpdateSpecRow]"></a>
+      <a id="*:ProvenShape[UpdateSpecRow]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $times" class="name">*</span><span class="result">: <span class="extype" name="slick.lifted.ProvenShape">ProvenShape</span>[(<span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span>, <span class="extype" name="java.util.UUID">UUID</span>, <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span>, <a href="../data/UpdateStatus$.html#UpdateStatus=org.genivi.sota.core.data.UpdateStatus.Value" class="extmbr" name="org.genivi.sota.core.data.UpdateStatus.UpdateStatus">UpdateStatus</a>)]</span>
+        <span title="gt4s: $times" class="name">*</span><span class="result">: <span class="extype" name="slick.lifted.ProvenShape">ProvenShape</span>[<a href="UpdateSpecs$$UpdateSpecRow.html" class="extype" name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecRow">UpdateSpecRow</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.db.UpdateSpecs$$UpdateSpecTable@*:slick.lifted.ProvenShape[(org.genivi.sota.data.Namespace.Namespace,java.util.UUID,org.genivi.sota.data.Vehicle.Vin,org.genivi.sota.core.data.UpdateStatus.UpdateStatus)]" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.db.UpdateSpecs$$UpdateSpecTable@*:slick.lifted.ProvenShape[org.genivi.sota.core.db.UpdateSpecs.UpdateSpecRow]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -311,16 +311,50 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AbstractTable</dd></dl></div>
-    </li><li name="slick.lifted.AbstractTable#encodeRef" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="encodeRef(path:slick.ast.Node):slick.lifted.AbstractTable[T]"></a>
-      <a id="encodeRef(Node):AbstractTable[(Namespace,UUID,Vin,UpdateStatus)]"></a>
+    </li><li name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecTable#creationTime" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="creationTime:slick.lifted.Rep[java.time.Instant]"></a>
+      <a id="creationTime:Rep[Instant]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">encodeRef</span><span class="params">(<span name="path">path: <span class="extype" name="slick.ast.Node">Node</span></span>)</span><span class="result">: <span class="extype" name="slick.lifted.AbstractTable">AbstractTable</span>[(<span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span>, <span class="extype" name="java.util.UUID">UUID</span>, <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span>, <a href="../data/UpdateStatus$.html#UpdateStatus=org.genivi.sota.core.data.UpdateStatus.Value" class="extmbr" name="org.genivi.sota.core.data.UpdateStatus.UpdateStatus">UpdateStatus</a>)]</span>
+        <span class="name">creationTime</span><span class="result">: <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="java.time.Instant">Instant</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#org.genivi.sota.core.db.UpdateSpecs$$UpdateSpecTable@creationTime:slick.lifted.Rep[java.time.Instant]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecTable#device" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="device:slick.lifted.Rep[org.genivi.sota.data.Uuid]"></a>
+      <a id="device:Rep[Uuid]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">device</span><span class="result">: <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="org.genivi.sota.data.Uuid">Uuid</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#org.genivi.sota.core.db.UpdateSpecs$$UpdateSpecTable@device:slick.lifted.Rep[org.genivi.sota.data.Uuid]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="slick.lifted.AbstractTable#encodeRef" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="encodeRef(path:slick.ast.Node):slick.lifted.AbstractTable[T]"></a>
+      <a id="encodeRef(Node):AbstractTable[UpdateSpecRow]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">encodeRef</span><span class="params">(<span name="path">path: <span class="extype" name="slick.ast.Node">Node</span></span>)</span><span class="result">: <span class="extype" name="slick.lifted.AbstractTable">AbstractTable</span>[<a href="UpdateSpecs$$UpdateSpecRow.html" class="extype" name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecRow">UpdateSpecRow</a>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../index.html#org.genivi.sota.core.db.UpdateSpecs$$UpdateSpecTable@encodeRef(path:slick.ast.Node):slick.lifted.AbstractTable[T]" title="Permalink" target="_top">
@@ -487,6 +521,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AbstractTable</dd></dl></div>
+    </li><li name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecTable#installPos" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="installPos:slick.lifted.Rep[Int]"></a>
+      <a id="installPos:Rep[Int]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">installPos</span><span class="result">: <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="scala.Int">Int</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#org.genivi.sota.core.db.UpdateSpecs$$UpdateSpecTable@installPos:slick.lifted.Rep[Int]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -504,23 +555,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecTable#namespace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="namespace:slick.lifted.Rep[org.genivi.sota.data.Namespace.Namespace]"></a>
-      <a id="namespace:Rep[Namespace]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">namespace</span><span class="result">: <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.db.UpdateSpecs$$UpdateSpecTable@namespace:slick.lifted.Rep[org.genivi.sota.data.Namespace.Namespace]" title="Permalink" target="_top">
-        <img src="../../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -827,19 +861,19 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Rep → AnyRef → Any</dd></dl></div>
-    </li><li name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecTable#vin" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="vin:slick.lifted.Rep[org.genivi.sota.data.Vehicle.Vin]"></a>
-      <a id="vin:Rep[Vin]"></a>
+    </li><li name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecTable#updateTime" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="updateTime:slick.lifted.Rep[java.time.Instant]"></a>
+      <a id="updateTime:Rep[Instant]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">vin</span><span class="result">: <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span>]</span>
+        <span class="name">updateTime</span><span class="result">: <span class="extype" name="slick.lifted.Rep">Rep</span>[<span class="extype" name="java.time.Instant">Instant</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../index.html#org.genivi.sota.core.db.UpdateSpecs$$UpdateSpecTable@vin:slick.lifted.Rep[org.genivi.sota.data.Vehicle.Vin]" title="Permalink" target="_top">
+      <a href="../../../../../index.html#org.genivi.sota.core.db.UpdateSpecs$$UpdateSpecTable@updateTime:slick.lifted.Rep[java.time.Instant]" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -923,11 +957,11 @@
 
         <div id="inheritedMembers">
         <div class="parent" name="slick.profile.RelationalTableComponent.Table">
-              <h3>Inherited from <span class="extype" name="slick.profile.RelationalTableComponent.Table">slick.driver.MySQLDriver.Table</span>[(<span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span>, <span class="extype" name="java.util.UUID">UUID</span>, <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span>, <a href="../data/UpdateStatus$.html#UpdateStatus=org.genivi.sota.core.data.UpdateStatus.Value" class="extmbr" name="org.genivi.sota.core.data.UpdateStatus.UpdateStatus">UpdateStatus</a>)]</h3>
+              <h3>Inherited from <span class="extype" name="slick.profile.RelationalTableComponent.Table">slick.driver.MySQLDriver.Table</span>[<a href="UpdateSpecs$$UpdateSpecRow.html" class="extype" name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecRow">UpdateSpecRow</a>]</h3>
             </div><div class="parent" name="slick.lifted.AbstractTable">
-              <h3>Inherited from <span class="extype" name="slick.lifted.AbstractTable">AbstractTable</span>[(<span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span>, <span class="extype" name="java.util.UUID">UUID</span>, <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span>, <a href="../data/UpdateStatus$.html#UpdateStatus=org.genivi.sota.core.data.UpdateStatus.Value" class="extmbr" name="org.genivi.sota.core.data.UpdateStatus.UpdateStatus">UpdateStatus</a>)]</h3>
+              <h3>Inherited from <span class="extype" name="slick.lifted.AbstractTable">AbstractTable</span>[<a href="UpdateSpecs$$UpdateSpecRow.html" class="extype" name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecRow">UpdateSpecRow</a>]</h3>
             </div><div class="parent" name="slick.lifted.Rep">
-              <h3>Inherited from <span class="extype" name="slick.lifted.Rep">Rep</span>[(<span class="extype" name="org.genivi.sota.data.Namespace.Namespace">Namespace</span>, <span class="extype" name="java.util.UUID">UUID</span>, <span class="extype" name="org.genivi.sota.data.Vehicle.Vin">Vin</span>, <a href="../data/UpdateStatus$.html#UpdateStatus=org.genivi.sota.core.data.UpdateStatus.Value" class="extmbr" name="org.genivi.sota.core.data.UpdateStatus.UpdateStatus">UpdateStatus</a>)]</h3>
+              <h3>Inherited from <span class="extype" name="slick.lifted.Rep">Rep</span>[<a href="UpdateSpecs$$UpdateSpecRow.html" class="extype" name="org.genivi.sota.core.db.UpdateSpecs.UpdateSpecRow">UpdateSpecRow</a>]</h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">

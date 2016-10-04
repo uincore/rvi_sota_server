@@ -62,7 +62,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -75,7 +75,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -89,7 +89,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="org.genivi.webserver.controllers.Application#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(ws:play.api.libs.ws.WSClient,messagesApi:play.api.i18n.MessagesApi,accountManager:org.genivi.webserver.Authentication.AccountManager):org.genivi.webserver.controllers.Application"></a>
+      <a id="&lt;init&gt;(ws:play.api.libs.ws.WSClient,messagesApi:play.api.i18n.MessagesApi,ldapAuthN:org.genivi.webserver.Authentication.LdapAuth,configuration:play.api.Configuration):org.genivi.webserver.controllers.Application"></a>
       <a id="&lt;init&gt;:Application"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -97,10 +97,10 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">Application</span><span class="params">(<span name="ws">ws: <span class="extype" name="play.api.libs.ws.WSClient">WSClient</span></span>, <span name="messagesApi">messagesApi: <span class="extype" name="play.api.i18n.MessagesApi">MessagesApi</span></span>, <span name="accountManager">accountManager: <a href="../Authentication/AccountManager.html" class="extype" name="org.genivi.webserver.Authentication.AccountManager">AccountManager</a></span>)</span>
+        <span class="name">Application</span><span class="params">(<span name="ws">ws: <span class="extype" name="play.api.libs.ws.WSClient">WSClient</span></span>, <span name="messagesApi">messagesApi: <span class="extype" name="play.api.i18n.MessagesApi">MessagesApi</span></span>, <span name="ldapAuthN">ldapAuthN: <a href="../Authentication/LdapAuth.html" class="extype" name="org.genivi.webserver.Authentication.LdapAuth">LdapAuth</a></span>, <span name="configuration">configuration: <span class="extype" name="play.api.Configuration">Configuration</span></span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@&lt;init&gt;(ws:play.api.libs.ws.WSClient,messagesApi:play.api.i18n.MessagesApi,accountManager:org.genivi.webserver.Authentication.AccountManager):org.genivi.webserver.controllers.Application" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@&lt;init&gt;(ws:play.api.libs.ws.WSClient,messagesApi:play.api.i18n.MessagesApi,ldapAuthN:org.genivi.webserver.Authentication.LdapAuth,configuration:play.api.Configuration):org.genivi.webserver.controllers.Application" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -114,7 +114,7 @@
         <div id="types" class="types members">
               <h3>Type Members</h3>
               <ol><li name="org.genivi.webserver.controllers.AuthConfigImpl.Authority" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="Authority=org.genivi.webserver.Authentication.Role.Role"></a>
+      <a id="Authority=org.genivi.webserver.Authentication.Role"></a>
       <a id="Authority:Authority"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -122,10 +122,10 @@
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">Authority</span><span class="result"> = <a href="../Authentication/Role$.html#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="org.genivi.webserver.Authentication.Role.Value">Authentication.Role.Value</a></span>
+        <span class="name">Authority</span><span class="result"> = <a href="../Authentication/Role.html" class="extype" name="org.genivi.webserver.Authentication.Role">Role</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@Authority=org.genivi.webserver.Authentication.Role.Role" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@Authority=org.genivi.webserver.Authentication.Role" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -766,7 +766,7 @@ case object NormalUser extends Role
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">CACHE_MANIFEST</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">CACHE_MANIFEST</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.controllers.Application@CACHE_MANIFEST:String" title="Permalink" target="_top">
@@ -1038,7 +1038,7 @@ case object NormalUser extends Role
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">CSS</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">CSS</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.controllers.Application@CSS(implicitcodec:play.api.mvc.Codec):String" title="Permalink" target="_top">
@@ -1123,7 +1123,7 @@ case object NormalUser extends Role
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">EVENT_STREAM</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">EVENT_STREAM</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.controllers.Application@EVENT_STREAM(implicitcodec:play.api.mvc.Codec):String" title="Permalink" target="_top">
@@ -1251,18 +1251,18 @@ case object NormalUser extends Role
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Status</dd></dl></div>
     </li><li name="play.api.http.ContentTypes#FORM" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="FORM(implicitcodec:&lt;?&gt;):String"></a>
-      <a id="FORM(Codec):String"></a>
+      <a id="FORM:String"></a>
+      <a id="FORM:String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">def</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">FORM</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">FORM</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@FORM(implicitcodec:play.api.mvc.Codec):String" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@FORM:String" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -1463,7 +1463,7 @@ case object NormalUser extends Role
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">HTML</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">HTML</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.controllers.Application@HTML(implicitcodec:play.api.mvc.Codec):String" title="Permalink" target="_top">
@@ -1701,7 +1701,7 @@ case object NormalUser extends Role
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">JAVASCRIPT</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">JAVASCRIPT</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.controllers.Application@JAVASCRIPT(implicitcodec:play.api.mvc.Codec):String" title="Permalink" target="_top">
@@ -1710,18 +1710,18 @@ case object NormalUser extends Role
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ContentTypes</dd></dl></div>
     </li><li name="play.api.http.ContentTypes#JSON" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="JSON(implicitcodec:&lt;?&gt;):String"></a>
-      <a id="JSON(Codec):String"></a>
+      <a id="JSON:String"></a>
+      <a id="JSON:String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">def</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">JSON</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">JSON</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@JSON(implicitcodec:play.api.mvc.Codec):String" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@JSON:String" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -2236,6 +2236,23 @@ case object NormalUser extends Role
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Status</dd></dl></div>
+    </li><li name="play.api.http.Status#PERMANENT_REDIRECT" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="PERMANENT_REDIRECT:Int"></a>
+      <a id="PERMANENT_REDIRECT:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PERMANENT_REDIRECT</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@PERMANENT_REDIRECT:Int" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Status</dd></dl></div>
     </li><li name="play.api.http.HeaderNames#PRAGMA" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="PRAGMA:String"></a>
       <a id="PRAGMA:String"></a>
@@ -2351,6 +2368,23 @@ case object NormalUser extends Role
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.controllers.Application@PaymentRequired:Results.this.Status" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Results</dd></dl></div>
+    </li><li name="play.api.mvc.Results#PermanentRedirect" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="PermanentRedirect(url:&lt;?&gt;):play.api.mvc.Result"></a>
+      <a id="PermanentRedirect(String):Result"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PermanentRedirect</span><span class="params">(<span name="url">url: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Result">Result</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@PermanentRedirect(url:String):play.api.mvc.Result" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -2874,7 +2908,7 @@ case object NormalUser extends Role
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">TEXT</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">TEXT</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.controllers.Application@TEXT(implicitcodec:play.api.mvc.Codec):String" title="Permalink" target="_top">
@@ -2899,19 +2933,19 @@ case object NormalUser extends Role
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Controller</dd></dl></div>
-    </li><li name="play.api.http.Status#TOO_MANY_REQUEST" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="TOO_MANY_REQUEST:Int"></a>
-      <a id="TOO_MANY_REQUEST:Int"></a>
+    </li><li name="play.api.http.Status#TOO_MANY_REQUESTS" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="TOO_MANY_REQUESTS:Int"></a>
+      <a id="TOO_MANY_REQUESTS:Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">TOO_MANY_REQUEST</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">TOO_MANY_REQUESTS</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@TOO_MANY_REQUEST:Int" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@TOO_MANY_REQUESTS:Int" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -2967,19 +3001,19 @@ case object NormalUser extends Role
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Results</dd></dl></div>
-    </li><li name="play.api.mvc.Results#TooManyRequest" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="TooManyRequest:Results.this.Status"></a>
-      <a id="TooManyRequest:Status"></a>
+    </li><li name="play.api.mvc.Results#TooManyRequests" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="TooManyRequests:Results.this.Status"></a>
+      <a id="TooManyRequests:Status"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">TooManyRequest</span><span class="result">: <a href="#StatusextendsResult" class="extmbr" name="org.genivi.webserver.controllers.Application.Status">Status</a></span>
+        <span class="name">TooManyRequests</span><span class="result">: <a href="#StatusextendsResult" class="extmbr" name="org.genivi.webserver.controllers.Application.Status">Status</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@TooManyRequest:Results.this.Status" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@TooManyRequests:Results.this.Status" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -3052,6 +3086,23 @@ case object NormalUser extends Role
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>HeaderNames</dd></dl></div>
+    </li><li name="play.api.http.Status#UPGRADE_REQUIRED" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="UPGRADE_REQUIRED:Int"></a>
+      <a id="UPGRADE_REQUIRED:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">UPGRADE_REQUIRED</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@UPGRADE_REQUIRED:Int" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Status</dd></dl></div>
     </li><li name="play.api.http.HeaderNames#USER_AGENT" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="USER_AGENT:String"></a>
       <a id="USER_AGENT:String"></a>
@@ -3231,7 +3282,7 @@ case object NormalUser extends Role
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">XML</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">XML</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.controllers.Application@XML(implicitcodec:play.api.mvc.Codec):String" title="Permalink" target="_top">
@@ -3324,23 +3375,6 @@ case object NormalUser extends Role
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>HeaderNames</dd></dl></div>
-    </li><li name="org.genivi.webserver.controllers.Application#accountManager" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="accountManager:org.genivi.webserver.Authentication.AccountManager"></a>
-      <a id="accountManager:AccountManager"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">accountManager</span><span class="result">: <a href="../Authentication/AccountManager.html" class="extype" name="org.genivi.webserver.Authentication.AccountManager">AccountManager</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@accountManager:org.genivi.webserver.Authentication.AccountManager" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
     </li><li name="org.genivi.webserver.controllers.Application#apiByPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="apiByPath(path:String):String"></a>
       <a id="apiByPath(String):String"></a>
@@ -3477,7 +3511,7 @@ case object NormalUser extends Role
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">authorizationFailed</span><span class="params">(<span name="request">request: <span class="extype" name="play.api.mvc.RequestHeader">RequestHeader</span></span>, <span name="user">user: <a href="#User=org.genivi.webserver.Authentication.Account" class="extmbr" name="org.genivi.webserver.controllers.Application.User">User</a></span>, <span name="authority">authority: <span class="extype" name="scala.Option">Option</span>[<a href="#Authority=org.genivi.webserver.Authentication.Role.Role" class="extmbr" name="org.genivi.webserver.controllers.Application.Authority">Authority</a>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="play.api.mvc.Result">Result</span>]</span>
+        <span class="name">authorizationFailed</span><span class="params">(<span name="request">request: <span class="extype" name="play.api.mvc.RequestHeader">RequestHeader</span></span>, <span name="user">user: <a href="#User=org.genivi.webserver.Authentication.Account" class="extmbr" name="org.genivi.webserver.controllers.Application.User">User</a></span>, <span name="authority">authority: <span class="extype" name="scala.Option">Option</span>[<a href="#Authority=org.genivi.webserver.Authentication.Role" class="extmbr" name="org.genivi.webserver.controllers.Application.Authority">Authority</a>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="play.api.mvc.Result">Result</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.controllers.Application@authorizationFailed(request:play.api.mvc.RequestHeader,user:AuthConfigImpl.this.User,authority:Option[AuthConfigImpl.this.Authority])(implicitcontext:scala.concurrent.ExecutionContext):scala.concurrent.Future[play.api.mvc.Result]" title="Permalink" target="_top">
@@ -3496,7 +3530,7 @@ case object NormalUser extends Role
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">authorize</span><span class="params">(<span name="user">user: <a href="#User=org.genivi.webserver.Authentication.Account" class="extmbr" name="org.genivi.webserver.controllers.Application.User">User</a></span>, <span name="authority">authority: <a href="#Authority=org.genivi.webserver.Authentication.Role.Role" class="extmbr" name="org.genivi.webserver.controllers.Application.Authority">Authority</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ctx">ctx: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
+        <span class="name">authorize</span><span class="params">(<span name="user">user: <a href="#User=org.genivi.webserver.Authentication.Account" class="extmbr" name="org.genivi.webserver.controllers.Application.User">User</a></span>, <span name="authority">authority: <a href="#Authority=org.genivi.webserver.Authentication.Role" class="extmbr" name="org.genivi.webserver.controllers.Application.Authority">Authority</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ctx">ctx: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.controllers.Application@authorize(user:AuthConfigImpl.this.User,authority:AuthConfigImpl.this.Authority)(implicitctx:scala.concurrent.ExecutionContext):scala.concurrent.Future[Boolean]" title="Permalink" target="_top">
@@ -3515,7 +3549,7 @@ You should alter this procedure to suit your application.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">authorized</span><span class="params">(<span name="authority">authority: <a href="#Authority=org.genivi.webserver.Authentication.Role.Role" class="extmbr" name="org.genivi.webserver.controllers.Application.Authority">Authority</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="request">request: <span class="extype" name="play.api.mvc.RequestHeader">RequestHeader</span></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Either">Either</span>[<span class="extype" name="play.api.mvc.Result">Result</span>, (<a href="#User=org.genivi.webserver.Authentication.Account" class="extmbr" name="org.genivi.webserver.controllers.Application.User">User</a>, <span class="extype" name="jp.t2v.lab.play2.auth.ResultUpdater">ResultUpdater</span>)]]</span>
+        <span class="name">authorized</span><span class="params">(<span name="authority">authority: <a href="#Authority=org.genivi.webserver.Authentication.Role" class="extmbr" name="org.genivi.webserver.controllers.Application.Authority">Authority</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="request">request: <span class="extype" name="play.api.mvc.RequestHeader">RequestHeader</span></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Either">Either</span>[<span class="extype" name="play.api.mvc.Result">Result</span>, (<a href="#User=org.genivi.webserver.Authentication.Account" class="extmbr" name="org.genivi.webserver.controllers.Application.User">User</a>, <span class="extype" name="jp.t2v.lab.play2.auth.ResultUpdater">ResultUpdater</span>)]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.controllers.Application@authorized(authority:AsyncAuth.this.Authority)(implicitrequest:play.api.mvc.RequestHeader,implicitcontext:scala.concurrent.ExecutionContext):scala.concurrent.Future[Either[play.api.mvc.Result,(AsyncAuth.this.User,jp.t2v.lab.play2.auth.ResultUpdater)]]" title="Permalink" target="_top">
@@ -3523,40 +3557,6 @@ You should alter this procedure to suit your application.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AsyncAuth</dd></dl></div>
-    </li><li name="play.api.mvc.Results#chunk" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="chunk(trailers:&lt;?&gt;):play.api.libs.iteratee.Enumeratee[Array[Byte],Array[Byte]]"></a>
-      <a id="chunk(Option[Iteratee[Array[Byte],Seq[(String,String)]]]):Enumeratee[Array[Byte],Array[Byte]]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">chunk</span><span class="params">(<span name="trailers">trailers: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="play.api.libs.iteratee.Iteratee">Iteratee</span>[<span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>], <span class="extype" name="scala.Seq">Seq</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]]]</span>)</span><span class="result">: <span class="extype" name="play.api.libs.iteratee.Enumeratee">Enumeratee</span>[<span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>], <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@chunk(trailers:Option[play.api.libs.iteratee.Iteratee[Array[Byte],Seq[(String,String)]]]):play.api.libs.iteratee.Enumeratee[Array[Byte],Array[Byte]]" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Results</dd></dl></div>
-    </li><li name="play.api.mvc.Results#chunk" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="chunk:play.api.libs.iteratee.Enumeratee[Array[Byte],Array[Byte]]"></a>
-      <a id="chunk:Enumeratee[Array[Byte],Array[Byte]]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">chunk</span><span class="result">: <span class="extype" name="play.api.libs.iteratee.Enumeratee">Enumeratee</span>[<span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>], <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@chunk:play.api.libs.iteratee.Enumeratee[Array[Byte],Array[Byte]]" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Results</dd></dl></div>
     </li><li name="jp.t2v.lab.play2.stackc.StackableController#cleanupOnFailed" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="cleanupOnFailed[A&lt;:&lt;?&gt;](request:&lt;?&gt;,e:&lt;?&gt;):Unit"></a>
       <a id="cleanupOnFailed[A](RequestWithAttributes[A],Throwable):Unit"></a>
@@ -3665,40 +3665,23 @@ You should alter this procedure to suit your application.
       </a>
     </span>
       
-    </li><li name="play.api.mvc.Results#dechunk" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="dechunk:play.api.libs.iteratee.Enumeratee[Array[Byte],Array[Byte]]"></a>
-      <a id="dechunk:Enumeratee[Array[Byte],Array[Byte]]"></a>
+    </li><li name="org.genivi.webserver.controllers.Application#deviceRegistryApiUri" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="deviceRegistryApiUri:String"></a>
+      <a id="deviceRegistryApiUri:String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">def</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">dechunk</span><span class="result">: <span class="extype" name="play.api.libs.iteratee.Enumeratee">Enumeratee</span>[<span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>], <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]]</span>
+        <span class="name">deviceRegistryApiUri</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@dechunk:play.api.libs.iteratee.Enumeratee[Array[Byte],Array[Byte]]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@deviceRegistryApiUri:String" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Results</dd></dl></div>
-    </li><li name="play.api.mvc.Results#dechunkWithTrailers" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="dechunkWithTrailers:play.api.libs.iteratee.Enumeratee[Array[Byte],Either[Array[Byte],Seq[(String,String)]]]"></a>
-      <a id="dechunkWithTrailers:Enumeratee[Array[Byte],Either[Array[Byte],Seq[(String,String)]]]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">dechunkWithTrailers</span><span class="result">: <span class="extype" name="play.api.libs.iteratee.Enumeratee">Enumeratee</span>[<span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>], <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>], <span class="extype" name="scala.Seq">Seq</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]]]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@dechunkWithTrailers:play.api.libs.iteratee.Enumeratee[Array[Byte],Either[Array[Byte],Seq[(String,String)]]]" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Results</dd></dl></div>
+      
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -3984,18 +3967,18 @@ Use something like this:
 </p><div class="fullcomment"><div class="comment cmt"><p>Renders the login form
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>OK response and login.html</p></dd></dl></div>
     </li><li name="org.genivi.webserver.controllers.Application#loginForm" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="loginForm:play.api.data.Form[Option[org.genivi.webserver.Authentication.Account]]"></a>
-      <a id="loginForm:Form[Option[Account]]"></a>
+      <a id="loginForm:play.api.data.Form[(String,String)]"></a>
+      <a id="loginForm:Form[(String,String)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">loginForm</span><span class="result">: <span class="extype" name="play.api.data.Form">Form</span>[<span class="extype" name="scala.Option">Option</span>[<a href="../Authentication/Account.html" class="extype" name="org.genivi.webserver.Authentication.Account">Account</a>]]</span>
+        <span class="name">loginForm</span><span class="result">: <span class="extype" name="play.api.data.Form">Form</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@loginForm:play.api.data.Form[Option[org.genivi.webserver.Authentication.Account]]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@loginForm:play.api.data.Form[(String,String)]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -4259,9 +4242,9 @@ Use something like this:
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Find a user by id
-</p><div class="fullcomment"><div class="comment cmt"><p>Find a user by id
-</p></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>The Id of the user</p></dd><dt>returns</dt><dd class="cmt"><p>Future option of user</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.genivi.webserver.controllers.Application">Application</a> → <a href="AuthConfigImpl.html" class="extype" name="org.genivi.webserver.controllers.AuthConfigImpl">AuthConfigImpl</a> → AuthConfig</dd></dl></div>
+      <p class="shortcomment cmt">A function that returns a <code>User</code> object from an <code>Id</code>.</p><div class="fullcomment"><div class="comment cmt"><p>A function that returns a <code>User</code> object from an <code>Id</code>.
+You can alter the procedure to suit your application.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.genivi.webserver.controllers.Application">Application</a> → AuthConfig</dd></dl></div>
     </li><li name="org.genivi.webserver.controllers.Application#resolverApiUri" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="resolverApiUri:String"></a>
       <a id="resolverApiUri:String"></a>
@@ -4431,7 +4414,7 @@ Default implemntation use Cookie.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">withCharset</span><span class="params">(<span name="mimeType">mimeType: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">withCharset</span><span class="params">(<span name="mimeType">mimeType: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="codec">codec: <span class="extype" name="play.api.mvc.Codec">Codec</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.webserver.controllers.Application@withCharset(mimeType:String)(implicitcodec:play.api.mvc.Codec):String" title="Permalink" target="_top">
@@ -4446,7 +4429,47 @@ Default implemntation use Cookie.
 
         <div id="values" class="values members">
               <h3>Deprecated Value Members</h3>
-              <ol><li name="jp.t2v.lab.play2.auth.AuthConfig#cookieDomainOption" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+              <ol><li name="play.api.http.Status#TOO_MANY_REQUEST" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="TOO_MANY_REQUEST:Int"></a>
+      <a id="TOO_MANY_REQUEST:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 3.0.0) Use TOO_MANY_REQUESTS instead">TOO_MANY_REQUEST</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@TOO_MANY_REQUEST:Int" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Status</dd><dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 3.0.0)</i> Use TOO_MANY_REQUESTS instead</p></dd></dl></div>
+    </li><li name="play.api.mvc.Results#TooManyRequest" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="TooManyRequest:Results.this.Status"></a>
+      <a id="TooManyRequest:Status"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 3.0.0) Use TooManyRequests instead">TooManyRequest</span><span class="result">: <a href="#StatusextendsResult" class="extmbr" name="org.genivi.webserver.controllers.Application.Status">Status</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.webserver.controllers.Application@TooManyRequest:Results.this.Status" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Results</dd><dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 3.0.0)</i> Use TooManyRequests instead</p></dd></dl></div>
+    </li><li name="jp.t2v.lab.play2.auth.AuthConfig#cookieDomainOption" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="cookieDomainOption:Option[String]"></a>
       <a id="cookieDomainOption:Option[String]"></a>
       <h4 class="signature">

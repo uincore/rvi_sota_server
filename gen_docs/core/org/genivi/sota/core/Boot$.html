@@ -45,13 +45,13 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">Boot</span><span class="result"> extends <span class="extype" name="scala.App">App</span> with <a href="db/DatabaseConfig.html" class="extype" name="org.genivi.sota.core.db.DatabaseConfig">DatabaseConfig</a></span>
+        <span class="name">Boot</span><span class="result"> extends <span class="extype" name="scala.App">App</span> with <a href="db/DatabaseConfig.html" class="extype" name="org.genivi.sota.core.db.DatabaseConfig">DatabaseConfig</a> with <a href="HttpBoot.html" class="extype" name="org.genivi.sota.core.HttpBoot">HttpBoot</a> with <a href="RviBoot.html" class="extype" name="org.genivi.sota.core.RviBoot">RviBoot</a> with <span class="extype" name="org.genivi.sota.db.BootMigrations">BootMigrations</span></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="db/DatabaseConfig.html" class="extype" name="org.genivi.sota.core.db.DatabaseConfig">DatabaseConfig</a>, <span class="extype" name="scala.App">App</span>, <span class="extype" name="scala.DelayedInit">DelayedInit</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="org.genivi.sota.db.BootMigrations">BootMigrations</span>, <a href="RviBoot.html" class="extype" name="org.genivi.sota.core.RviBoot">RviBoot</a>, <a href="HttpBoot.html" class="extype" name="org.genivi.sota.core.HttpBoot">HttpBoot</a>, <a href="db/DatabaseConfig.html" class="extype" name="org.genivi.sota.core.db.DatabaseConfig">DatabaseConfig</a>, <span class="extype" name="scala.App">App</span>, <span class="extype" name="scala.DelayedInit">DelayedInit</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -62,20 +62,20 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="org.genivi.sota.core.Boot"><span>Boot</span></li><li class="in" name="org.genivi.sota.core.db.DatabaseConfig"><span>DatabaseConfig</span></li><li class="in" name="scala.App"><span>App</span></li><li class="in" name="scala.DelayedInit"><span>DelayedInit</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="org.genivi.sota.core.Boot"><span>Boot</span></li><li class="in" name="org.genivi.sota.db.BootMigrations"><span>BootMigrations</span></li><li class="in" name="org.genivi.sota.core.RviBoot"><span>RviBoot</span></li><li class="in" name="org.genivi.sota.core.HttpBoot"><span>HttpBoot</span></li><li class="in" name="org.genivi.sota.core.db.DatabaseConfig"><span>DatabaseConfig</span></li><li class="in" name="scala.App"><span>App</span></li><li class="in" name="scala.DelayedInit"><span>DelayedInit</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -217,30 +217,13 @@
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">val</span>
+        <span class="kind">lazy val</span>
       </span>
       <span class="symbol">
         <span class="name">config</span><span class="result">: <span class="extype" name="com.typesafe.config.Config">Config</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.sota.core.Boot$@config:com.typesafe.config.Config" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="org.genivi.sota.core.Boot#connectivity" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="connectivity:org.genivi.sota.core.resolver.Connectivity"></a>
-      <a id="connectivity:Connectivity"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">connectivity</span><span class="result">: <a href="resolver/Connectivity.html" class="extype" name="org.genivi.sota.core.resolver.Connectivity">Connectivity</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.Boot$@connectivity:org.genivi.sota.core.resolver.Connectivity" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -262,6 +245,40 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="db/DatabaseConfig.html" class="extype" name="org.genivi.sota.core.db.DatabaseConfig">DatabaseConfig</a></dd></dl></div>
+    </li><li name="org.genivi.sota.core.HttpBoot#defaultConnectivity" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="defaultConnectivity:org.genivi.sota.core.resolver.Connectivity"></a>
+      <a id="defaultConnectivity:Connectivity"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">defaultConnectivity</span><span class="result">: <a href="resolver/Connectivity.html" class="extype" name="org.genivi.sota.core.resolver.Connectivity">Connectivity</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.Boot$@defaultConnectivity:org.genivi.sota.core.resolver.Connectivity" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="HttpBoot.html" class="extype" name="org.genivi.sota.core.HttpBoot">HttpBoot</a></dd></dl></div>
+    </li><li name="org.genivi.sota.core.Boot#deviceRegistryClient" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="deviceRegistryClient:org.genivi.sota.client.DeviceRegistryClient"></a>
+      <a id="deviceRegistryClient:DeviceRegistryClient"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">deviceRegistryClient</span><span class="result">: <span class="extype" name="org.genivi.sota.client.DeviceRegistryClient">DeviceRegistryClient</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.Boot$@deviceRegistryClient:org.genivi.sota.client.DeviceRegistryClient" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.genivi.sota.core.Boot">Boot</a> → <a href="RviBoot.html" class="extype" name="org.genivi.sota.core.RviBoot">RviBoot</a> → <a href="HttpBoot.html" class="extype" name="org.genivi.sota.core.HttpBoot">HttpBoot</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -296,7 +313,7 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="org.genivi.sota.core.Boot#exec" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="org.genivi.sota.core.Boot#exec" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="exec:scala.concurrent.ExecutionContextExecutor"></a>
       <a id="exec:ExecutionContextExecutor"></a>
       <h4 class="signature">
@@ -312,7 +329,7 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.genivi.sota.core.Boot">Boot</a> → <a href="RviBoot.html" class="extype" name="org.genivi.sota.core.RviBoot">RviBoot</a> → <a href="HttpBoot.html" class="extype" name="org.genivi.sota.core.HttpBoot">HttpBoot</a></dd></dl></div>
     </li><li name="scala.App#executionStart" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="executionStart:Long"></a>
       <a id="executionStart:Long"></a>
@@ -330,23 +347,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>App</dd></dl></div>
-    </li><li name="org.genivi.sota.core.Boot#externalResolverClient" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="externalResolverClient:org.genivi.sota.core.resolver.DefaultExternalResolverClient"></a>
-      <a id="externalResolverClient:DefaultExternalResolverClient"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">externalResolverClient</span><span class="result">: <a href="resolver/DefaultExternalResolverClient.html" class="extype" name="org.genivi.sota.core.resolver.DefaultExternalResolverClient">DefaultExternalResolverClient</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.Boot$@externalResolverClient:org.genivi.sota.core.resolver.DefaultExternalResolverClient" title="Permalink" target="_top">
-        <img src="../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -404,23 +404,40 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="org.genivi.sota.core.Boot#host" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="host:String"></a>
-      <a id="host:String"></a>
+    </li><li name="org.genivi.sota.core.Boot#healthResource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="healthResource:org.genivi.sota.http.HealthResource"></a>
+      <a id="healthResource:HealthResource"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">host</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">healthResource</span><span class="result">: <span class="extype" name="org.genivi.sota.http.HealthResource">HealthResource</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.Boot$@host:String" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.core.Boot$@healthResource:org.genivi.sota.http.HealthResource" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       
+    </li><li name="org.genivi.sota.core.HttpBoot#httpInteractionRoutes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="httpInteractionRoutes(db:slick.driver.MySQLDriver.api.Database,namespaceDirective:akka.http.scaladsl.server.Directive1[org.genivi.sota.data.Namespace],authDirective:org.genivi.sota.http.AuthDirectives.AuthScope=&gt;akka.http.scaladsl.server.Directive0,messageBus:org.genivi.sota.messaging.MessageBusPublisher):akka.http.scaladsl.server.Route"></a>
+      <a id="httpInteractionRoutes(slick.driver.JdbcProfile.API.Database,Directive1[Namespace],(AuthScope)⇒Directive0,MessageBusPublisher):Route"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">httpInteractionRoutes</span><span class="params">(<span name="db">db: <span class="extype" name="slick.profile.BasicProfile.API.Database">slick.driver.JdbcProfile.API.Database</span></span>, <span name="namespaceDirective">namespaceDirective: <span class="extype" name="akka.http.scaladsl.server.Directive1">Directive1</span>[<span class="extype" name="org.genivi.sota.data.Namespace">Namespace</span>]</span>, <span name="authDirective">authDirective: (<span class="extype" name="org.genivi.sota.http.AuthDirectives.AuthScope">AuthScope</span>) ⇒ <span class="extype" name="akka.http.scaladsl.server.Directive0">Directive0</span></span>, <span name="messageBus">messageBus: <span class="extype" name="org.genivi.sota.messaging.MessageBusPublisher">MessageBusPublisher</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Route">Route</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.Boot$@httpInteractionRoutes(db:slick.driver.MySQLDriver.api.Database,namespaceDirective:akka.http.scaladsl.server.Directive1[org.genivi.sota.data.Namespace],authDirective:org.genivi.sota.http.AuthDirectives.AuthScope=&gt;akka.http.scaladsl.server.Directive0,messageBus:org.genivi.sota.messaging.MessageBusPublisher):akka.http.scaladsl.server.Route" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="HttpBoot.html" class="extype" name="org.genivi.sota.core.HttpBoot">HttpBoot</a></dd></dl></div>
     </li><li name="org.genivi.sota.core.Boot#interactionProtocol" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="interactionProtocol:String"></a>
       <a id="interactionProtocol:String"></a>
@@ -498,7 +515,7 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="org.genivi.sota.core.Boot#materializer" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="org.genivi.sota.core.Boot#materializer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="materializer:akka.stream.ActorMaterializer"></a>
       <a id="materializer:ActorMaterializer"></a>
       <h4 class="signature">
@@ -514,7 +531,24 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.genivi.sota.core.Boot">Boot</a> → <a href="RviBoot.html" class="extype" name="org.genivi.sota.core.RviBoot">RviBoot</a> → <a href="HttpBoot.html" class="extype" name="org.genivi.sota.core.HttpBoot">HttpBoot</a></dd></dl></div>
+    </li><li name="org.genivi.sota.core.Boot#messageBusPublisher" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="messageBusPublisher:org.genivi.sota.messaging.MessageBusPublisher"></a>
+      <a id="messageBusPublisher:MessageBusPublisher"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">messageBusPublisher</span><span class="result">: <span class="extype" name="org.genivi.sota.messaging.MessageBusPublisher">MessageBusPublisher</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.Boot$@messageBusPublisher:org.genivi.sota.messaging.MessageBusPublisher" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.genivi.sota.core.Boot">Boot</a> → <a href="RviBoot.html" class="extype" name="org.genivi.sota.core.RviBoot">RviBoot</a> → <a href="HttpBoot.html" class="extype" name="org.genivi.sota.core.HttpBoot">HttpBoot</a></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -566,40 +600,91 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="org.genivi.sota.core.Boot#port" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="port:Int"></a>
-      <a id="port:Int"></a>
+    </li><li name="org.genivi.sota.core.Boot#resolverClient" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="resolverClient:org.genivi.sota.core.resolver.DefaultExternalResolverClient"></a>
+      <a id="resolverClient:DefaultExternalResolverClient"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">port</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">resolverClient</span><span class="result">: <a href="resolver/DefaultExternalResolverClient.html" class="extype" name="org.genivi.sota.core.resolver.DefaultExternalResolverClient">DefaultExternalResolverClient</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.Boot$@port:Int" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.core.Boot$@resolverClient:org.genivi.sota.core.resolver.DefaultExternalResolverClient" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.genivi.sota.core.Boot">Boot</a> → <a href="RviBoot.html" class="extype" name="org.genivi.sota.core.RviBoot">RviBoot</a> → <a href="HttpBoot.html" class="extype" name="org.genivi.sota.core.HttpBoot">HttpBoot</a></dd></dl></div>
     </li><li name="org.genivi.sota.core.Boot#routes" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="routes(notifier:org.genivi.sota.core.transfer.UpdateNotifier):akka.http.scaladsl.server.Route"></a>
-      <a id="routes(UpdateNotifier):Route"></a>
+      <a id="routes():scala.concurrent.Future[akka.http.scaladsl.server.Route]"></a>
+      <a id="routes():Future[Route]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">routes</span><span class="params">(<span name="notifier">notifier: <a href="transfer/UpdateNotifier.html" class="extype" name="org.genivi.sota.core.transfer.UpdateNotifier">UpdateNotifier</a></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Route">Route</span></span>
+        <span class="name">routes</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="akka.http.scaladsl.server.Route">Route</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.Boot$@routes(notifier:org.genivi.sota.core.transfer.UpdateNotifier):akka.http.scaladsl.server.Route" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.core.Boot$@routes():scala.concurrent.Future[akka.http.scaladsl.server.Route]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       
+    </li><li name="org.genivi.sota.core.RviBoot#rviConnectivity" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="rviConnectivity:org.genivi.sota.core.rvi.RviConnectivity"></a>
+      <a id="rviConnectivity:RviConnectivity"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">lazy val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">rviConnectivity</span><span class="result">: <a href="rvi/RviConnectivity.html" class="extype" name="org.genivi.sota.core.rvi.RviConnectivity">RviConnectivity</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.Boot$@rviConnectivity:org.genivi.sota.core.rvi.RviConnectivity" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="RviBoot.html" class="extype" name="org.genivi.sota.core.RviBoot">RviBoot</a></dd></dl></div>
+    </li><li name="org.genivi.sota.core.RviBoot#rviInteractionRoutes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="rviInteractionRoutes(db:slick.driver.MySQLDriver.api.Database,namespaceDirective:akka.http.scaladsl.server.Directive1[org.genivi.sota.data.Namespace]):scala.concurrent.Future[akka.http.scaladsl.server.Route]"></a>
+      <a id="rviInteractionRoutes(slick.driver.JdbcProfile.API.Database,Directive1[Namespace]):Future[Route]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">rviInteractionRoutes</span><span class="params">(<span name="db">db: <span class="extype" name="slick.profile.BasicProfile.API.Database">slick.driver.JdbcProfile.API.Database</span></span>, <span name="namespaceDirective">namespaceDirective: <span class="extype" name="akka.http.scaladsl.server.Directive1">Directive1</span>[<span class="extype" name="org.genivi.sota.data.Namespace">Namespace</span>]</span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="akka.http.scaladsl.server.Route">Route</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.Boot$@rviInteractionRoutes(db:slick.driver.MySQLDriver.api.Database,namespaceDirective:akka.http.scaladsl.server.Directive1[org.genivi.sota.data.Namespace]):scala.concurrent.Future[akka.http.scaladsl.server.Route]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="RviBoot.html" class="extype" name="org.genivi.sota.core.RviBoot">RviBoot</a></dd></dl></div>
+    </li><li name="org.genivi.sota.core.RviBoot#rviRoutes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="rviRoutes(db:slick.driver.MySQLDriver.api.Database,notifier:org.genivi.sota.core.transfer.UpdateNotifier,namespaceDirective:akka.http.scaladsl.server.Directive1[org.genivi.sota.data.Namespace]):akka.http.scaladsl.server.Route"></a>
+      <a id="rviRoutes(slick.driver.JdbcProfile.API.Database,UpdateNotifier,Directive1[Namespace]):Route"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">rviRoutes</span><span class="params">(<span name="db">db: <span class="extype" name="slick.profile.BasicProfile.API.Database">slick.driver.JdbcProfile.API.Database</span></span>, <span name="notifier">notifier: <a href="transfer/UpdateNotifier.html" class="extype" name="org.genivi.sota.core.transfer.UpdateNotifier">UpdateNotifier</a></span>, <span name="namespaceDirective">namespaceDirective: <span class="extype" name="akka.http.scaladsl.server.Directive1">Directive1</span>[<span class="extype" name="org.genivi.sota.data.Namespace">Namespace</span>]</span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Route">Route</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.Boot$@rviRoutes(db:slick.driver.MySQLDriver.api.Database,notifier:org.genivi.sota.core.transfer.UpdateNotifier,namespaceDirective:akka.http.scaladsl.server.Directive1[org.genivi.sota.data.Namespace]):akka.http.scaladsl.server.Route" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="RviBoot.html" class="extype" name="org.genivi.sota.core.RviBoot">RviBoot</a></dd></dl></div>
     </li><li name="org.genivi.sota.core.db.DatabaseConfig#session" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="session:slick.driver.MySQLDriver.api.Session"></a>
       <a id="session:slick.driver.JdbcProfile.API.Session"></a>
@@ -609,7 +694,7 @@
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">session</span><span class="result">: <span class="extype" name="slick.profile.BasicProfile.CommonAPI.Session">slick.driver.JdbcProfile.API.Session</span></span>
+        <span class="name">session</span><span class="result">: <span class="extype" name="slick.profile.BasicProfile.API.Session">slick.driver.JdbcProfile.API.Session</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.sota.core.Boot$@session:slick.driver.MySQLDriver.api.Session" title="Permalink" target="_top">
@@ -617,7 +702,41 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="db/DatabaseConfig.html" class="extype" name="org.genivi.sota.core.db.DatabaseConfig">DatabaseConfig</a></dd></dl></div>
-    </li><li name="org.genivi.sota.core.Boot#startSotaServices" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="org.genivi.sota.core.Boot#settings" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="settings:org.genivi.sota.core.Settings"></a>
+      <a id="settings:Settings"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">settings</span><span class="result">: <a href="Settings.html" class="extype" name="org.genivi.sota.core.Settings">Settings</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.Boot$@settings:org.genivi.sota.core.Settings" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.genivi.sota.core.Boot">Boot</a> → <a href="RviBoot.html" class="extype" name="org.genivi.sota.core.RviBoot">RviBoot</a></dd></dl></div>
+    </li><li name="org.genivi.sota.core.Boot#sotaLog" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="sotaLog:akka.http.scaladsl.server.Directive0"></a>
+      <a id="sotaLog:Directive0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">sotaLog</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Directive0">Directive0</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.genivi.sota.core.Boot$@sotaLog:akka.http.scaladsl.server.Directive0" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="org.genivi.sota.core.RviBoot#startSotaServices" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="startSotaServices(db:slick.driver.MySQLDriver.api.Database):akka.http.scaladsl.server.Route"></a>
       <a id="startSotaServices(slick.driver.JdbcProfile.API.Database):Route"></a>
       <h4 class="signature">
@@ -626,27 +745,27 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">startSotaServices</span><span class="params">(<span name="db">db: <span class="extype" name="slick.profile.BasicProfile.CommonAPI.Database">slick.driver.JdbcProfile.API.Database</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Route">Route</span></span>
+        <span class="name">startSotaServices</span><span class="params">(<span name="db">db: <span class="extype" name="slick.profile.BasicProfile.API.Database">slick.driver.JdbcProfile.API.Database</span></span>)</span><span class="result">: <span class="extype" name="akka.http.scaladsl.server.Route">Route</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.sota.core.Boot$@startSotaServices(db:slick.driver.MySQLDriver.api.Database):akka.http.scaladsl.server.Route" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="org.genivi.sota.core.Boot#startup" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="startup:scala.concurrent.Future[org.genivi.sota.core.rvi.ServerServices]"></a>
-      <a id="startup:Future[ServerServices]"></a>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="RviBoot.html" class="extype" name="org.genivi.sota.core.RviBoot">RviBoot</a></dd></dl></div>
+    </li><li name="org.genivi.sota.core.Boot#startupF" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="startupF:scala.concurrent.Future[scala.concurrent.Future[akka.http.scaladsl.Http.ServerBinding]]"></a>
+      <a id="startupF:Future[Future[ServerBinding]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">startup</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<a href="rvi/ServerServices.html" class="extype" name="org.genivi.sota.core.rvi.ServerServices">ServerServices</a>]</span>
+        <span class="name">startupF</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="akka.http.scaladsl.Http.ServerBinding">ServerBinding</span>]]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#org.genivi.sota.core.Boot$@startup:scala.concurrent.Future[org.genivi.sota.core.rvi.ServerServices]" title="Permalink" target="_top">
+      <a href="../../../../index.html#org.genivi.sota.core.Boot$@startupF:scala.concurrent.Future[scala.concurrent.Future[akka.http.scaladsl.Http.ServerBinding]]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -668,7 +787,7 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="org.genivi.sota.core.Boot#system" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="org.genivi.sota.core.Boot#system" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="system:akka.actor.ActorSystem"></a>
       <a id="system:ActorSystem"></a>
       <h4 class="signature">
@@ -684,7 +803,7 @@
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.genivi.sota.core.Boot">Boot</a> → <a href="RviBoot.html" class="extype" name="org.genivi.sota.core.RviBoot">RviBoot</a> → <a href="HttpBoot.html" class="extype" name="org.genivi.sota.core.HttpBoot">HttpBoot</a></dd></dl></div>
     </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>
@@ -711,7 +830,7 @@
         <span class="kind">lazy val</span>
       </span>
       <span class="symbol">
-        <span class="name">version</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">version</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../index.html#org.genivi.sota.core.Boot$@version:String" title="Permalink" target="_top">
@@ -820,7 +939,13 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="org.genivi.sota.core.db.DatabaseConfig">
+        <div class="parent" name="org.genivi.sota.db.BootMigrations">
+              <h3>Inherited from <span class="extype" name="org.genivi.sota.db.BootMigrations">BootMigrations</span></h3>
+            </div><div class="parent" name="org.genivi.sota.core.RviBoot">
+              <h3>Inherited from <a href="RviBoot.html" class="extype" name="org.genivi.sota.core.RviBoot">RviBoot</a></h3>
+            </div><div class="parent" name="org.genivi.sota.core.HttpBoot">
+              <h3>Inherited from <a href="HttpBoot.html" class="extype" name="org.genivi.sota.core.HttpBoot">HttpBoot</a></h3>
+            </div><div class="parent" name="org.genivi.sota.core.db.DatabaseConfig">
               <h3>Inherited from <a href="db/DatabaseConfig.html" class="extype" name="org.genivi.sota.core.db.DatabaseConfig">DatabaseConfig</a></h3>
             </div><div class="parent" name="scala.App">
               <h3>Inherited from <span class="extype" name="scala.App">App</span></h3>
