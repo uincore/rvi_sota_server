@@ -203,7 +203,7 @@
         }
       }
     },
-    "/devices/group_info": {
+    "/device_groups": {
       "get": {
         "description": "Returns a list of all groups",
         "responses": {
@@ -219,7 +219,7 @@
         }
       }
     },
-    "/devices/{uuid}/group_info": {
+    "/device_groups/{uuid}": {
       "post": {
         "description": "Create a group info entry for a namespace/groupName entry",
         "parameters": [
@@ -314,7 +314,7 @@
         }
       }
     },
-    "/devices/{uuid}/group_info/rename": {
+    "/device_groups/{uuid}/rename": {
       "put": {
         "description": "Rename a group",
         "parameters": [
@@ -336,6 +336,31 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/device_groups/{uuid}/devices": {
+      "get": {
+        "description": "return a list of device uuids in group",
+        "parameters": [
+          {
+            "name": "uuid",
+            "description": "The uuid of an existing group",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/uuid"
+              }
+            }
           }
         }
       }
