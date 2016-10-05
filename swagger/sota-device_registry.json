@@ -365,6 +365,28 @@
         }
       }
     },
+    "/device_groups/{uuid}/count": {
+      "get": {
+        "description": "return count of devices in group",
+        "parameters": [
+          {
+            "name": "uuid",
+            "description": "The uuid of an existing group",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
     "/device_groups/from_attributes": {
       "post": {
         "description": "Create a group from two devices' common attributes",
