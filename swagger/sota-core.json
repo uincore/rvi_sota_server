@@ -336,7 +336,7 @@
             "description": "The groups to add to campaign",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CampaignGroups"
+              "$ref": "#/definitions/SetCampaignGroups"
             }
           }
         ],
@@ -1211,7 +1211,7 @@
         "groups": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/CampaignGroup"
           },
           "description": "An array of group names"
         },
@@ -1256,15 +1256,26 @@
         }
       }
     },
-    "CampaignGroups": {
+    "CampaignGroup": {
+      "type": "object",
+      "properties": {
+        "group": {
+          "$ref": "#/definitions/uuid"
+        },
+        "updateRequest": {
+          "$ref": "#/definitions/uuid"
+        }
+      }
+    },
+    "SetCampaignGroups": {
       "type": "object",
       "properties": {
         "groups": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/uuid"
           },
-          "description": "The groups for the campaign"
+          "description": "The uuids of the groups for the campaign"
         }
       }
     },
