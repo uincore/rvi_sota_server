@@ -186,7 +186,7 @@
         }
       }
     },
-    "/campaign": {
+    "/campaigns": {
       "get": {
         "description": "List all campaigns",
         "responses": {
