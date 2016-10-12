@@ -244,12 +244,12 @@
         }
       }
     },
-    "/device_groups/{uuid}": {
+    "/device_groups/{groupId}": {
       "post": {
         "description": "Create a group info entry for a namespace/groupName entry",
         "parameters": [
           {
-            "name": "uuid",
+            "name": "groupId",
             "description": "The uuid of an existing device object",
             "in": "path",
             "required": true,
@@ -282,7 +282,7 @@
         "description": "Update the group info entry for a namespace/groupName entry",
         "parameters": [
           {
-            "name": "uuid",
+            "name": "groupId",
             "description": "The uuid of an existing device object",
             "in": "path",
             "required": true,
@@ -315,7 +315,7 @@
         "description": "Retrieve the group info for a namespace/groupName entry",
         "parameters": [
           {
-            "name": "uuid",
+            "name": "groupId",
             "description": "The uuid of an existing device object",
             "in": "path",
             "required": true,
@@ -339,12 +339,12 @@
         }
       }
     },
-    "/device_groups/{uuid}/rename": {
+    "/device_groups/{groupId}/rename": {
       "put": {
         "description": "Rename a group",
         "parameters": [
           {
-            "name": "uuid",
+            "name": "groupId",
             "description": "The uuid of an existing group",
             "in": "path",
             "required": true,
@@ -365,12 +365,12 @@
         }
       }
     },
-    "/device_groups/{uuid}/devices": {
+    "/device_groups/{groupId}/devices": {
       "get": {
         "description": "return a list of device uuids in group",
         "parameters": [
           {
-            "name": "uuid",
+            "name": "groupId",
             "description": "The uuid of an existing group",
             "in": "path",
             "required": true,
@@ -412,6 +412,56 @@
         }
       }
     },
+    "/device_groups/{groupId}/devices/{deviceId}": {
+      "post": {
+        "description": "add a device to a group",
+        "parameters": [
+          {
+            "name": "groupId",
+            "description": "The uuid of an existing group",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "description": "The uuid of an existing device",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "description": "remove a device from a group",
+        "parameters": [
+          {
+            "name": "groupId",
+            "description": "The uuid of an existing group",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "description": "The uuid of an existing device",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/device_groups/from_attributes": {
       "post": {
         "description": "Create a group from two devices' common attributes",
@@ -428,7 +478,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "returns the uuid of the newly created group",
+            "schema": {
+              "$ref": "#/definitions/uuid"
+            }
           }
         }
       }
