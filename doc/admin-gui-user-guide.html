@@ -36,12 +36,9 @@
 
         
             
-                <li class="nav-header">Documentation</li>
+                <li class="nav-header">Getting Started</li>
             
-            <li data-order=""><a href="/rvi_sota_server/doc/deployment-with-dockercompose.html">Deployment with docker-compose</a></li>
-        
-            
-            <li data-order="6"><a href="/rvi_sota_server/doc/contributing.html">Contributing</a></li>
+            <li data-order="2"><a href="/rvi_sota_server/doc/deployment-with-dockercompose.html">Deployment with docker-compose</a></li>
         
             
             <li data-order="3"><a href="/rvi_sota_server/doc/admin-gui-user-guide.html">Admin GUI Guide</a></li>
@@ -55,7 +52,54 @@
 
         
             
-                <li class="nav-header">Security</li>
+                <li class="nav-header">Developers</li>
+            
+            <li data-order="10"><a href="/rvi_sota_server/dev/generated-documentation.html">Auto-generated Documentation</a></li>
+        
+            
+            <li data-order="4"><a href="/rvi_sota_server/dev/architecture.html">SOTA Architecture</a></li>
+        
+            
+            <li data-order="1"><a href="/rvi_sota_server/dev/contributing.html">Contributing</a></li>
+        
+            
+            <li data-order="6"><a href="/rvi_sota_server/dev/database-style-guide.html">Database Style Guide</a></li>
+        
+            
+            <li data-order="5"><a href="/rvi_sota_server/dev/scala-style-guide.html">Scala Style Guide</a></li>
+        
+            
+            <li data-order="1"><a href="/rvi_sota_server/dev/api.html">API</a></li>
+        
+    
+        
+        
+
+        
+            
+                <li class="nav-header">Client Documentation</li>
+            
+            <li data-order="3"><a href="/rvi_sota_server/cli/client-commands-and-events-reference.html">Client commands and events API reference</a></li>
+        
+            
+            <li data-order="1"><a href="/rvi_sota_server/cli/introduction.html">Introduction</a></li>
+        
+            
+            <li data-order="2"><a href="/rvi_sota_server/cli/client-startup-and-configuration.html">Client Startup and Configuration</a></li>
+        
+            
+            <li data-order="8"><a href="/rvi_sota_server/cli/client-implementation-example-session.html">RVI Client Implementation Example Session</a></li>
+        
+            
+            <li data-order="7"><a href="/rvi_sota_server/cli/client-implementation.html">RVI Client Implementation Reference</a></li>
+        
+    
+        
+        
+
+        
+            
+                <li class="nav-header">Security Approach</li>
             
             <li data-order=""><a href="/rvi_sota_server/sec/security-threats-mitigations.html">Security Threats & Mitigations</a></li>
         
@@ -79,34 +123,6 @@
             <li data-order="4"><a href="/rvi_sota_server/ref/requirements.html">Requirements</a></li>
         
     
-        
-        
-
-        
-            
-                <li class="nav-header">Developers</li>
-            
-            <li data-order="10"><a href="/rvi_sota_server/dev/generated-documentation.html">Auto-generated Documentation</a></li>
-        
-            
-            <li data-order="8"><a href="/rvi_sota_server/dev/client-implementation-example-session.html">Client Implementation Example Session</a></li>
-        
-            
-            <li data-order="7"><a href="/rvi_sota_server/dev/client-implementation.html">Client Implementation Reference</a></li>
-        
-            
-            <li data-order="4"><a href="/rvi_sota_server/dev/architecture.html">SOTA Architecture</a></li>
-        
-            
-            <li data-order="6"><a href="/rvi_sota_server/dev/database-style-guide.html">Database Style Guide</a></li>
-        
-            
-            <li data-order="5"><a href="/rvi_sota_server/dev/scala-style-guide.html">Scala Style Guide</a></li>
-        
-            
-            <li data-order="1"><a href="/rvi_sota_server/dev/api.html">API</a></li>
-        
-    
 <!-- List additional links. It is recommended to add a divider
     e.g. <li class="divider"></li> first to break up the content. -->
 </ul>
@@ -122,13 +138,13 @@
 </div>
 
 <div class="paragraph">
-<p>This is the user manual for the SOTA Admin Web GUI. This is a simple web front-end to the <a href="http://advancedtelematic.github.io/rvi_sota_server/dev/api.html">Core and Resolver APIs</a>. The APIs should be considered the canonical interface.</p>
+<p>This is the user manual for the SOTA Admin Web GUI. This is a simple web front-end to the <a href="http://advancedtelematic.github.io/rvi_sota_server/dev/api.html">Core, Resolver, and Device Registry APIs</a>. The APIs should be considered the canonical interface.</p>
 </div>
 <div class="sect1">
 <h2 id="signing-in">Signing in</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The default username is <code>genivi</code>, and the default password is <code>genivirocks!</code>. The url of the server depends on where and how it was deployed; a local deployment using sbt will be at <a href="http://localhost:9000" class="bare">http://localhost:9000</a>; a docker deployment will be on port 80.</p>
+<p>The default username is <code>genivi</code>, and the default password is <code>genivirocks!</code>. The web UI will be at <a href="http://localhost:9000" class="bare">http://localhost:9000</a> by default.</p>
 </div>
 </div>
 </div>
@@ -266,7 +282,7 @@ You might need to manually refresh the details page.
 
             <div class="row">
                 <div id="footer" class="col-sm-12">
-                    Documentation for <a href="https://github.com/PDXostc/rvi_sota_server">GENIVI SOTA Project</a>
+                    Documentation for <a href="https://github.com/advancedtelematic/rvi_sota_server">GENIVI SOTA Project</a>
 
                 </div>
             </div>

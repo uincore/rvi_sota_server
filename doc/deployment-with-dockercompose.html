@@ -36,12 +36,9 @@
 
         
             
-                <li class="nav-header">Documentation</li>
+                <li class="nav-header">Getting Started</li>
             
-            <li data-order=""><a href="/rvi_sota_server/doc/deployment-with-dockercompose.html">Deployment with docker-compose</a></li>
-        
-            
-            <li data-order="6"><a href="/rvi_sota_server/doc/contributing.html">Contributing</a></li>
+            <li data-order="2"><a href="/rvi_sota_server/doc/deployment-with-dockercompose.html">Deployment with docker-compose</a></li>
         
             
             <li data-order="3"><a href="/rvi_sota_server/doc/admin-gui-user-guide.html">Admin GUI Guide</a></li>
@@ -55,7 +52,54 @@
 
         
             
-                <li class="nav-header">Security</li>
+                <li class="nav-header">Developers</li>
+            
+            <li data-order="10"><a href="/rvi_sota_server/dev/generated-documentation.html">Auto-generated Documentation</a></li>
+        
+            
+            <li data-order="4"><a href="/rvi_sota_server/dev/architecture.html">SOTA Architecture</a></li>
+        
+            
+            <li data-order="1"><a href="/rvi_sota_server/dev/contributing.html">Contributing</a></li>
+        
+            
+            <li data-order="6"><a href="/rvi_sota_server/dev/database-style-guide.html">Database Style Guide</a></li>
+        
+            
+            <li data-order="5"><a href="/rvi_sota_server/dev/scala-style-guide.html">Scala Style Guide</a></li>
+        
+            
+            <li data-order="1"><a href="/rvi_sota_server/dev/api.html">API</a></li>
+        
+    
+        
+        
+
+        
+            
+                <li class="nav-header">Client Documentation</li>
+            
+            <li data-order="3"><a href="/rvi_sota_server/cli/client-commands-and-events-reference.html">Client commands and events API reference</a></li>
+        
+            
+            <li data-order="1"><a href="/rvi_sota_server/cli/introduction.html">Introduction</a></li>
+        
+            
+            <li data-order="2"><a href="/rvi_sota_server/cli/client-startup-and-configuration.html">Client Startup and Configuration</a></li>
+        
+            
+            <li data-order="8"><a href="/rvi_sota_server/cli/client-implementation-example-session.html">RVI Client Implementation Example Session</a></li>
+        
+            
+            <li data-order="7"><a href="/rvi_sota_server/cli/client-implementation.html">RVI Client Implementation Reference</a></li>
+        
+    
+        
+        
+
+        
+            
+                <li class="nav-header">Security Approach</li>
             
             <li data-order=""><a href="/rvi_sota_server/sec/security-threats-mitigations.html">Security Threats & Mitigations</a></li>
         
@@ -77,34 +121,6 @@
         
             
             <li data-order="4"><a href="/rvi_sota_server/ref/requirements.html">Requirements</a></li>
-        
-    
-        
-        
-
-        
-            
-                <li class="nav-header">Developers</li>
-            
-            <li data-order="10"><a href="/rvi_sota_server/dev/generated-documentation.html">Auto-generated Documentation</a></li>
-        
-            
-            <li data-order="8"><a href="/rvi_sota_server/dev/client-implementation-example-session.html">Client Implementation Example Session</a></li>
-        
-            
-            <li data-order="7"><a href="/rvi_sota_server/dev/client-implementation.html">Client Implementation Reference</a></li>
-        
-            
-            <li data-order="4"><a href="/rvi_sota_server/dev/architecture.html">SOTA Architecture</a></li>
-        
-            
-            <li data-order="6"><a href="/rvi_sota_server/dev/database-style-guide.html">Database Style Guide</a></li>
-        
-            
-            <li data-order="5"><a href="/rvi_sota_server/dev/scala-style-guide.html">Scala Style Guide</a></li>
-        
-            
-            <li data-order="1"><a href="/rvi_sota_server/dev/api.html">API</a></li>
         
     
 <!-- List additional links. It is recommended to add a divider
@@ -193,6 +209,32 @@
 </div>
 </div>
 <div class="sect1">
+<h2 id="connecting-a-client">Connecting a client</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once you have the server up and running, you&#8217;ll probably want to set up a client and get it talking to the server. Instructions for building a binary are at <a href="https://github.com/advancedtelematic/rvi_sota_client">the rvi_sota_client repo</a>.</p>
+</div>
+<div class="paragraph">
+<p>Once you have a binary on a client device, you will need to create a device in the SOTA server UI, and then configure the client to use the device ID you just created. Creating the device is straightforward; log into the admin UI (user: genivi, password: genivirocks!), click the Vehicles tab, and add a new one.</p>
+</div>
+<div class="paragraph">
+<p>To configure the client, please take a look at the detailed configuration instructions available <a href="../cli/client-startup-and-configuration.html">here</a>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you want RVI communication, you&#8217;ll also need to configure your client RVI node with the appropriate device ID. Edit the <strong>DEVICE_ID</strong> environment variable in client-rvi.yml to match the device you just created, then restart the client RVI node.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="cloud-deployment">Cloud deployment</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -210,7 +252,7 @@
 
             <div class="row">
                 <div id="footer" class="col-sm-12">
-                    Documentation for <a href="https://github.com/PDXostc/rvi_sota_server">GENIVI SOTA Project</a>
+                    Documentation for <a href="https://github.com/advancedtelematic/rvi_sota_server">GENIVI SOTA Project</a>
 
                 </div>
             </div>
