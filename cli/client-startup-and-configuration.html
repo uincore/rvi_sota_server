@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+
+        <title>GENIVI SOTA Project : Client Startup and Configuration</title>
+        <meta name="description" content="Software Updates Over the Air">
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/rvi_sota_server/css/main.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+    </head>
+    <body>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div id="header" class="col-sm-12">
+                    <h4><img src="/rvi_sota_server/images/icon-logo.png"> <a class="brand" href="/rvi_sota_server/">GENIVI SOTA Project</a> / 
+    Software Updates Over the Air
+</h4>
+
+                </div>
+            </div>
+
+            <div class="row">
+                
+                
+                    <div id="navigation" class="col-sm-3">
+                        <ul class="nav nav-list">
+    <li><a href="/rvi_sota_server/">Home</a></li>
+    
+        
+        
+
+        
+            
+                <li class="nav-header">Getting Started</li>
+            
+            <li data-order="2"><a href="/rvi_sota_server/doc/deployment-with-dockercompose.html">Deployment with docker-compose</a></li>
+        
+            
+            <li data-order="3"><a href="/rvi_sota_server/doc/admin-gui-user-guide.html">Admin GUI Guide</a></li>
+        
+            
+            <li data-order="1"><a href="/rvi_sota_server/doc/building-installing.html">Building & Deploying</a></li>
+        
+    
+        
+        
+
+        
+            
+                <li class="nav-header">Developers</li>
+            
+            <li data-order="10"><a href="/rvi_sota_server/dev/generated-documentation.html">Auto-generated Documentation</a></li>
+        
+            
+            <li data-order="4"><a href="/rvi_sota_server/dev/architecture.html">SOTA Architecture</a></li>
+        
+            
+            <li data-order="1"><a href="/rvi_sota_server/dev/contributing.html">Contributing</a></li>
+        
+            
+            <li data-order="6"><a href="/rvi_sota_server/dev/database-style-guide.html">Database Style Guide</a></li>
+        
+            
+            <li data-order="5"><a href="/rvi_sota_server/dev/scala-style-guide.html">Scala Style Guide</a></li>
+        
+            
+            <li data-order="1"><a href="/rvi_sota_server/dev/api.html">API</a></li>
+        
+    
+        
+        
+
+        
+            
+                <li class="nav-header">Client Documentation</li>
+            
+            <li data-order="3"><a href="/rvi_sota_server/cli/client-commands-and-events-reference.html">Client commands and events API reference</a></li>
+        
+            
+            <li data-order="1"><a href="/rvi_sota_server/cli/introduction.html">Introduction</a></li>
+        
+            
+            <li data-order="2"><a href="/rvi_sota_server/cli/client-startup-and-configuration.html">Client Startup and Configuration</a></li>
+        
+            
+            <li data-order="8"><a href="/rvi_sota_server/cli/client-implementation-example-session.html">RVI Client Implementation Example Session</a></li>
+        
+            
+            <li data-order="7"><a href="/rvi_sota_server/cli/client-implementation.html">RVI Client Implementation Reference</a></li>
+        
+    
+        
+        
+
+        
+            
+                <li class="nav-header">Security Approach</li>
+            
+            <li data-order=""><a href="/rvi_sota_server/sec/security-threats-mitigations.html">Security Threats & Mitigations</a></li>
+        
+            
+            <li data-order=""><a href="/rvi_sota_server/sec/whitelisted-interactions.html">Whitelisted Interactions</a></li>
+        
+    
+        
+        
+
+        
+            
+                <li class="nav-header">Reference</li>
+            
+            <li data-order=""><a href="/rvi_sota_server/ref/dependencies.html">Dependencies</a></li>
+        
+            
+            <li data-order="5"><a href="/rvi_sota_server/ref/use-cases.html">Use Cases</a></li>
+        
+            
+            <li data-order="4"><a href="/rvi_sota_server/ref/requirements.html">Requirements</a></li>
+        
+    
+<!-- List additional links. It is recommended to add a divider
+    e.g. <li class="divider"></li> first to break up the content. -->
+</ul>
+
+                    </div>
+
+                    <div id="content" class="col-sm-9">
+                        <div id="content" class="col-sm-10">
+                            <div class="page-header">
+    <h2>Client Startup and Configuration
+        
+    </h2>
+</div>
+
+<div class="sect1">
+<h2 id="starting-the-sota-client">Starting the SOTA client</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In general, the SOTA client should be run at startup, as a service. For example, if you&#8217;re using systemd you would want a service file like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example: systemd service file</div>
+<div class="content">
+<pre>[Unit]
+Description=SOTA Client
+Wants=network-online.target
+After=network.target network-online.target
+Requires=network-online.target
+
+[Service]
+RestartSec=5
+Restart=on-failure
+Environment="RUST_LOG=info"
+DefaultTimeoutStopSec=5
+ExecStart=/usr/bin/sota_client --config /etc/sota.toml
+
+[Install]
+WantedBy=multi-user.target</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Systemd is not a requirement, of course; you can use whatever startup system you like, or just run directly from the command line to test.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sota-client-config-file-guide">SOTA Client config file guide</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The config file for the SOTA client is in TOML format, and can be invoked at startup with <code>sota_client  --config /path/to/config_file.toml</code>. Example config files for use with <a href="https://github.com/advancedtelematic/rvi_sota_client/raw/master/tests/genivi.sota.toml">RVI</a> or <a href="https://github.com/advancedtelematic/rvi_sota_client/raw/master/tests/sota.toml">HTTP</a> transport are available in the <a href="https://github.com/advancedtelematic/rvi_sota_client/">rvi_sota_client</a> repo.</p>
+</div>
+<div class="sect2">
+<h3 id="auth">[auth]</h3>
+<div class="paragraph">
+<p>This section is required for connection to an SOTA server that implements authentication. It needs to be the first section of the config file. If you are not using authentication, or if you are using RVI transport for authentication, you should <strong>delete</strong> this section entirely.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[auth]
+server = "https://auth-plus.gw.prod01.advancedtelematic.com" <i class="conum" data-value="1"></i><b>(1)</b>
+client_id = "bf66425f-d4d6-422b-b510-7c7f178af9fe" <i class="conum" data-value="2"></i><b>(2)</b>
+client_secret = "hr8nEWzQc9" <i class="conum" data-value="2"></i><b>(2)</b>
+credentials_file = "/opt/sota/credentials.toml" <i class="conum" data-value="3"></i><b>(3)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The URL of the auth server.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>A unique client ID and secret for this device.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>If this value is defined, SOTA client will check this file for auth credentials first, and use the credentials it finds there. If the file does not exist, it will be created with the <code>client_id</code> and <code>client_secret</code> above.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="core">[core]</h3>
+<div class="paragraph">
+<p>This is simply the URL of the core SOTA update server.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[core]
+server = "https://sota-core.gw.prod01.advancedtelematic.com"</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="device">[device]</h3>
+<div class="paragraph">
+<p>This section contains device-specific configuration.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[device]
+uuid = "123e4567-e89b-12d3-a456-426655440000" <i class="conum" data-value="1"></i><b>(1)</b>
+vin = "" <i class="conum" data-value="2"></i><b>(2)</b>
+system_info = "system_info.sh" <i class="conum" data-value="3"></i><b>(3)</b>
+polling_interval = 10 <i class="conum" data-value="4"></i><b>(4)</b>
+packages_dir = "/tmp/" <i class="conum" data-value="5"></i><b>(5)</b>
+package_manager = "deb" <i class="conum" data-value="6"></i><b>(6)</b>
+certificates_path = "/tmp/sota_certificates" <i class="conum" data-value="7"></i><b>(7)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The UUID of the device. This is assigned by ATS Garage upon device creation, and should not be changed.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The device&#8217;s VIN, if it has one. Deprecated feature; this value is not used by the current version of ATS Garage.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The script to use to gather system information.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The frequency, in seconds, with which the SOTA client should poll the server for updates.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The location SOTA Client should use for temporary package storage until they are processed by the software loading manager.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The software loading manager backend to use. Possible values are <code>deb</code>, <code>rpm</code>, and <code>off</code>. If an external software loading manager is in use, this should be set to <code>off</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>The certificate authorities SOTA Client trusts. Defaults are taken from Mozilla Servo.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="network">[network]</h3>
+<div class="paragraph">
+<p>This section contains network configuration information. Some values may be ignored if the corresponding communication methods aren&#8217;t enabled.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[network]
+http_server = "127.0.0.1:8080" <i class="conum" data-value="1"></i><b>(1)</b>
+socket_commands_path = "/tmp/sota-commands.socket" <i class="conum" data-value="2"></i><b>(2)</b>
+socket_events_path = "/tmp/sota-events.socket" <i class="conum" data-value="3"></i><b>(3)</b>
+websocket_server = "127.0.0.1:9081" <i class="conum" data-value="4"></i><b>(4)</b>
+rvi_edge_server = "127.0.0.1:9080" <i class="conum" data-value="5"></i><b>(5)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The host and port the client should listen on for commands if the http gateway is enabled in the [gateway] section.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The name of the unix domain socket to be used for receiving commands, if the socket gateway is enabled in the [gateway] section.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The name of the unix domain socket to be used for sending events, if the socket gateway is enabled in the [gateway] section.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The host and port to listen for local websocket connections on. Could be used, for example, for integration with an HMI.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The host and port the client should listen for RVI messages on, if the rvi gateway is enabled in the [gateway] section.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gateway">[gateway]</h3>
+<div class="paragraph">
+<p>The SOTA Client communicates with the device&#8217;s software loading manager (or other interested parties) through various gateways. For more details on how this works, please see the <a href="../cli/client-commands-and-events-reference.html">Client commands and events API reference</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[gateway]
+console = false <i class="conum" data-value="1"></i><b>(1)</b>
+dbus = false
+http = false <i class="conum" data-value="2"></i><b>(2)</b>
+rvi = false
+socket = false <i class="conum" data-value="3"></i><b>(3)</b>
+websocket = true</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>REPL mode, for debug use only.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Simple http server, for sending commands to the client remotely. Note that this does <em>not</em> affect how the client communicates with the server.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Unix domain sockets for local communication.</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="optional-gateway-rvi">Optional gateway: [rvi]</h4>
+<div class="paragraph">
+<p>Remote Vehicle Interaction (RVI) is an open source infrastructure developed by GENIVI and Jaguar Land Rover to power the next generation of connected vehicle services. This section contains values for configuration of RVI nodes. Note that having this section defined does not imply that RVI will be used; if the RVI gateway is turned off in the <code>[gateway]</code> section, this is ignored.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[rvi]
+client = "http://127.0.0.1:8901"
+storage_dir = "/var/sota"
+timeout = 20</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="optional-gateway-dbus">Optional gateway: [dbus]</h4>
+<div class="paragraph">
+<p>This section contains values for dbus configuration, using the GENIVI software loading manager&#8217;s names as the default. Note that having this section defined does not imply that dbus will be used; if the dbus gateway is turned off in the <code>[gateway]</code> section, this is ignored.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[dbus]
+name = "org.genivi.SotaClient"
+path = "/org/genivi/SotaClient"
+interface = "org.genivi.SotaClient"
+software_manager = "org.genivi.SoftwareLoadingManager"
+software_manager_path = "/org/genivi/SoftwareLoadingManager"
+timeout = 60</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+
+            <div class="row">
+                <div id="footer" class="col-sm-12">
+                    Documentation for <a href="https://github.com/advancedtelematic/rvi_sota_server">GENIVI SOTA Project</a>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function orderNav() {
+                var list,
+                    section,
+                    header,
+                    sections = [],
+                    lists = {},
+                    headers = {};
+
+                var navUl = document.querySelectorAll('#navigation ul')[0],
+                    navLis = document.querySelectorAll('#navigation ul li');
+
+                if (!navUl) return;
+
+                for (var i = 0; i < navLis.length; i++) {
+                    var order, li = navLis[i];
+
+                    if (li.classList.contains('nav-header')) {
+                        section = li.textContent || li.innerText;
+                        sections.push(section);
+                        headers[section] = li;
+                        continue;
+                    }
+
+                    if (!lists[section]) {
+                        lists[section] = [];
+                    }
+
+                    order = parseFloat(li.getAttribute('data-order'))
+                    lists[section].push([order, li]);
+                }
+
+                for (var i = 0; i < sections.length; i++) {
+                    section = sections[i];
+                    list = lists[section].sort(function(a, b) {
+                        return a[0] - b[0];
+                    });
+
+                    if (header = headers[section]) {
+                        navUl.appendChild(header);
+                    }
+                    for (var j = 0; j < list.length; j++) {
+                        navUl.appendChild(list[j][1]);
+                    }
+                }
+            }
+
+            if (document.querySelectorAll) orderNav();
+        </script>
+        
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-69301419-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+        
+    </body>
+</html>
