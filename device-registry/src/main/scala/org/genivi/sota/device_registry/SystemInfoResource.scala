@@ -35,6 +35,7 @@ class SystemInfoResource(deviceNamespaceAuthorizer: Directive1[Uuid])
                       .filter(r => JsonMatcher.compare(data, r.groupInfo)._1.equals(r.groupInfo))
                       .map(_.id)
       res        <- DBIO.sequence(groups.map { groupId =>
+                      println(s"ADDING DEVICE $deviceUuid to group $groupId")
                       GroupMemberRepository.addGroupMember(groupId, deviceUuid)
                     })
     } yield res
@@ -64,6 +65,8 @@ class SystemInfoResource(deviceNamespaceAuthorizer: Directive1[Uuid])
   def updateSystemInfo(uuid: Uuid, data: Json): Route = {
     val f = db.run(SystemInfoRepository.update(uuid, data))
     f.onSuccess { case _ =>
+      println(s"UPDATING GROUP MEMBERSHIP FOR DEVICE $uuid")
+      println(s"NEW SYSTEM INFO: $data")
       updateGroupMembershipsForDevice(uuid, data)
     }
     complete(f)
