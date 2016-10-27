@@ -25,15 +25,7 @@
   "paths": {
     "/devices": {
       "get": {
-        "description": "Get a list of all the devices in a particular namespace in the device registry.",
-        "parameters": [
-          {
-            "name": "namespace",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "description": "Get a list of all the devices in the namespace in the device registry.",
         "responses": {
           "200": {
             "description": "OK",
@@ -49,12 +41,6 @@
       "post": {
         "description": "Register a new device with a name and an ID, get back its UUID",
         "parameters": [
-          {
-            "name": "namespace",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "DeviceT",
             "in": "body",
