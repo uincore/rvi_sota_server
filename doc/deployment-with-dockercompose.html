@@ -79,6 +79,9 @@
             
                 <li class="nav-header">Client Documentation</li>
             
+            <li data-order="2"><a href="/rvi_sota_server/cli/building-the-sota-client.html">Building the SOTA Client</a></li>
+        
+            
             <li data-order="3"><a href="/rvi_sota_server/cli/client-commands-and-events-reference.html">Client commands and events API reference</a></li>
         
             
@@ -209,36 +212,39 @@
 </div>
 </div>
 <div class="sect1">
+<h2 id="cloud-deployment">Cloud deployment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you want to deploy to the cloud, docker-compose can also help you do that. The easiest way is to use <a href="https://docs.docker.com/machine/drivers/aws/">docker-machine&#8217;s AWS driver</a> to create and deploy to a remote host.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="connecting-a-client">Connecting a client</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Once you have the server up and running, you&#8217;ll probably want to set up a client and get it talking to the server. Instructions for building a binary are at <a href="https://github.com/advancedtelematic/rvi_sota_client">the rvi_sota_client repo</a>.</p>
+<p>Once you have the server up and running, you&#8217;ll probably want to set up a client and get it talking to the server. See <a href="../cli/building-the-sota-client.html">Building the SOTA Client</a> for build instructions.</p>
 </div>
 <div class="paragraph">
 <p>Once you have a binary on a client device, you will need to create a device in the SOTA server UI, and then configure the client to use the device ID you just created. Creating the device is straightforward; log into the admin UI (user: genivi, password: genivirocks!), click the Vehicles tab, and add a new one.</p>
 </div>
 <div class="paragraph">
-<p>To configure the client, please take a look at the detailed configuration instructions available <a href="../cli/client-startup-and-configuration.html">here</a>.</p>
+<p>To configure the client to use this UUID, please take a look at the detailed configuration instructions available <a href="../cli/client-startup-and-configuration.html">here</a>.</p>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-If you want RVI communication, you&#8217;ll also need to configure your client RVI node with the appropriate device ID. Edit the <strong>DEVICE_ID</strong> environment variable in client-rvi.yml to match the device you just created, then restart the client RVI node.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="cloud-deployment">Cloud deployment</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="connecting-a-client-with-rvi">Connecting a client with RVI</h3>
 <div class="paragraph">
-<p>If you want to deploy to the cloud, docker-compose can also help you do that. The easiest way is to use <a href="https://docs.docker.com/machine/drivers/aws/">docker-machine&#8217;s AWS driver</a> to create and deploy to a remote host.</p>
+<p>If you want RVI communication, you&#8217;ll also need to configure your client RVI node with the appropriate device ID. Edit the <strong>DEVICE_ID</strong> environment variable in client-rvi.yml to match the device you just created, then restart the client RVI node.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="genivi-software-loading-manager">GENIVI Software Loading Manager</h3>
+<div class="paragraph">
+<p>See <a href="https://github.com/GENIVI/genivi_swm">genivi_swm</a> on how to run the Software Loading Manager demo. It also contains instructions for creating an update image, which can be uploaded as a package to the SOTA Server.</p>
+</div>
+<div class="paragraph">
+<p>Now you can create an update campaign on the SOTA Server, using the same update_id as the uuid in the update image you created. Also, as the genivi_swm demo runs as root, remember to run the <code>sota_client</code> as root as well so that they can communicate on the same system bus.</p>
+</div>
 </div>
 </div>
 </div>

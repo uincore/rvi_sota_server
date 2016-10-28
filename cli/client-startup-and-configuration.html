@@ -79,6 +79,9 @@
             
                 <li class="nav-header">Client Documentation</li>
             
+            <li data-order="2"><a href="/rvi_sota_server/cli/building-the-sota-client.html">Building the SOTA Client</a></li>
+        
+            
             <li data-order="3"><a href="/rvi_sota_server/cli/client-commands-and-events-reference.html">Client commands and events API reference</a></li>
         
             
@@ -172,12 +175,12 @@ WantedBy=multi-user.target</pre>
 <h2 id="sota-client-config-file-guide">SOTA Client config file guide</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The config file for the SOTA client is in TOML format, and can be invoked at startup with <code>sota_client  --config /path/to/config_file.toml</code>. Example config files for use with <a href="https://github.com/advancedtelematic/rvi_sota_client/raw/master/tests/genivi.sota.toml">RVI</a> or <a href="https://github.com/advancedtelematic/rvi_sota_client/raw/master/tests/sota.toml">HTTP</a> transport are available in the <a href="https://github.com/advancedtelematic/rvi_sota_client/">rvi_sota_client</a> repo.</p>
+<p>The config file for the SOTA client is in TOML format, and can be invoked at startup with <code>sota_client  --config /path/to/config_file.toml</code>. Example config files for use with <a href="https://github.com/advancedtelematic/rvi_sota_client/raw/master/tests/genivi.sota.toml">RVI</a> or <a href="https://github.com/advancedtelematic/rvi_sota_client/raw/master/tests/sota.toml">HTTP</a> transport are available in the <a href="https://github.com/advancedtelematic/rvi_sota_client/">rvi_sota_client</a> repo. If you&#8217;re using a commercial service like <a href="https://app.atsgarage.com">ATS Garage</a>, you&#8217;ve already been provided with a config file; you can use that as a basis for any changes you need to make.</p>
 </div>
 <div class="sect2">
 <h3 id="auth">[auth]</h3>
 <div class="paragraph">
-<p>This section is required for connection to an SOTA server that implements authentication. It needs to be the first section of the config file. If you are not using authentication, or if you are using RVI transport for authentication, you should <strong>delete</strong> this section entirely.</p>
+<p>This section is required for connection to a SOTA server that implements authentication. It needs to be the first section of the config file. If you are not using authentication, or if you are using RVI transport for authentication, you should <strong>delete</strong> this section entirely.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -192,7 +195,7 @@ credentials_file = "/opt/sota/credentials.toml" <i class="conum" data-value="3">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The URL of the auth server.</td>
+<td>The URL of the auth server. Example given is from <a href="https://app.atsgarage.com">ATS Garage</a>.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -208,13 +211,31 @@ credentials_file = "/opt/sota/credentials.toml" <i class="conum" data-value="3">
 <div class="sect2">
 <h3 id="core">[core]</h3>
 <div class="paragraph">
-<p>This is simply the URL of the core SOTA update server.</p>
+<p>This section contains configuration for communicating with the Core server.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>[core]
-server = "https://sota-core.gw.prod01.advancedtelematic.com"</pre>
+server = "https://sota-core.gw.prod01.advancedtelematic.com" <i class="conum" data-value="1"></i><b>(1)</b>
+polling = true <i class="conum" data-value="2"></i><b>(2)</b>
+polling_sec = 10 <i class="conum" data-value="3"></i><b>(3)</b></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The URL of the Core server. Example given is from <a href="https://app.atsgarage.com">ATS Garage</a>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Boolean indicating whether the Core server should be polled for new updates. You should turn this off if you are using RVI, or if there is an external component on your device using the <a href="../cli/client-commands-and-events-reference.html#commands">GetUpdateRequests command</a>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Set the polling frequency in seconds. This will have no effect if polling is off.</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -226,42 +247,32 @@ server = "https://sota-core.gw.prod01.advancedtelematic.com"</pre>
 <div class="content">
 <pre>[device]
 uuid = "123e4567-e89b-12d3-a456-426655440000" <i class="conum" data-value="1"></i><b>(1)</b>
-vin = "" <i class="conum" data-value="2"></i><b>(2)</b>
-system_info = "system_info.sh" <i class="conum" data-value="3"></i><b>(3)</b>
-polling_interval = 10 <i class="conum" data-value="4"></i><b>(4)</b>
-packages_dir = "/tmp/" <i class="conum" data-value="5"></i><b>(5)</b>
-package_manager = "deb" <i class="conum" data-value="6"></i><b>(6)</b>
-certificates_path = "/tmp/sota_certificates" <i class="conum" data-value="7"></i><b>(7)</b></pre>
+system_info = "system_info.sh" <i class="conum" data-value="2"></i><b>(2)</b>
+packages_dir = "/tmp/" <i class="conum" data-value="3"></i><b>(3)</b>
+package_manager = "off" <i class="conum" data-value="4"></i><b>(4)</b>
+certificates_path = "/tmp/sota_certificates" <i class="conum" data-value="5"></i><b>(5)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The UUID of the device. This is assigned by ATS Garage upon device creation, and should not be changed.</td>
+<td>The UUID of the device. This is usually assigned by the Core server on device creation. With <a href="https://app.atsgarage.com">ATS Garage</a>, this will be provided in the config file available for download.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The device&#8217;s VIN, if it has one. Deprecated feature; this value is not used by the current version of ATS Garage.</td>
+<td>The script to use to gather system information. By default, this uses <a href="https://github.com/advancedtelematic/rvi_sota_client/blob/master/run/system_info.sh">system_info.sh</a>.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The script to use to gather system information.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>The frequency, in seconds, with which the SOTA client should poll the server for updates.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
 <td>The location SOTA Client should use for temporary package storage until they are processed by the software loading manager.</td>
 </tr>
 <tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
 <td>The software loading manager backend to use. Possible values are <code>deb</code>, <code>rpm</code>, and <code>off</code>. If an external software loading manager is in use, this should be set to <code>off</code>.</td>
 </tr>
 <tr>
-<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
 <td>The certificate authorities SOTA Client trusts. Defaults are taken from Mozilla Servo.</td>
 </tr>
 </table>
@@ -275,7 +286,7 @@ certificates_path = "/tmp/sota_certificates" <i class="conum" data-value="7"></i
 <div class="listingblock">
 <div class="content">
 <pre>[network]
-http_server = "127.0.0.1:8080" <i class="conum" data-value="1"></i><b>(1)</b>
+http_server = "127.0.0.1:8888" <i class="conum" data-value="1"></i><b>(1)</b>
 socket_commands_path = "/tmp/sota-commands.socket" <i class="conum" data-value="2"></i><b>(2)</b>
 socket_events_path = "/tmp/sota-events.socket" <i class="conum" data-value="3"></i><b>(3)</b>
 websocket_server = "127.0.0.1:9081" <i class="conum" data-value="4"></i><b>(4)</b>
