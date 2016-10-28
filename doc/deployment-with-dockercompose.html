@@ -245,6 +245,20 @@
 <div class="paragraph">
 <p>Now you can create an update campaign on the SOTA Server, using the same update_id as the uuid in the update image you created. Also, as the genivi_swm demo runs as root, remember to run the <code>sota_client</code> as root as well so that they can communicate on the same system bus.</p>
 </div>
+<div class="sect3">
+<h4 id="quickstart">Quickstart</h4>
+<div class="listingblock">
+<div class="content">
+<pre>    git clone https://github.com/GENIVI/genivi_swm
+    cd genivi_swm
+    export PYTHONPATH="${PWD}/common/"
+    python software_loading_manager/software_loading_manager.py</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As the genivi_swm demo runs as root, remember to run the <code>sota_client</code> as root as well so that they can communicate on the same system bus.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
