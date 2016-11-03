@@ -301,7 +301,44 @@
 <h2 id="building-locally">Building locally</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Assuming you have Rust and Cargo installed, <code>cargo build --release</code> should work. As a first troubleshooting step, make sure your Rust version matches the one that the Docker image uses; you can find that in the <a href="https://github.com/advancedtelematic/dockerfiles/blob/master/rust/Dockerfile">Dockerfile</a>.</p>
+<p>As long as you&#8217;re on a platform that Rust supports, you should be able to build the client. The general steps are:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Install rust with <a href="https://www.rustup.rs/">rustup</a></p>
+</li>
+<li>
+<p>Make sure you have the necessary dependencies installed, particularly <code>libdbus-dev</code> and <code>libssl-dev</code></p>
+</li>
+<li>
+<p>Clone the <a href="https://github.com/advancedtelematic/rvi_sota_client">client repo</a> (preferably the stable branch)</p>
+</li>
+<li>
+<p>Compile using <code>cargo build --release</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>That&#8217;s really it! At the moment, there is one extra step: we need to pin a particular version of <a href="https://github.com/hyperium/hyper">hyper</a>, a Rust HTTP library, due to some ssl fixes that are not yet in the release branches. There&#8217;s a Makefile target for that, though; just run <code>make rust-openssl</code> before you build.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example: Building sota_client on a fresh Raspbian install, Raspberry Pi 2</div>
+<div class="content">
+<pre>apt-get update &amp;&amp; apt-get install -y autoconf git libdbus-1-dev libtool openssl \
+  libssl-dev lshw jq
+curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable -y
+export PATH=/root/.cargo/bin:$PATH
+git clone https://github.com/advancedtelematic/rvi_sota_client.git -b stable
+cd rvi_sota_client
+make rust-openssl
+cargo build --release
+cp run/sota_certificates /etc/
+cp run/system_info.sh /usr/bin/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once you have the client built, you&#8217;ll probably want to take a close look at the <a href="../cli/client-startup-and-configuration.html">configuration guide</a> and perhaps the <a href="../cli/client-commands-and-events-reference.html">commands and events reference</a>.</p>
 </div>
 </div>
 </div>
