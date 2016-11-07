@@ -1204,7 +1204,8 @@
             "InFlight",
             "Pending",
             "Canceled",
-            "Failed"
+            "Failed",
+            "Finished"
           ]
         }
       }
