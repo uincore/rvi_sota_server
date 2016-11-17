@@ -228,19 +228,10 @@
             }
           }
         }
-      }
-    },
-    "/device_groups/{groupId}": {
-      "put": {
+      },
+      "post": {
         "description": "Create a group for a namespace/groupName entry",
         "parameters": [
-          {
-            "name": "groupId",
-            "description": "The uuid of the group",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "groupName",
             "description": "The name of the group of devices",
@@ -256,17 +247,10 @@
         }
       }
     },
-    "/device_groups/{groupId}/group_info": {
+    "/device_groups/group_info": {
       "post": {
         "description": "Create a group info entry for a namespace/groupName entry",
         "parameters": [
-          {
-            "name": "groupId",
-            "description": "The uuid of the group",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "groupName",
             "description": "The name of the group of devices",
@@ -289,7 +273,9 @@
             "description": "Created"
           }
         }
-      },
+      }
+    },
+    "/device_groups/{groupId}/group_info": {
       "put": {
         "description": "Update the group info entry for a namespace/groupName entry",
         "parameters": [
