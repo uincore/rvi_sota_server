@@ -1,0 +1,53 @@
+version: '2'
+services:
+
+  sota-client:
+    image: advancedtelematic/sota-client
+    links:
+      - device-registry
+      - core
+      - rvi_device
+    ports:
+      - 8888:8888
+      - 9080:9080
+    command: bash -c 'sleep 30 && /usr/bin/run.sh'
+    environment:
+      AUTH_SECTION: 'false'
+
+      CORE_SERVER: 'http://core:8080'
+      CORE_POLLING: 'false'
+      CORE_POLLING_SEC: 10
+
+      DBUS_NAME: org.genivi.SotaClient
+      DBUS_PATH: /org/genivi/SotaClient
+      DBUS_INTERFACE: org.genivi.SotaClient
+      DBUS_SOFTWARE_MANAGER: org.genivi.SoftwareLoadingManager
+      DBUS_SOFTWARE_MANAGER_PATH: /org/genivi/SoftwareLoadingManager
+      DBUS_TIMEOUT: 60
+
+      DEVICE_PACKAGES_DIR: /tmp/
+      DEVICE_PACKAGE_MANAGER: off
+      DEVICE_CERTIFICATES_PATH: /etc/sota_certificates
+      DEVICE_SYSTEM_INFO: system_info.sh
+
+      GATEWAY_CONSOLE: 'false'
+      GATEWAY_DBUS: 'true'
+      GATEWAY_HTTP: 'false'
+      GATEWAY_RVI: 'true'
+      GATEWAY_SOCKET: 'false'
+      GATEWAY_WEBSOCKET: 'false'
+
+      NETWORK_HTTP_SERVER: 127.0.0.1:8888
+      NETWORK_RVI_EDGE_SERVER: 127.0.0.1:9080
+      NETWORK_SOCKET_COMMANDS_PATH: /tmp/sota-commands.socket
+      NETWORK_SOCKET_EVENTS_PATH: /tmp/sota-events.socket
+      NETWORK_WEBSOCKET_SERVER: 127.0.0.1:3012
+
+      REGISTRY_SERVER: 'http://device_registry:8083'
+      DEVICE_UUID: 31714439-8d76-4db3-90de-640c005f76b5
+
+      DEVICE_PACKAGE_MANAGER: deb
+
+      RVI_CLIENT: http://rvi_device:8901
+      RVI_STORAGE_DIR: /var/sota
+      RVI_TIMEOUT: 20

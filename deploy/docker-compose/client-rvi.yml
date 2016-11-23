@@ -2,15 +2,17 @@ version: '2'
 services:
 
   rvi_device:
-    image: advancedtelematic/rvi:0.5.0
+    image: advancedtelematic/rvi:latest
     stdin_open: true
     depends_on:
       - rvi_backend
+      - sota-client
     expose:
       - 8901
     ports:
       - 8901:8901
     command: device
     environment:
-      DEVICE_ID: aaaaaaaa-1111-bbbb-2222-ccccccccccc
+      DEVICE_ID: 31714439-8d76-4db3-90de-640c005f76b5
       RVI_BACKEND: "rvi_backend"
+      RVI_LOGLEVEL: debug
