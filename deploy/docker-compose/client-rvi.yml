@@ -2,7 +2,8 @@ version: '2'
 services:
 
   rvi_device:
-    image: advancedtelematic/rvi:0.5.0
+    image: advancedtelematic/rvi:latest
+    network_mode: 'host'
     stdin_open: true
     depends_on:
       - rvi_backend
@@ -12,5 +13,6 @@ services:
       - 8901:8901
     command: device
     environment:
-      DEVICE_ID: aaaaaaaa-1111-bbbb-2222-ccccccccccc
-      RVI_BACKEND: "rvi_backend"
+      DEVICE_ID: 24b04cdd-1410-43f0-8690-ca8fac1ccd58
+      RVI_BACKEND: "localhost"
+      RVI_LOGLEVEL: debug
