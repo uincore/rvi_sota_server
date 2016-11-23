@@ -3,18 +3,19 @@ services:
 
   sota-client:
     image: advancedtelematic/sota-client
-    links:
-      - device-registry
-      - core
-      - rvi_device
+    network_mode: host
+    #links:
+    #- device-registry
+    #- core
+    #- rvi_device
     ports:
       - 8888:8888
       - 9080:9080
-    command: bash -c 'sleep 30 && /usr/bin/run.sh'
+    command: bash -c 'sleep 10 && /usr/bin/run.sh'
     environment:
       AUTH_SECTION: 'false'
 
-      CORE_SERVER: 'http://core:8080'
+      CORE_SERVER: 'http://localhost:8080'
       CORE_POLLING: 'false'
       CORE_POLLING_SEC: 10
 
@@ -43,11 +44,11 @@ services:
       NETWORK_SOCKET_EVENTS_PATH: /tmp/sota-events.socket
       NETWORK_WEBSOCKET_SERVER: 127.0.0.1:3012
 
-      REGISTRY_SERVER: 'http://device_registry:8083'
-      DEVICE_UUID: 31714439-8d76-4db3-90de-640c005f76b5
+      REGISTRY_SERVER: 'http://localhost:8083'
+      DEVICE_UUID: 6f9372ec-e073-465d-80f1-febb175cb304
 
       DEVICE_PACKAGE_MANAGER: deb
 
-      RVI_CLIENT: http://rvi_device:8901
+      RVI_CLIENT: http://127.0.0.1:8901
       RVI_STORAGE_DIR: /var/sota
       RVI_TIMEOUT: 20

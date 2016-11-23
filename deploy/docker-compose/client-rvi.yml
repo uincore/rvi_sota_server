@@ -3,16 +3,18 @@ services:
 
   rvi_device:
     image: advancedtelematic/rvi:latest
+    network_mode: 'host'
     stdin_open: true
     depends_on:
       - rvi_backend
-      - sota-client
+    #links:
+    # - sota-client-ambassador:sota-client
     expose:
       - 8901
     ports:
       - 8901:8901
     command: device
     environment:
-      DEVICE_ID: 31714439-8d76-4db3-90de-640c005f76b5
-      RVI_BACKEND: "rvi_backend"
+      DEVICE_ID: 6f9372ec-e073-465d-80f1-febb175cb304
+      RVI_BACKEND: "localhost"
       RVI_LOGLEVEL: debug
