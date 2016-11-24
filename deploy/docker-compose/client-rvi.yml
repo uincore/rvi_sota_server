@@ -15,6 +15,6 @@ services:
       - 8901:8901
     command: device
     environment:
-      DEVICE_ID: 6f9372ec-e073-465d-80f1-febb175cb304
+      DEVICE_ID: d3270b21-db7e-4590-aa13-535af6c72417
       RVI_BACKEND: "localhost"
       RVI_LOGLEVEL: debug

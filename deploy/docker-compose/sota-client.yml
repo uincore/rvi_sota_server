@@ -28,12 +28,12 @@ services:
       DBUS_TIMEOUT: 60
 
       DEVICE_PACKAGES_DIR: /tmp/
-      DEVICE_PACKAGE_MANAGER: off
+      DEVICE_PACKAGE_MANAGER: deb
       DEVICE_CERTIFICATES_PATH: /etc/sota_certificates
       DEVICE_SYSTEM_INFO: system_info.sh
 
       GATEWAY_CONSOLE: 'false'
-      GATEWAY_DBUS: 'true'
+      GATEWAY_DBUS: 'false'
       GATEWAY_HTTP: 'false'
       GATEWAY_RVI: 'true'
       GATEWAY_SOCKET: 'false'
@@ -46,9 +46,7 @@ services:
       NETWORK_WEBSOCKET_SERVER: 127.0.0.1:3012
 
       REGISTRY_SERVER: 'http://localhost:8083'
-      DEVICE_UUID: 6f9372ec-e073-465d-80f1-febb175cb304
-
-      DEVICE_PACKAGE_MANAGER: deb
+      DEVICE_UUID: d3270b21-db7e-4590-aa13-535af6c72417
 
       RVI_CLIENT: http://127.0.0.1:8901
       RVI_STORAGE_DIR: /var/sota
