@@ -618,6 +618,11 @@
           "type": "string",
           "format": "dateTime",
           "description": "The last time a device uuid was seen by the SOTA server."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "dateTime",
+          "description": "The time the device was created"
         }
       }
     },
