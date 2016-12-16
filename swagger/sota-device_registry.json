@@ -590,6 +590,37 @@
           }
         }
       }
+    },
+    "/active_device_count": {
+      "get": {
+        "description": "returns count of devices active during the given time interval",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "description": "start time (inclusive)",
+            "required": true,
+            "type": "string",
+            "format": "offsetDateTime"
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "end time (exclusive)",
+            "required": true,
+            "type": "string",
+            "format": "offsetDateTime"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActiveDevicesCount"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -654,6 +685,11 @@
           "type": "string",
           "format": "dateTime",
           "description": "The time the device was created"
+        },
+        "activatedAt": {
+          "type": "string",
+          "format": "dateTime",
+          "description": "The time the device was activated"
         }
       }
     },
@@ -724,6 +760,10 @@
           }
         }
       }
+    },
+    "ActiveDevicesCount": {
+      "type": "integer",
+      "description": "count of active devices (in a given interval)"
     }
   }
 }
