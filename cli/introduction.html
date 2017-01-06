@@ -155,16 +155,19 @@
 <h2 id="understanding-the-reference-client">Understanding the reference client</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The SOTA client is, in a nutshell, a middleman. It receives update notifications from Core, and downloads the update packages. It then passes them to a software loading manager for installation. (For a reference implementation of a software loading manager, see <a href="https://github.com/GENIVI/genivi_swm">the GENIVI SWM</a>). Once the software loading manager is finished, it sends a report on the install, which the SOTA client passes back to Core.</p>
+<p>The SOTA client is, in a nutshell, a middleman. It receives update notifications from Core, and downloads the update packages. It then passes them to a software loading manager (SLM) for installation. (For a reference implementation of an SLM, see <a href="https://github.com/GENIVI/genivi_swm">the GENIVI SWM</a>). Once the software loading manager is finished, it sends a report on the install, which the SOTA client passes back to Core.</p>
 </div>
 <div class="paragraph">
 <p>It does all this through a command/event infrastructure: it broadcasts events, and listens for commands. For more detail, see the <a href="../cli/client-commands-and-events-reference.html">SOTA client command and event reference</a>.</p>
 </div>
 <div class="paragraph">
-<p>A flow for the installation of a single update might look like this (HTTP transport, RVI disabled):</p>
+<p>A flow for the installation of a single update might look like this:</p>
 </div>
-<div class="paragraph">
-<p>Client polls core for update &#8594; Event: UpdatesReceived &#8594; Client downloads update &#8594; Event: DownloadComplete &#8594; Software manager installs update &#8594; SWM sends command to client: SendUpdateReport &#8594; Client reports the status of the install back to the server</p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/client-interaction-sequence-diagram.mermaid.svg" alt="client interaction sequence diagram.mermaid">
+</div>
+<div class="title">Figure 1. Update flow (HTTP transport, RVI disabled)</div>
 </div>
 <div class="paragraph">
 <p>The reference client can communicate with SOTA Core in two ways, configurable on client startup. If you want to use RVI nodes, you can enable RVI communication and disable HTTP communication. If you prefer to let the client communicate with SOTA Core directly over HTTP/HTTPS, it can also do that. See <a href="../cli/client-startup-and-configuration.html">Client Startup and Configuration</a> for detailed configuration information.</p>
