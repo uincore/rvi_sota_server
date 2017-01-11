@@ -16,9 +16,12 @@ import akka.http.scaladsl.util.FastFuture
 import akka.stream.ActorMaterializer
 import org.genivi.sota.data.{Namespace, PackageId, Uuid}
 import akka.http.scaladsl.marshalling.Marshal
+import akka.http.scaladsl.settings.ConnectionPoolSettings
 import cats.syntax.show._
 import org.genivi.sota.http.NamespaceDirectives.nsHeader
 import org.genivi.sota.marshalling.CirceMarshallingSupport
+import org.genivi.sota.rest.ErrorRepresentation
+import akka.http.scaladsl.client.RequestBuilding.Put
 import org.genivi.sota.rest.ErrorRepresentation
 
 import scala.concurrent.Future
@@ -120,6 +123,8 @@ class DefaultExternalResolverClient(baseUri : Uri, resolveUri: Uri, packagesUri:
 
   private[this] val log = Logging( system, "org.genivi.sota.externalResolverClient" )
 
+  private val _http = Http()
+
   override def resolve(namespace: Namespace, packageId: PackageId): Future[Map[Uuid, Set[PackageId]]] = {
     val resolvePath = resolveUri
       .withPath(resolveUri.path)
@@ -162,11 +167,11 @@ class DefaultExternalResolverClient(baseUri : Uri, resolveUri: Uri, packagesUri:
     }
 
   override def setInstalledPackages(device: Uuid, json: io.circe.Json) : Future[Unit] = {
-    import akka.http.scaladsl.client.RequestBuilding.Put
-    import org.genivi.sota.rest.ErrorRepresentation
-
     val uri = vehiclesUri.withPath( vehiclesUri.path / device.show / "packages" )
-    val futureResult = Http().singleRequest( Put(uri, json) ).flatMap {
+
+    val httpSettings = ConnectionPoolSettings(system).withPipeliningLimit(3).withMaxOpenRequests(128)
+
+    val futureResult = _http.singleRequest(Put(uri, json), settings = httpSettings).flatMap {
       case HttpResponse( StatusCodes.NoContent, _, _, _ ) =>
         FastFuture.successful( () )
 
