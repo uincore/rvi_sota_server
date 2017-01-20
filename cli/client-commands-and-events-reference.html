@@ -301,26 +301,29 @@ SendInstalledPackages is intended to send a complete list of all packages on the
 <h2 id="gateways">Gateways</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The commands and events, in general, are the same regardless of the gateway used. The exact invocation method may differ, however, and certain gateways may not support all commands/events.</p>
+<p>Different subsets of commands and events are used in each gateway depending on its purpose.</p>
 </div>
-<div class="sect2">
-<h3 id="d-bus">D-Bus</h3>
-
-</div>
-<div class="sect2">
-<h3 id="unix-domain-socket">Unix domain socket</h3>
-<div class="sect3">
-<h4 id="sendupdatereport">SendUpdateReport</h4>
 <div class="paragraph">
-<p>The Unix domain socket gateway supports a limited version of the SendUpdateReport command. The form of the command over unix domain sockets is <code>SendUpdateReport update_id result_code</code>.</p>
+<p>The Websocket gateway supports subscribing to every event in the client. This gateway is currently used for updating the ATS Garage web interface for example.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP and Console gateways support sending any command to the client, and will receive the final event after interpreting it. These gateways are primarily used for testing.</p>
+</div>
+<div class="paragraph">
+<p>The D-Bus and Socket gateways are intended for listening for <code>DownloadComplete</code> events to inform an external installer of available updates. This installer can then reply to the client with the installation outcome (with a <code>SendUpdateReport</code> command) and the currently installed packages (with a <code>SendInstalledPackages</code> command).</p>
+</div>
+<div class="sect3">
+<h4 id="sendupdatereport-command">SendUpdateReport command</h4>
+<div class="paragraph">
+<p>The command syntax is: <code>SendUpdateReport update_id result_code</code>, where:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The update ID is the one received from the <code>DownloadComplete</code> message.</p>
+<p>The <code>update_id</code> is the same as that from the <code>DownloadComplete</code> event.</p>
 </li>
 <li>
-<p>The result of the update attempt, either in numberical or verbal form. The possible update codes are enumerated here:</p>
+<p>The <code>result_code</code> matches the following table:</p>
 </li>
 </ul>
 </div>
@@ -332,8 +335,8 @@ SendInstalledPackages is intended to send a complete list of all packages on the
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Numerical</th>
-<th class="tableblock halign-left valign-top">Verbal</th>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Text</th>
 <th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
@@ -442,39 +445,23 @@ SendInstalledPackages is intended to send a complete list of all packages on the
 </table>
 </div>
 <div class="sect3">
-<h4 id="sendinstalledpackages">SendInstalledPackages</h4>
+<h4 id="sendinstalledpackages-command">SendInstalledPackages command</h4>
 <div class="paragraph">
-<p>The syntax for SendInstalledPackages is:</p>
+<p>The command syntax is:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>SendInstalledPackages package1_name package1_version package2_name package2_version [...] packageN_name packageN_version</pre>
+<pre>SendInstalledPackages pkg1_name pkg1_version pkg2_name pkg2_version [...] pkgN_name pkgN_version</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Package names and versions can&#8217;t contain spaces, but there are no other character restrictions. For example, all of the package/versions listed here are valid:</p>
+<p>Note that the package version must be included for each package name, and neither the name nor version may contain spaces. Here is a valid example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>SendInstalledPackages gcc 7.63 Movie&amp;MusicPlayer rc2-beta3 ECU9274927BF82-firmware gitID-2fab572</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Note, however, that all packages must have a version.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="websocket">Websocket</h3>
-
-</div>
-<div class="sect2">
-<h3 id="console">Console</h3>
-
-</div>
-<div class="sect2">
-<h3 id="http">HTTP</h3>
-
 </div>
 </div>
 </div>

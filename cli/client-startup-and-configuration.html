@@ -190,8 +190,7 @@ WantedBy=multi-user.target</pre>
 <pre>[auth]
 server = "https://auth-plus.gw.prod01.advancedtelematic.com" <i class="conum" data-value="1"></i><b>(1)</b>
 client_id = "bf66425f-d4d6-422b-b510-7c7f178af9fe" <i class="conum" data-value="2"></i><b>(2)</b>
-client_secret = "hr8nEWzQc9" <i class="conum" data-value="2"></i><b>(2)</b>
-credentials_file = "/opt/sota/credentials.toml" <i class="conum" data-value="3"></i><b>(3)</b></pre>
+client_secret = "hr8nEWzQc9" <i class="conum" data-value="2"></i><b>(2)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -203,10 +202,6 @@ credentials_file = "/opt/sota/credentials.toml" <i class="conum" data-value="3">
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>A unique client ID and secret for this device.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>If this value is defined, SOTA client will check this file for auth credentials first, and use the credentials it finds there. If the file does not exist, it will be created with the <code>client_id</code> and <code>client_secret</code> above.</td>
 </tr>
 </table>
 </div>
@@ -253,7 +248,8 @@ uuid = "123e4567-e89b-12d3-a456-426655440000" <i class="conum" data-value="1"></
 system_info = "system_info.sh" <i class="conum" data-value="2"></i><b>(2)</b>
 packages_dir = "/tmp/" <i class="conum" data-value="3"></i><b>(3)</b>
 package_manager = "off" <i class="conum" data-value="4"></i><b>(4)</b>
-certificates_path = "/tmp/sota_certificates" <i class="conum" data-value="5"></i><b>(5)</b></pre>
+auto_download = true <i class="conum" data-value="5"></i><b>(5)</b>
+certificates_path = "/tmp/sota_certificates" <i class="conum" data-value="6"></i><b>(6)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -276,7 +272,56 @@ certificates_path = "/tmp/sota_certificates" <i class="conum" data-value="5"></i
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Boolean indicating whether the client should automatically start downloading new packages. If this is set to false then an external mechanism will need to trigger the start of the download instead.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
 <td>The certificate authorities SOTA Client trusts. Defaults are taken from Mozilla Servo.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gateway">[gateway]</h3>
+<div class="paragraph">
+<p>The SOTA Client communicates with the device&#8217;s software loading manager (or other interested parties) through various gateways. For more details on how this works, please see the <a href="../cli/client-commands-and-events-reference.html">Client commands and events API reference</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[gateway]
+console = false <i class="conum" data-value="1"></i><b>(1)</b>
+dbus = false <i class="conum" data-value="2"></i><b>(2)</b>
+http = false <i class="conum" data-value="3"></i><b>(3)</b>
+rvi = false <i class="conum" data-value="4"></i><b>(4)</b>
+socket = false <i class="conum" data-value="5"></i><b>(5)</b>
+websocket = true <i class="conum" data-value="6"></i><b>(6)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Start a basic REPL that can send any command to the client. This gateway is used for testing only.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Send a message to D-Bus on available updates, and listen for replies to trigger a download or forward an installation report.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Start a basic HTTP server that will accept new commands and reply with the final event. This gateway is primarily used for testing.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Start an RVI HTTP server that can receive packages from an RVI Erlang client.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Listen on a socket for incoming commands, and broadcast all download events.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Broadcast events to each connected websocket client.</td>
 </tr>
 </table>
 </div>
@@ -300,56 +345,23 @@ rvi_edge_server = "127.0.0.1:9080" <i class="conum" data-value="5"></i><b>(5)</b
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The host and port the client should listen on for commands if the http gateway is enabled in the [gateway] section.</td>
+<td>The host and port the client should listen on for receiving commands (if the http gateway is enabled).</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The name of the unix domain socket to be used for receiving commands, if the socket gateway is enabled in the [gateway] section.</td>
+<td>The name of the unix domain socket to be used for receiving commands (if the socket gateway is enabled).</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The name of the unix domain socket to be used for sending events, if the socket gateway is enabled in the [gateway] section.</td>
+<td>The name of the unix domain socket to be used for listening to <code>DownloadComplete</code> and <code>DownloadFailed</code> events broadcast by client (if the socket gateway is enabled).</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>The host and port to listen for local websocket connections on. Could be used, for example, for integration with an HMI.</td>
+<td>The host and port to listen for new websocket clients (if the websocket gateway is enabled).</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>The host and port the client should listen for RVI messages on, if the rvi gateway is enabled in the [gateway] section.</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="gateway">[gateway]</h3>
-<div class="paragraph">
-<p>The SOTA Client communicates with the device&#8217;s software loading manager (or other interested parties) through various gateways. For more details on how this works, please see the <a href="../cli/client-commands-and-events-reference.html">Client commands and events API reference</a>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>[gateway]
-console = false <i class="conum" data-value="1"></i><b>(1)</b>
-dbus = false
-http = false <i class="conum" data-value="2"></i><b>(2)</b>
-rvi = false
-socket = false <i class="conum" data-value="3"></i><b>(3)</b>
-websocket = true</pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>REPL mode, for debug use only.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Simple http server, for sending commands to the client remotely. Note that this does <em>not</em> affect how the client communicates with the server.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Unix domain sockets for local communication.</td>
+<td>The host and port the client should listen for RVI messages on (if the rvi gateway is enabled).</td>
 </tr>
 </table>
 </div>
