@@ -56,6 +56,7 @@ object SotaBuild extends Build {
       "-Ywarn-dead-code",
       "-Yno-adapted-args"
     ),
+    scalacOptions in (Compile, console) ~= (_.filterNot(_ == "-Ywarn-unused-import")),
     scalacOptions in (Compile, doc) ++= Seq(
       "-no-link-warnings"
     )
