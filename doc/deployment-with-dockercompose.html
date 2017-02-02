@@ -207,10 +207,16 @@
 <li>
 <p><code>client-rvi.yml</code> contains the additional RVI client node for testing with the SOTA Client</p>
 </li>
+<li>
+<p><code>client-device.yml</code> contains the additional SOTA client for testing</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
 <p>To start the base SOTA Server, run <code>docker-compose -f docker-compose.yml up</code>. To start the SOTA Server with an RVI backend node, run <code>docker-compose -f docker-compose.yml -f core-rvi.yml up</code>. To start the SOTA Server with both RVI backend and device nodes, run <code>docker-compose -f docker-compose.yml -f core-rvi.yml -f client-rvi.yml up</code>.</p>
+</div>
+<div class="paragraph">
+<p>To start the base SOTA Server with a SOTA Client device, run <code>docker-compose -f docker-compose.yml -f client-device.yml up</code>. Note that you may have to restart some services to ensure proper startup order, e.g. <code>docker restart dockercompose_sota-client_1</code>. You can check logs with e.g. <code>docker logs dockercompose_sota-client_1</code>.</p>
 </div>
 </div>
 </div>
