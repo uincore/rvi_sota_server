@@ -47,14 +47,14 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-5098' class='srclink' href='../../../src/sota/src/package_manager/rpm.rs.html#1-46' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-5295' class='srclink' href='../../../src/sota/src/package_manager/rpm.rs.html#1-51' title='goto source code'>[src]</a></span></h1>
 <h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.install_package.html'
                                   title='sota::package_manager::rpm::install_package'>install_package</a></td>
                            <td class='docblock short'>
-                                <p>Installs a new RPM package.</p>
+                                <p>Installs a new RPM package with <code>rpm -Uvh --force &lt;package-path&gt;</code>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -62,7 +62,7 @@
                                   title='sota::package_manager::rpm::installed_packages'>installed_packages</a></td>
                            <td class='docblock short'>
                                 <p>Returns a list of installed RPM packages with
-<code>rpm -qa ==queryformat ${NAME} ${VERSION}\n</code>.</p>
+<code>rpm -qa --queryformat ${NAME} ${VERSION}\n</code>.</p>
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>

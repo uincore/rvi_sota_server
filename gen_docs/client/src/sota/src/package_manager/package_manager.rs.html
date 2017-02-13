@@ -183,12 +183,24 @@
 <span id="139">139</span>
 <span id="140">140</span>
 <span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::{<span class='ident'>Decoder</span>, <span class='ident'>Decodable</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>borrow</span>::<span class='ident'>Cow</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>::<span class='ident'>FromStr</span>;
 
 <span class='kw'>use</span> <span class='ident'>datatype</span>::{<span class='ident'>Error</span>, <span class='ident'>Package</span>, <span class='ident'>UpdateResultCode</span>};
-<span class='kw'>use</span> <span class='ident'>package_manager</span>::{<span class='ident'>deb</span>, <span class='ident'>otb</span>, <span class='ident'>rpm</span>, <span class='ident'>tpm</span>};
+<span class='kw'>use</span> <span class='ident'>datatype</span>::<span class='ident'>auth</span>::<span class='ident'>AccessToken</span>;
+<span class='kw'>use</span> <span class='ident'>package_manager</span>::{<span class='ident'>deb</span>, <span class='ident'>otb</span>, <span class='ident'>rpm</span>, <span class='ident'>thm</span>, <span class='ident'>tpm</span>};
 
 
 <span class='doccomment'>/// The outcome when installing a package as a tuple of the `UpdateResultCode`</span>
@@ -202,6 +214,7 @@
     <span class='ident'>Off</span>,
     <span class='ident'>Deb</span>,
     <span class='ident'>Rpm</span>,
+    <span class='ident'>TreeHub</span>,
     <span class='ident'>File</span> { <span class='ident'>filename</span>: <span class='ident'>String</span>, <span class='ident'>succeeds</span>: <span class='ident'>bool</span> },
     <span class='ident'>OSTree</span> { <span class='ident'>repodir</span>: <span class='ident'>String</span> }
 }
@@ -214,6 +227,7 @@
             <span class='ident'>PackageManager</span>::<span class='ident'>Off</span> <span class='op'>=&gt;</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;no package manager&quot;</span>),
             <span class='ident'>PackageManager</span>::<span class='ident'>Deb</span> <span class='op'>=&gt;</span> <span class='ident'>deb</span>::<span class='ident'>installed_packages</span>(),
             <span class='ident'>PackageManager</span>::<span class='ident'>Rpm</span> <span class='op'>=&gt;</span> <span class='ident'>rpm</span>::<span class='ident'>installed_packages</span>(),
+            <span class='ident'>PackageManager</span>::<span class='ident'>TreeHub</span> <span class='op'>=&gt;</span> <span class='ident'>thm</span>::<span class='ident'>installed_packages</span>(),
             <span class='ident'>PackageManager</span>::<span class='ident'>File</span> { <span class='kw-2'>ref</span> <span class='ident'>filename</span>, .. } <span class='op'>=&gt;</span> <span class='ident'>tpm</span>::<span class='ident'>installed_packages</span>(<span class='ident'>filename</span>),
             <span class='ident'>PackageManager</span>::<span class='ident'>OSTree</span> { <span class='kw-2'>ref</span> <span class='ident'>repodir</span> } <span class='op'>=&gt;</span> <span class='ident'>otb</span>::<span class='ident'>installed_packages</span>(<span class='ident'>repodir</span>),
         }
@@ -221,11 +235,15 @@
 
     <span class='doccomment'>/// Delegates to the package manager specific function for installing a new</span>
     <span class='doccomment'>/// package on the device.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>install_package</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>InstallOutcome</span>, <span class='ident'>InstallOutcome</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>install_package</span><span class='op'>&lt;</span><span class='lifetime'>&#39;t</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>token</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;t</span>, <span class='ident'>AccessToken</span><span class='op'>&gt;&gt;</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>InstallOutcome</span>, <span class='ident'>InstallOutcome</span><span class='op'>&gt;</span> {
         <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
             <span class='ident'>PackageManager</span>::<span class='ident'>Off</span> <span class='op'>=&gt;</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;no package manager&quot;</span>),
             <span class='ident'>PackageManager</span>::<span class='ident'>Deb</span> <span class='op'>=&gt;</span> <span class='ident'>deb</span>::<span class='ident'>install_package</span>(<span class='ident'>path</span>),
             <span class='ident'>PackageManager</span>::<span class='ident'>Rpm</span> <span class='op'>=&gt;</span> <span class='ident'>rpm</span>::<span class='ident'>install_package</span>(<span class='ident'>path</span>),
+            <span class='ident'>PackageManager</span>::<span class='ident'>TreeHub</span> <span class='op'>=&gt;</span> {
+                <span class='kw'>let</span> <span class='ident'>token</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>token</span>.<span class='ident'>ok_or</span>((<span class='ident'>UpdateResultCode</span>::<span class='ident'>GENERAL_ERROR</span>, <span class='string'>&quot;No token available&quot;</span>.<span class='ident'>to_string</span>())));
+                <span class='ident'>thm</span>::<span class='ident'>install_package</span>(<span class='ident'>path</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>token</span>)
+            }
             <span class='ident'>PackageManager</span>::<span class='ident'>File</span> { <span class='kw-2'>ref</span> <span class='ident'>filename</span>, <span class='ident'>succeeds</span> } <span class='op'>=&gt;</span> {
                 <span class='ident'>tpm</span>::<span class='ident'>install_package</span>(<span class='ident'>filename</span>, <span class='ident'>path</span>, <span class='ident'>succeeds</span>)
             }
@@ -238,7 +256,7 @@
     <span class='doccomment'>/// Indicates whether a specific package is installed on the device.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_installed</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>package</span>: <span class='kw-2'>&amp;</span><span class='ident'>Package</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='self'>self</span>.<span class='ident'>installed_packages</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>packages</span><span class='op'>|</span> <span class='ident'>packages</span>.<span class='ident'>contains</span>(<span class='ident'>package</span>))
-            .<span class='ident'>unwrap_or_else</span>(<span class='op'>|</span><span class='ident'>err</span><span class='op'>|</span> { <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;couldn&#39;t get a list of packages: {}&quot;</span>, <span class='ident'>err</span>); <span class='bool-val'>false</span> })
+            .<span class='ident'>unwrap_or_else</span>(<span class='op'>|</span><span class='ident'>err</span><span class='op'>|</span> { <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;couldn&#39;t get a list of packages: {}&quot;</span>, <span class='ident'>err</span>); <span class='boolvalue'>false</span> })
     }
 
     <span class='doccomment'>/// Returns a string representation of the package manager&#39;s extension.</span>
@@ -248,6 +266,7 @@
             <span class='ident'>PackageManager</span>::<span class='ident'>Deb</span> <span class='op'>=&gt;</span> <span class='string'>&quot;deb&quot;</span>.<span class='ident'>to_string</span>(),
             <span class='ident'>PackageManager</span>::<span class='ident'>Rpm</span> <span class='op'>=&gt;</span> <span class='string'>&quot;rpm&quot;</span>.<span class='ident'>to_string</span>(),
             <span class='ident'>PackageManager</span>::<span class='ident'>File</span> { <span class='kw-2'>ref</span> <span class='ident'>filename</span>, .. } <span class='op'>=&gt;</span> <span class='ident'>filename</span>.<span class='ident'>to_string</span>(),
+            <span class='ident'>PackageManager</span>::<span class='ident'>TreeHub</span> <span class='op'>=&gt;</span> <span class='string'>&quot;ostree&quot;</span>.<span class='ident'>to_string</span>(),
             <span class='ident'>PackageManager</span>::<span class='ident'>OSTree</span> {..} <span class='op'>=&gt;</span> <span class='string'>&quot;otb&quot;</span>.<span class='ident'>to_string</span>(),
         }
     }
@@ -261,9 +280,10 @@
             <span class='string'>&quot;off&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>PackageManager</span>::<span class='ident'>Off</span>),
             <span class='string'>&quot;deb&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>PackageManager</span>::<span class='ident'>Deb</span>),
             <span class='string'>&quot;rpm&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>PackageManager</span>::<span class='ident'>Rpm</span>),
+            <span class='string'>&quot;ostree&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>PackageManager</span>::<span class='ident'>TreeHub</span>),
 
             <span class='ident'>file</span> <span class='kw'>if</span> <span class='ident'>file</span>.<span class='ident'>len</span>() <span class='op'>&gt;</span> <span class='number'>5</span> <span class='op'>&amp;&amp;</span> <span class='ident'>file</span>[..<span class='number'>5</span>].<span class='ident'>as_bytes</span>() <span class='op'>==</span> <span class='string'>b&quot;file:&quot;</span> <span class='op'>=&gt;</span> {
-                <span class='prelude-val'>Ok</span>(<span class='ident'>PackageManager</span>::<span class='ident'>File</span> { <span class='ident'>filename</span>: <span class='ident'>file</span>[<span class='number'>5</span>..].<span class='ident'>to_string</span>(), <span class='ident'>succeeds</span>: <span class='bool-val'>true</span> })
+                <span class='prelude-val'>Ok</span>(<span class='ident'>PackageManager</span>::<span class='ident'>File</span> { <span class='ident'>filename</span>: <span class='ident'>file</span>[<span class='number'>5</span>..].<span class='ident'>to_string</span>(), <span class='ident'>succeeds</span>: <span class='boolvalue'>true</span> })
             },
 
             <span class='ident'>repo</span> <span class='kw'>if</span> <span class='ident'>repo</span>.<span class='ident'>len</span>() <span class='op'>&gt;</span> <span class='number'>4</span> <span class='op'>&amp;&amp;</span> <span class='ident'>repo</span>[..<span class='number'>4</span>].<span class='ident'>as_bytes</span>() <span class='op'>==</span> <span class='string'>b&quot;otb:&quot;</span> <span class='op'>=&gt;</span> {
@@ -290,7 +310,7 @@
                 <span class='ident'>version</span>: <span class='ident'>String</span>::<span class='ident'>from</span>(<span class='ident'>parts</span>[<span class='number'>1</span>])
             })
         },
-        _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Parse</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;Couldn&#39;t parse package: {}&quot;</span>, <span class='ident'>line</span>)))
+        _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Parse</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;couldn&#39;t parse package: {}&quot;</span>, <span class='ident'>line</span>)))
     }
 }
 
@@ -322,7 +342,7 @@
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_rejects_bogus_input</span>() {
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>parse_package</span>(<span class='string'>&quot;foobar&quot;</span>).<span class='ident'>unwrap_err</span>()),
-                   <span class='string'>&quot;Parse error: Couldn&#39;t parse package: foobar&quot;</span>.<span class='ident'>to_string</span>());
+                   <span class='string'>&quot;Parse error: couldn&#39;t parse package: foobar&quot;</span>.<span class='ident'>to_string</span>());
     }
 }
 </pre>

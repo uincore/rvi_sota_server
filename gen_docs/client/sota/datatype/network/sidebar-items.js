@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Method","Enumerate the supported HTTP methods."]],"struct":[["SocketAddr","Encapsulate a socket address for implementing additional traits."],["Url","Encapsulate a url with additional methods and traits."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["system_info","Generate a new system information report."]]});

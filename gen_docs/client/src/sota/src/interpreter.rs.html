@@ -415,15 +415,34 @@
 <span id="371">371</span>
 <span id="372">372</span>
 <span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>chan</span>;
-<span class='kw'>use</span> <span class='ident'>chan</span>::{<span class='ident'>Sender</span>, <span class='ident'>Receiver</span>};
-<span class='kw'>use</span> <span class='ident'>std</span>;
+<span class='kw'>use</span> <span class='ident'>chan</span>::{<span class='ident'>Sender</span>, <span class='ident'>Receiver</span>, <span class='ident'>WaitGroup</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::{<span class='ident'>process</span>, <span class='ident'>thread</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>borrow</span>::<span class='ident'>Cow</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>time</span>::<span class='ident'>Duration</span>;
+<span class='kw'>use</span> <span class='ident'>time</span>;
 
-<span class='kw'>use</span> <span class='ident'>datatype</span>::{<span class='ident'>AccessToken</span>, <span class='ident'>Auth</span>, <span class='ident'>ClientId</span>, <span class='ident'>ClientSecret</span>, <span class='ident'>Command</span>, <span class='ident'>Config</span>,
-               <span class='ident'>Error</span>, <span class='ident'>Event</span>, <span class='ident'>Package</span>, <span class='ident'>UpdateReport</span>, <span class='ident'>UpdateRequestStatus</span> <span class='kw'>as</span> <span class='ident'>Status</span>,
-               <span class='ident'>UpdateResultCode</span>};
+<span class='kw'>use</span> <span class='ident'>datatype</span>::{<span class='ident'>AccessToken</span>, <span class='ident'>Auth</span>, <span class='ident'>ClientCredentials</span>, <span class='ident'>Command</span>, <span class='ident'>Config</span>, <span class='ident'>Error</span>, <span class='ident'>Event</span>,
+               <span class='ident'>Package</span>, <span class='ident'>UpdateReport</span>, <span class='ident'>UpdateRequestStatus</span> <span class='kw'>as</span> <span class='ident'>Status</span>, <span class='ident'>UpdateResultCode</span>,
+               <span class='ident'>system_info</span>};
 <span class='kw'>use</span> <span class='ident'>gateway</span>::<span class='ident'>Interpret</span>;
 <span class='kw'>use</span> <span class='ident'>http</span>::{<span class='ident'>AuthClient</span>, <span class='ident'>Client</span>};
 <span class='kw'>use</span> <span class='ident'>oauth2</span>::<span class='ident'>authenticate</span>;
@@ -437,9 +456,20 @@
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Interpreter</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>O</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>interpret</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>input</span>: <span class='ident'>I</span>, <span class='ident'>otx</span>: <span class='kw-2'>&amp;</span><span class='ident'>Sender</span><span class='op'>&lt;</span><span class='ident'>O</span><span class='op'>&gt;</span>);
 
-    <span class='kw'>fn</span> <span class='ident'>run</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>irx</span>: <span class='ident'>Receiver</span><span class='op'>&lt;</span><span class='ident'>I</span><span class='op'>&gt;</span>, <span class='ident'>otx</span>: <span class='ident'>Sender</span><span class='op'>&lt;</span><span class='ident'>O</span><span class='op'>&gt;</span>) {
+    <span class='kw'>fn</span> <span class='ident'>run</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>irx</span>: <span class='ident'>Receiver</span><span class='op'>&lt;</span><span class='ident'>I</span><span class='op'>&gt;</span>, <span class='ident'>otx</span>: <span class='ident'>Sender</span><span class='op'>&lt;</span><span class='ident'>O</span><span class='op'>&gt;</span>, <span class='ident'>wg</span>: <span class='ident'>WaitGroup</span>) {
+        <span class='kw'>let</span> <span class='ident'>cooldown</span> <span class='op'>=</span> <span class='ident'>Duration</span>::<span class='ident'>from_millis</span>(<span class='number'>100</span>);
+
         <span class='kw'>loop</span> {
-            <span class='self'>self</span>.<span class='ident'>interpret</span>(<span class='ident'>irx</span>.<span class='ident'>recv</span>().<span class='ident'>expect</span>(<span class='string'>&quot;interpreter sender closed&quot;</span>), <span class='kw-2'>&amp;</span><span class='ident'>otx</span>);
+            <span class='kw'>let</span> <span class='ident'>input</span>   <span class='op'>=</span> <span class='ident'>irx</span>.<span class='ident'>recv</span>().<span class='ident'>expect</span>(<span class='string'>&quot;interpreter sender closed&quot;</span>);
+            <span class='kw'>let</span> <span class='ident'>started</span> <span class='op'>=</span> <span class='ident'>time</span>::<span class='ident'>precise_time_ns</span>();
+
+            <span class='ident'>wg</span>.<span class='ident'>add</span>(<span class='number'>1</span>);
+            <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;interpreter starting: {}&quot;</span>, <span class='ident'>started</span>);
+            <span class='self'>self</span>.<span class='ident'>interpret</span>(<span class='ident'>input</span>, <span class='kw-2'>&amp;</span><span class='ident'>otx</span>);
+
+            <span class='ident'>thread</span>::<span class='ident'>sleep</span>(<span class='ident'>cooldown</span>); <span class='comment'>// let any further work commence</span>
+            <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;interpreter stopping: {}&quot;</span>, <span class='ident'>started</span>);
+            <span class='ident'>wg</span>.<span class='ident'>done</span>();
         }
     }
 }
@@ -448,21 +478,24 @@
 <span class='doccomment'>/// The `EventInterpreter` listens for `Event`s and optionally responds with</span>
 <span class='doccomment'>/// `Command`s that may be sent to the `CommandInterpreter`.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>EventInterpreter</span> {
-    <span class='kw'>pub</span> <span class='ident'>package_manager</span>: <span class='ident'>PackageManager</span>
+    <span class='kw'>pub</span> <span class='ident'>pacman</span>:        <span class='ident'>PackageManager</span>,
+    <span class='kw'>pub</span> <span class='ident'>auto_download</span>: <span class='ident'>bool</span>,
+    <span class='kw'>pub</span> <span class='ident'>sysinfo</span>:       <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
 }
 
 <span class='kw'>impl</span> <span class='ident'>Interpreter</span><span class='op'>&lt;</span><span class='ident'>Event</span>, <span class='ident'>Command</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>EventInterpreter</span> {
     <span class='kw'>fn</span> <span class='ident'>interpret</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>event</span>: <span class='ident'>Event</span>, <span class='ident'>ctx</span>: <span class='kw-2'>&amp;</span><span class='ident'>Sender</span><span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>) {
-        <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;Event received: {}&quot;</span>, <span class='ident'>event</span>);
+        <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;EventInterpreter received: {}&quot;</span>, <span class='ident'>event</span>);
+
         <span class='kw'>match</span> <span class='ident'>event</span> {
             <span class='ident'>Event</span>::<span class='ident'>Authenticated</span> <span class='op'>=&gt;</span> {
-                <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>SendSystemInfo</span>);
-
-                <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>package_manager</span> <span class='op'>!=</span> <span class='ident'>PackageManager</span>::<span class='ident'>Off</span> {
-                    <span class='self'>self</span>.<span class='ident'>package_manager</span>.<span class='ident'>installed_packages</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>packages</span><span class='op'>|</span> {
+                <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>pacman</span> <span class='op'>!=</span> <span class='ident'>PackageManager</span>::<span class='ident'>Off</span> {
+                    <span class='self'>self</span>.<span class='ident'>pacman</span>.<span class='ident'>installed_packages</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>packages</span><span class='op'>|</span> {
                         <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>SendInstalledPackages</span>(<span class='ident'>packages</span>));
                     }).<span class='ident'>unwrap_or_else</span>(<span class='op'>|</span><span class='ident'>err</span><span class='op'>|</span> <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;couldn&#39;t send a list of packages: {}&quot;</span>, <span class='ident'>err</span>));
                 }
+
+                <span class='self'>self</span>.<span class='ident'>sysinfo</span>.<span class='ident'>as_ref</span>().<span class='ident'>map</span>(<span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>SendSystemInfo</span>));
             }
 
             <span class='ident'>Event</span>::<span class='ident'>NotAuthenticated</span> <span class='op'>=&gt;</span> {
@@ -472,17 +505,18 @@
 
             <span class='ident'>Event</span>::<span class='ident'>UpdatesReceived</span>(<span class='ident'>requests</span>) <span class='op'>=&gt;</span> {
                 <span class='kw'>for</span> <span class='ident'>request</span> <span class='kw'>in</span> <span class='ident'>requests</span> {
-                    <span class='kw'>match</span> (<span class='ident'>request</span>.<span class='ident'>status</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>package_manager</span>) {
-                        (<span class='ident'>Status</span>::<span class='ident'>Pending</span>, _) <span class='op'>=&gt;</span> <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>StartDownload</span>(<span class='ident'>request</span>.<span class='ident'>requestId</span>.<span class='ident'>clone</span>())),
+                    <span class='kw'>let</span> <span class='ident'>id</span> <span class='op'>=</span> <span class='ident'>request</span>.<span class='ident'>requestId</span>.<span class='ident'>clone</span>();
+                    <span class='kw'>match</span> <span class='ident'>request</span>.<span class='ident'>status</span> {
+                        <span class='ident'>Status</span>::<span class='ident'>Pending</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>auto_download</span> <span class='op'>=&gt;</span> {
+                            <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>StartDownload</span>(<span class='ident'>id</span>));
+                        },
 
-                        (<span class='ident'>Status</span>::<span class='ident'>InFlight</span>, <span class='kw-2'>&amp;</span><span class='ident'>PackageManager</span>::<span class='ident'>Off</span>) <span class='op'>=&gt;</span> (),
-
-                        (<span class='ident'>Status</span>::<span class='ident'>InFlight</span>, _) <span class='op'>=&gt;</span> {
-                            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>package_manager</span>.<span class='ident'>is_installed</span>(<span class='kw-2'>&amp;</span><span class='ident'>request</span>.<span class='ident'>packageId</span>) {
-                                <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>SendUpdateReport</span>(<span class='ident'>UpdateReport</span>::<span class='ident'>single</span>(
-                                    <span class='ident'>request</span>.<span class='ident'>requestId</span>.<span class='ident'>clone</span>(), <span class='ident'>UpdateResultCode</span>::<span class='ident'>OK</span>, <span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>())));
+                        <span class='ident'>Status</span>::<span class='ident'>InFlight</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>pacman</span> <span class='op'>!=</span> <span class='ident'>PackageManager</span>::<span class='ident'>Off</span> <span class='op'>=&gt;</span> {
+                            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>pacman</span>.<span class='ident'>is_installed</span>(<span class='kw-2'>&amp;</span><span class='ident'>request</span>.<span class='ident'>packageId</span>) {
+                                <span class='kw'>let</span> <span class='ident'>report</span> <span class='op'>=</span> <span class='ident'>UpdateReport</span>::<span class='ident'>single</span>(<span class='ident'>id</span>, <span class='ident'>UpdateResultCode</span>::<span class='ident'>OK</span>, <span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>());
+                                <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>SendUpdateReport</span>(<span class='ident'>report</span>));
                             } <span class='kw'>else</span> {
-                                <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>StartDownload</span>(<span class='ident'>request</span>.<span class='ident'>requestId</span>.<span class='ident'>clone</span>()));
+                                <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>StartDownload</span>(<span class='ident'>id</span>));
                             }
                         }
 
@@ -492,7 +526,7 @@
             }
 
             <span class='ident'>Event</span>::<span class='ident'>DownloadComplete</span>(<span class='ident'>dl</span>) <span class='op'>=&gt;</span> {
-                <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>package_manager</span> <span class='op'>!=</span> <span class='ident'>PackageManager</span>::<span class='ident'>Off</span> {
+                <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>pacman</span> <span class='op'>!=</span> <span class='ident'>PackageManager</span>::<span class='ident'>Off</span> {
                     <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>StartInstall</span>(<span class='ident'>dl</span>.<span class='ident'>update_id</span>.<span class='ident'>clone</span>()));
                 }
             }
@@ -507,8 +541,8 @@
             }
 
             <span class='ident'>Event</span>::<span class='ident'>UpdateReportSent</span> <span class='op'>=&gt;</span> {
-                <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>package_manager</span> <span class='op'>!=</span> <span class='ident'>PackageManager</span>::<span class='ident'>Off</span> {
-                    <span class='self'>self</span>.<span class='ident'>package_manager</span>.<span class='ident'>installed_packages</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>packages</span><span class='op'>|</span> {
+                <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>pacman</span> <span class='op'>!=</span> <span class='ident'>PackageManager</span>::<span class='ident'>Off</span> {
+                    <span class='self'>self</span>.<span class='ident'>pacman</span>.<span class='ident'>installed_packages</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>packages</span><span class='op'>|</span> {
                         <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>SendInstalledPackages</span>(<span class='ident'>packages</span>));
                     }).<span class='ident'>unwrap_or_else</span>(<span class='op'>|</span><span class='ident'>err</span><span class='op'>|</span> <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;couldn&#39;t send a list of packages: {}&quot;</span>, <span class='ident'>err</span>));
                 }
@@ -526,7 +560,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Interpreter</span><span class='op'>&lt;</span><span class='ident'>Command</span>, <span class='ident'>Interpret</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>CommandInterpreter</span> {
     <span class='kw'>fn</span> <span class='ident'>interpret</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>cmd</span>: <span class='ident'>Command</span>, <span class='ident'>itx</span>: <span class='kw-2'>&amp;</span><span class='ident'>Sender</span><span class='op'>&lt;</span><span class='ident'>Interpret</span><span class='op'>&gt;</span>) {
-        <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;Command received: {}&quot;</span>, <span class='ident'>cmd</span>);
+        <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;CommandInterpreter received: {}&quot;</span>, <span class='ident'>cmd</span>);
         <span class='ident'>itx</span>.<span class='ident'>send</span>(<span class='ident'>Interpret</span> { <span class='ident'>command</span>: <span class='ident'>cmd</span>, <span class='ident'>response_tx</span>: <span class='prelude-val'>None</span> });
     }
 }
@@ -544,11 +578,11 @@
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;t</span><span class='op'>&gt;</span> <span class='ident'>Interpreter</span><span class='op'>&lt;</span><span class='ident'>Interpret</span>, <span class='ident'>Event</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>GlobalInterpreter</span><span class='op'>&lt;</span><span class='lifetime'>&#39;t</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>interpret</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>interpret</span>: <span class='ident'>Interpret</span>, <span class='ident'>etx</span>: <span class='kw-2'>&amp;</span><span class='ident'>Sender</span><span class='op'>&lt;</span><span class='ident'>Event</span><span class='op'>&gt;</span>) {
-        <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;Interpreter started: {}&quot;</span>, <span class='ident'>interpret</span>.<span class='ident'>command</span>);
+        <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;GlobalInterpreter received: {}&quot;</span>, <span class='ident'>interpret</span>.<span class='ident'>command</span>);
 
         <span class='kw'>let</span> (<span class='ident'>multi_tx</span>, <span class='ident'>multi_rx</span>) <span class='op'>=</span> <span class='ident'>chan</span>::<span class='ident'>async</span>::<span class='op'>&lt;</span><span class='ident'>Event</span><span class='op'>&gt;</span>();
         <span class='kw'>let</span> <span class='ident'>outcome</span> <span class='op'>=</span> <span class='kw'>match</span> (<span class='self'>self</span>.<span class='ident'>token</span>.<span class='ident'>as_ref</span>(), <span class='self'>self</span>.<span class='ident'>config</span>.<span class='ident'>auth</span>.<span class='ident'>is_none</span>()) {
-            (<span class='prelude-val'>Some</span>(_), _) <span class='op'>|</span> (_, <span class='bool-val'>true</span>) <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>authenticated</span>(<span class='ident'>interpret</span>.<span class='ident'>command</span>, <span class='ident'>multi_tx</span>),
+            (<span class='prelude-val'>Some</span>(_), _) <span class='op'>|</span> (_, <span class='boolvalue'>true</span>) <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>authenticated</span>(<span class='ident'>interpret</span>.<span class='ident'>command</span>, <span class='ident'>multi_tx</span>),
             _                        <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>unauthenticated</span>(<span class='ident'>interpret</span>.<span class='ident'>command</span>, <span class='ident'>multi_tx</span>)
         };
 
@@ -559,21 +593,20 @@
                     <span class='ident'>etx</span>.<span class='ident'>send</span>(<span class='ident'>ev</span>.<span class='ident'>clone</span>());
                     <span class='ident'>response_ev</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>ev</span>);
                 }
-                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;Interpreter finished.&quot;</span>);
             }
 
-            <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Authorization</span>(_)) <span class='op'>=&gt;</span> {
+            <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>HttpAuth</span>(<span class='ident'>resp</span>)) <span class='op'>=&gt;</span> {
+                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;HTTP authorization failed: {}&quot;</span>, <span class='ident'>resp</span>);
+                <span class='self'>self</span>.<span class='ident'>token</span> <span class='op'>=</span> <span class='prelude-val'>None</span>;
                 <span class='kw'>let</span> <span class='ident'>ev</span> <span class='op'>=</span> <span class='ident'>Event</span>::<span class='ident'>NotAuthenticated</span>;
                 <span class='ident'>etx</span>.<span class='ident'>send</span>(<span class='ident'>ev</span>.<span class='ident'>clone</span>());
                 <span class='ident'>response_ev</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>ev</span>);
-                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Interpreter authentication failed&quot;</span>);
             }
 
             <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> {
                 <span class='kw'>let</span> <span class='ident'>ev</span> <span class='op'>=</span> <span class='ident'>Event</span>::<span class='ident'>Error</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>err</span>));
                 <span class='ident'>etx</span>.<span class='ident'>send</span>(<span class='ident'>ev</span>.<span class='ident'>clone</span>());
                 <span class='ident'>response_ev</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>ev</span>);
-                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Interpreter failed: {}&quot;</span>, <span class='ident'>err</span>);
             }
         }
 
@@ -588,7 +621,7 @@
 
         <span class='comment'>// always send at least one Event response</span>
         <span class='kw'>match</span> <span class='ident'>cmd</span> {
-            <span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(_) <span class='op'>=&gt;</span> <span class='ident'>etx</span>.<span class='ident'>send</span>(<span class='ident'>Event</span>::<span class='ident'>Authenticated</span>),
+            <span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(_) <span class='op'>=&gt;</span> <span class='ident'>etx</span>.<span class='ident'>send</span>(<span class='ident'>Event</span>::<span class='ident'>AlreadyAuthenticated</span>),
 
             <span class='ident'>Command</span>::<span class='ident'>GetUpdateRequests</span> <span class='op'>=&gt;</span> {
                 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>updates</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>sota</span>.<span class='ident'>get_update_requests</span>());
@@ -609,8 +642,8 @@
             }
 
             <span class='ident'>Command</span>::<span class='ident'>ListSystemInfo</span> <span class='op'>=&gt;</span> {
-                <span class='kw'>let</span> <span class='ident'>info</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>config</span>.<span class='ident'>device</span>.<span class='ident'>system_info</span>.<span class='ident'>report</span>());
-                <span class='ident'>etx</span>.<span class='ident'>send</span>(<span class='ident'>Event</span>::<span class='ident'>FoundSystemInfo</span>(<span class='ident'>info</span>));
+                <span class='kw'>let</span> <span class='ident'>cmd</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>config</span>.<span class='ident'>device</span>.<span class='ident'>system_info</span>.<span class='ident'>as_ref</span>().<span class='ident'>expect</span>(<span class='string'>&quot;system_info command not set&quot;</span>);
+                <span class='ident'>etx</span>.<span class='ident'>send</span>(<span class='ident'>Event</span>::<span class='ident'>FoundSystemInfo</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>system_info</span>(<span class='kw-2'>&amp;</span><span class='ident'>cmd</span>))));
             }
 
             <span class='ident'>Command</span>::<span class='ident'>SendInstalledPackages</span>(<span class='ident'>packages</span>) <span class='op'>=&gt;</span> {
@@ -626,8 +659,8 @@
             }
 
             <span class='ident'>Command</span>::<span class='ident'>SendSystemInfo</span> <span class='op'>=&gt;</span> {
-                <span class='kw'>let</span> <span class='ident'>info</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>config</span>.<span class='ident'>device</span>.<span class='ident'>system_info</span>.<span class='ident'>report</span>());
-                <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>sota</span>.<span class='ident'>send_system_info</span>(<span class='kw-2'>&amp;</span><span class='ident'>info</span>));
+                <span class='kw'>let</span> <span class='ident'>cmd</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>config</span>.<span class='ident'>device</span>.<span class='ident'>system_info</span>.<span class='ident'>as_ref</span>().<span class='ident'>expect</span>(<span class='string'>&quot;system_info command not set&quot;</span>);
+                <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>sota</span>.<span class='ident'>send_system_info</span>(<span class='kw-2'>&amp;</span><span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>system_info</span>(<span class='kw-2'>&amp;</span><span class='ident'>cmd</span>))));
                 <span class='ident'>etx</span>.<span class='ident'>send</span>(<span class='ident'>Event</span>::<span class='ident'>SystemInfoSent</span>);
             }
 
@@ -653,12 +686,12 @@
 
             <span class='ident'>Command</span>::<span class='ident'>StartInstall</span>(<span class='ident'>id</span>) <span class='op'>=&gt;</span> {
                 <span class='ident'>etx</span>.<span class='ident'>send</span>(<span class='ident'>Event</span>::<span class='ident'>InstallingUpdate</span>(<span class='ident'>id</span>.<span class='ident'>clone</span>()));
-                <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>sota</span>.<span class='ident'>install_update</span>(<span class='ident'>id</span>)
+                <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>sota</span>.<span class='ident'>install_update</span>(<span class='self'>self</span>.<span class='ident'>token</span>.<span class='ident'>clone</span>(), <span class='ident'>id</span>)
                     .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>report</span><span class='op'>|</span> <span class='ident'>etx</span>.<span class='ident'>send</span>(<span class='ident'>Event</span>::<span class='ident'>InstallComplete</span>(<span class='ident'>report</span>)))
                     .<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>report</span><span class='op'>|</span> <span class='ident'>etx</span>.<span class='ident'>send</span>(<span class='ident'>Event</span>::<span class='ident'>InstallFailed</span>(<span class='ident'>report</span>)));
             }
 
-            <span class='ident'>Command</span>::<span class='ident'>Shutdown</span> <span class='op'>=&gt;</span> <span class='ident'>std</span>::<span class='ident'>process</span>::<span class='ident'>exit</span>(<span class='number'>0</span>),
+            <span class='ident'>Command</span>::<span class='ident'>Shutdown</span> <span class='op'>=&gt;</span> <span class='ident'>process</span>::<span class='ident'>exit</span>(<span class='number'>0</span>),
         }
 
         <span class='prelude-val'>Ok</span>(())
@@ -668,16 +701,17 @@
         <span class='kw'>match</span> <span class='ident'>cmd</span> {
             <span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(_) <span class='op'>=&gt;</span> {
                 <span class='kw'>let</span> <span class='ident'>config</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>config</span>.<span class='ident'>auth</span>.<span class='ident'>clone</span>().<span class='ident'>expect</span>(<span class='string'>&quot;trying to authenticate without auth config&quot;</span>);
-                <span class='self'>self</span>.<span class='ident'>set_client</span>(<span class='ident'>Auth</span>::<span class='ident'>Credentials</span>(<span class='ident'>ClientId</span>(<span class='ident'>config</span>.<span class='ident'>client_id</span>),
-                                                  <span class='ident'>ClientSecret</span>(<span class='ident'>config</span>.<span class='ident'>client_secret</span>)));
-                <span class='kw'>let</span> <span class='ident'>server</span> <span class='op'>=</span> <span class='ident'>config</span>.<span class='ident'>server</span>.<span class='ident'>join</span>(<span class='string'>&quot;/token&quot;</span>).<span class='ident'>expect</span>(<span class='string'>&quot;couldn&#39;t build authentication url&quot;</span>);
-                <span class='kw'>let</span> <span class='ident'>token</span>  <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>authenticate</span>(<span class='ident'>server</span>, <span class='self'>self</span>.<span class='ident'>http_client</span>.<span class='ident'>as_ref</span>()));
+                <span class='self'>self</span>.<span class='ident'>set_client</span>(<span class='ident'>Auth</span>::<span class='ident'>Credentials</span>(<span class='ident'>ClientCredentials</span> {
+                    <span class='ident'>client_id</span>:     <span class='ident'>config</span>.<span class='ident'>client_id</span>,
+                    <span class='ident'>client_secret</span>: <span class='ident'>config</span>.<span class='ident'>client_secret</span>,
+                }));
+                <span class='kw'>let</span> <span class='ident'>token</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>authenticate</span>(<span class='ident'>config</span>.<span class='ident'>server</span>.<span class='ident'>join</span>(<span class='string'>&quot;/token&quot;</span>), <span class='self'>self</span>.<span class='ident'>http_client</span>.<span class='ident'>as_ref</span>()));
                 <span class='self'>self</span>.<span class='ident'>set_client</span>(<span class='ident'>Auth</span>::<span class='ident'>Token</span>(<span class='ident'>token</span>.<span class='ident'>clone</span>()));
                 <span class='self'>self</span>.<span class='ident'>token</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>token</span>.<span class='ident'>into</span>());
                 <span class='ident'>etx</span>.<span class='ident'>send</span>(<span class='ident'>Event</span>::<span class='ident'>Authenticated</span>);
             }
 
-            <span class='ident'>Command</span>::<span class='ident'>Shutdown</span> <span class='op'>=&gt;</span> <span class='ident'>std</span>::<span class='ident'>process</span>::<span class='ident'>exit</span>(<span class='number'>0</span>),
+            <span class='ident'>Command</span>::<span class='ident'>Shutdown</span> <span class='op'>=&gt;</span> <span class='ident'>process</span>::<span class='ident'>exit</span>(<span class='number'>0</span>),
 
             _ <span class='op'>=&gt;</span> <span class='ident'>etx</span>.<span class='ident'>send</span>(<span class='ident'>Event</span>::<span class='ident'>NotAuthenticated</span>)
         }
@@ -735,17 +769,17 @@
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>already_authenticated</span>() {
         <span class='kw'>let</span> <span class='ident'>replies</span>    <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
-        <span class='kw'>let</span> <span class='ident'>pkg_mgr</span>    <span class='op'>=</span> <span class='ident'>PackageManager</span>::<span class='ident'>new_tpm</span>(<span class='bool-val'>true</span>);
+        <span class='kw'>let</span> <span class='ident'>pkg_mgr</span>    <span class='op'>=</span> <span class='ident'>PackageManager</span>::<span class='ident'>new_tpm</span>(<span class='boolvalue'>true</span>);
         <span class='kw'>let</span> (<span class='ident'>ctx</span>, <span class='ident'>erx</span>) <span class='op'>=</span> <span class='ident'>new_interpreter</span>(<span class='ident'>replies</span>, <span class='ident'>pkg_mgr</span>);
 
         <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(<span class='prelude-val'>None</span>));
-        <span class='ident'>assert_rx</span>(<span class='ident'>erx</span>, <span class='kw-2'>&amp;</span>[<span class='ident'>Event</span>::<span class='ident'>Authenticated</span>]);
+        <span class='ident'>assert_rx</span>(<span class='ident'>erx</span>, <span class='kw-2'>&amp;</span>[<span class='ident'>Event</span>::<span class='ident'>AlreadyAuthenticated</span>]);
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>download_updates</span>() {
         <span class='kw'>let</span> <span class='ident'>replies</span>    <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;[]&quot;</span>.<span class='ident'>to_string</span>(); <span class='number'>10</span>];
-        <span class='kw'>let</span> <span class='ident'>pkg_mgr</span>    <span class='op'>=</span> <span class='ident'>PackageManager</span>::<span class='ident'>new_tpm</span>(<span class='bool-val'>true</span>);
+        <span class='kw'>let</span> <span class='ident'>pkg_mgr</span>    <span class='op'>=</span> <span class='ident'>PackageManager</span>::<span class='ident'>new_tpm</span>(<span class='boolvalue'>true</span>);
         <span class='kw'>let</span> (<span class='ident'>ctx</span>, <span class='ident'>erx</span>) <span class='op'>=</span> <span class='ident'>new_interpreter</span>(<span class='ident'>replies</span>, <span class='ident'>pkg_mgr</span>);
 
         <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>StartDownload</span>(<span class='string'>&quot;1&quot;</span>.<span class='ident'>to_string</span>()));
@@ -762,7 +796,7 @@
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>install_update_success</span>() {
         <span class='kw'>let</span> <span class='ident'>replies</span>    <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;[]&quot;</span>.<span class='ident'>to_string</span>(); <span class='number'>10</span>];
-        <span class='kw'>let</span> <span class='ident'>pkg_mgr</span>    <span class='op'>=</span> <span class='ident'>PackageManager</span>::<span class='ident'>new_tpm</span>(<span class='bool-val'>true</span>);
+        <span class='kw'>let</span> <span class='ident'>pkg_mgr</span>    <span class='op'>=</span> <span class='ident'>PackageManager</span>::<span class='ident'>new_tpm</span>(<span class='boolvalue'>true</span>);
         <span class='kw'>let</span> (<span class='ident'>ctx</span>, <span class='ident'>erx</span>) <span class='op'>=</span> <span class='ident'>new_interpreter</span>(<span class='ident'>replies</span>, <span class='ident'>pkg_mgr</span>);
 
         <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>StartInstall</span>(<span class='string'>&quot;1&quot;</span>.<span class='ident'>to_string</span>()));
@@ -777,7 +811,7 @@
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>install_update_failed</span>() {
         <span class='kw'>let</span> <span class='ident'>replies</span>    <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;[]&quot;</span>.<span class='ident'>to_string</span>(); <span class='number'>10</span>];
-        <span class='kw'>let</span> <span class='ident'>pkg_mgr</span>    <span class='op'>=</span> <span class='ident'>PackageManager</span>::<span class='ident'>new_tpm</span>(<span class='bool-val'>false</span>);
+        <span class='kw'>let</span> <span class='ident'>pkg_mgr</span>    <span class='op'>=</span> <span class='ident'>PackageManager</span>::<span class='ident'>new_tpm</span>(<span class='boolvalue'>false</span>);
         <span class='kw'>let</span> (<span class='ident'>ctx</span>, <span class='ident'>erx</span>) <span class='op'>=</span> <span class='ident'>new_interpreter</span>(<span class='ident'>replies</span>, <span class='ident'>pkg_mgr</span>);
 
         <span class='ident'>ctx</span>.<span class='ident'>send</span>(<span class='ident'>Command</span>::<span class='ident'>StartInstall</span>(<span class='string'>&quot;1&quot;</span>.<span class='ident'>to_string</span>()));

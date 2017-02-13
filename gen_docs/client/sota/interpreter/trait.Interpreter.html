@@ -47,11 +47,11 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-4773' class='srclink' href='../../src/sota/src/interpreter.rs.html#19-27' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait Interpreter&lt;I,&nbsp;O&gt; {
+               </span><a id='src-4946' class='srclink' href='../../src/sota/src/interpreter.rs.html#21-40' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait Interpreter&lt;I, O&gt; {
     fn <a href='#tymethod.interpret' class='fnname'>interpret</a>(&amp;mut self, input: I, otx: &amp;Sender&lt;O&gt;);
 
-    fn <a href='#method.run' class='fnname'>run</a>(&amp;mut self, irx: Receiver&lt;I&gt;, otx: Sender&lt;O&gt;) { ... }
+    fn <a href='#method.run' class='fnname'>run</a>(&amp;mut self, irx: Receiver&lt;I&gt;, otx: Sender&lt;O&gt;, wg: WaitGroup) { ... }
 }</pre><div class='docblock'><p>An <code>Interpreter</code> loops over any incoming values, on receipt of which it
 delegates to the <code>interpret</code> function which will respond with output values.</p>
 </div>
@@ -60,12 +60,12 @@ delegates to the <code>interpret</code> function which will respond with output 
         <h3 id='tymethod.interpret' class='method stab '><code>fn <a href='#tymethod.interpret' class='fnname'>interpret</a>(&amp;mut self, input: I, otx: &amp;Sender&lt;O&gt;)</code></h3></div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
-        <h3 id='method.run' class='method stab '><code>fn <a href='#method.run' class='fnname'>run</a>(&amp;mut self, irx: Receiver&lt;I&gt;, otx: Sender&lt;O&gt;)</code></h3></div>
+        <h3 id='method.run' class='method stab '><code>fn <a href='#method.run' class='fnname'>run</a>(&amp;mut self, irx: Receiver&lt;I&gt;, otx: Sender&lt;O&gt;, wg: WaitGroup)</code></h3></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl Interpreter&lt;<a class='enum' href='../../sota/datatype/event/enum.Event.html' title='sota::datatype::event::Event'>Event</a>,&nbsp;<a class='enum' href='../../sota/datatype/command/enum.Command.html' title='sota::datatype::command::Command'>Command</a>&gt; for <a class='struct' href='../../sota/interpreter/struct.EventInterpreter.html' title='sota::interpreter::EventInterpreter'>EventInterpreter</a></code></li>
-<li><code>impl Interpreter&lt;<a class='enum' href='../../sota/datatype/command/enum.Command.html' title='sota::datatype::command::Command'>Command</a>,&nbsp;<a class='struct' href='../../sota/gateway/gateway/struct.Interpret.html' title='sota::gateway::gateway::Interpret'>Interpret</a>&gt; for <a class='struct' href='../../sota/interpreter/struct.CommandInterpreter.html' title='sota::interpreter::CommandInterpreter'>CommandInterpreter</a></code></li>
-<li><code>impl&lt;'t&gt; Interpreter&lt;<a class='struct' href='../../sota/gateway/gateway/struct.Interpret.html' title='sota::gateway::gateway::Interpret'>Interpret</a>,&nbsp;<a class='enum' href='../../sota/datatype/event/enum.Event.html' title='sota::datatype::event::Event'>Event</a>&gt; for <a class='struct' href='../../sota/interpreter/struct.GlobalInterpreter.html' title='sota::interpreter::GlobalInterpreter'>GlobalInterpreter</a>&lt;'t&gt;</code></li>
+    <li><code>impl Interpreter&lt;<a class='enum' href='../../sota/datatype/event/enum.Event.html' title='sota::datatype::event::Event'>Event</a>, <a class='enum' href='../../sota/datatype/command/enum.Command.html' title='sota::datatype::command::Command'>Command</a>&gt; for <a class='struct' href='../../sota/interpreter/struct.EventInterpreter.html' title='sota::interpreter::EventInterpreter'>EventInterpreter</a></code></li>
+<li><code>impl Interpreter&lt;<a class='enum' href='../../sota/datatype/command/enum.Command.html' title='sota::datatype::command::Command'>Command</a>, <a class='struct' href='../../sota/gateway/gateway/struct.Interpret.html' title='sota::gateway::gateway::Interpret'>Interpret</a>&gt; for <a class='struct' href='../../sota/interpreter/struct.CommandInterpreter.html' title='sota::interpreter::CommandInterpreter'>CommandInterpreter</a></code></li>
+<li><code>impl&lt;'t&gt; Interpreter&lt;<a class='struct' href='../../sota/gateway/gateway/struct.Interpret.html' title='sota::gateway::gateway::Interpret'>Interpret</a>, <a class='enum' href='../../sota/datatype/event/enum.Event.html' title='sota::datatype::event::Event'>Event</a>&gt; for <a class='struct' href='../../sota/interpreter/struct.GlobalInterpreter.html' title='sota::interpreter::GlobalInterpreter'>GlobalInterpreter</a>&lt;'t&gt;</code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/sota/interpreter/trait.Interpreter.js">
                  </script></section>

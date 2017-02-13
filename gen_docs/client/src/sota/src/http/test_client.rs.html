@@ -77,12 +77,17 @@
 <span id="33">33</span>
 <span id="34">34</span>
 <span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>chan</span>::<span class='ident'>Sender</span>;
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>status</span>::<span class='ident'>StatusCode</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cell</span>::<span class='ident'>RefCell</span>;
 
 <span class='kw'>use</span> <span class='ident'>datatype</span>::<span class='ident'>Error</span>;
-<span class='kw'>use</span> <span class='ident'>http</span>::{<span class='ident'>Client</span>, <span class='ident'>Request</span>, <span class='ident'>Response</span>};
+<span class='kw'>use</span> <span class='ident'>http</span>::{<span class='ident'>Client</span>, <span class='ident'>Request</span>, <span class='ident'>Response</span>, <span class='ident'>ResponseData</span>};
 
 
 <span class='doccomment'>/// The `TestClient` will return HTTP responses from an existing list of strings.</span>
@@ -106,12 +111,15 @@
 <span class='kw'>impl</span> <span class='ident'>Client</span> <span class='kw'>for</span> <span class='ident'>TestClient</span> {
     <span class='kw'>fn</span> <span class='ident'>chan_request</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>req</span>: <span class='ident'>Request</span>, <span class='ident'>resp_tx</span>: <span class='ident'>Sender</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span>) {
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>responses</span>.<span class='ident'>borrow_mut</span>().<span class='ident'>pop</span>() {
-            <span class='prelude-val'>Some</span>(<span class='ident'>body</span>) <span class='op'>=&gt;</span> <span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='prelude-val'>Ok</span>(<span class='ident'>body</span>.<span class='ident'>as_bytes</span>().<span class='ident'>to_vec</span>())),
-            <span class='prelude-val'>None</span>       <span class='op'>=&gt;</span> <span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Client</span>(<span class='ident'>req</span>.<span class='ident'>url</span>.<span class='ident'>to_string</span>())))
+            <span class='prelude-val'>Some</span>(<span class='ident'>body</span>) <span class='op'>=&gt;</span> <span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='ident'>Response</span>::<span class='ident'>Success</span>(<span class='ident'>ResponseData</span> {
+                <span class='ident'>code</span>: <span class='ident'>StatusCode</span>::<span class='prelude-val'>Ok</span>,
+                <span class='ident'>body</span>: <span class='ident'>body</span>.<span class='ident'>as_bytes</span>().<span class='ident'>to_vec</span>()
+            })),
+            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='ident'>Response</span>::<span class='ident'>Error</span>(<span class='ident'>Error</span>::<span class='ident'>Client</span>(<span class='ident'>req</span>.<span class='ident'>url</span>.<span class='ident'>to_string</span>())))
         }
     }
 
-    <span class='kw'>fn</span> <span class='ident'>is_testing</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> { <span class='bool-val'>true</span> }
+    <span class='kw'>fn</span> <span class='ident'>is_testing</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> { <span class='boolvalue'>true</span> }
 }
 </pre>
 </section>

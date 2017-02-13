@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["auth",""],["command",""],["config",""],["dbus",""],["error",""],["event",""],["json_rpc",""],["system_info",""],["update_report",""],["update_request",""],["url",""]]});
+initSidebarItems({"mod":[["auth",""],["command",""],["config",""],["dbus",""],["error",""],["event",""],["json_rpc",""],["network",""],["report",""],["request",""],["shell",""]]});

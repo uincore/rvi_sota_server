@@ -293,7 +293,7 @@
     }
 
     <span class='kw'>let</span> <span class='ident'>outcome</span> <span class='op'>=</span> <span class='op'>||</span> <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>OpenOptions</span>::<span class='ident'>new</span>().<span class='ident'>create</span>(<span class='bool-val'>true</span>).<span class='ident'>write</span>(<span class='bool-val'>true</span>).<span class='ident'>append</span>(<span class='bool-val'>true</span>).<span class='ident'>open</span>(<span class='ident'>path</span>).<span class='ident'>unwrap</span>();
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>OpenOptions</span>::<span class='ident'>new</span>().<span class='ident'>create</span>(<span class='boolvalue'>true</span>).<span class='ident'>write</span>(<span class='boolvalue'>true</span>).<span class='ident'>append</span>(<span class='boolvalue'>true</span>).<span class='ident'>open</span>(<span class='ident'>path</span>).<span class='ident'>unwrap</span>();
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>f</span>.<span class='ident'>write</span>(<span class='ident'>pkg</span>.<span class='ident'>as_bytes</span>()));
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>f</span>.<span class='ident'>write</span>(<span class='string'>b&quot;\n&quot;</span>));
         <span class='prelude-val'>Ok</span>(())
@@ -353,8 +353,8 @@
     <span class='kw'>fn</span> <span class='ident'>install_packages</span>() {
         <span class='kw'>let</span> <span class='ident'>dir</span>  <span class='op'>=</span> <span class='ident'>TestDir</span>::<span class='ident'>new</span>(<span class='string'>&quot;sota-tpm-test-3&quot;</span>);
         <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}/tpm&quot;</span>, <span class='ident'>dir</span>.<span class='number'>0</span>);
-        <span class='ident'>install_package</span>(<span class='kw-2'>&amp;</span><span class='ident'>path</span>, <span class='string'>&quot;apa 0.0.0&quot;</span>, <span class='bool-val'>true</span>).<span class='ident'>unwrap</span>();
-        <span class='ident'>install_package</span>(<span class='kw-2'>&amp;</span><span class='ident'>path</span>, <span class='string'>&quot;bepa 1.0.0&quot;</span>, <span class='bool-val'>true</span>).<span class='ident'>unwrap</span>();
+        <span class='ident'>install_package</span>(<span class='kw-2'>&amp;</span><span class='ident'>path</span>, <span class='string'>&quot;apa 0.0.0&quot;</span>, <span class='boolvalue'>true</span>).<span class='ident'>unwrap</span>();
+        <span class='ident'>install_package</span>(<span class='kw-2'>&amp;</span><span class='ident'>path</span>, <span class='string'>&quot;bepa 1.0.0&quot;</span>, <span class='boolvalue'>true</span>).<span class='ident'>unwrap</span>();
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>installed_packages</span>(<span class='kw-2'>&amp;</span><span class='ident'>path</span>).<span class='ident'>unwrap</span>(), <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>pkg1</span>(), <span class='ident'>pkg2</span>()]);
     }
 
@@ -362,8 +362,8 @@
     <span class='kw'>fn</span> <span class='ident'>failed_installation</span>() {
         <span class='kw'>let</span> <span class='ident'>dir</span>  <span class='op'>=</span> <span class='ident'>TestDir</span>::<span class='ident'>new</span>(<span class='string'>&quot;sota-tpm-test-4&quot;</span>);
         <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}/tpm&quot;</span>, <span class='ident'>dir</span>.<span class='number'>0</span>);
-        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>install_package</span>(<span class='kw-2'>&amp;</span><span class='ident'>path</span>, <span class='string'>&quot;apa 0.0.0&quot;</span>, <span class='bool-val'>false</span>).<span class='ident'>is_err</span>());
-        <span class='ident'>install_package</span>(<span class='kw-2'>&amp;</span><span class='ident'>path</span>, <span class='string'>&quot;bepa 1.0.0&quot;</span>, <span class='bool-val'>true</span>).<span class='ident'>unwrap</span>();
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>install_package</span>(<span class='kw-2'>&amp;</span><span class='ident'>path</span>, <span class='string'>&quot;apa 0.0.0&quot;</span>, <span class='boolvalue'>false</span>).<span class='ident'>is_err</span>());
+        <span class='ident'>install_package</span>(<span class='kw-2'>&amp;</span><span class='ident'>path</span>, <span class='string'>&quot;bepa 1.0.0&quot;</span>, <span class='boolvalue'>true</span>).<span class='ident'>unwrap</span>();
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>installed_packages</span>(<span class='kw-2'>&amp;</span><span class='ident'>path</span>).<span class='ident'>unwrap</span>(), <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>pkg2</span>()]);
     }
 }

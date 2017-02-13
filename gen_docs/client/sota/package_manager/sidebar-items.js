@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["deb",""],["otb",""],["package_manager",""],["rpm",""],["tpm",""]]});
+initSidebarItems({"mod":[["deb",""],["otb",""],["package_manager",""],["rpm",""],["thm",""],["tpm",""]]});

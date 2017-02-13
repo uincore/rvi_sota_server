@@ -47,15 +47,20 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-4784' class='srclink' href='../../src/sota/src/interpreter.rs.html#32-34' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-4969' class='srclink' href='../../src/sota/src/interpreter.rs.html#45-49' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct EventInterpreter {
-    pub package_manager: <a class='enum' href='../../sota/package_manager/package_manager/enum.PackageManager.html' title='sota::package_manager::package_manager::PackageManager'>PackageManager</a>,
+    pub pacman: <a class='enum' href='../../sota/package_manager/package_manager/enum.PackageManager.html' title='sota::package_manager::package_manager::PackageManager'>PackageManager</a>,
+    pub auto_download: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>,
+    pub sysinfo: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
 }</pre><div class='docblock'><p>The <code>EventInterpreter</code> listens for <code>Event</code>s and optionally responds with
 <code>Command</code>s that may be sent to the <code>CommandInterpreter</code>.</p>
-</div><h2 class='fields'>Fields</h2><span id='structfield.package_manager' class='structfield'><code>package_manager: <a class='enum' href='../../sota/package_manager/package_manager/enum.PackageManager.html' title='sota::package_manager::package_manager::PackageManager'>PackageManager</a></code>
-                           </span><span class='stab '></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../sota/interpreter/trait.Interpreter.html' title='sota::interpreter::Interpreter'>Interpreter</a>&lt;<a class='enum' href='../../sota/datatype/event/enum.Event.html' title='sota::datatype::event::Event'>Event</a>,&nbsp;<a class='enum' href='../../sota/datatype/command/enum.Command.html' title='sota::datatype::command::Command'>Command</a>&gt; for <a class='struct' href='../../sota/interpreter/struct.EventInterpreter.html' title='sota::interpreter::EventInterpreter'>EventInterpreter</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-4786' class='srclink' href='../../src/sota/src/interpreter.rs.html#36-102' title='goto source code'>[src]</a></span></h3>
+</div><h2 class='fields'>Fields</h2>
+<table><tr class='stab '>
+                             <td id='structfield.pacman'><code>pacman</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.auto_download'><code>auto_download</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.sysinfo'><code>sysinfo</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../sota/interpreter/trait.Interpreter.html' title='sota::interpreter::Interpreter'>Interpreter</a>&lt;<a class='enum' href='../../sota/datatype/event/enum.Event.html' title='sota::datatype::event::Event'>Event</a>, <a class='enum' href='../../sota/datatype/command/enum.Command.html' title='sota::datatype::command::Command'>Command</a>&gt; for <a class='struct' href='../../sota/interpreter/struct.EventInterpreter.html' title='sota::interpreter::EventInterpreter'>EventInterpreter</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-4973' class='srclink' href='../../src/sota/src/interpreter.rs.html#51-119' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.interpret' class='method'><code>fn <a href='../../sota/interpreter/trait.Interpreter.html#tymethod.interpret' class='fnname'>interpret</a>(&amp;mut self, event: <a class='enum' href='../../sota/datatype/event/enum.Event.html' title='sota::datatype::event::Event'>Event</a>, ctx: &amp;Sender&lt;<a class='enum' href='../../sota/datatype/command/enum.Command.html' title='sota::datatype::command::Command'>Command</a>&gt;)</code></h4>
-<h4 id='method.run' class='method'><code>fn <a href='../../sota/interpreter/trait.Interpreter.html#method.run' class='fnname'>run</a>(&amp;mut self, irx: Receiver&lt;I&gt;, otx: Sender&lt;O&gt;)</code></h4>
+<h4 id='method.run' class='method'><code>fn <a href='../../sota/interpreter/trait.Interpreter.html#method.run' class='fnname'>run</a>(&amp;mut self, irx: Receiver&lt;I&gt;, otx: Sender&lt;O&gt;, wg: WaitGroup)</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 

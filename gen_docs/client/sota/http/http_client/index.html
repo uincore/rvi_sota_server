@@ -47,14 +47,30 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-4566' class='srclink' href='../../../src/sota/src/http/http_client.rs.html#1-43' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-4619' class='srclink' href='../../../src/sota/src/http/http_client.rs.html#1-83' title='goto source code'>[src]</a></span></h1>
 <h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.Request.html'
                                   title='sota::http::http_client::Request'>Request</a></td>
                            <td class='docblock short'>
-                                <p>A simplified representation of an HTTP request for use in the client.</p>
+                                <p>A new HTTP request to be sent from a specific Client.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.ResponseData.html'
+                                  title='sota::http::http_client::ResponseData'>ResponseData</a></td>
+                           <td class='docblock short'>
+                                <p>Wraps the HTTP Status Code as well as any returned body.</p>
+                           </td>
+                       </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.Response.html'
+                                  title='sota::http::http_client::Response'>Response</a></td>
+                           <td class='docblock short'>
+                                <p>A Response enumerates between a successful (e.g. 2xx) HTTP response, a failed
+(e.g. 4xx/5xx) response, or an Error before receiving any response.</p>
                            </td>
                        </tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
@@ -62,16 +78,8 @@
                            <td><a class='trait' href='trait.Client.html'
                                   title='sota::http::http_client::Client'>Client</a></td>
                            <td class='docblock short'>
-                                <p>Abstracts a particular HTTP Client implementation with the basic methods
-for sending <code>Request</code>s and receiving asynchronous <code>Response</code>s via a channel.</p>
-                           </td>
-                       </tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
-<table>
-                       <tr class=' module-item'>
-                           <td><a class='type' href='type.Response.html'
-                                  title='sota::http::http_client::Response'>Response</a></td>
-                           <td class='docblock short'>
-                                <p>Return the body of an HTTP response on success, or an <code>Error</code> otherwise.</p>
+                                <p>Abstracts a particular HTTP Client implementation with methods for sending
+<code>Request</code>s and receiving asynchronous <code>Response</code>s.</p>
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>

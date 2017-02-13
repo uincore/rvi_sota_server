@@ -82,15 +82,6 @@
 <span id="38">38</span>
 <span id="39">39</span>
 <span id="40">40</span>
-<span id="41">41</span>
-<span id="42">42</span>
-<span id="43">43</span>
-<span id="44">44</span>
-<span id="45">45</span>
-<span id="46">46</span>
-<span id="47">47</span>
-<span id="48">48</span>
-<span id="49">49</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>borrow</span>::<span class='ident'>Cow</span>;
 
@@ -99,7 +90,7 @@
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Auth</span> {
     <span class='prelude-val'>None</span>,
-    <span class='ident'>Credentials</span>(<span class='ident'>ClientId</span>, <span class='ident'>ClientSecret</span>),
+    <span class='ident'>Credentials</span>(<span class='ident'>ClientCredentials</span>),
     <span class='ident'>Token</span>(<span class='ident'>AccessToken</span>),
 }
 
@@ -110,8 +101,15 @@
 }
 
 
-<span class='doccomment'>/// For storage of the returned access token data following a successful</span>
-<span class='doccomment'>/// authentication.</span>
+<span class='doccomment'>/// Encapsulates the client id and secret used during authentication.</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Debug</span>, <span class='ident'>RustcEncodable</span>, <span class='ident'>RustcDecodable</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ClientCredentials</span> {
+    <span class='kw'>pub</span> <span class='ident'>client_id</span>:     <span class='ident'>String</span>,
+    <span class='kw'>pub</span> <span class='ident'>client_secret</span>: <span class='ident'>String</span>,
+}
+
+
+<span class='doccomment'>/// Stores the returned access token data following a successful authentication.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcDecodable</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>, <span class='ident'>Default</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>AccessToken</span> {
     <span class='kw'>pub</span> <span class='ident'>access_token</span>: <span class='ident'>String</span>,
@@ -124,22 +122,6 @@
     <span class='kw'>fn</span> <span class='ident'>into</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>AccessToken</span><span class='op'>&gt;</span> {
         <span class='ident'>Cow</span>::<span class='ident'>Owned</span>(<span class='self'>self</span>)
     }
-}
-
-
-<span class='doccomment'>/// Encapsulates a `String` type for use in `Auth::Credentials`</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Debug</span>, <span class='ident'>RustcEncodable</span>, <span class='ident'>RustcDecodable</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ClientId</span>(<span class='kw'>pub</span> <span class='ident'>String</span>);
-
-<span class='doccomment'>/// Encapsulates a `String` type for use in `Auth::Credentials`</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Debug</span>, <span class='ident'>RustcEncodable</span>, <span class='ident'>RustcDecodable</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ClientSecret</span>(<span class='kw'>pub</span> <span class='ident'>String</span>);
-
-<span class='doccomment'>/// Encapsulates the client id and secret used during authentication.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Debug</span>, <span class='ident'>RustcEncodable</span>, <span class='ident'>RustcDecodable</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ClientCredentials</span> {
-    <span class='kw'>pub</span> <span class='ident'>client_id</span>:     <span class='ident'>ClientId</span>,
-    <span class='kw'>pub</span> <span class='ident'>client_secret</span>: <span class='ident'>ClientSecret</span>,
 }
 </pre>
 </section>

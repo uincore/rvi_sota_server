@@ -371,8 +371,8 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>::<span class='ident'>FromStr</span>;
 
 <span class='kw'>use</span> <span class='ident'>nom</span>::{<span class='ident'>IResult</span>, <span class='ident'>space</span>, <span class='ident'>eof</span>};
-<span class='kw'>use</span> <span class='ident'>datatype</span>::{<span class='ident'>ClientCredentials</span>, <span class='ident'>ClientId</span>, <span class='ident'>ClientSecret</span>, <span class='ident'>Error</span>, <span class='ident'>InstalledSoftware</span>,
-               <span class='ident'>Package</span>, <span class='ident'>UpdateReport</span>, <span class='ident'>UpdateRequestId</span>, <span class='ident'>UpdateResultCode</span>};
+<span class='kw'>use</span> <span class='ident'>datatype</span>::{<span class='ident'>ClientCredentials</span>, <span class='ident'>Error</span>, <span class='ident'>InstalledSoftware</span>, <span class='ident'>Package</span>, <span class='ident'>UpdateReport</span>,
+               <span class='ident'>UpdateRequestId</span>, <span class='ident'>UpdateResultCode</span>};
 
 
 <span class='doccomment'>/// System-wide commands that are sent to the interpreter.</span>
@@ -479,8 +479,9 @@
             <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(<span class='prelude-val'>None</span>)),
             <span class='number'>1</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='string'>&quot;usage: auth &lt;client-id&gt; &lt;client-secret&gt;&quot;</span>.<span class='ident'>to_string</span>())),
             <span class='number'>2</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(<span class='prelude-val'>Some</span>(<span class='ident'>ClientCredentials</span> {
-                    <span class='ident'>client_id</span>:     <span class='ident'>ClientId</span>(<span class='ident'>args</span>[<span class='number'>0</span>].<span class='ident'>to_string</span>()),
-                    <span class='ident'>client_secret</span>: <span class='ident'>ClientSecret</span>(<span class='ident'>args</span>[<span class='number'>1</span>].<span class='ident'>to_string</span>())}))),
+                <span class='ident'>client_id</span>:     <span class='ident'>args</span>[<span class='number'>0</span>].<span class='ident'>to_string</span>(),
+                <span class='ident'>client_secret</span>: <span class='ident'>args</span>[<span class='number'>1</span>].<span class='ident'>to_string</span>()
+            }))),
             _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Command</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected Authenticate args: {:?}&quot;</span>, <span class='ident'>args</span>))),
         },
 
@@ -560,8 +561,7 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>tests</span> {
     <span class='kw'>use</span> <span class='kw'>super</span>::{<span class='ident'>command</span>, <span class='ident'>arguments</span>};
-    <span class='kw'>use</span> <span class='ident'>datatype</span>::{<span class='ident'>Command</span>, <span class='ident'>ClientCredentials</span>, <span class='ident'>ClientId</span>, <span class='ident'>ClientSecret</span>, <span class='ident'>Package</span>,
-                   <span class='ident'>UpdateReport</span>, <span class='ident'>UpdateResultCode</span>};
+    <span class='kw'>use</span> <span class='ident'>datatype</span>::{<span class='ident'>Command</span>, <span class='ident'>ClientCredentials</span>, <span class='ident'>Package</span>, <span class='ident'>UpdateReport</span>, <span class='ident'>UpdateResultCode</span>};
     <span class='kw'>use</span> <span class='ident'>nom</span>::<span class='ident'>IResult</span>;
 
 
@@ -592,8 +592,8 @@
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;auth&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(<span class='prelude-val'>None</span>));
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;auth user pass&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(),
                    <span class='ident'>Command</span>::<span class='ident'>Authenticate</span>(<span class='prelude-val'>Some</span>(<span class='ident'>ClientCredentials</span> {
-                       <span class='ident'>client_id</span>:     <span class='ident'>ClientId</span>(<span class='string'>&quot;user&quot;</span>.<span class='ident'>to_string</span>()),
-                       <span class='ident'>client_secret</span>: <span class='ident'>ClientSecret</span>(<span class='string'>&quot;pass&quot;</span>.<span class='ident'>to_string</span>()),
+                       <span class='ident'>client_id</span>:     <span class='string'>&quot;user&quot;</span>.<span class='ident'>to_string</span>(),
+                       <span class='ident'>client_secret</span>: <span class='string'>&quot;pass&quot;</span>.<span class='ident'>to_string</span>(),
                    })));
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;auth one&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='string'>&quot;auth one two three&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>Command</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());

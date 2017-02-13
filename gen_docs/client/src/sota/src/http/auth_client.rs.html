@@ -253,100 +253,28 @@
 <span id="209">209</span>
 <span id="210">210</span>
 <span id="211">211</span>
-<span id="212">212</span>
-<span id="213">213</span>
-<span id="214">214</span>
-<span id="215">215</span>
-<span id="216">216</span>
-<span id="217">217</span>
-<span id="218">218</span>
-<span id="219">219</span>
-<span id="220">220</span>
-<span id="221">221</span>
-<span id="222">222</span>
-<span id="223">223</span>
-<span id="224">224</span>
-<span id="225">225</span>
-<span id="226">226</span>
-<span id="227">227</span>
-<span id="228">228</span>
-<span id="229">229</span>
-<span id="230">230</span>
-<span id="231">231</span>
-<span id="232">232</span>
-<span id="233">233</span>
-<span id="234">234</span>
-<span id="235">235</span>
-<span id="236">236</span>
-<span id="237">237</span>
-<span id="238">238</span>
-<span id="239">239</span>
-<span id="240">240</span>
-<span id="241">241</span>
-<span id="242">242</span>
-<span id="243">243</span>
-<span id="244">244</span>
-<span id="245">245</span>
-<span id="246">246</span>
-<span id="247">247</span>
-<span id="248">248</span>
-<span id="249">249</span>
-<span id="250">250</span>
-<span id="251">251</span>
-<span id="252">252</span>
-<span id="253">253</span>
-<span id="254">254</span>
-<span id="255">255</span>
-<span id="256">256</span>
-<span id="257">257</span>
-<span id="258">258</span>
-<span id="259">259</span>
-<span id="260">260</span>
-<span id="261">261</span>
-<span id="262">262</span>
-<span id="263">263</span>
-<span id="264">264</span>
-<span id="265">265</span>
-<span id="266">266</span>
-<span id="267">267</span>
-<span id="268">268</span>
-<span id="269">269</span>
-<span id="270">270</span>
-<span id="271">271</span>
-<span id="272">272</span>
-<span id="273">273</span>
-<span id="274">274</span>
-<span id="275">275</span>
-<span id="276">276</span>
-<span id="277">277</span>
-<span id="278">278</span>
-<span id="279">279</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>chan</span>::<span class='ident'>Sender</span>;
-<span class='kw'>use</span> <span class='ident'>hyper</span>;
-<span class='kw'>use</span> <span class='ident'>hyper</span>::{<span class='ident'>Encoder</span>, <span class='ident'>Decoder</span>, <span class='ident'>Next</span>};
-<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>client</span>::{<span class='ident'>Client</span> <span class='kw'>as</span> <span class='ident'>HyperClient</span>, <span class='ident'>Handler</span>, <span class='ident'>HttpsConnector</span>,
-                    <span class='ident'>Request</span> <span class='kw'>as</span> <span class='ident'>HyperRequest</span>, <span class='ident'>Response</span> <span class='kw'>as</span> <span class='ident'>HyperResponse</span>};
-<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>header</span>::{<span class='ident'>Authorization</span>, <span class='ident'>Basic</span>, <span class='ident'>Bearer</span>, <span class='ident'>ContentLength</span>, <span class='ident'>ContentType</span>, <span class='ident'>Location</span>};
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>client</span>::{<span class='ident'>Body</span>, <span class='ident'>Client</span> <span class='kw'>as</span> <span class='ident'>HyperClient</span>, <span class='ident'>ProxyConfig</span>, <span class='ident'>RedirectPolicy</span>,
+                    <span class='ident'>Response</span> <span class='kw'>as</span> <span class='ident'>HyperResponse</span>};
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>header</span>::{<span class='ident'>Authorization</span>, <span class='ident'>Basic</span>, <span class='ident'>Bearer</span>, <span class='ident'>Connection</span>, <span class='ident'>ContentLength</span>,
+                    <span class='ident'>ContentType</span>, <span class='ident'>Headers</span>, <span class='ident'>Location</span>};
 <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>mime</span>::{<span class='ident'>Attr</span>, <span class='ident'>Mime</span>, <span class='ident'>TopLevel</span>, <span class='ident'>SubLevel</span>, <span class='ident'>Value</span>};
-<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>net</span>::{<span class='ident'>HttpStream</span>, <span class='ident'>HttpsStream</span>, <span class='ident'>OpensslStream</span>};
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>net</span>::{<span class='ident'>HttpsConnector</span>};
 <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>status</span>::<span class='ident'>StatusCode</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::{<span class='ident'>io</span>, <span class='ident'>mem</span>};
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='ident'>ErrorKind</span>, <span class='ident'>Write</span>};
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>time</span>::<span class='ident'>Duration</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::{<span class='ident'>env</span>, <span class='ident'>str</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>Read</span>;
 <span class='kw'>use</span> <span class='ident'>time</span>;
 
 <span class='kw'>use</span> <span class='ident'>datatype</span>::{<span class='ident'>Auth</span>, <span class='ident'>Error</span>};
-<span class='kw'>use</span> <span class='ident'>http</span>::{<span class='ident'>Client</span>, <span class='ident'>get_openssl</span>, <span class='ident'>Request</span>, <span class='ident'>Response</span>};
+<span class='kw'>use</span> <span class='ident'>http</span>::{<span class='ident'>Client</span>, <span class='ident'>Request</span>, <span class='ident'>Response</span>, <span class='ident'>ResponseData</span>, <span class='ident'>TlsClient</span>};
+<span class='kw'>use</span> <span class='ident'>url</span>::<span class='ident'>Url</span>;
 
 
-<span class='doccomment'>/// The `AuthClient` will attach an `Authentication` header to each outgoing</span>
-<span class='doccomment'>/// HTTP request.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>)]</span>
+<span class='doccomment'>/// The `AuthClient` will attach an `Authentication` header to each outgoing request.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>AuthClient</span> {
     <span class='ident'>auth</span>:   <span class='ident'>Auth</span>,
-    <span class='ident'>client</span>: <span class='ident'>HyperClient</span><span class='op'>&lt;</span><span class='ident'>AuthHandler</span><span class='op'>&gt;</span>,
+    <span class='ident'>client</span>: <span class='ident'>HyperClient</span>,
 }
 
 <span class='kw'>impl</span> <span class='ident'>Default</span> <span class='kw'>for</span> <span class='ident'>AuthClient</span> {
@@ -355,109 +283,128 @@
     }
 }
 
+<span class='kw'>impl</span> <span class='ident'>Client</span> <span class='kw'>for</span> <span class='ident'>AuthClient</span> {
+    <span class='kw'>fn</span> <span class='ident'>chan_request</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>req</span>: <span class='ident'>Request</span>, <span class='ident'>resp_tx</span>: <span class='ident'>Sender</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span>) {
+        <span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='self'>self</span>.<span class='ident'>send</span>(<span class='ident'>AuthRequest</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>auth</span>, <span class='ident'>req</span>)));
+    }
+}
+
 <span class='kw'>impl</span> <span class='ident'>AuthClient</span> {
-    <span class='doccomment'>/// Instantiates a new client ready to make requests for the given `Auth` type.</span>
+    <span class='doccomment'>/// Create a new HTTP client for the given `Auth` type.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from</span>(<span class='ident'>auth</span>: <span class='ident'>Auth</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
-        <span class='kw'>let</span> <span class='ident'>client</span>  <span class='op'>=</span> <span class='ident'>HyperClient</span>::<span class='op'>&lt;</span><span class='ident'>AuthHandler</span><span class='op'>&gt;</span>::<span class='ident'>configure</span>()
-            .<span class='ident'>keep_alive</span>(<span class='bool-val'>true</span>)
-            .<span class='ident'>max_sockets</span>(<span class='number'>1024</span>)
-            .<span class='ident'>connector</span>(<span class='ident'>HttpsConnector</span>::<span class='ident'>new</span>(<span class='ident'>get_openssl</span>()))
-            .<span class='ident'>build</span>()
-            .<span class='ident'>expect</span>(<span class='string'>&quot;unable to create a new hyper Client&quot;</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>client</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>env</span>::<span class='ident'>var</span>(<span class='string'>&quot;HTTP_PROXY&quot;</span>) {
+            <span class='prelude-val'>Ok</span>(<span class='kw-2'>ref</span> <span class='ident'>proxy</span>) <span class='op'>=&gt;</span> {
+                <span class='kw'>let</span> <span class='ident'>url</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='ident'>proxy</span>).<span class='ident'>unwrap_or_else</span>(<span class='op'>|</span><span class='ident'>err</span><span class='op'>|</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;couldn&#39;t parse HTTP_PROXY: {}&quot;</span>, <span class='ident'>err</span>));
+                <span class='kw'>let</span> <span class='ident'>host</span> <span class='op'>=</span> <span class='ident'>url</span>.<span class='ident'>host_str</span>().<span class='ident'>expect</span>(<span class='string'>&quot;couldn&#39;t parse HTTP_PROXY host&quot;</span>).<span class='ident'>to_string</span>();
+                <span class='kw'>let</span> <span class='ident'>port</span> <span class='op'>=</span> <span class='ident'>url</span>.<span class='ident'>port_or_known_default</span>().<span class='ident'>expect</span>(<span class='string'>&quot;couldn&#39;t parse HTTP_PROXY port&quot;</span>);
+                <span class='ident'>HyperClient</span>::<span class='ident'>with_proxy_config</span>(<span class='ident'>ProxyConfig</span>(<span class='ident'>host</span>, <span class='ident'>port</span>, <span class='ident'>TlsClient</span>::<span class='ident'>new</span>()))
+            },
+
+            <span class='prelude-val'>Err</span>(_) <span class='op'>=&gt;</span> <span class='ident'>HyperClient</span>::<span class='ident'>with_connector</span>(<span class='ident'>HttpsConnector</span>::<span class='ident'>new</span>(<span class='ident'>TlsClient</span>::<span class='ident'>new</span>()))
+        };
+
+        <span class='ident'>client</span>.<span class='ident'>set_redirect_policy</span>(<span class='ident'>RedirectPolicy</span>::<span class='ident'>FollowNone</span>);
 
         <span class='ident'>AuthClient</span> {
             <span class='ident'>auth</span>:   <span class='ident'>auth</span>,
             <span class='ident'>client</span>: <span class='ident'>client</span>,
         }
     }
-}
 
-<span class='kw'>impl</span> <span class='ident'>Client</span> <span class='kw'>for</span> <span class='ident'>AuthClient</span> {
-    <span class='kw'>fn</span> <span class='ident'>chan_request</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>req</span>: <span class='ident'>Request</span>, <span class='ident'>resp_tx</span>: <span class='ident'>Sender</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span>) {
-        <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;{} {}&quot;</span>, <span class='ident'>req</span>.<span class='ident'>method</span>, <span class='ident'>req</span>.<span class='ident'>url</span>);
-        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>client</span>.<span class='ident'>request</span>(<span class='ident'>req</span>.<span class='ident'>url</span>.<span class='ident'>inner</span>(), <span class='ident'>AuthHandler</span> {
-            <span class='ident'>auth</span>:     <span class='self'>self</span>.<span class='ident'>auth</span>.<span class='ident'>clone</span>(),
-            <span class='ident'>req</span>:      <span class='ident'>req</span>,
-            <span class='ident'>timeout</span>:  <span class='ident'>Duration</span>::<span class='ident'>from_secs</span>(<span class='number'>20</span>),
-            <span class='ident'>started</span>:  <span class='prelude-val'>None</span>,
-            <span class='ident'>written</span>:  <span class='number'>0</span>,
-            <span class='ident'>response</span>: <span class='ident'>Vec</span>::<span class='ident'>new</span>(),
-            <span class='ident'>resp_tx</span>:  <span class='ident'>resp_tx</span>.<span class='ident'>clone</span>(),
-        }).<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>err</span><span class='op'>|</span> <span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>from</span>(<span class='ident'>err</span>))));
+    <span class='doccomment'>/// Set the Authorization headers that are used for each outgoing request.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_auth</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>auth</span>: <span class='ident'>Auth</span>) {
+        <span class='self'>self</span>.<span class='ident'>auth</span> <span class='op'>=</span> <span class='ident'>auth</span>;
     }
-}
 
+    <span class='kw'>fn</span> <span class='ident'>send</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>req</span>: <span class='ident'>AuthRequest</span>) <span class='op'>-&gt;</span> <span class='ident'>Response</span> {
+        <span class='kw'>let</span> <span class='ident'>started</span> <span class='op'>=</span> <span class='ident'>time</span>::<span class='ident'>precise_time_ns</span>();
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>request</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>client</span>
+            .<span class='ident'>request</span>(<span class='ident'>req</span>.<span class='ident'>request</span>.<span class='ident'>method</span>.<span class='ident'>clone</span>().<span class='ident'>into</span>(), (<span class='op'>*</span><span class='ident'>req</span>.<span class='ident'>request</span>.<span class='ident'>url</span>).<span class='ident'>clone</span>())
+            .<span class='ident'>headers</span>(<span class='ident'>req</span>.<span class='ident'>headers</span>.<span class='ident'>clone</span>());
 
-<span class='doccomment'>/// The async handler for outgoing HTTP requests.</span>
-<span class='comment'>// FIXME: uncomment when yocto is at 1.8.0: #[derive(Debug)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>AuthHandler</span> {
-    <span class='ident'>auth</span>:     <span class='ident'>Auth</span>,
-    <span class='ident'>req</span>:      <span class='ident'>Request</span>,
-    <span class='ident'>timeout</span>:  <span class='ident'>Duration</span>,
-    <span class='ident'>started</span>:  <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span>,
-    <span class='ident'>written</span>:  <span class='ident'>usize</span>,
-    <span class='ident'>response</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>,
-    <span class='ident'>resp_tx</span>:  <span class='ident'>Sender</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span>,
-}
+        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>body</span>) <span class='op'>=</span> <span class='ident'>req</span>.<span class='ident'>request</span>.<span class='ident'>body</span> {
+            <span class='ident'>request</span> <span class='op'>=</span> <span class='ident'>request</span>.<span class='ident'>body</span>(<span class='ident'>Body</span>::<span class='ident'>BufBody</span>(<span class='ident'>body</span>, <span class='ident'>body</span>.<span class='ident'>len</span>()));
+            <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;request length: {} bytes&quot;</span>, <span class='ident'>body</span>.<span class='ident'>len</span>());
+            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>text</span>) <span class='op'>=</span> <span class='ident'>str</span>::<span class='ident'>from_utf8</span>(<span class='ident'>body</span>) {
+                <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;request body:\n{}&quot;</span>, <span class='ident'>text</span>);
+            }
+        }
 
-<span class='comment'>// FIXME: required for building on 1.7.0 only</span>
-<span class='kw'>impl</span> ::<span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>AuthHandler</span> {
-    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> ::<span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> ::<span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
-        <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;unimplemented&quot;</span>)
-    }
-}
+        <span class='kw'>match</span> <span class='ident'>request</span>.<span class='ident'>send</span>() {
+            <span class='prelude-val'>Ok</span>(<span class='kw-2'>mut</span> <span class='ident'>resp</span>) <span class='op'>=&gt;</span> {
+                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;Response status: {}&quot;</span>, <span class='ident'>resp</span>.<span class='ident'>status</span>);
+                <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;response headers:\n{}&quot;</span>, <span class='ident'>resp</span>.<span class='ident'>headers</span>);
+                <span class='kw'>let</span> <span class='ident'>latency</span> <span class='op'>=</span> <span class='ident'>time</span>::<span class='ident'>precise_time_ns</span>() <span class='kw'>as</span> <span class='ident'>f64</span> <span class='op'>-</span> <span class='ident'>started</span> <span class='kw'>as</span> <span class='ident'>f64</span>;
+                <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;response latency: {}ms&quot;</span>, (<span class='ident'>latency</span> <span class='op'>/</span> <span class='number'>1e6</span>) <span class='kw'>as</span> <span class='ident'>u32</span>);
 
-<span class='kw'>impl</span> <span class='ident'>AuthHandler</span> {
-    <span class='kw'>fn</span> <span class='ident'>redirect_request</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>resp</span>: <span class='ident'>HyperResponse</span>) {
-        <span class='kw'>match</span> <span class='ident'>resp</span>.<span class='ident'>headers</span>().<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>Location</span><span class='op'>&gt;</span>() {
-            <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>Location</span>(<span class='kw-2'>ref</span> <span class='ident'>loc</span>)) <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>req</span>.<span class='ident'>url</span>.<span class='ident'>join</span>(<span class='ident'>loc</span>).<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>url</span><span class='op'>|</span> {
-                <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;redirecting to {}&quot;</span>, <span class='ident'>url</span>);
-                <span class='comment'>// drop Authorization Header on redirect</span>
-                <span class='kw'>let</span> <span class='ident'>client</span>  <span class='op'>=</span> <span class='ident'>AuthClient</span>::<span class='ident'>default</span>();
-                <span class='kw'>let</span> <span class='ident'>resp_rx</span> <span class='op'>=</span> <span class='ident'>client</span>.<span class='ident'>send_request</span>(<span class='ident'>Request</span> {
-                    <span class='ident'>url</span>:    <span class='ident'>url</span>,
-                    <span class='ident'>method</span>: <span class='self'>self</span>.<span class='ident'>req</span>.<span class='ident'>method</span>.<span class='ident'>clone</span>(),
-                    <span class='ident'>body</span>:   <span class='ident'>mem</span>::<span class='ident'>replace</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>req</span>.<span class='ident'>body</span>, <span class='prelude-val'>None</span>),
-                });
-                <span class='kw'>match</span> <span class='ident'>resp_rx</span>.<span class='ident'>recv</span>().<span class='ident'>expect</span>(<span class='string'>&quot;no redirect_request response&quot;</span>) {
-                    <span class='prelude-val'>Ok</span>(<span class='ident'>data</span>) <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='prelude-val'>Ok</span>(<span class='ident'>data</span>)),
-                    <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>from</span>(<span class='ident'>err</span>)))
+                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>body</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>resp</span>.<span class='ident'>read_to_end</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>body</span>) {
+                    <span class='prelude-val'>Ok</span>(_)    <span class='op'>=&gt;</span> <span class='ident'>ResponseData</span> { <span class='ident'>code</span>: <span class='ident'>resp</span>.<span class='ident'>status</span>, <span class='ident'>body</span>: <span class='ident'>body</span> },
+                    <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='ident'>Response</span>::<span class='ident'>Error</span>(<span class='ident'>Error</span>::<span class='ident'>Client</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;couldn&#39;t read response body: {}&quot;</span>, <span class='ident'>err</span>)))
+                };
+                <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;response body size: {}&quot;</span>, <span class='ident'>data</span>.<span class='ident'>body</span>.<span class='ident'>len</span>());
+
+                <span class='kw'>if</span> <span class='ident'>resp</span>.<span class='ident'>status</span>.<span class='ident'>is_redirection</span>() {
+                    <span class='self'>self</span>.<span class='ident'>redirect_request</span>(<span class='kw-2'>&amp;</span><span class='ident'>req</span>, <span class='ident'>resp</span>)
+                } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>resp</span>.<span class='ident'>status</span>.<span class='ident'>is_success</span>() {
+                    <span class='ident'>Response</span>::<span class='ident'>Success</span>(<span class='ident'>data</span>)
+                } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>resp</span>.<span class='ident'>status</span> <span class='op'>==</span> <span class='ident'>StatusCode</span>::<span class='ident'>Unauthorized</span> <span class='op'>||</span> <span class='ident'>resp</span>.<span class='ident'>status</span> <span class='op'>==</span> <span class='ident'>StatusCode</span>::<span class='ident'>Forbidden</span> {
+                    <span class='ident'>Response</span>::<span class='ident'>Error</span>(<span class='ident'>Error</span>::<span class='ident'>HttpAuth</span>(<span class='ident'>data</span>))
+                } <span class='kw'>else</span> {
+                    <span class='ident'>Response</span>::<span class='ident'>Failed</span>(<span class='ident'>data</span>)
                 }
-            }).<span class='ident'>unwrap_or_else</span>(<span class='op'>|</span><span class='ident'>err</span><span class='op'>|</span> <span class='self'>self</span>.<span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>from</span>(<span class='ident'>err</span>)))),
+            }
 
-            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Client</span>(<span class='string'>&quot;redirect missing Location header&quot;</span>.<span class='ident'>to_string</span>())))
+            <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='ident'>Response</span>::<span class='ident'>Error</span>(<span class='ident'>Error</span>::<span class='ident'>Client</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;couldn&#39;t send request: {}&quot;</span>, <span class='ident'>err</span>)))
         }
     }
+
+    <span class='kw'>fn</span> <span class='ident'>redirect_request</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='ident'>AuthRequest</span>, <span class='ident'>resp</span>: <span class='ident'>HyperResponse</span>) <span class='op'>-&gt;</span> <span class='ident'>Response</span> {
+        <span class='kw'>match</span> <span class='ident'>resp</span>.<span class='ident'>headers</span>.<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>Location</span><span class='op'>&gt;</span>() {
+            <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>Location</span>(<span class='kw-2'>ref</span> <span class='ident'>loc</span>)) <span class='op'>=&gt;</span> {
+                <span class='comment'>// drop Authorization header</span>
+                <span class='self'>self</span>.<span class='ident'>send</span>(<span class='ident'>AuthRequest</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>Auth</span>::<span class='prelude-val'>None</span>, <span class='ident'>Request</span> {
+                    <span class='ident'>url</span>:    <span class='ident'>req</span>.<span class='ident'>request</span>.<span class='ident'>url</span>.<span class='ident'>join</span>(<span class='ident'>loc</span>),
+                    <span class='ident'>method</span>: <span class='ident'>req</span>.<span class='ident'>request</span>.<span class='ident'>method</span>.<span class='ident'>clone</span>(),
+                    <span class='ident'>body</span>:   <span class='ident'>req</span>.<span class='ident'>request</span>.<span class='ident'>body</span>.<span class='ident'>clone</span>(),
+                }))
+            },
+
+            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='ident'>Response</span>::<span class='ident'>Error</span>(<span class='ident'>Error</span>::<span class='ident'>Client</span>(<span class='string'>&quot;redirect missing Location header&quot;</span>.<span class='ident'>to_string</span>()))
+        }
+    }
+
 }
 
-<span class='doccomment'>/// The `AuthClient` may be used for both HTTP and HTTPS connections.</span>
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>Stream</span> <span class='op'>=</span> <span class='ident'>HttpsStream</span><span class='op'>&lt;</span><span class='ident'>OpensslStream</span><span class='op'>&lt;</span><span class='ident'>HttpStream</span><span class='op'>&gt;&gt;</span>;
 
-<span class='kw'>impl</span> <span class='ident'>Handler</span><span class='op'>&lt;</span><span class='ident'>Stream</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>AuthHandler</span> {
-    <span class='kw'>fn</span> <span class='ident'>on_request</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>HyperRequest</span>) <span class='op'>-&gt;</span> <span class='ident'>Next</span> {
-        <span class='ident'>req</span>.<span class='ident'>set_method</span>(<span class='self'>self</span>.<span class='ident'>req</span>.<span class='ident'>method</span>.<span class='ident'>clone</span>().<span class='ident'>into</span>());
-        <span class='self'>self</span>.<span class='ident'>started</span>    <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>time</span>::<span class='ident'>precise_time_ns</span>());
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>req</span>.<span class='ident'>headers_mut</span>();
+<span class='kw'>struct</span> <span class='ident'>AuthRequest</span> {
+    <span class='ident'>request</span>: <span class='ident'>Request</span>,
+    <span class='ident'>headers</span>: <span class='ident'>Headers</span>,
+}
+
+<span class='kw'>impl</span> <span class='ident'>AuthRequest</span> {
+    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>auth</span>: <span class='kw-2'>&amp;</span><span class='ident'>Auth</span>, <span class='ident'>req</span>: <span class='ident'>Request</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
+
+        <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>Connection</span>::<span class='ident'>close</span>());
+        <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>ContentLength</span>(<span class='ident'>req</span>.<span class='ident'>body</span>.<span class='ident'>as_ref</span>().<span class='ident'>map_or</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>body</span><span class='op'>|</span> <span class='ident'>body</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>u64</span>)));
 
         <span class='comment'>// empty Charset to keep RVI happy</span>
         <span class='kw'>let</span> <span class='ident'>mime_json</span> <span class='op'>=</span> <span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Application</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Json</span>, <span class='macro'>vec</span><span class='macro'>!</span>[]);
         <span class='kw'>let</span> <span class='ident'>mime_form</span> <span class='op'>=</span> <span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Application</span>, <span class='ident'>SubLevel</span>::<span class='ident'>WwwFormUrlEncoded</span>,
                              <span class='macro'>vec</span><span class='macro'>!</span>[(<span class='ident'>Attr</span>::<span class='ident'>Charset</span>, <span class='ident'>Value</span>::<span class='ident'>Utf8</span>)]);
 
-        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>auth</span> {
+        <span class='kw'>match</span> <span class='op'>*</span><span class='ident'>auth</span> {
             <span class='ident'>Auth</span>::<span class='prelude-val'>None</span> <span class='op'>=&gt;</span> {
                 <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>ContentType</span>(<span class='ident'>mime_json</span>));
             }
 
-            <span class='ident'>Auth</span>::<span class='ident'>Credentials</span>(_, _) <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>req</span>.<span class='ident'>body</span>.<span class='ident'>is_some</span>() <span class='op'>=&gt;</span> {
-                <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;no request body expected for Auth::Credentials&quot;</span>);
-            }
-
-            <span class='ident'>Auth</span>::<span class='ident'>Credentials</span>(<span class='kw-2'>ref</span> <span class='ident'>id</span>, <span class='kw-2'>ref</span> <span class='ident'>secret</span>) <span class='op'>=&gt;</span> {
-                <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>Authorization</span>(<span class='ident'>Basic</span> { <span class='ident'>username</span>: <span class='ident'>id</span>.<span class='number'>0</span>.<span class='ident'>clone</span>(),
-                                                  <span class='ident'>password</span>: <span class='prelude-val'>Some</span>(<span class='ident'>secret</span>.<span class='number'>0</span>.<span class='ident'>clone</span>()) }));
+            <span class='ident'>Auth</span>::<span class='ident'>Credentials</span>(<span class='kw-2'>ref</span> <span class='ident'>cred</span>) <span class='op'>=&gt;</span> {
+                <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>Authorization</span>(<span class='ident'>Basic</span> {
+                    <span class='ident'>username</span>: <span class='ident'>cred</span>.<span class='ident'>client_id</span>.<span class='ident'>clone</span>(),
+                    <span class='ident'>password</span>: <span class='prelude-val'>Some</span>(<span class='ident'>cred</span>.<span class='ident'>client_secret</span>.<span class='ident'>clone</span>())
+                }));
                 <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>ContentType</span>(<span class='ident'>mime_form</span>));
-                <span class='self'>self</span>.<span class='ident'>req</span>.<span class='ident'>body</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='string'>br#&quot;grant_type=client_credentials&quot;#</span>.<span class='ident'>to_vec</span>());
             }
 
             <span class='ident'>Auth</span>::<span class='ident'>Token</span>(<span class='kw-2'>ref</span> <span class='ident'>token</span>) <span class='op'>=&gt;</span> {
@@ -466,101 +413,10 @@
             }
         };
 
-        <span class='self'>self</span>.<span class='ident'>req</span>.<span class='ident'>body</span>.<span class='ident'>as_ref</span>().<span class='ident'>map_or</span>(<span class='ident'>Next</span>::<span class='ident'>read</span>().<span class='ident'>timeout</span>(<span class='self'>self</span>.<span class='ident'>timeout</span>), <span class='op'>|</span><span class='ident'>body</span><span class='op'>|</span> {
-            <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>ContentLength</span>(<span class='ident'>body</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>u64</span>));
-            <span class='ident'>Next</span>::<span class='ident'>write</span>()
-        })
-    }
-
-    <span class='kw'>fn</span> <span class='ident'>on_request_writable</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>encoder</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Encoder</span><span class='op'>&lt;</span><span class='ident'>Stream</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Next</span> {
-        <span class='kw'>let</span> <span class='ident'>body</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>req</span>.<span class='ident'>body</span>.<span class='ident'>as_ref</span>().<span class='ident'>expect</span>(<span class='string'>&quot;on_request_writable expects a body&quot;</span>);
-
-        <span class='kw'>match</span> <span class='ident'>encoder</span>.<span class='ident'>write</span>(<span class='kw-2'>&amp;</span><span class='ident'>body</span>[<span class='self'>self</span>.<span class='ident'>written</span>..]) {
-            <span class='prelude-val'>Ok</span>(<span class='number'>0</span>) <span class='op'>=&gt;</span> {
-                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;Request length: {} bytes&quot;</span>, <span class='ident'>body</span>.<span class='ident'>len</span>());
-                <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>body</span>) <span class='op'>=</span> <span class='ident'>str</span>::<span class='ident'>from_utf8</span>(<span class='ident'>body</span>) {
-                    <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;body:\n{}&quot;</span>, <span class='ident'>body</span>);
-                }
-                <span class='ident'>Next</span>::<span class='ident'>read</span>().<span class='ident'>timeout</span>(<span class='self'>self</span>.<span class='ident'>timeout</span>)
-            },
-
-            <span class='prelude-val'>Ok</span>(<span class='ident'>n</span>) <span class='op'>=&gt;</span> {
-                <span class='self'>self</span>.<span class='ident'>written</span> <span class='op'>+=</span> <span class='ident'>n</span>;
-                <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;{} bytes written to request body&quot;</span>, <span class='ident'>n</span>);
-                <span class='ident'>Next</span>::<span class='ident'>write</span>()
-            }
-
-            <span class='prelude-val'>Err</span>(<span class='kw-2'>ref</span> <span class='ident'>err</span>) <span class='kw'>if</span> <span class='ident'>err</span>.<span class='ident'>kind</span>() <span class='op'>==</span> <span class='ident'>ErrorKind</span>::<span class='ident'>WouldBlock</span> <span class='op'>=&gt;</span> {
-                <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;retry on_request_writable&quot;</span>);
-                <span class='ident'>Next</span>::<span class='ident'>write</span>()
-            }
-
-            <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> {
-                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;unable to write request body: {}&quot;</span>, <span class='ident'>err</span>);
-                <span class='self'>self</span>.<span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>from</span>(<span class='ident'>err</span>)));
-                <span class='ident'>Next</span>::<span class='ident'>remove</span>()
-            }
+        <span class='ident'>AuthRequest</span> {
+            <span class='ident'>request</span>: <span class='ident'>req</span>,
+            <span class='ident'>headers</span>: <span class='ident'>headers</span>,
         }
-    }
-
-    <span class='kw'>fn</span> <span class='ident'>on_response</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>resp</span>: <span class='ident'>HyperResponse</span>) <span class='op'>-&gt;</span> <span class='ident'>Next</span> {
-        <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;Response status: {}&quot;</span>, <span class='ident'>resp</span>.<span class='ident'>status</span>());
-        <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;on_response headers:\n{}&quot;</span>, <span class='ident'>resp</span>.<span class='ident'>headers</span>());
-        <span class='kw'>let</span> <span class='ident'>started</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>started</span>.<span class='ident'>expect</span>(<span class='string'>&quot;expected start time&quot;</span>);
-        <span class='kw'>let</span> <span class='ident'>latency</span> <span class='op'>=</span> <span class='ident'>time</span>::<span class='ident'>precise_time_ns</span>() <span class='kw'>as</span> <span class='ident'>f64</span> <span class='op'>-</span> <span class='ident'>started</span> <span class='kw'>as</span> <span class='ident'>f64</span>;
-        <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;on_response latency: {}ms&quot;</span>, (<span class='ident'>latency</span> <span class='op'>/</span> <span class='number'>1e6</span>) <span class='kw'>as</span> <span class='ident'>u32</span>);
-
-        <span class='kw'>if</span> <span class='ident'>resp</span>.<span class='ident'>status</span>().<span class='ident'>is_success</span>() {
-            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>len</span>) <span class='op'>=</span> <span class='ident'>resp</span>.<span class='ident'>headers</span>().<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>ContentLength</span><span class='op'>&gt;</span>() {
-                <span class='kw'>if</span> <span class='op'>*</span><span class='op'>*</span><span class='ident'>len</span> <span class='op'>&gt;</span> <span class='number'>0</span> {
-                    <span class='kw'>return</span> <span class='ident'>Next</span>::<span class='ident'>read</span>();
-                }
-            }
-            <span class='self'>self</span>.<span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='prelude-val'>Ok</span>(<span class='ident'>Vec</span>::<span class='ident'>new</span>()));
-            <span class='ident'>Next</span>::<span class='ident'>end</span>()
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>resp</span>.<span class='ident'>status</span>().<span class='ident'>is_redirection</span>() {
-            <span class='self'>self</span>.<span class='ident'>redirect_request</span>(<span class='ident'>resp</span>);
-            <span class='ident'>Next</span>::<span class='ident'>end</span>()
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>resp</span>.<span class='ident'>status</span>() <span class='op'>==</span> <span class='kw-2'>&amp;</span><span class='ident'>StatusCode</span>::<span class='ident'>Unauthorized</span>
-               <span class='op'>||</span> <span class='ident'>resp</span>.<span class='ident'>status</span>() <span class='op'>==</span> <span class='kw-2'>&amp;</span><span class='ident'>StatusCode</span>::<span class='ident'>Forbidden</span> {
-            <span class='self'>self</span>.<span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Authorization</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>resp</span>.<span class='ident'>status</span>()))));
-            <span class='ident'>Next</span>::<span class='ident'>end</span>()
-        } <span class='kw'>else</span> {
-            <span class='self'>self</span>.<span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Client</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>resp</span>.<span class='ident'>status</span>()))));
-            <span class='ident'>Next</span>::<span class='ident'>end</span>()
-        }
-    }
-
-    <span class='kw'>fn</span> <span class='ident'>on_response_readable</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>decoder</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Decoder</span><span class='op'>&lt;</span><span class='ident'>Stream</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Next</span> {
-        <span class='kw'>match</span> <span class='ident'>io</span>::<span class='ident'>copy</span>(<span class='ident'>decoder</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>response</span>) {
-            <span class='prelude-val'>Ok</span>(<span class='number'>0</span>) <span class='op'>=&gt;</span> {
-                <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;on_response_readable bytes read: {}&quot;</span>, <span class='self'>self</span>.<span class='ident'>response</span>.<span class='ident'>len</span>());
-                <span class='self'>self</span>.<span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='prelude-val'>Ok</span>(<span class='ident'>mem</span>::<span class='ident'>replace</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>response</span>, <span class='ident'>Vec</span>::<span class='ident'>new</span>())));
-                <span class='ident'>Next</span>::<span class='ident'>end</span>()
-            }
-
-            <span class='prelude-val'>Ok</span>(<span class='ident'>n</span>) <span class='op'>=&gt;</span> {
-                <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;{} more response bytes read&quot;</span>, <span class='ident'>n</span>);
-                <span class='ident'>Next</span>::<span class='ident'>read</span>()
-            }
-
-            <span class='prelude-val'>Err</span>(<span class='kw-2'>ref</span> <span class='ident'>err</span>) <span class='kw'>if</span> <span class='ident'>err</span>.<span class='ident'>kind</span>() <span class='op'>==</span> <span class='ident'>ErrorKind</span>::<span class='ident'>WouldBlock</span> <span class='op'>=&gt;</span> {
-                <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;retry on_response_readable&quot;</span>);
-                <span class='ident'>Next</span>::<span class='ident'>read</span>()
-            }
-
-            <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> {
-                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;unable to read response body: {}&quot;</span>, <span class='ident'>err</span>);
-                <span class='self'>self</span>.<span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>from</span>(<span class='ident'>err</span>)));
-                <span class='ident'>Next</span>::<span class='ident'>end</span>()
-            }
-        }
-    }
-
-    <span class='kw'>fn</span> <span class='ident'>on_error</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>err</span>: <span class='ident'>hyper</span>::<span class='ident'>Error</span>) <span class='op'>-&gt;</span> <span class='ident'>Next</span> {
-        <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;on_error: {}&quot;</span>, <span class='ident'>err</span>);
-        <span class='self'>self</span>.<span class='ident'>resp_tx</span>.<span class='ident'>send</span>(<span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>from</span>(<span class='ident'>err</span>)));
-        <span class='ident'>Next</span>::<span class='ident'>remove</span>()
     }
 }
 
@@ -568,14 +424,13 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>tests</span> {
     <span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>::<span class='ident'>Json</span>;
-    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>Path</span>;
 
     <span class='kw'>use</span> <span class='kw'>super</span>::<span class='op'>*</span>;
-    <span class='kw'>use</span> <span class='ident'>http</span>::{<span class='ident'>Client</span>, <span class='ident'>set_ca_certificates</span>};
+    <span class='kw'>use</span> <span class='ident'>http</span>::{<span class='ident'>Client</span>, <span class='ident'>Response</span>, <span class='ident'>use_default_certificates</span>};
 
 
     <span class='kw'>fn</span> <span class='ident'>get_client</span>() <span class='op'>-&gt;</span> <span class='ident'>AuthClient</span> {
-        <span class='ident'>set_ca_certificates</span>(<span class='kw-2'>&amp;</span><span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='string'>&quot;run/sota_certificates&quot;</span>));
+        <span class='ident'>use_default_certificates</span>();
         <span class='ident'>AuthClient</span>::<span class='ident'>default</span>()
     }
 
@@ -584,8 +439,13 @@
         <span class='kw'>let</span> <span class='ident'>client</span>  <span class='op'>=</span> <span class='ident'>get_client</span>();
         <span class='kw'>let</span> <span class='ident'>url</span>     <span class='op'>=</span> <span class='string'>&quot;http://eu.httpbin.org/bytes/16?seed=123&quot;</span>.<span class='ident'>parse</span>().<span class='ident'>unwrap</span>();
         <span class='kw'>let</span> <span class='ident'>resp_rx</span> <span class='op'>=</span> <span class='ident'>client</span>.<span class='ident'>get</span>(<span class='ident'>url</span>, <span class='prelude-val'>None</span>);
-        <span class='kw'>let</span> <span class='ident'>data</span>    <span class='op'>=</span> <span class='ident'>resp_rx</span>.<span class='ident'>recv</span>().<span class='ident'>unwrap</span>().<span class='ident'>unwrap</span>();
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>data</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>13</span>, <span class='number'>22</span>, <span class='number'>104</span>, <span class='number'>27</span>, <span class='number'>230</span>, <span class='number'>9</span>, <span class='number'>137</span>, <span class='number'>85</span>, <span class='number'>218</span>, <span class='number'>40</span>, <span class='number'>86</span>, <span class='number'>85</span>, <span class='number'>62</span>, <span class='number'>0</span>, <span class='number'>111</span>, <span class='number'>22</span>]);
+        <span class='kw'>let</span> <span class='ident'>resp</span>    <span class='op'>=</span> <span class='ident'>resp_rx</span>.<span class='ident'>recv</span>().<span class='ident'>unwrap</span>();
+        <span class='kw'>let</span> <span class='ident'>expect</span>  <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>13</span>, <span class='number'>22</span>, <span class='number'>104</span>, <span class='number'>27</span>, <span class='number'>230</span>, <span class='number'>9</span>, <span class='number'>137</span>, <span class='number'>85</span>, <span class='number'>218</span>, <span class='number'>40</span>, <span class='number'>86</span>, <span class='number'>85</span>, <span class='number'>62</span>, <span class='number'>0</span>, <span class='number'>111</span>, <span class='number'>22</span>];
+        <span class='kw'>match</span> <span class='ident'>resp</span> {
+            <span class='ident'>Response</span>::<span class='ident'>Success</span>(<span class='ident'>data</span>) <span class='op'>=&gt;</span> <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>data</span>.<span class='ident'>body</span>, <span class='ident'>expect</span>),
+            <span class='ident'>Response</span>::<span class='ident'>Failed</span>(<span class='ident'>data</span>)  <span class='op'>=&gt;</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;failed response: {}&quot;</span>, <span class='ident'>data</span>),
+            <span class='ident'>Response</span>::<span class='ident'>Error</span>(<span class='ident'>err</span>)    <span class='op'>=&gt;</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;error response: {}&quot;</span>, <span class='ident'>err</span>)
+        };
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -593,9 +453,13 @@
         <span class='kw'>let</span> <span class='ident'>client</span>  <span class='op'>=</span> <span class='ident'>get_client</span>();
         <span class='kw'>let</span> <span class='ident'>url</span>     <span class='op'>=</span> <span class='string'>&quot;https://eu.httpbin.org/post&quot;</span>.<span class='ident'>parse</span>().<span class='ident'>unwrap</span>();
         <span class='kw'>let</span> <span class='ident'>resp_rx</span> <span class='op'>=</span> <span class='ident'>client</span>.<span class='ident'>post</span>(<span class='ident'>url</span>, <span class='prelude-val'>Some</span>(<span class='string'>br#&quot;foo&quot;#</span>.<span class='ident'>to_vec</span>()));
-        <span class='kw'>let</span> <span class='ident'>body</span>    <span class='op'>=</span> <span class='ident'>resp_rx</span>.<span class='ident'>recv</span>().<span class='ident'>unwrap</span>().<span class='ident'>unwrap</span>();
-        <span class='kw'>let</span> <span class='ident'>resp</span>    <span class='op'>=</span> <span class='ident'>String</span>::<span class='ident'>from_utf8</span>(<span class='ident'>body</span>).<span class='ident'>unwrap</span>();
-        <span class='kw'>let</span> <span class='ident'>json</span>    <span class='op'>=</span> <span class='ident'>Json</span>::<span class='ident'>from_str</span>(<span class='kw-2'>&amp;</span><span class='ident'>resp</span>).<span class='ident'>unwrap</span>();
+        <span class='kw'>let</span> <span class='ident'>resp</span>    <span class='op'>=</span> <span class='ident'>resp_rx</span>.<span class='ident'>recv</span>().<span class='ident'>unwrap</span>();
+        <span class='kw'>let</span> <span class='ident'>body</span>    <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>resp</span> {
+            <span class='ident'>Response</span>::<span class='ident'>Success</span>(<span class='ident'>data</span>) <span class='op'>=&gt;</span> <span class='ident'>String</span>::<span class='ident'>from_utf8</span>(<span class='ident'>data</span>.<span class='ident'>body</span>).<span class='ident'>unwrap</span>(),
+            <span class='ident'>Response</span>::<span class='ident'>Failed</span>(<span class='ident'>data</span>)  <span class='op'>=&gt;</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;failed response: {}&quot;</span>, <span class='ident'>data</span>),
+            <span class='ident'>Response</span>::<span class='ident'>Error</span>(<span class='ident'>err</span>)    <span class='op'>=&gt;</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;error response: {}&quot;</span>, <span class='ident'>err</span>)
+        };
+        <span class='kw'>let</span> <span class='ident'>json</span>    <span class='op'>=</span> <span class='ident'>Json</span>::<span class='ident'>from_str</span>(<span class='kw-2'>&amp;</span><span class='ident'>body</span>).<span class='ident'>unwrap</span>();
         <span class='kw'>let</span> <span class='ident'>obj</span>     <span class='op'>=</span> <span class='ident'>json</span>.<span class='ident'>as_object</span>().<span class='ident'>unwrap</span>();
         <span class='kw'>let</span> <span class='ident'>data</span>    <span class='op'>=</span> <span class='ident'>obj</span>.<span class='ident'>get</span>(<span class='string'>&quot;data&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>as_string</span>().<span class='ident'>unwrap</span>();
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>data</span>, <span class='string'>&quot;foo&quot;</span>);

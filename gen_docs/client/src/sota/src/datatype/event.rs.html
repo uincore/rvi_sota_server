@@ -103,6 +103,8 @@
 <span id="59">59</span>
 <span id="60">60</span>
 <span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='ident'>Display</span>, <span class='ident'>Formatter</span>, <span class='prelude-ty'>Result</span> <span class='kw'>as</span> <span class='ident'>FmtResult</span>};
 
@@ -120,6 +122,8 @@
     <span class='ident'>Authenticated</span>,
     <span class='doccomment'>/// An operation failed because we are not currently authenticated.</span>
     <span class='ident'>NotAuthenticated</span>,
+    <span class='doccomment'>/// Nothing was done as we are already authenticated.</span>
+    <span class='ident'>AlreadyAuthenticated</span>,
 
     <span class='doccomment'>/// A notification from Core of pending or in-flight updates.</span>
     <span class='ident'>UpdatesReceived</span>(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>UpdateRequest</span><span class='op'>&gt;</span>),

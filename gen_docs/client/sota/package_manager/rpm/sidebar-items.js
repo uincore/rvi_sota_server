@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["install_package","Installs a new RPM package."],["installed_packages","Returns a list of installed RPM packages with `rpm -qa ==queryformat ${NAME} ${VERSION}\\n`."]]});
+initSidebarItems({"fn":[["install_package","Installs a new RPM package with `rpm -Uvh --force <package-path>`."],["installed_packages","Returns a list of installed RPM packages with `rpm -qa --queryformat ${NAME} ${VERSION}\\n`."]]});

@@ -85,19 +85,62 @@
 <span id="41">41</span>
 <span id="42">42</span>
 <span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>chan</span>;
-<span class='kw'>use</span> <span class='ident'>chan</span>::{<span class='ident'>Sender</span>, <span class='ident'>Receiver</span>};
+<span class='kw'>use</span> <span class='ident'>chan</span>::{<span class='self'>self</span>, <span class='ident'>Sender</span>, <span class='ident'>Receiver</span>};
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>status</span>::<span class='ident'>StatusCode</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='ident'>Display</span>, <span class='ident'>Formatter</span>, <span class='prelude-ty'>Result</span> <span class='kw'>as</span> <span class='ident'>FmtResult</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
 
 <span class='kw'>use</span> <span class='ident'>datatype</span>::{<span class='ident'>Error</span>, <span class='ident'>Method</span>, <span class='ident'>Url</span>};
 
 
-<span class='doccomment'>/// Abstracts a particular HTTP Client implementation with the basic methods</span>
-<span class='doccomment'>/// for sending `Request`s and receiving asynchronous `Response`s via a channel.</span>
+<span class='doccomment'>/// Abstracts a particular HTTP Client implementation with methods for sending</span>
+<span class='doccomment'>/// `Request`s and receiving asynchronous `Response`s.</span>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Client</span> {
     <span class='kw'>fn</span> <span class='ident'>chan_request</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>req</span>: <span class='ident'>Request</span>, <span class='ident'>resp_tx</span>: <span class='ident'>Sender</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span>);
 
     <span class='kw'>fn</span> <span class='ident'>send_request</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>req</span>: <span class='ident'>Request</span>) <span class='op'>-&gt;</span> <span class='ident'>Receiver</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span> {
+        <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;{} {}&quot;</span>, <span class='ident'>req</span>.<span class='ident'>method</span>, <span class='ident'>req</span>.<span class='ident'>url</span>);
         <span class='kw'>let</span> (<span class='ident'>resp_tx</span>, <span class='ident'>resp_rx</span>) <span class='op'>=</span> <span class='ident'>chan</span>::<span class='ident'>async</span>::<span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span>();
         <span class='self'>self</span>.<span class='ident'>chan_request</span>(<span class='ident'>req</span>, <span class='ident'>resp_tx</span>);
         <span class='ident'>resp_rx</span>
@@ -115,20 +158,57 @@
         <span class='self'>self</span>.<span class='ident'>send_request</span>(<span class='ident'>Request</span> { <span class='ident'>method</span>: <span class='ident'>Method</span>::<span class='ident'>Put</span>, <span class='ident'>url</span>: <span class='ident'>url</span>, <span class='ident'>body</span>: <span class='ident'>body</span> })
     }
 
-    <span class='kw'>fn</span> <span class='ident'>is_testing</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> { <span class='bool-val'>false</span> }
+    <span class='kw'>fn</span> <span class='ident'>is_testing</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> { <span class='boolvalue'>false</span> }
 }
 
 
-<span class='doccomment'>/// A simplified representation of an HTTP request for use in the client.</span>
+<span class='doccomment'>/// A new HTTP request to be sent from a specific Client.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Request</span> {
     <span class='kw'>pub</span> <span class='ident'>method</span>: <span class='ident'>Method</span>,
     <span class='kw'>pub</span> <span class='ident'>url</span>:    <span class='ident'>Url</span>,
-    <span class='kw'>pub</span> <span class='ident'>body</span>:   <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;&gt;</span>
+    <span class='kw'>pub</span> <span class='ident'>body</span>:   <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;&gt;</span>,
 }
 
-<span class='doccomment'>/// Return the body of an HTTP response on success, or an `Error` otherwise.</span>
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>Response</span> <span class='op'>=</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>, <span class='ident'>Error</span><span class='op'>&gt;</span>;
+
+<span class='doccomment'>/// A Response enumerates between a successful (e.g. 2xx) HTTP response, a failed</span>
+<span class='doccomment'>/// (e.g. 4xx/5xx) response, or an Error before receiving any response.</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Response</span> {
+    <span class='ident'>Success</span>(<span class='ident'>ResponseData</span>),
+    <span class='ident'>Failed</span>(<span class='ident'>ResponseData</span>),
+    <span class='ident'>Error</span>(<span class='ident'>Error</span>)
+}
+
+<span class='kw'>impl</span> <span class='ident'>Display</span> <span class='kw'>for</span> <span class='ident'>Response</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>FmtResult</span> {
+        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='ident'>Response</span>::<span class='ident'>Success</span>(<span class='kw-2'>ref</span> <span class='ident'>data</span>) <span class='op'>=&gt;</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>data</span>),
+            <span class='ident'>Response</span>::<span class='ident'>Failed</span>(<span class='kw-2'>ref</span> <span class='ident'>data</span>)  <span class='op'>=&gt;</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>data</span>),
+            <span class='ident'>Response</span>::<span class='ident'>Error</span>(<span class='kw-2'>ref</span> <span class='ident'>err</span>)    <span class='op'>=&gt;</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>err</span>),
+        }
+    }
+}
+
+
+<span class='doccomment'>/// Wraps the HTTP Status Code as well as any returned body.</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ResponseData</span> {
+    <span class='kw'>pub</span> <span class='ident'>code</span>: <span class='ident'>StatusCode</span>,
+    <span class='kw'>pub</span> <span class='ident'>body</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>
+}
+
+<span class='kw'>impl</span> <span class='ident'>Display</span> <span class='kw'>for</span> <span class='ident'>ResponseData</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>FmtResult</span> {
+        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>body</span>.<span class='ident'>len</span>() {
+            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;Response Code: {}&quot;</span>, <span class='self'>self</span>.<span class='ident'>code</span>),
+            <span class='ident'>n</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>str</span>::<span class='ident'>from_utf8</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>body</span>) {
+                <span class='prelude-val'>Ok</span>(<span class='ident'>text</span>) <span class='op'>=&gt;</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;Response Code: {}, Body:\n{}&quot;</span>, <span class='self'>self</span>.<span class='ident'>code</span>, <span class='ident'>text</span>),
+                <span class='prelude-val'>Err</span>(_)   <span class='op'>=&gt;</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;Response Code: {}, Body: {} bytes&quot;</span>, <span class='self'>self</span>.<span class='ident'>code</span>, <span class='ident'>n</span>),
+            }
+        }
+    }
+}
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

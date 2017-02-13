@@ -42,29 +42,25 @@
         </form>
     </nav>
 
-    <section id='main' class="content source"><pre class="line-numbers"><span id="1"> 1</span>
-<span id="2"> 2</span>
-<span id="3"> 3</span>
-<span id="4"> 4</span>
-<span id="5"> 5</span>
-<span id="6"> 6</span>
-<span id="7"> 7</span>
-<span id="8"> 8</span>
-<span id="9"> 9</span>
-<span id="10">10</span>
-<span id="11">11</span>
+    <section id='main' class="content source"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
 </pre><pre class='rust '>
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>auth_client</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>http_client</span>;
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>http_server</span>;
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>openssl</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>test_client</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>tls</span>;
 
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>auth_client</span>::{<span class='ident'>AuthClient</span>, <span class='ident'>AuthHandler</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>http_client</span>::{<span class='ident'>Client</span>, <span class='ident'>Request</span>, <span class='ident'>Response</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>http_server</span>::{<span class='ident'>Server</span>, <span class='ident'>ServerHandler</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>openssl</span>::{<span class='ident'>get_openssl</span>, <span class='ident'>set_ca_certificates</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>auth_client</span>::<span class='ident'>AuthClient</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>http_client</span>::{<span class='ident'>Client</span>, <span class='ident'>Request</span>, <span class='ident'>Response</span>, <span class='ident'>ResponseData</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>test_client</span>::<span class='ident'>TestClient</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>tls</span>::{<span class='ident'>TlsClient</span>, <span class='ident'>set_certificates</span>, <span class='ident'>use_default_certificates</span>};
 </pre>
 </section>
     <section id='search' class="content hidden"></section>
