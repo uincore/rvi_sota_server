@@ -194,7 +194,7 @@
 <h2 id="deployment-options">Deployment options</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are three docker-compose files included in the git repo, under <code>/deploy/docker-compose</code>:</p>
+<p>There are six docker-compose files included in the git repo, under <code>/deploy/docker-compose</code>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -203,6 +203,12 @@
 </li>
 <li>
 <p><code>core-rvi.yml</code> contains the additional RVI server node with environment overrides for the SOTA Core server.</p>
+</li>
+<li>
+<p><code>core-local-storage.yml</code> contains additional values to configure a data volume for persistent local storage of uploaded packages</p>
+</li>
+<li>
+<p><code>core-s3-storage.yml</code> contains additional values to configure SOTA Core to use Amazon S3 for persistent storage of uploaded packages</p>
 </li>
 <li>
 <p><code>client-rvi.yml</code> contains the additional RVI client node for testing with the SOTA Client</p>
@@ -217,6 +223,55 @@
 </div>
 <div class="paragraph">
 <p>To start the base SOTA Server with a SOTA Client device, run <code>docker-compose -f docker-compose.yml -f client-device.yml up</code>. Note that you may have to restart some services to ensure proper startup order, e.g. <code>docker restart dockercompose_sota-client_1</code>. You can check logs with e.g. <code>docker logs dockercompose_sota-client_1</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="persistent-package-storage">Persistent package storage</h3>
+<div class="paragraph">
+<p>By default, uploaded packages will be stored in /tmp inside of the Core docker container, and thus disappear on restart. If you want persistent storage, you have two options: configure an S3 bucket to store uploads, or mount a local directory inside the Core docker container.</p>
+</div>
+<div class="sect3">
+<h4 id="s3-storage">S3 Storage</h4>
+<div class="paragraph">
+<p>For S3 storage, you will need to set the following environment variables:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CORE_AWS_ACCESS_KEY</p>
+</li>
+<li>
+<p>CORE_AWS_SECRET_KEY</p>
+</li>
+<li>
+<p>CORE_AWS_BUCKET_ID</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Then, deploy with docker-compose as usual, but with <code>core-s3-storage.yml</code> added. For example,</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>docker-compose -f docker-compose.yml -f core-s3-storage.yml up</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="local-storage">Local storage</h4>
+<div class="paragraph">
+<p>To configure a local directory to store uploaded packages, you need to create a directory and give ownership to the user <code>daemon</code>, then pass that directory in the SOTA_PACKAGE_DIR environment variable and deploy with docker-compose as usual, but with <code>core-local-storage.yml</code> added. For example, to use <code>/opt/sota-packages</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>mkdir /opt/sota-packages
+chown daemon:daemon /opt/sota-packages
+SOTA_PACKAGE_DIR=/opt/sota-packages docker-compose -f docker-compose.yml -f core-local-storage.yml up</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If your packages aren&#8217;t showing up, double-check ownership and permissions.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
