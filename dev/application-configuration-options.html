@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+
+        <title>GENIVI SOTA Project : Application configuration options</title>
+        <meta name="description" content="Software Updates Over the Air">
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/rvi_sota_server/css/main.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+    </head>
+    <body>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div id="header" class="col-sm-12">
+                    <h4><img src="/rvi_sota_server/images/icon-logo.png"> <a class="brand" href="/rvi_sota_server/">GENIVI SOTA Project</a> / 
+    Software Updates Over the Air
+</h4>
+
+                </div>
+            </div>
+
+            <div class="row">
+                
+                
+                    <div id="navigation" class="col-sm-3">
+                        <ul class="nav nav-list">
+    <li><a href="/rvi_sota_server/">Home</a></li>
+    
+        
+        
+
+        
+            
+                <li class="nav-header">Getting Started</li>
+            
+            <li data-order="2"><a href="/rvi_sota_server/doc/deployment-with-dockercompose.html">Deployment with docker-compose</a></li>
+        
+            
+            <li data-order="3"><a href="/rvi_sota_server/doc/admin-gui-user-guide.html">Admin GUI Guide</a></li>
+        
+            
+            <li data-order="1"><a href="/rvi_sota_server/doc/building-installing.html">Building & Deploying</a></li>
+        
+    
+        
+        
+
+        
+            
+                <li class="nav-header">Developers</li>
+            
+            <li data-order="4"><a href="/rvi_sota_server/dev/application-configuration-options.html">Application configuration options</a></li>
+        
+            
+            <li data-order="6"><a href="/rvi_sota_server/dev/messaging-in-rvisotaserver.html">Messaging in rvi_sota_server</a></li>
+        
+            
+            <li data-order="10"><a href="/rvi_sota_server/dev/generated-documentation.html">Auto-generated Documentation</a></li>
+        
+            
+            <li data-order="4"><a href="/rvi_sota_server/dev/architecture.html">SOTA Architecture</a></li>
+        
+            
+            <li data-order="1"><a href="/rvi_sota_server/dev/contributing.html">Contributing</a></li>
+        
+            
+            <li data-order="6"><a href="/rvi_sota_server/dev/database-style-guide.html">Database Style Guide</a></li>
+        
+            
+            <li data-order="5"><a href="/rvi_sota_server/dev/scala-style-guide.html">Scala Style Guide</a></li>
+        
+            
+            <li data-order="1"><a href="/rvi_sota_server/dev/api.html">API</a></li>
+        
+    
+        
+        
+
+        
+            
+                <li class="nav-header">Client Documentation</li>
+            
+            <li data-order="2"><a href="/rvi_sota_server/cli/building-the-sota-client.html">Building the SOTA Client</a></li>
+        
+            
+            <li data-order="3"><a href="/rvi_sota_server/cli/client-commands-and-events-reference.html">Client commands and events API reference</a></li>
+        
+            
+            <li data-order="1"><a href="/rvi_sota_server/cli/introduction.html">Introduction</a></li>
+        
+            
+            <li data-order="2"><a href="/rvi_sota_server/cli/client-startup-and-configuration.html">Client Startup and Configuration</a></li>
+        
+            
+            <li data-order="8"><a href="/rvi_sota_server/cli/client-implementation-example-session.html">RVI Client Implementation Example Session</a></li>
+        
+            
+            <li data-order="7"><a href="/rvi_sota_server/cli/client-implementation.html">RVI Client Implementation Reference</a></li>
+        
+    
+        
+        
+
+        
+    
+        
+        
+
+        
+            
+                <li class="nav-header">Reference</li>
+            
+            <li data-order=""><a href="/rvi_sota_server/ref/dependencies.html">Dependencies</a></li>
+        
+            
+            <li data-order="5"><a href="/rvi_sota_server/ref/use-cases.html">Use Cases</a></li>
+        
+            
+            <li data-order="4"><a href="/rvi_sota_server/ref/requirements.html">Requirements</a></li>
+        
+    
+<!-- List additional links. It is recommended to add a divider
+    e.g. <li class="divider"></li> first to break up the content. -->
+</ul>
+
+                    </div>
+
+                    <div id="content" class="col-sm-9">
+                        <div id="content" class="col-sm-10">
+                            <div class="page-header">
+    <h2>Application configuration options
+        
+    </h2>
+</div>
+
+<div class="paragraph">
+<p>SOTA Server has a number of configuration options that can be set using environment variables. In general, the defaults are sane options for running a local development instance. The <a href="../doc/deployment-with-dockercompose.html">docker-compose files</a> also set a number of these environment variables to values which are sane defaults for a Docker-based local setup.</p>
+</div>
+<div class="sect1">
+<h2 id="core-configuration-options">Core configuration options</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AKKA_HTTP_REQUEST_TIMEOUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">15 minutes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP request timeout.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AKKA_HTTP_IDLE_TIMEOUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">15 minutes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP idle timeout.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“0.0.0.0”</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hosts Core should listen on.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PORT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8080</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port number Core should run on.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CORE_INTERACTION_PROTOCOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“http”</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interaction protocol for clients. May be “http” or “rvi”.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEFAULT_NAMESPACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“default”</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default namespace to use, if not otherwise specified.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CORE_AWS_ACCESS_KEY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS access key for package storage. If undefined, packages will be stored locally on Core.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CORE_AWS_SECRET_KEY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS secret key for package storage. If undefined, packages will be stored locally on Core.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CORE_AWS_BUCKET_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS S3 bucket ID for package storage. If undefined, packages will be stored locally on Core.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RVI_URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"http://127.0.0.1:8801"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI for the RVI server node, if RVI is in use.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SOTA_SERVICES_URI</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI to register with RVI for SOTA services. Should normally be the rvi endpoint at Core’s ip and port, e.g. “http://core:8080/rvi”.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RESOLVER_API_URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"http://localhost:8081"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location and port of the Resolver.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEVICE_REGISTRY_API_URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"http://localhost:8083"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location and port of the Device Registry.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PACKAGE_STORAGE_PATH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“/tmp/”</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A path on Core to store uploaded packages, if S3 storage is not in use.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PACKAGES_VERSION_FORMAT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"^\d+\.\d+\.\d+$"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A regular expression that package version numbers will be validated against.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CORE_DB_URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"jdbc:mariadb://localhost:3306/sota_core"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The URL of the Core database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CORE_DB_USER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“sota”</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Username with access to the Core database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CORE_DB_PASSWORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“s0ta”</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password for Core database user.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB_NUM_THREADS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB_QUEUE_SIZE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB_CONNECTION_TIMEOUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1s</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB_VALIDATION_TIMEOUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1s</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CORE_DB_MIGRATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FALSE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When set to true, runs database migrations on startup.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTH_PROTOCOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“oauth.accesstoken”</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The protocol to use for authentication. OAuth will require some integration work; “none” will disable authentication for devices. (If RVI is enabled, authentication is handled through RVI.)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTH_VERIFICATION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“local”</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If Oauth is being used for authentication, defines how tokens should be verified. Currently, valid options are “none”, “local”, and “auth-plus”. An Oauth implementation would require defining a new validation method.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JWT_SECRET</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A secret for JSON Web Tokens.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SCOPES_DOMAIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">empty string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Config option for a future feature. Currently unused.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resolver-configuration-options">Resolver configuration options</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTH_PROTOCOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">oauth.idtoken</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The protocol to use for authentication. OAuth will require some integration work; “none” will disable authentication for devices. (If RVI is enabled, authentication is handled through RVI.)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JWT_SECRET</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SCOPES_DOMAIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“”</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Config option for a future feature. Currently unused.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEVICE_REGISTRY_API_URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://localhost:8083" class="bare">http://localhost:8083</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The location of the device registry api.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">localhost</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Host to listen for connections on.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PORT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8081</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port to listen on.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEFAULT_NAMESPACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">default</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default namespace to use, if not otherwise specified.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RESOLVER_DB_URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jdbc:mariadb://localhost:3306/sota_resolver</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The URL of the resolver database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RESOLVER_DB_USER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sota</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Username with access to the resolver database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RESOLVER_DB_PASSWORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">s0ta</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password for resolver database user.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB_NUM_THREADS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB_QUEUE_SIZE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB_CONNECTION_TIMEOUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1s</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB_VALIDATION_TIMEOUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1s</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RESOLVER_DB_MIGRATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FALSE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When set to true, runs database migrations on startup.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PACKAGES_VERSION_FORMAT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"^\d+\.\d+\.\d+$"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A regular expression that package version numbers will be validated against.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="device-registry-configuration-options">Device Registry configuration options</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTH_PROTOCOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">oauth.idtoken</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The protocol to use for authentication. OAuth will require some integration work; “none” will disable authentication for devices. (If RVI is enabled, authentication is handled through RVI.)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SCOPES_DOMAIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“”</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Config option for a future feature. Currently unused.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">localhost</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hosts device registry should listen on.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PORT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8083</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port number device registry should run on.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEFAULT_NAMESPACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">default</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default namespace to use, if not otherwise specified.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEVICE_REGISTRY_DB_URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jdbc:mariadb://localhost:3306/sota_device_registry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The URL of the device registry database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEVICE_REGISTRY_DB_USER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sota</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Username with access to the device registry database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEVICE_REGISTRY_DB_PASSWORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">s0ta</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password for device registry database user.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB_NUM_THREADS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">20</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB_QUEUE_SIZE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB_CONNECTION_TIMEOUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1s</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB_VALIDATION_TIMEOUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1s</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEVICE_REGISTRY_DB_MIGRATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FALSE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When set to true, runs database migrations on startup.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PACKAGES_VERSION_FORMAT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"^\d+\.\d+\.\d+$"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A regular expression that package version numbers will be validated against.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="web-server-configuration-options">Web server configuration options</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PACKAGES_VERSION_FORMAT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"^\d+\.\d+\.\d+$"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A regular expression that package version numbers will be validated against.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LDAP_HOST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“localhost”</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The hostname of an LDAP server.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LDAP_PORT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8389</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The port the LDAP service is running on.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LDAP_AUTHN_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">uid=sota,ou=users,dc=genivi,dc=org</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LDAP_PASSWORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“s0ta”</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LDAP_KEY_STORE_TYPE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“JKS”</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LDAP_KEY_STORE_PATH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“conf/certs/client.jks”</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LDAP_KEY_STORE_PASSWORD</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LDAP_TRUST_STORE_PATH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"conf/certs/exampletrust.jks"</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTHN_BASE_DN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ou=users,dc=genivi,dc=org</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTHN_SEARCH_FILTER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"uid=%s"</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LDAP_INMEMORY_ENABLE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set to true, will run an in-memory LDAP server with a few hard-coded users, for easy testing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CORE_API_URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"http://localhost:8080"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Core’s URI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RESOLVER_API_URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"http://localhost:8081"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resolver’s URI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEVICE_REGISTRY_API_URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"http://localhost:8083"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Device Registry’s URI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DOCKER_IP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“localhost”</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If you are using docker-machine, set this to your docker-machine IP.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+
+            <div class="row">
+                <div id="footer" class="col-sm-12">
+                    Documentation for <a href="https://github.com/genivi/rvi_sota_server">GENIVI SOTA Project</a>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function orderNav() {
+                var list,
+                    section,
+                    header,
+                    sections = [],
+                    lists = {},
+                    headers = {};
+
+                var navUl = document.querySelectorAll('#navigation ul')[0],
+                    navLis = document.querySelectorAll('#navigation ul li');
+
+                if (!navUl) return;
+
+                for (var i = 0; i < navLis.length; i++) {
+                    var order, li = navLis[i];
+
+                    if (li.classList.contains('nav-header')) {
+                        section = li.textContent || li.innerText;
+                        sections.push(section);
+                        headers[section] = li;
+                        continue;
+                    }
+
+                    if (!lists[section]) {
+                        lists[section] = [];
+                    }
+
+                    order = parseFloat(li.getAttribute('data-order'))
+                    lists[section].push([order, li]);
+                }
+
+                for (var i = 0; i < sections.length; i++) {
+                    section = sections[i];
+                    list = lists[section].sort(function(a, b) {
+                        return a[0] - b[0];
+                    });
+
+                    if (header = headers[section]) {
+                        navUl.appendChild(header);
+                    }
+                    for (var j = 0; j < list.length; j++) {
+                        navUl.appendChild(list[j][1]);
+                    }
+                }
+            }
+
+            if (document.querySelectorAll) orderNav();
+        </script>
+        
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-69301419-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+        
+    </body>
+</html>
